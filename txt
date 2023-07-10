@@ -1,0 +1,101 @@
+public
+: react의 정적 파일들이 저장된 폴더(static 파일)
+: static file = 이미지, css, html, js와 같이 내용이 고정->응답에서 별도의 처리 필요 없음
+:
+
+manifest.json : 사용자에게 기기 관련 메타데이터를 제공하는 파일
+
+react-app-env.d.ts
+: 환경변수 쓸 때, typescript 환경에서는 type지정해줘야함. 이 파일에다가 해주면 됨.
+
+app.tsx가 index.tsx에서 public/index.html과 연결되는거임.
+
+public 폴더 안에 있는 파일들만, html에서 참조할 수 있음.
+
+
+----------------------------------------------
+[개념]
+
+DOM (Document Object Model)
+- 웹페이지에 하나하나 요소들을 Element 라고 함. h1, p, li, img 등
+- elements들을 담고 있는 웹페이지를 documents(문서)라고 함.
+- 브라우저는 이 웹페이지에 있는 html 태그들을 분석해서 페이지를 띄워주는 거임
+- DOM이란, 웹페이지의 elements 들을 트리형태로 표현한 거임
+---DOM 트리 안에는 각 element에 해당하는 node가 들어있음.
+---DOM이 제공하는 api -> DOM의 element에 접근해서 작업 = DOM 조작(querySelector같은게 바로 DOM 조작)
+
+Virtual DOM(가상 돔)
+- 리액트는 virtual DOM을 통해 실제 DOM을 조작하는 일을 빠르게 만듦.
+- 가상 돔은 실제 돔과 똑같은 내용을 담고 있음(복사본). 객체 형태로 메모리에 저장돼있음.
+- 그냥 자바스크립트 객체임. 실제 화면에 접근하는게 x
+- 리액트는 두 개의 가상 돔을 유지함
+1. 렌더링 이전 가상돔(변경이전)
+2. 렌더링 이후 보이게 될 가상 돔(변경이후)
+--- state가 바뀌면 2번 가상돔을 생성함.
+--- Diffing : 1번과 2번의 변경사항을 파악하고
+--- Reconsiliation(재조정) : 바뀐 부분을 실제 돔에다가 갈아끼우는 거임. 이 때 Batch Update를 수행
+* batch update : 변경사항을 하나하나 갈아끼우는게 아니라, 한번에 갈아끼우게 됨 -> 빠름.
+
+
+
+
+함수형 프로그래밍 vs 객체지향 프로그래밍
+
+함수형 프로그래밍
+- 
+
+객체지향 프로그래밍
+
+----------------------------------------------
+
+
+[useState]
+- setState에서 인자로는 prevState를 가져오게 됨. 그걸 이용
+setState((prevState)=>{return newState})
+- useState(초기값) 에서 초기값에서도 콜백으로 쓸 수 있음.
+한번만 실행되게 하고 싶을 때 // 만약 무거운 작업을 해야하는거라면, 콜백 자체를 return으로 치기
+useState(()=>{return heavyWorks()})
+
+
+[useEffect]
+컴포넌트가 아래의 상황에서, 특정 작업을 처리하고 싶을 때 사용
+mount : 화면에 첫 렌더링
+update : 다시 렌더링
+unmount : 화면에서 사라질 때
+
+두 가지 형태
+useEffect(()=>{}) : 콜백만 -> 매 렌더링마다 콜백 실행
+useEffect(()=>{},[value]) : 콜백 + dependancy array -> 마운트 + value값 바뀔때마다 콜백
+
+cleanUp function : return 안에 정리해주는 작업 
+- 컴포넌트가 unmount 될 때
+- 다음 useEffect가 실행되기 전에 정리시켜줌
+useEffect(()=>{
+    // 작업 코드
+    return ()=>{
+        // 정리해주는 코드
+    }
+},[])
+
+
+[useRef]
+- 두 가지 용도
+1. 변수의 저장공간
+- state의 변화 -> 렌더링 -> 컴포넌트 내부 변수들 초기화됨
+---> 변화시켜도 내부 변수들 초기화 안시키고 싶을 때. 변경해도 리렌더링 안시키고 싶을 때.
+---> 반대로 state가 변화되어도, ref의 값들은 유지됨. 얘가 일반 변수 선언하는 것과의 차이점.
+- 정리하면, 렌더링을 발생시키지 않는 변화 값을 다루고 싶을 때 사용하는 거임.
+2. DOM 요소에 접근
+- 바닐라 자바스크립트의 querySelector 같은 느낌으로.
+- useRef를 쓰면, ref object를 반환함
+---> const ref = useRef(value) -> {current:value}
+---> 원하는 돔에다가 ref속성 넣으면 됨 // <input ref={ref} />
+
+
+
+
+
+
+
+
+[react 컴포넌트에서 css 조작]
