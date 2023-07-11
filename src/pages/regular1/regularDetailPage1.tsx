@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import backImg from "./backgreen.png";
 import * as S from "./regularDetailPage1.style";
-import { song } from "./data";
+import { SONGDATA } from "../../data/data";
 import { useState, useEffect, useRef } from "react";
 
 function RegularDetailPage1() {
@@ -10,9 +10,6 @@ function RegularDetailPage1() {
 
   const contentRef = useRef<HTMLDivElement[]>([]);
   const scrollYRef = useRef<number>(0);
-
-  const TABDATA1 = ["1번", "2번", "3번", "4번", "5번"];
-  const TABDATA2 = ["6번", "7번", "8번", "9번", "10번"];
 
   useEffect(() => {
     setCurrentTab(contentRef.current[0]);
@@ -43,7 +40,7 @@ function RegularDetailPage1() {
       <S.BackgroundDiv />
       <S.Index isOn={isVisible}>
         <S.IndexTop>
-          {TABDATA1.map((data, index) => (
+          {SONGDATA.slice(0, 5).map((data, index) => (
             <S.IndexMenu
               key={index}
               onClick={() => {
@@ -54,12 +51,13 @@ function RegularDetailPage1() {
               }}
               selected={contentRef.current[index] === currentTab}
             >
-              {data}
+              <p>{data.index}.</p>
+              <p>{data.title}</p>
             </S.IndexMenu>
           ))}
         </S.IndexTop>
         <S.IndexBottom>
-          {TABDATA2.map((data, index) => (
+          {SONGDATA.slice(5).map((data, index) => (
             <S.IndexMenu
               key={index}
               onClick={() => {
@@ -70,7 +68,8 @@ function RegularDetailPage1() {
               }}
               selected={contentRef.current[index + 5] === currentTab}
             >
-              {data}
+              <p>{data.index}.</p>
+              <p>{data.title}</p>
             </S.IndexMenu>
           ))}
         </S.IndexBottom>

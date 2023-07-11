@@ -99,3 +99,39 @@ useEffect(()=>{
 
 
 [react 컴포넌트에서 css 조작]
+- styled-component props 설정
+- 컴포넌트에서 state로 관리. state를 props로 넘겨주기
+
+[audio]
+html audo 태그
+- 맥 사파리에서 두번째부터 재생이 잘 안되는 이슈 있다고 함.
+
+web audio api 객체
+
+
+일단 노래가 나오게 해보자
+1. html 태그 써서 
+2. web audio api 객체 써서.
+
+
+비디오, 오디오 파일, 엑셀파일 등 api로 주고받는 큰 파일타입은 거의 blob.
+
+
+1. audiocontext 생성
+2. source 생성하기 위해, input audio node를 생성
+3. source에 효과 주기 위해, effects audio node 생성
+4. audioContext source가 출력될 destination 설정
+5. input audionode에 각종 effect audio node 연결되는거임
+6. audioContext로 재생여부 제어
+
+
+자동 재생하려면 할 수는 있는 거 같음. html 태그 쓰고 iframe 끼워넣으니까 됨.
+javascript로 제어하는 = audio 객체 생성해서 해야하는데. 그 부분 필요
+
+audio 관련 
+로직 짤 순서
+- audio 10개 담고, 스크롤 할때마다 audio 바뀌게 재생
+- audio 자동재생
+
+
+[리액트에서 addEventListner]
