@@ -1,39 +1,54 @@
-import { styled } from "styled-components";
-import backImg from "./backgreen.png";
 import * as S from "./regularDetailPage1.style";
-import { SONGDATA } from "../../data/data";
+import { SONGDATA, AUDIOFILES } from "../../data/data";
 import { useState, useEffect, useRef } from "react";
 
 function RegularDetailPage1() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [currentTab, setCurrentTab] = useState<any>();
+  const [isVisible, setIsVisible] = useState(true); // scroll 관련
+  const [currentContent, setCurrentContent] = useState<any>();
+  const [myAudio, setMyAudio] = useState(new Audio()); // audio 관련
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
 
   const contentRef = useRef<HTMLDivElement[]>([]);
-  const scrollYRef = useRef<number>(0);
+
+  // scroll view 관련
+  const targetCallback = (entries: any, observer: any) => {
+    entries.forEach((entry: any) => {
+      if (entry.isIntersecting) {
+        // 타겟이 관찰될 때 실행코드
+        console.log(entry.target);
+        setCurrentContent(entry.target);
+      }
+    });
+  };
+
+  // audio 관련
+  const playAudio = () => {
+    myAudio.play();
+    setIsPlaying(true);
+  };
+
+  const playNextAudio = () => {
+    const nextIndex = (currentAudioIndex + 1) % AUDIOFILES.length;
+    setCurrentAudioIndex(nextIndex);
+    // audio
+    myAudio.src = AUDIOFILES[nextIndex];
+    myAudio.play();
+    setIsPlaying(true);
+  };
 
   useEffect(() => {
-    setCurrentTab(contentRef.current[0]);
+    setCurrentContent(contentRef.current[0]);
+    const observer = new IntersectionObserver(targetCallback, {
+      threshold: 0.75,
+    });
+
+    contentRef.current.map((content) => {
+      if (content) observer.observe(content);
+    });
+
+    setMyAudio(new Audio(AUDIOFILES[0]));
   }, []);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > scrollYRef.current) {
-  //       // 위로 스크롤
-  //       setIsVisible(false);
-  //     } else {
-  //       // 위로 스크롤
-  //       console.log("위로 스크롤");
-  //       setIsVisible(true);
-  //     }
-  //     // 현재 스크롤 위치를 참조값으로 업데이트
-  //     scrollYRef.current = window.scrollY;
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -47,9 +62,9 @@ function RegularDetailPage1() {
                 contentRef.current[index].scrollIntoView({
                   behavior: "smooth",
                 });
-                setCurrentTab(contentRef.current[index]);
+                setCurrentContent(contentRef.current[index]);
               }}
-              selected={contentRef.current[index] === currentTab}
+              selected={contentRef.current[index] === currentContent}
             >
               <p>{data.index}.</p>
               <p>{data.title}</p>
@@ -64,9 +79,9 @@ function RegularDetailPage1() {
                 contentRef.current[index + 5].scrollIntoView({
                   behavior: "smooth",
                 });
-                setCurrentTab(contentRef.current[index + 5]);
+                setCurrentContent(contentRef.current[index + 5]);
               }}
-              selected={contentRef.current[index + 5] === currentTab}
+              selected={contentRef.current[index + 5] === currentContent}
             >
               <p>{data.index}.</p>
               <p>{data.title}</p>
@@ -76,6 +91,7 @@ function RegularDetailPage1() {
       </S.Index>
       <div style={{ marginTop: "10vh" }}></div>
       {/* margin 용도 div */}
+
       <S.ContentDiv ref={(el: HTMLDivElement) => (contentRef.current[0] = el)}>
         1번 콘텐츠
       </S.ContentDiv>

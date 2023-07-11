@@ -102,6 +102,9 @@ useEffect(()=>{
 - styled-component props 설정
 - 컴포넌트에서 state로 관리. state를 props로 넘겨주기
 
+
+-------------0711-------------
+
 [audio]
 html audo 태그
 - 맥 사파리에서 두번째부터 재생이 잘 안되는 이슈 있다고 함.
@@ -133,5 +136,20 @@ audio 관련
 - audio 10개 담고, 스크롤 할때마다 audio 바뀌게 재생
 - audio 자동재생
 
+유튜브 영상 iframe 따고 display none 줘도 재생되나 ?
 
-[리액트에서 addEventListner]
+
+
+[스크롤 따라서 인덱스 바뀌게]
+intersection observer api
+
+
+
+[useRef로 DOM 집었을 때, useEffect 안에 ref.current 써야 할때 문제]
+1. ref 객체 처음 생성 (null 선언)
+2. hook 실행 (null로 감지)
+3. ref.current 객체 할당
+4. hook 재실행 안됨 -> hook 안에 있는 ref.current 관련 로직이 안됨.
+
+react는 ref가 설정/해제되는 상황을 다룰 때, callback ref 방법 제공
+-> 추후 공부
