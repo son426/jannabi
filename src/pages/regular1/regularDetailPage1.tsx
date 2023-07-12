@@ -6,13 +6,14 @@ import { useAudio } from "../../hooks/useAudio";
 function RegularDetailPage1() {
   const [isVisible, setIsVisible] = useState(true); // scroll 관련
   const [currentContent, setCurrentContent] = useState<any>();
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
-  const [audioInstances, setAudioInstances] = useState<HTMLAudioElement[]>([]);
-
   const contentRef = useRef<HTMLDivElement[]>([]);
-  const audioRef = useRef<HTMLAudioElement>(new Audio());
+
+  // const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
+  // const [audioInstances, setAudioInstances] = useState<HTMLAudioElement[]>([]);
+  // const audioRef = useRef<HTMLAudioElement>(new Audio());
+
+  const { currentAudioIndex, audioInstances, setCurrentAudioIndex, audioRef } =
+    useAudio();
 
   // scroll view 관련
   const targetCallback = (entries: any, observer: any) => {
@@ -40,24 +41,14 @@ function RegularDetailPage1() {
 
   // audio 관련
   useEffect(() => {
-    const loadedAudioInstances = AUDIOFILES.map((audioFile) => {
-      const audio = new Audio(audioFile);
-      audio.preload = "auto";
-      return audio;
-    });
-
-    setAudioInstances(loadedAudioInstances);
-  }, []);
-
-  useEffect(() => {
     audioRef.current = audioInstances[currentAudioIndex];
-    console.log(audioRef.current);
 
     if (audioRef.current !== undefined) {
       // stop
-      console.log(audioRef.current.src);
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+
+      // play (pause와 충돌관련 에러 방지용 if문)
       if (audioRef.current.paused) {
         audioRef.current.muted = true;
         audioRef.current.play();
