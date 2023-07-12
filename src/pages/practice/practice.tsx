@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import audioFile1 from "../../data/audio.mp3";
 import audioFile2 from "../../data/surprise.mp3";
-import { TestDiv } from "./practice.style";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import { BackgroundDiv, TestDiv } from "./practice.style";
 import { AUDIOFILES } from "../../data/data";
 
 // audio
@@ -36,13 +35,14 @@ function Practice() {
   }, []);
 
   return (
-    <TestDiv>
-      <div>1번 콘텐츠</div>
-      <div>2번 콘텐츠</div>
+    <BackgroundDiv></BackgroundDiv>
+    // <TestDiv>
+    //   <div>1번 콘텐츠</div>
+    //   <div>2번 콘텐츠</div>
 
-      <button onClick={togglePlay}>{isPlaying ? "중지" : "재생"}</button>
-      <button onClick={playNextAudio}>다음 음악</button>
-    </TestDiv>
+    //   <button onClick={togglePlay}>{isPlaying ? "중지" : "재생"}</button>
+    //   <button onClick={playNextAudio}>다음 음악</button>
+    // </TestDiv>
   );
 }
 
