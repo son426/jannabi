@@ -8,10 +8,6 @@ function RegularDetailPage1() {
   const [currentContent, setCurrentContent] = useState<any>();
   const contentRef = useRef<HTMLDivElement[]>([]);
 
-  // const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
-  // const [audioInstances, setAudioInstances] = useState<HTMLAudioElement[]>([]);
-  // const audioRef = useRef<HTMLAudioElement>(new Audio());
-
   const { currentAudioIndex, audioInstances, setCurrentAudioIndex, audioRef } =
     useAudio();
 
@@ -33,7 +29,6 @@ function RegularDetailPage1() {
     const observer = new IntersectionObserver(targetCallback, {
       threshold: 0.75,
     });
-
     contentRef.current.map((content) => {
       if (content) observer.observe(content);
     });
