@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth"; // 이메일&비번인지, 폰번호인지, 소셜로그인인지에 따라 다르게 import
 
-export const Auth = () => {
+const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -58,3 +58,5 @@ export const Auth = () => {
     </>
   );
 };
+
+export default Auth;

@@ -1,9 +1,11 @@
-import { Auth } from "./auth";
+import Auth from "./auth";
+import Crud from "./crud";
 
 function Practice2() {
   return (
     <>
-      <Auth></Auth>
+      <Auth />
+      <Crud />
     </>
   );
 }
