@@ -7,23 +7,18 @@ function RegularDetailPage1() {
   const [isVisible, setIsVisible] = useState(true); // scroll 관련
   const [currentContent, setCurrentContent] = useState<any>();
 
-  // const [isPlaying, setIsPlaying] = useState(false);
-  // const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
+  const [audioInstances, setAudioInstances] = useState<HTMLAudioElement[]>([]);
 
   const contentRef = useRef<HTMLDivElement[]>([]);
-  // const audioRef = useRef<HTMLAudioElement>(new Audio());
-  const { audioRef, isPlaying, currentAudioIndex, setCurrentAudioIndex } =
-    useAudio();
+  const audioRef = useRef<HTMLAudioElement>(new Audio());
 
   // scroll view 관련
   const targetCallback = (entries: any, observer: any) => {
     entries.forEach((entry: any) => {
       if (entry.isIntersecting) {
         // 타겟이 관찰될 때 실행코드
-
-        // console.dir(entry.target);
-        // console.log(entry.target.dataset.index);
-
         const musicIndex = parseInt(entry.target.dataset.index) - 1;
         setCurrentAudioIndex(musicIndex);
         setCurrentContent(entry.target);
@@ -31,6 +26,7 @@ function RegularDetailPage1() {
     });
   };
 
+  // index 처리 관련
   useEffect(() => {
     setCurrentContent(contentRef.current[0]);
     const observer = new IntersectionObserver(targetCallback, {
@@ -42,25 +38,38 @@ function RegularDetailPage1() {
     });
   }, []);
 
+  // audio 관련
   useEffect(() => {
-    // stop
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
+    const loadedAudioInstances = AUDIOFILES.map((audioFile) => {
+      const audio = new Audio(audioFile);
+      audio.preload = "auto";
+      return audio;
+    });
 
-    // play
-    audioRef.current = new Audio(AUDIOFILES[currentAudioIndex]);
+    setAudioInstances(loadedAudioInstances);
+  }, []);
 
-    if (audioRef.current.paused) {
-      audioRef.current.muted = true;
-      audioRef.current.play();
-      audioRef.current.muted = false;
-    }
+  useEffect(() => {
+    audioRef.current = audioInstances[currentAudioIndex];
+    console.log(audioRef.current);
 
-    return () => {
+    if (audioRef.current !== undefined) {
+      // stop
+      console.log(audioRef.current.src);
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-    };
-  }, [currentAudioIndex]);
+      if (audioRef.current.paused) {
+        audioRef.current.muted = true;
+        audioRef.current.play();
+        audioRef.current.muted = false;
+      }
+
+      return () => {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      };
+    }
+  }, [currentAudioIndex, audioInstances]);
 
   return (
     <>

@@ -188,18 +188,18 @@ index 어떻게 찍히나 파악필요
 index -1 을 해줘야하는 거였고, setState에서 값이 바로 반영안되는 이슈였음.
 audio 객체를 state 대신 useRef 에다가 관리.
 
-play pause 부딪히는 걸 확실하게 정리해보자.
 
+[play pause 충돌 관련]
 - audio.play() 는 promise 객체를 반환함.
 --- 재생되고 나서 뭔가 처리하고 싶다면 비동기로 처리가능.
 --- play() 호출은 promise를 반환하는데, 코드에서 promise 관련 처리를 해줘야함.
 - audio.pause()는 promise 객체를 반환안함.
 --- pause 시키고 실행시키는 비동기처리가 불가능함.
 --- pause하고 다음곡 재생시키려고 할 때, 문제가 생김. pause play 충돌
-
-곡이 load가 안돼서 그럼 -> 곡 전체를 페이지 처음에 다 받아와서 저장해놓기.
-
+- 곡이 load가 안돼서 그럼 -> 곡 전체를 페이지 처음에 다 받아와서 저장해놓기.
 
 
-커스텀훅
+
+[커스텀훅]
+- useAudio
 - 커스텀훅으로 돌리니까, play pause 부딪히는게 또 뜸

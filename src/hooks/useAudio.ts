@@ -27,9 +27,11 @@ export function useAudio() {
       // play
       // audioRef.current = new Audio(AUDIOFILES[currentAudioIndex]);
       audioRef.current = audioInstances[currentAudioIndex];
-      audioRef.current.muted = true;
-      audioRef.current.play();
-      audioRef.current.muted = false;
+      if (audioRef.current.paused) {
+        audioRef.current.muted = true;
+        audioRef.current.play();
+        audioRef.current.muted = false;
+      }
     }
 
     return () => {
