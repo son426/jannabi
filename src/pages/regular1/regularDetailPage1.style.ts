@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 import backImg from "./backgreen.png";
+import backCursor1 from "../../data/images/backCursor1.png";
+import backCursor2 from "../../data/images/backCursor2.png";
 
 export const BackgroundDiv = styled.div`
   background-image: url(${backImg});
@@ -75,4 +77,31 @@ export const ContentDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const BackDiv = styled.div`
+  width: 40%;
+  height: 50vh;
+  position: fixed;
+  top: 20vh;
+
+  cursor: url(${backCursor1}) 20 30, pointer;
+  &:hover {
+    animation-name: cursorAnimation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes cursorAnimation {
+    0% {
+      cursor: url(${backCursor1}) 20 30, auto;
+    }
+    50% {
+      cursor: url(${backCursor2}) 20 30, auto;
+    }
+    100% {
+      cursor: url(${backCursor1}) 20 30, auto;
+    }
+  }
 `;

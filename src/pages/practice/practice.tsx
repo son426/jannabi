@@ -35,7 +35,10 @@ function Practice() {
   }, []);
 
   return (
-    <BackgroundDiv></BackgroundDiv>
+    <>
+      <BackgroundDiv>hi</BackgroundDiv>
+      <TestDiv></TestDiv>
+    </>
     // <TestDiv>
     //   <div>1번 콘텐츠</div>
     //   <div>2번 콘텐츠</div>

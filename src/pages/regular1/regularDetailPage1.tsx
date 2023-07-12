@@ -2,6 +2,7 @@ import * as S from "./regularDetailPage1.style";
 import { SONGDATA, AUDIOFILES } from "../../data/data";
 import { useState, useEffect, useRef } from "react";
 import { useAudio } from "../../hooks/useAudio";
+import { useNavigate } from "react-router-dom";
 
 function RegularDetailPage1() {
   const [isVisible, setIsVisible] = useState(true); // scroll 관련
@@ -9,7 +10,9 @@ function RegularDetailPage1() {
   const contentRef = useRef<HTMLDivElement[]>([]);
 
   const { currentAudioIndex, audioInstances, setCurrentAudioIndex, audioRef } =
-    useAudio();
+    useAudio(AUDIOFILES);
+
+  const navigate = useNavigate();
 
   // scroll view 관련
   const targetCallback = (entries: any, observer: any) => {
@@ -78,6 +81,11 @@ function RegularDetailPage1() {
             </S.IndexMenu>
           ))}
         </S.IndexTop>
+        <S.BackDiv
+          onClick={() => {
+            navigate(-1);
+          }}
+        ></S.BackDiv>
         <S.IndexBottom>
           {SONGDATA.slice(5).map((data, index) => (
             <S.IndexMenu

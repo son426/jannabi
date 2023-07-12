@@ -1,14 +1,16 @@
 import { styled } from "styled-components";
-import backImg1 from "./14401024.png";
-import backImg2 from "./19201080.png";
-import backImg3 from "./1600900.png";
+import backCursor from "./back.jpg";
 
 export const TestDiv = styled.div`
-  height: 200vh;
+  width: 40%;
+  height: 60vh;
+  border: 1px solid black;
+  position: fixed;
+  top: 20vh;
+  background-image: url();
 `;
 
 export const BackgroundDiv = styled.div`
-  background-image: url(${backImg1});
   width: 100%;
   height: 1020vh;
   position: absolute;
