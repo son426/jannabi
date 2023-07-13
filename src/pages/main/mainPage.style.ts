@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import backImg from "./background.png";
-import shelfImg from "./group.png";
 
 export const Img = styled.img``;
 
@@ -14,9 +13,6 @@ export const BackgroundDiv = styled.div`
 `;
 
 // 외않됨?
-export const Bookshelf = styled.div`
-  background-image: url(${shelfImg});
-`;
 
 export const ContentDiv = styled.div``;
 

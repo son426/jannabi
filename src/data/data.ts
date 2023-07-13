@@ -38,3 +38,24 @@ export const AUDIOFILES = [
   audioFile9, // MONEKY HOTEL
   audioFile10, // 왕눈이 왈츠
 ];
+
+export const irregularAlbumData = [
+  {
+    id: 1,
+    title: "잔나비 소곡집",
+    lyrics:
+      "머나먼 별빛 저 별에서도\n노랠 부르는 사랑 살겠지\n밤이면 오손도손 그리운 것들 모아서\n노랠 지어 부르겠지\n\n새까만 밤하늘을 수놓은 별빛마저\n불어오는 바람 따라가고\n보고픈 그대 생각 짙어져 가는\n시월의 아름다운 이 밤에",
+    fontColor: "#2760ad",
+    backgroundColor: "#f6f6ee",
+    img: "https://newsimg.hankookilbo.com/cms/articlerelease/2020/11/05/37a3b6c5-9c73-4f33-a549-f7402201efc5.png",
+  },
+  {
+    id: 2,
+    title: "로켓트",
+    lyrics:
+      "give me some love\n어색한 우리사이\n하나의 해답\nlove love\n\n말로 하긴 낯 뜨거운\n여전히 이른듯한\n우리의 춤사위\nlove love",
+    fontColor: "#BCB8B7",
+    backgroundColor: "#121212",
+    img: "https://i.namu.wiki/i/M9R5Yu9XJanGTu9EangEppwOX9AgTzOT5dIDidvJzaBzzM3U2w_7GkqvHKhww3yF_jg763OO5yTZCc6NycHlOQ.webp",
+  },
+];
