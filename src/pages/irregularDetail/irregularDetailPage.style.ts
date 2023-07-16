@@ -15,6 +15,7 @@ export const BackgroundDiv = styled.div<IBackgroundProps>`
   opacity: 0.92;
   position: fixed;
   top: 0;
+  cursor: pointer;
 `;
 
 export const ContentDiv = styled.div<IContentProps>`

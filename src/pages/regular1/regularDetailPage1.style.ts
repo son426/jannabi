@@ -3,6 +3,18 @@ import backImg from "./backgreen.png";
 import backCursor1 from "../../data/images/backCursor1.png";
 import backCursor2 from "../../data/images/backCursor2.png";
 
+interface IIndexProps {
+  isOn: boolean;
+}
+
+interface IIndexMenuProps {
+  selected: boolean;
+}
+
+interface IFloatingProps {
+  ishovered: boolean;
+}
+
 export const BackgroundDiv = styled.div`
   background-image: url(${backImg});
   width: 100%;
@@ -11,14 +23,6 @@ export const BackgroundDiv = styled.div`
   top: 0;
   z-index: -1;
 `;
-
-interface IIndexProps {
-  isOn: boolean;
-}
-
-interface IIndexMenuProps {
-  selected: boolean;
-}
 
 export const Index = styled.div<IIndexProps>`
   color: white;
@@ -104,4 +108,14 @@ export const BackDiv = styled.div`
       cursor: url(${backCursor1}) 20 30, auto;
     }
   }
+`;
+
+export const FloatingDiv = styled.div<IFloatingProps>`
+  position: fixed;
+  top: 30vh;
+  right: 10vw;
+  width: ${(props) => (props.ishovered ? "200px" : "100px")};
+  height: 50px;
+  background-color: red;
+  transition: width 0.3s ease-in-out;
 `;

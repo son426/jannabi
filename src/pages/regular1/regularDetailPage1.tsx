@@ -3,16 +3,24 @@ import { SONGDATA, AUDIOFILES } from "../../data/data";
 import { useState, useEffect, useRef } from "react";
 import { useAudio } from "../../hooks/useAudio";
 import { useNavigate } from "react-router-dom";
+import { useScroll } from "../../hooks/useScroll";
 
 function RegularDetailPage1() {
-  const [isVisible, setIsVisible] = useState(true); // scroll 관련
   const [currentContent, setCurrentContent] = useState<any>();
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
   const contentRef = useRef<HTMLDivElement[]>([]);
+  const flagRef = useRef<boolean>(false);
+  const floatingButtonRef = useRef<HTMLDivElement>(null);
 
   const { currentAudioIndex, audioInstances, setCurrentAudioIndex, audioRef } =
     useAudio(AUDIOFILES);
+  const { isVisible } = useScroll();
 
   const navigate = useNavigate();
+
+  // floating 관련
+  useEffect(() => {}, []);
 
   // scroll view 관련
   const targetCallback = (entries: any, observer: any) => {
@@ -35,6 +43,7 @@ function RegularDetailPage1() {
     contentRef.current.map((content) => {
       if (content) observer.observe(content);
     });
+    flagRef.current = true;
   }, []);
 
   // audio 관련
@@ -48,9 +57,9 @@ function RegularDetailPage1() {
 
       // play (pause와 충돌관련 에러 방지용 if문)
       if (audioRef.current.paused) {
-        audioRef.current.muted = true;
+        // audioRef.current.muted = true;
         audioRef.current.play();
-        audioRef.current.muted = false;
+        // audioRef.current.muted = false;
       }
 
       return () => {
@@ -74,7 +83,9 @@ function RegularDetailPage1() {
                 });
                 setCurrentContent(contentRef.current[index]);
               }}
-              selected={contentRef.current[index] === currentContent}
+              selected={
+                flagRef.current && contentRef.current[index] === currentContent
+              }
             >
               <p>{data.index}.</p>
               <p>{data.title}</p>
@@ -96,7 +107,10 @@ function RegularDetailPage1() {
                 });
                 setCurrentContent(contentRef.current[index + 5]);
               }}
-              selected={contentRef.current[index + 5] === currentContent}
+              selected={
+                flagRef.current &&
+                contentRef.current[index + 5] === currentContent
+              }
             >
               <p>{data.index}.</p>
               <p>{data.title}</p>
@@ -104,9 +118,15 @@ function RegularDetailPage1() {
           ))}
         </S.IndexBottom>
       </S.Index>
-      <div style={{ marginTop: "10vh" }}></div>
+      <S.FloatingDiv
+        ref={floatingButtonRef}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        ishovered={isHovered}
+      >
+        <div>재생</div>
+      </S.FloatingDiv>
       {/* margin 용도 div */}
-
       <S.ContentDiv
         ref={(el: HTMLDivElement) => (contentRef.current[0] = el)}
         data-index="1"

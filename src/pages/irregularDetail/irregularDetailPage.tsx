@@ -29,7 +29,12 @@ function IrregularDetailPage() {
   return (
     <>
       <MainPage />
-      <S.BackgroundDiv backgroundcolor={albumData?.backgroundColor}>
+      <S.BackgroundDiv
+        onClick={() => {
+          navigate(-1);
+        }}
+        backgroundcolor={albumData?.backgroundColor}
+      >
         <S.ContentDiv fontcolor={albumData?.fontColor}>
           <S.BackButton
             onClick={() => {
