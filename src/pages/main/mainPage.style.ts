@@ -36,7 +36,7 @@ export const BackgroundDiv = styled.div`
 export const ShelfDiv = styled.div`
   background-image: url(${shelfImg});
   background-size: 100%;
-  border: 5px solid red;
+  /* border: 5px solid red; */
   width: 100%;
   height: 250vh; // background Div랑 같은 vh
   transform: translateY(-13em);
@@ -47,11 +47,11 @@ export const ShelfDiv = styled.div`
 // 새롭게 div 짜자.
 
 export const RegularRow = styled.div`
-  border: 3px solid blue;
+  /* border: 3px solid blue; */
   width: 100vw;
   height: 16em;
   position: absolute;
-  top: 30.35em;
+  top: 30.7em;
   display: flex;
   justify-content: center;
   gap: 2em;
@@ -99,11 +99,11 @@ export const RegularDiv = styled(Link)`
 /////////////////////////
 
 export const IrregularRow1 = styled.div`
-  border: 3px solid blue;
+  /* border: 3px solid blue; */
   width: 100vw;
   height: 14em;
   position: relative;
-  top: 53.5em;
+  top: 53.9em;
   display: flex;
   justify-content: center;
   gap: 2em;
@@ -135,6 +135,9 @@ export const Irr2 = styled(SampleLink)<IImageProps>`
   height: 3.5em;
   bottom: 6.3em;
   left: 25.8em;
+  ${Irr1}:hover & {
+    transform: translateY(-5px);
+  }
 `;
 
 export const Irr3 = styled(SampleLink)<IImageProps>`
@@ -197,11 +200,11 @@ export const Irr8 = styled(SampleLink)<IImageProps>`
 /////////////////////////
 
 export const IrregularRow2 = styled.div`
-  border: 3px solid blue;
+  /* border: 3px solid blue; */
   width: 100vw;
   height: 13em;
   position: absolute;
-  top: 72em;
+  top: 72.6em;
   display: flex;
   justify-content: center;
   gap: 2em;

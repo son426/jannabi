@@ -36,13 +36,6 @@ function IrregularDetailPage() {
         backgroundcolor={albumData?.backgroundColor}
       >
         <S.ContentDiv fontcolor={albumData?.fontColor}>
-          <S.BackButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            뒤로 가기
-          </S.BackButton>
           <S.ContentColumnDiv>
             <img src={albumData?.img} />
           </S.ContentColumnDiv>
