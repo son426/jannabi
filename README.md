@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# 잔나비 프로젝트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+잔나비를, 잔나비스럽게 담아내는 프로젝트입니다.
 
 ## Available Scripts
 
