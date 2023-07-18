@@ -1,3 +1,9 @@
+// 현재 시간으로부터 몇시간 전인지 계산
+
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+// 입력 : Date / 반환 : string
 export function timeForToday(value: Date): string {
   const today = new Date();
   const timeValue = new Date(value);
@@ -21,4 +27,19 @@ export function timeForToday(value: Date): string {
   }
 
   return `${Math.floor(betweenTimeDay / 365)}년전`;
+}
+
+// custom 디자인한 alert 반환
+// 입력 : string / 반환 : void
+export function customAlert(message: string): void {}
+
+// 화면 이동시, 스크롤 탑으로.
+export function ScrollTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 }
