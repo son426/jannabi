@@ -1,19 +1,20 @@
-import { styled } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import backCursor from "./back.jpg";
 
+const typing = keyframes`
+  from{
+    width:0;
+  }
+`;
+
 export const TestDiv = styled.div`
-  width: 40%;
-  height: 60vh;
-  border: 1px solid black;
-  position: fixed;
-  top: 20vh;
-  background-image: url();
+  animation: typing 1s steps(40, end);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid #000;
+  font-family: monospace;
 `;
 
 export const BackgroundDiv = styled.div`
   width: 100%;
-  height: 1020vh;
-  position: absolute;
-  top: 0;
-  z-index: -1;
 `;
