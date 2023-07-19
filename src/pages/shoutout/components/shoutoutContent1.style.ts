@@ -108,8 +108,8 @@ export const Card = styled.div<IImageProps>`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 300px;
-  height: 500px;
+  width: 25rem;
+  height: 30rem;
   position: absolute;
   animation: ${rotateAnimation} 3s linear infinite;
 `;

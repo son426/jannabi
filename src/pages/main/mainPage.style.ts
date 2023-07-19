@@ -28,27 +28,34 @@ export const BackgroundDiv = styled.div`
   background-image: url(${backImg});
   background-position: center;
   background-size: cover;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   top: 0;
   position: absolute;
   z-index: -2;
+  overflow: scroll;
 `;
 
 // margin 체크
 // irregular 에서 어떻게 할지.
 
 export const ShelfDiv = styled.div`
-  background-image: url(${shelfImg});
-  background-size: contain;
-  background-position: top;
-  background-repeat: no-repeat;
   border: 5px solid red;
   width: 100%;
   height: 100vh;
   position: relative;
-  margin: 30vh auto;
-  transform: scale(1.4);
+  margin: 20vh 0;
+`;
+
+export const Shelf = styled.div`
+  background-image: url(${shelfImg});
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 64%;
+  height: 150%;
+  margin: 0 auto;
+  border: 5px solid black;
 `;
 
 export const RegularRow = styled.div`

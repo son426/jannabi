@@ -2,10 +2,13 @@ import * as S from "./shoutoutContent1.style";
 import choi from "../assets/choi.png";
 import kim from "../assets/kim.png";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ShoutoutContent1() {
   const [selected, setSelected] = useState<number>(1);
   const [cardIndex, setCardIndex] = useState("0");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selected === 1) {
@@ -19,7 +22,7 @@ function ShoutoutContent1() {
     <S.Content1>
       <S.LogoDiv
         onClick={() => {
-          window.location.href = "/main";
+          navigate("/main");
         }}
       ></S.LogoDiv>
       <S.MarginDiv></S.MarginDiv>

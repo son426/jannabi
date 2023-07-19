@@ -6,6 +6,7 @@ import ShoutoutContent1 from "./components/shoutoutContent1";
 import ShoutoutContent2 from "./components/shoutoutContent2";
 import { useAudio } from "../../hooks/useAudio";
 import { AUDIOFILES } from "../../data/data";
+import { useNavigate } from "react-router-dom";
 
 export interface IComment {
   content: string;
@@ -22,8 +23,10 @@ function ShoutoutPage() {
   const commentDataRef = collection(db, "comment");
   const audioRef = useRef<HTMLAudioElement>(new Audio());
 
+  const navigate = useNavigate();
+
   const handleAudioEnd = () => {
-    window.location.href = "/secretend";
+    navigate("/secretend");
   };
 
   // audio 재생
