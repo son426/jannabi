@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import backImg from "./backgreen.png";
+import bg1 from "./bg1.png";
 import backCursor1 from "../../data/images/backCursor1.png";
 import backCursor2 from "../../data/images/backCursor2.png";
 
@@ -74,8 +75,12 @@ export const IndexMenu = styled.div<IIndexMenuProps>`
 `;
 
 export const ContentDiv = styled.div`
+  background-image: url(${bg1});
+  background-repeat: no-repeat;
+  background-size: contain;
   width: 100%;
-  height: 100vh;
+  aspect-ratio: 1/2;
+
   color: white;
   border: 1px white solid;
   display: flex;

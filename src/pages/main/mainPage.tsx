@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./mainPage.style";
 import images from "./image/index";
 import Intro from "./intro";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
 
@@ -18,15 +18,15 @@ function MainPage() {
         <S.ShelfDiv>
           <S.Shelf>
             <S.RegularRow>
-              <S.RegularDiv to="/regulardetail/1">
+              <S.RegularDiv to="/regulardetail/1" series={1}>
                 <S.RegularCoverDiv img={images.regular1}></S.RegularCoverDiv>
                 <S.LpDiv></S.LpDiv>
               </S.RegularDiv>
-              <S.RegularDiv to="/regulardetail/2">
+              <S.RegularDiv to="/regulardetail/2" series={2}>
                 <S.RegularCoverDiv img={images.regular2}></S.RegularCoverDiv>
                 <S.LpDiv></S.LpDiv>
               </S.RegularDiv>
-              <S.RegularDiv to="/regulardetail/3">
+              <S.RegularDiv to="/regulardetail/3" series={3}>
                 <S.RegularCoverDiv img={images.regular3}></S.RegularCoverDiv>
                 <S.LpDiv></S.LpDiv>
               </S.RegularDiv>

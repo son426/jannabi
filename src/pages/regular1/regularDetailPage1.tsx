@@ -117,14 +117,14 @@ function RegularDetailPage1() {
           ))}
         </S.IndexBottom>
       </S.Index>
-      <S.FloatingDiv
+      {/* <S.FloatingDiv
         ref={floatingButtonRef}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         ishovered={isHovered}
       >
         <div>재생</div>
-      </S.FloatingDiv>
+      </S.FloatingDiv> */}
       {/* margin 용도 div */}
       <S.ContentDiv
         ref={(el: HTMLDivElement) => (contentRef.current[0] = el)}

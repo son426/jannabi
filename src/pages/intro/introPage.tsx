@@ -10,10 +10,10 @@ function IntroPage() {
     <>
       <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
       <S.ImgWrapper>
-        {/* <S.FloatingButtonWrapper>
-          <S.FloatingButton>클릭해서 입장</S.FloatingButton>
+        <S.FloatingButtonWrapper isclicked={isClicked}>
+          <S.FloatingButton>Click !</S.FloatingButton>
           <S.FloatingArrow></S.FloatingArrow>
-        </S.FloatingButtonWrapper> */}
+        </S.FloatingButtonWrapper>
         <S.IntroImageDiv
           isclicked={isClicked}
           onClick={() => {

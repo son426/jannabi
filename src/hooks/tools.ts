@@ -32,15 +32,3 @@ export function timeForToday(value: Date): string {
 // custom 디자인한 alert 반환
 // 입력 : string / 반환 : void
 export function customAlert(message: string): void {}
-
-// 화면 이동시, 스크롤 탑으로.
-// export function ScrollTop() {
-//   const { pathname } = useLocation();
-
-//   useEffect(() => {
-//     if (pathname.includes("regular")) console.log(pathname);
-//     console.log(pathname.includes("regulardetail"));
-//   }, [pathname]);
-
-//   return null;
-// }

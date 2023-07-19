@@ -1,10 +1,25 @@
-import styled, { keyframes } from "styled-components";
-import backImg from "./background.png";
-import shelfImg from "./shelf.png";
-import LP from "./lp.png";
+import styled, { keyframes, css } from "styled-components";
+import backImg from "./image/background.png";
+import shelfImg from "./image/shelf.png";
+import LP from "./image/lp.png";
 
 import { Link } from "react-router-dom";
+
+import regular1_2 from "./image/regular/regular1-2.png";
+import regular2_2 from "./image/regular/regular2-2.png";
+import regular3_2 from "./image/regular/regular3-2.png";
+import irregular1_2 from "./image/irregular/1-2.png";
+import irregular4_2 from "./image/irregular/4-2.png";
 import irregular5_2 from "./image/irregular/5-2.png";
+import irregular6_2 from "./image/irregular/6-2.png";
+import irregular8_2 from "./image/irregular/8-2.png";
+import irregular9_2 from "./image/irregular/9-2.png";
+import irregular11_2 from "./image/irregular/11-2.png";
+import irregular14_2 from "./image/irregular/14-2.png";
+import irregular15_2 from "./image/irregular/15-2.png";
+import irregular16_2 from "./image/irregular/16-2.png";
+
+const regular2 = [regular1_2, regular2_2, regular3_2];
 
 const slideLeftAnimation = keyframes`
   from {
@@ -95,7 +110,7 @@ export const LpDiv = styled.div`
   position: absolute;
 `;
 
-export const RegularDiv = styled(Link)`
+export const RegularDiv = styled(Link)<{ series: number }>`
   display: block;
   width: 25%;
   height: 110%;
@@ -110,6 +125,8 @@ export const RegularDiv = styled(Link)`
     cursor: pointer;
     ${RegularCoverDiv} {
       transform: translateX(-10px);
+      background-image: ${({ series }) =>
+        series ? `url(${regular2[series - 1]})` : "none"};
     }
     ${LpDiv} {
       transform: translateX(15px);
@@ -148,6 +165,7 @@ export const Irr1 = styled(SampleLink)<IImageProps>`
   left: 12.3em;
   &:hover {
     transform: translateY(-5px) rotate(3deg);
+    background-image: url(${irregular1_2});
   }
 `;
 
@@ -174,9 +192,10 @@ export const Irr4 = styled(SampleLink)<IImageProps>`
   width: 12em;
   height: 3.5em;
   bottom: 0;
-  left: 11.7em;
+  left: 11.9em;
   &:hover {
     transform: translateY(-3px) rotate(-2deg);
+    background-image: url(${irregular4_2});
   }
 `;
 
@@ -198,6 +217,7 @@ export const Irr6 = styled(SampleLink)<IImageProps>`
   left: 28.55em;
   &:hover {
     transform: translateY(-5px);
+    background-image: url(${irregular6_2});
   }
   &:hover ~ ${Irr5} {
     transform: translateY(-50px);
@@ -238,6 +258,10 @@ export const Irr9 = styled(SampleLink)<IImageProps>`
   height: 10em;
   bottom: 0em;
   left: 4.5em;
+  &:hover {
+    transform: translateY(-5px);
+    background-image: url(${irregular9_2});
+  }
 `;
 
 export const Irr10 = styled(SampleLink)<IImageProps>`
@@ -252,6 +276,10 @@ export const Irr11 = styled(SampleLink)<IImageProps>`
   height: 8.6em;
   bottom: 0em;
   left: 10em;
+  &:hover {
+    transform: translateY(-5px);
+    background-image: url(${irregular11_2});
+  }
 `;
 
 export const Irr12 = styled(SampleLink)<IImageProps>`
@@ -273,6 +301,10 @@ export const Irr14 = styled(SampleLink)<IImageProps>`
   height: 3.6em;
   bottom: 3em;
   left: 22.38em;
+  &:hover {
+    transform: translateY(-5px);
+    background-image: url(${irregular14_2});
+  }
 `;
 
 export const Irr15 = styled(SampleLink)<IImageProps>`
@@ -280,6 +312,7 @@ export const Irr15 = styled(SampleLink)<IImageProps>`
   height: 10.5em;
   bottom: 0em;
   left: 31.5em;
+  background-image: url(${irregular15_2});
 `;
 
 export const Irr16 = styled(SampleLink)<IImageProps>`
@@ -287,4 +320,5 @@ export const Irr16 = styled(SampleLink)<IImageProps>`
   height: 10em;
   bottom: 0em;
   left: 35.5em;
+  background-image: url(${irregular16_2});
 `;
