@@ -29,36 +29,38 @@ export const BackgroundDiv = styled.div`
   background-position: center;
   background-size: cover;
   width: 100%;
-  height: 250vh;
+  height: 100vh;
   top: 0;
   position: absolute;
   z-index: -2;
 `;
 
+// margin 체크
+// irregular 에서 어떻게 할지.
+
 export const ShelfDiv = styled.div`
   background-image: url(${shelfImg});
-  background-size: 100%;
-  background-size: cover;
-  background-position: center;
-  /* border: 5px solid red; */
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  border: 5px solid red;
   width: 100%;
-  height: 250vh; // background Div랑 같은 vh
-  transform: translateY(-13em);
+  height: 100vh;
   position: relative;
+  margin: 30vh auto;
+  transform: scale(1.4);
 `;
 
-// 콘텐츠 들어가는 div에 맞게
-// 새롭게 div 짜자.
-
 export const RegularRow = styled.div`
-  /* border: 3px solid blue; */
-  width: 100vw;
-  height: 16em;
+  border: 3px solid blue;
+  top: 10%;
+  width: 100%;
+  /* aspect-ratio: 100/18; */
+  height: 19%;
   position: absolute;
-  top: 30.7em;
   display: flex;
   justify-content: center;
-  gap: 2em;
+  gap: 1.5%;
 `;
 
 interface IImageProps {
@@ -67,14 +69,21 @@ interface IImageProps {
 
 export const RegularCoverDiv = styled.div<IImageProps>`
   background-image: url(${(props) => props.img});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
   height: 100%;
+  border: 1px solid red;
   position: absolute;
   z-index: 2;
 `;
 
 export const LpDiv = styled.div`
   background-image: url(${LP});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -82,9 +91,11 @@ export const LpDiv = styled.div`
 
 export const RegularDiv = styled(Link)`
   display: block;
-  width: 17.5em;
-  height: 100%;
+  width: 10%;
+  height: 120%;
+
   position: relative;
+  bottom: 10%;
 
   ${RegularCoverDiv}, ${LpDiv} {
     transition: transform 0.3s ease-in-out;
@@ -103,11 +114,11 @@ export const RegularDiv = styled(Link)`
 /////////////////////////
 
 export const IrregularRow1 = styled.div`
-  /* border: 3px solid blue; */
-  width: 100vw;
-  height: 14em;
+  border: 3px solid blue;
+  width: 100%;
+  height: 17.5%;
   position: relative;
-  top: 53.9em;
+  top: 38%;
   display: flex;
   justify-content: center;
   gap: 2em;
@@ -204,11 +215,11 @@ export const Irr8 = styled(SampleLink)<IImageProps>`
 /////////////////////////
 
 export const IrregularRow2 = styled.div`
-  /* border: 3px solid blue; */
+  border: 3px solid blue;
   width: 100vw;
-  height: 13em;
+  height: 16%;
   position: absolute;
-  top: 72.6em;
+  top: 61%;
   display: flex;
   justify-content: center;
   gap: 2em;
