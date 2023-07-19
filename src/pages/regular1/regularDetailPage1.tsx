@@ -1,7 +1,7 @@
 import * as S from "./regularDetailPage1.style";
 import { SONGDATA, AUDIOFILES } from "../../data/data";
 import { useState, useEffect, useRef } from "react";
-import { useAudio } from "../../hooks/useAudio";
+import { useAudios } from "../../hooks/useAudios";
 import { useNavigate } from "react-router-dom";
 import { useScroll } from "../../hooks/useScroll";
 
@@ -14,8 +14,9 @@ function RegularDetailPage1() {
   const floatingButtonRef = useRef<HTMLDivElement>(null);
 
   const { currentAudioIndex, audioInstances, setCurrentAudioIndex, audioRef } =
-    useAudio(AUDIOFILES);
-  const { isVisible } = useScroll();
+    useAudios(AUDIOFILES);
+  // const { isVisible } = useScroll();
+  const isVisible = true;
 
   const navigate = useNavigate();
 
@@ -57,9 +58,7 @@ function RegularDetailPage1() {
 
       // play (pause와 충돌관련 에러 방지용 if문)
       if (audioRef.current.paused) {
-        // audioRef.current.muted = true;
         audioRef.current.play();
-        // audioRef.current.muted = false;
       }
 
       return () => {

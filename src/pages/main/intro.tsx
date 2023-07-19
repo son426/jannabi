@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { styled, keyframes, css } from "styled-components";
+import { useRecoilState } from "recoil";
+import { isIntroAtom } from "../../constants/atom";
 
 const fadeOutAnimation = keyframes`
     0%{
@@ -55,6 +57,8 @@ function Intro() {
   const indexRef1 = useRef<number>(0);
   const indexRef2 = useRef<number>(0);
 
+  const [isIntro, setIsIntro] = useRecoilState(isIntroAtom);
+
   const [text1, setText1] = useState<string>("");
   const [text2, setText2] = useState<string>("");
   const [end, setEnd] = useState<boolean>(false);
@@ -93,6 +97,9 @@ function Intro() {
       if (indexRef2.current === textRef2.current.length) {
         clearInterval(intervalRef2.current!);
         setEnd(true);
+        setTimeout(() => {
+          setIsIntro(false);
+        }, 6000);
       }
     }
 

@@ -1,21 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { AUDIOFILES } from "../data/data";
 
-export function useAudio(audioFiles: string[]) {
-  const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
-  const [audioInstances, setAudioInstances] = useState<HTMLAudioElement[]>([]);
+export function useAudio(audioFile: string) {
+  const audioRef = useRef<HTMLAudioElement>(new Audio(audioFile as string));
 
-  const audioRef = useRef<HTMLAudioElement>(new Audio());
+  const audioPlay = () => {
+    audioRef.current.load();
+    audioRef.current.play();
+  };
+
+  const audioStop = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+  };
 
   useEffect(() => {
-    const loadedAudioInstances = audioFiles.map((audioFile) => {
-      const audio = new Audio(audioFile);
-      audio.preload = "auto";
-      return audio;
-    });
-
-    setAudioInstances(loadedAudioInstances);
+    return () => {
+      audioStop();
+    };
   }, []);
 
-  return { currentAudioIndex, audioInstances, setCurrentAudioIndex, audioRef };
+  return { audioPlay, audioStop, audioRef };
 }

@@ -34,12 +34,13 @@ export function timeForToday(value: Date): string {
 export function customAlert(message: string): void {}
 
 // 화면 이동시, 스크롤 탑으로.
-export function ScrollTop() {
-  const { pathname } = useLocation();
+// export function ScrollTop() {
+//   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+//   useEffect(() => {
+//     if (pathname.includes("regular")) console.log(pathname);
+//     console.log(pathname.includes("regulardetail"));
+//   }, [pathname]);
 
-  return null;
-}
+//   return null;
+// }

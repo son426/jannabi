@@ -67,7 +67,7 @@ export const IndexMenu = styled.div<IIndexMenuProps>`
     transition: color 0.2s linear;
   }
   p {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     font-weight: 600;
     text-align: center;
   }

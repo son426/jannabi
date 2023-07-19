@@ -4,9 +4,10 @@ import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import ShoutoutContent1 from "./components/shoutoutContent1";
 import ShoutoutContent2 from "./components/shoutoutContent2";
-import { useAudio } from "../../hooks/useAudio";
+
 import { AUDIOFILES } from "../../data/data";
 import { useNavigate } from "react-router-dom";
+import { useAudio } from "../../hooks/useAudio";
 
 export interface IComment {
   content: string;
@@ -21,7 +22,8 @@ function ShoutoutPage() {
   const [isEnded, setIsEnded] = useState(false);
 
   const commentDataRef = collection(db, "comment");
-  const audioRef = useRef<HTMLAudioElement>(new Audio());
+
+  const { audioPlay, audioStop, audioRef } = useAudio(AUDIOFILES[8]);
 
   const navigate = useNavigate();
 
@@ -32,18 +34,14 @@ function ShoutoutPage() {
   // audio 재생
   useEffect(() => {
     if (!audioRef.current.paused) return;
-
     const audioElement = audioRef.current;
 
-    audioElement.src = AUDIOFILES[8];
-    audioElement.load();
-    audioElement.play();
+    audioPlay();
 
     audioElement.addEventListener("ended", handleAudioEnd);
 
     return () => {
-      audioElement.pause();
-      audioElement.currentTime = 0;
+      audioStop();
       audioElement.removeEventListener("ended", handleAudioEnd);
     };
   }, []);

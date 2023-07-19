@@ -8,13 +8,11 @@ import RegularDetailPage3 from "./pages/regular3/regularDetailPage3";
 import Practice from "./pages/practice/practice";
 import Firebase from "./pages/practice/firebase/firebase";
 import ShoutoutPage from "./pages/shoutout/shoutoutPage";
-import { ScrollTop } from "./hooks/tools";
 import EndPage from "./pages/end/endPage";
 
 function Router() {
   return (
     <BrowserRouter>
-      <ScrollTop />
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/main" element={<MainPage />} />
