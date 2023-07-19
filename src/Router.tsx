@@ -9,6 +9,7 @@ import Practice from "./pages/practice/practice";
 import Firebase from "./pages/practice/firebase/firebase";
 import ShoutoutPage from "./pages/shoutout/shoutoutPage";
 import { ScrollTop } from "./hooks/tools";
+import EndPage from "./pages/end/endPage";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/irregularDetail/:id" element={<IrregularDetailPage />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/shoutout" element={<ShoutoutPage />} />
+        <Route path="/secretend" element={<EndPage />} />
         <Route path="/firebase" element={<Firebase />} />
       </Routes>
     </BrowserRouter>

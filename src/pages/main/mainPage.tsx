@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as S from "./mainPage.style";
 import images from "./image/index";
+import Intro from "./intro";
 
 function MainPage() {
+  const location = useLocation();
+
+  const isIntroPage = location.state?.isIntro === true;
+  console.log(location);
+
   return (
     <>
+      {isIntroPage && <Intro />}
       <S.BackgroundDiv></S.BackgroundDiv>
       <S.ShelfDiv>
         <S.RegularRow>

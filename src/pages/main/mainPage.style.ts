@@ -26,6 +26,8 @@ const slideRightAnimation = keyframes`
 
 export const BackgroundDiv = styled.div`
   background-image: url(${backImg});
+  background-position: center;
+  background-size: cover;
   width: 100%;
   height: 250vh;
   top: 0;
@@ -36,6 +38,8 @@ export const BackgroundDiv = styled.div`
 export const ShelfDiv = styled.div`
   background-image: url(${shelfImg});
   background-size: 100%;
+  background-size: cover;
+  background-position: center;
   /* border: 5px solid red; */
   width: 100%;
   height: 250vh; // background Div랑 같은 vh

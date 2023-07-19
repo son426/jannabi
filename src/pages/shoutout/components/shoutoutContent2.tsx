@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { timeForToday } from "../../../hooks/tools";
-import * as S from "../shoutoutPage.style";
+import * as S from "./shoutoutContent2.style";
 import { addDoc, CollectionReference, DocumentData } from "firebase/firestore";
 import { FiSend } from "../../../assets/icon";
 import { IComment } from "../shoutoutPage";

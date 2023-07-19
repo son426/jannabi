@@ -1,11 +1,27 @@
-import * as S from "../shoutoutPage.style";
-import choi from "../choi.png";
-import kim from "../kim.png";
+import * as S from "./shoutoutContent1.style";
+import choi from "../assets/choi.png";
+import kim from "../assets/kim.png";
+import { useState, useEffect } from "react";
 
 function ShoutoutContent1() {
+  const [selected, setSelected] = useState<number>(1);
+  const [cardIndex, setCardIndex] = useState("0");
+
+  useEffect(() => {
+    if (selected === 1) {
+      setCardIndex("0");
+    } else {
+      setCardIndex("1");
+    }
+  }, [selected]);
+
   return (
     <S.Content1>
-      <S.LogoDiv></S.LogoDiv>
+      <S.LogoDiv
+        onClick={() => {
+          window.location.href = "/main";
+        }}
+      ></S.LogoDiv>
       <S.MarginDiv></S.MarginDiv>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <S.Column>
@@ -19,12 +35,31 @@ function ShoutoutContent1() {
             최정훈(보컬)과 김도형(기타)으로 구성된 2인조 밴드이다.
           </S.SubTitle>
           <S.CheckBox>
-            <div>보컬리스트 최정훈</div>
-            <div>기타리스트 김도형</div>
+            <S.CheckBoxRow
+              selected={selected === 1 ? true : false}
+              onClick={() => {
+                setSelected(1);
+              }}
+            >
+              <p>VOCALIST</p>
+              <p>최정훈</p>
+            </S.CheckBoxRow>
+            <S.CheckBoxRow
+              selected={selected === 2 ? true : false}
+              onClick={() => {
+                setSelected(2);
+              }}
+            >
+              <p>GUITARIST</p>
+              <p>김도형</p>
+            </S.CheckBoxRow>
           </S.CheckBox>
         </S.Column>
         <S.Column>
-          <S.Card img={kim} style={{ transform: "rotateZ(-10deg)" }}></S.Card>
+          <S.Card
+            img={kim}
+            style={{ transform: "rotateZ(-10deg)", zIndex: cardIndex }}
+          ></S.Card>
           <S.Card img={choi} style={{ transform: "rotateZ(10deg)" }}></S.Card>
         </S.Column>
       </div>

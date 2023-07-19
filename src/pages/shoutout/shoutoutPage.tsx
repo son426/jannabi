@@ -1,15 +1,11 @@
 import * as S from "./shoutoutPage.style";
-import { useState, useEffect } from "react";
-import {
-  getDocs,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import { useState, useEffect, useRef } from "react";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import ShoutoutContent1 from "./components/shoutoutContent1";
 import ShoutoutContent2 from "./components/shoutoutContent2";
+import { useAudio } from "../../hooks/useAudio";
+import { AUDIOFILES } from "../../data/data";
 
 export interface IComment {
   content: string;
@@ -21,8 +17,33 @@ function ShoutoutPage() {
   const [isSmall, setIsSmall] = useState<boolean>(false);
   const [comments, setComments] = useState<IComment[]>([]);
   const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
+  const [isEnded, setIsEnded] = useState(false);
 
   const commentDataRef = collection(db, "comment");
+  const audioRef = useRef<HTMLAudioElement>(new Audio());
+
+  const handleAudioEnd = () => {
+    window.location.href = "/secretend";
+  };
+
+  // audio 재생
+  useEffect(() => {
+    if (!audioRef.current.paused) return;
+
+    const audioElement = audioRef.current;
+
+    audioElement.src = AUDIOFILES[8];
+    audioElement.load();
+    audioElement.play();
+
+    audioElement.addEventListener("ended", handleAudioEnd);
+
+    return () => {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      audioElement.removeEventListener("ended", handleAudioEnd);
+    };
+  }, []);
 
   const fetchComments = async () => {
     try {
