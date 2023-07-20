@@ -74,6 +74,13 @@ export const IndexMenu = styled.div<IIndexMenuProps>`
   }
 `;
 
+export const CoverDiv = styled.div`
+  background-image: url(${backImg});
+  background-size: contain;
+  height: 100vh;
+  width: 100%;
+`;
+
 export const ContentDiv = styled.div`
   background-image: url(${bg1});
   background-repeat: no-repeat;

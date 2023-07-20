@@ -71,7 +71,7 @@ function RegularDetailPage1() {
   return (
     <>
       <S.BackgroundDiv />
-      <S.Index isOn={isVisible}>
+      {/* <S.Index isOn={isVisible}>
         <S.IndexTop>
           {SONGDATA.slice(0, 5).map((data, index) => (
             <S.IndexMenu
@@ -116,7 +116,7 @@ function RegularDetailPage1() {
             </S.IndexMenu>
           ))}
         </S.IndexBottom>
-      </S.Index>
+      </S.Index> */}
       {/* <S.FloatingDiv
         ref={floatingButtonRef}
         onMouseEnter={() => setIsHovered(true)}
@@ -126,6 +126,7 @@ function RegularDetailPage1() {
         <div>재생</div>
       </S.FloatingDiv> */}
       {/* margin 용도 div */}
+      <S.CoverDiv></S.CoverDiv>
       <S.ContentDiv
         ref={(el: HTMLDivElement) => (contentRef.current[0] = el)}
         data-index="1"

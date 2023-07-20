@@ -19,11 +19,7 @@ function Router() {
         <Route path="/regularDetail/1" element={<RegularDetailPage1 />} />
         <Route path="/regularDetail/2" element={<RegularDetailPage2 />} />
         <Route path="/regularDetail/3" element={<RegularDetailPage3 />} />
-        <Route
-          path="/irregularDetail/
-        :id"
-          element={<IrregularDetailPage />}
-        />
+        <Route path="/irregularDetail/:id" element={<IrregularDetailPage />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/shoutout" element={<ShoutoutPage />} />
         <Route path="/secretend" element={<EndPage />} />
