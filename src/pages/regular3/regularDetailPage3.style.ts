@@ -123,7 +123,7 @@ export const ContentImgDiv = styled.div<IContentIndex>`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-  width: 49%;
+  width: 30%;
   aspect-ratio: 1/1;
   margin-bottom: 3%;
 `;

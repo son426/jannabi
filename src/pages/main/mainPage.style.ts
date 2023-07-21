@@ -9,16 +9,6 @@ import regular1_2 from "./image/regular/regular1-2.png";
 import regular2_2 from "./image/regular/regular2-2.png";
 import regular3_2 from "./image/regular/regular3-2.png";
 
-import irregular1 from "./image/irregular/1.png";
-import irregular4 from "./image/irregular/4.png";
-import irregular5 from "./image/irregular/5.png";
-import irregular6 from "./image/irregular/6.png";
-import irregular8 from "./image/irregular/8.png";
-import irregular9 from "./image/irregular/9.png";
-import irregular11 from "./image/irregular/11.png";
-import irregular14 from "./image/irregular/14.png";
-import irregular15 from "./image/irregular/15.png";
-import irregular16 from "./image/irregular/16.png";
 import irregular1_2 from "./image/irregular/1-2.png";
 import irregular4_2 from "./image/irregular/4-2.png";
 import irregular5_2 from "./image/irregular/5-2.png";
@@ -97,6 +87,7 @@ export const RegularRow = styled.div`
 
 interface IImageProps {
   img: string;
+  hoveredImg?: string;
 }
 
 export const RegularCoverDiv = styled.div<IImageProps>`
@@ -175,7 +166,7 @@ export const Irr4 = styled(SampleLink)<IImageProps>`
   left: 11.9em;
   &:hover {
     transform: translateY(-5px) rotate(-2deg);
-    background-image: url(${irregular4_2});
+    background-image: url(${(props) => props.hoveredImg});
   }
 `;
 
@@ -186,10 +177,10 @@ export const Irr1 = styled(SampleLink)<IImageProps>`
   left: 12.3em;
   &:hover {
     transform: translateY(-5px) rotate(3deg);
-    background-image: url(${irregular1_2});
+    background-image: url(${(props) => props.hoveredImg});
   }
   ${Irr4}:hover ~ & {
-    transform: translateY(-10px);
+    transform: translateY(-7px);
   }
 `;
 
@@ -199,7 +190,7 @@ export const Irr2 = styled(SampleLink)<IImageProps>`
   bottom: 5.8em;
   left: 11.2em;
   ${Irr4}:hover ~ & {
-    transform: translateY(-10px);
+    transform: translateY(-7px);
   }
 `;
 
@@ -209,7 +200,7 @@ export const Irr3 = styled(SampleLink)<IImageProps>`
   bottom: 3.4em;
   left: 12.3em;
   ${Irr4}:hover ~ & {
-    transform: translateY(-10px);
+    transform: translateY(-7px);
   }
 `;
 
@@ -220,7 +211,7 @@ export const Irr8 = styled(SampleLink)<IImageProps>`
   left: 35.5em;
   &:hover {
     transform: translateY(-15px);
-    background-image: url(${irregular8_2});
+    background-image: url(${(props) => props.hoveredImg});
   }
 `;
 
@@ -231,7 +222,7 @@ export const Irr6 = styled(SampleLink)<IImageProps>`
   left: 28.55em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${irregular6_2});
+    background-image: url(${(props) => props.hoveredImg});
   }
 
   ${Irr8}:hover ~ & {
@@ -244,16 +235,13 @@ export const Irr5 = styled(SampleLink)<IImageProps>`
   height: 9em;
   bottom: 0em;
   left: 24em;
-
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${irregular5_2});
+    background-image: url(${(props) => props.hoveredImg});
   }
-
   ${Irr6}:hover ~ & {
     transform: translateX(-2px) rotate(-2deg);
   }
-
   ${Irr8}:hover ~ & {
     transform: translateX(-2px) rotate(-2deg);
   }

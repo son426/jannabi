@@ -67,7 +67,7 @@ function ShoutoutPage() {
 
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
-    const scrollThreshold = 600;
+    const scrollThreshold = 500;
     if (scrollTop > scrollThreshold) {
       setIsSmall(true);
     } else {

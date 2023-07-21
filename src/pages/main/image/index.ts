@@ -17,6 +17,16 @@ import irregular13 from "./irregular/13.png";
 import irregular14 from "./irregular/14.png";
 import irregular15 from "./irregular/15.png";
 import irregular16 from "./irregular/16.png";
+import irregular1_2 from "./irregular/1-2.png";
+import irregular4_2 from "./irregular/4-2.png";
+import irregular5_2 from "./irregular/5-2.png";
+import irregular6_2 from "./irregular/6-2.png";
+import irregular8_2 from "./irregular/8-2.png";
+import irregular9_2 from "./irregular/9-2.png";
+import irregular11_2 from "./irregular/11-2.png";
+import irregular14_2 from "./irregular/14-2.png";
+import irregular15_2 from "./irregular/15-2.png";
+import irregular16_2 from "./irregular/16-2.png";
 
 export default {
   regular1,
@@ -38,4 +48,14 @@ export default {
   irregular14,
   irregular15,
   irregular16,
+  irregular1_2,
+  irregular4_2,
+  irregular5_2,
+  irregular6_2,
+  irregular8_2,
+  irregular9_2,
+  irregular11_2,
+  irregular14_2,
+  irregular15_2,
+  irregular16_2,
 };

@@ -25,9 +25,12 @@ const translateZAnimation = keyframes`
   }
 `;
 
+const content1Em = "20px";
+
 export const Content1 = styled.div`
   height: 100vh;
   /* border: 5px solid red; */
+  font-size: ${content1Em};
 `;
 
 export const LogoDiv = styled.div`
@@ -35,8 +38,8 @@ export const LogoDiv = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 10rem;
-  height: 13rem;
+  width: 5em;
+  height: 10em;
   position: absolute;
   top: 12%;
   left: 50%;
@@ -53,20 +56,20 @@ export const MarginDiv = styled.div`
 export const Column = styled.div`
   /* border: 1px solid red; */
   position: relative;
-  width: 40%;
+  width: 45%;
   height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 2em;
 `;
 
 export const Title = styled.div`
   /* border: 1px solid white; */
   white-space: pre-line;
-  font-size: 2.5rem;
-  line-height: 3rem;
+  font-size: 1.7em;
+  line-height: 1.25em;
   font-weight: 600;
   color: white;
   width: 80%;
@@ -75,7 +78,8 @@ export const Title = styled.div`
 export const SubTitle = styled.div`
   /* border: 1px solid white; */
   white-space: pre-line;
-  font-size: 1rem;
+  font-size: 0.65em;
+  line-height: 1.3em;
   font-weight: 100;
   color: white;
   width: 80%;
@@ -86,7 +90,8 @@ export const CheckBox = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.5em;
+  font-size: 0.6em;
 `;
 
 export const CheckBoxRow = styled.div<{ selected: boolean }>`
@@ -95,7 +100,7 @@ export const CheckBoxRow = styled.div<{ selected: boolean }>`
   cursor: pointer;
   display: flex;
   p {
-    width: 6rem;
+    width: 6em;
   }
 `;
 
@@ -108,8 +113,8 @@ export const Card = styled.div<IImageProps>`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 25rem;
-  height: 30rem;
+  width: 15em;
+  height: 20em;
   position: absolute;
   animation: ${rotateAnimation} 3s linear infinite;
 `;

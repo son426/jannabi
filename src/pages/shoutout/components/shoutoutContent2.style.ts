@@ -8,6 +8,7 @@ export const Content2 = styled.div`
   position: relative;
   overflow: hidden;
   /* border: 1px solid red; */
+  font-size: 20px;
 `;
 
 export const BackImageDiv = styled.div`
@@ -31,8 +32,8 @@ export const LogoDiv2 = styled.div<ISmall>`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: ${(props) => (props.issmall ? "15rem" : "30rem")};
-  height: ${(props) => (props.issmall ? "15rem" : "30rem")};
+  width: ${(props) => (props.issmall ? "10em" : "20em")};
+  height: ${(props) => (props.issmall ? "10em" : "20em")};
   position: absolute;
   top: ${(props) => (props.issmall ? "15%" : "50%")};
   left: 50%;
@@ -134,15 +135,14 @@ export const CommentContent = styled.p`
   color: white;
   margin: 0;
   padding: 0;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.45em;
 `;
 
 export const CommentDate = styled.p`
   color: white;
   margin: 0;
   padding: 0;
-  font-size: 0.6rem;
+  font-size: 0.2em;
   position: absolute;
   bottom: 10%;
   right: 1%;

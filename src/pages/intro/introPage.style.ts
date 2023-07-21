@@ -110,7 +110,7 @@ export const ImgWrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
-  border: 3px solid red;
+  border: 3px solid transparent;
   overflow: hidden;
 `;
 
@@ -121,7 +121,7 @@ export const IntroImageDiv = styled.div<IClickedProps>`
   background-size: cover;
   width: 50%;
   height: 250%;
-  border: 1px solid blue;
+  border: 1px solid transparent;
   animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s forwards,
     ${({ isclicked }) =>
       isclicked

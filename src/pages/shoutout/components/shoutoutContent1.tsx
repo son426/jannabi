@@ -26,7 +26,12 @@ function ShoutoutContent1() {
         }}
       ></S.LogoDiv>
       <S.MarginDiv></S.MarginDiv>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <S.Column>
           <S.Title>
             힙한 거, 쿨한 거 싫어요.{"\n"}그래서 가장 뜨거울{"\n"}우리들의
