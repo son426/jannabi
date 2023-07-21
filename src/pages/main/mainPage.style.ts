@@ -8,6 +8,17 @@ import { Link } from "react-router-dom";
 import regular1_2 from "./image/regular/regular1-2.png";
 import regular2_2 from "./image/regular/regular2-2.png";
 import regular3_2 from "./image/regular/regular3-2.png";
+
+import irregular1 from "./image/irregular/1.png";
+import irregular4 from "./image/irregular/4.png";
+import irregular5 from "./image/irregular/5.png";
+import irregular6 from "./image/irregular/6.png";
+import irregular8 from "./image/irregular/8.png";
+import irregular9 from "./image/irregular/9.png";
+import irregular11 from "./image/irregular/11.png";
+import irregular14 from "./image/irregular/14.png";
+import irregular15 from "./image/irregular/15.png";
+import irregular16 from "./image/irregular/16.png";
 import irregular1_2 from "./image/irregular/1-2.png";
 import irregular4_2 from "./image/irregular/4-2.png";
 import irregular5_2 from "./image/irregular/5-2.png";
@@ -55,14 +66,14 @@ export const BackgroundDiv = styled.div`
 // irregular 에서 어떻게 할지.
 
 export const ShelfDiv = styled.div`
-  border: 5px solid red;
+  border: 5px solid transparent;
   width: 100%;
   height: 150vh;
   margin: 20vh 0;
 `;
 
 export const Shelf = styled.div`
-  border: 5px solid black;
+  border: 5px solid transparent;
   background-image: url(${shelfImg});
   background-size: contain;
   background-position: top;
@@ -74,11 +85,11 @@ export const Shelf = styled.div`
 `;
 
 export const RegularRow = styled.div`
-  border: 3px solid blue;
+  border: 3px solid transparent;
   width: 950px;
   margin: 0 auto;
-  margin-top: 108px;
-  height: 19%;
+  margin-top: 105px;
+  height: 19.5%;
   display: flex;
   justify-content: center;
   gap: 3.5%;
@@ -137,7 +148,7 @@ export const RegularDiv = styled(Link)<{ series: number }>`
 /////////////////////////
 
 export const IrregularRow1 = styled.div`
-  border: 3px solid blue;
+  border: 3px solid transparent;
   width: 950px;
   height: 185px;
   margin: 0 auto;
@@ -149,13 +160,23 @@ export const IrregularRow1 = styled.div`
 `;
 
 const SampleLink = styled(Link)<IImageProps>`
-  display: block;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
+`;
+
+export const Irr4 = styled(SampleLink)<IImageProps>`
+  width: 12em;
+  height: 3.5em;
+  bottom: 0;
+  left: 11.9em;
+  &:hover {
+    transform: translateY(-5px) rotate(-2deg);
+    background-image: url(${irregular4_2});
+  }
 `;
 
 export const Irr1 = styled(SampleLink)<IImageProps>`
@@ -167,35 +188,54 @@ export const Irr1 = styled(SampleLink)<IImageProps>`
     transform: translateY(-5px) rotate(3deg);
     background-image: url(${irregular1_2});
   }
+  ${Irr4}:hover ~ & {
+    transform: translateY(-10px);
+  }
 `;
 
 export const Irr2 = styled(SampleLink)<IImageProps>`
-  pointer-events: none;
   width: 12em;
   height: 2.97em;
   bottom: 5.8em;
   left: 11.2em;
-  ${Irr1}:hover & {
-    transform: translateY(-5px);
+  ${Irr4}:hover ~ & {
+    transform: translateY(-10px);
   }
 `;
 
 export const Irr3 = styled(SampleLink)<IImageProps>`
-  pointer-events: none;
   width: 12em;
   height: 2.55em;
   bottom: 3.4em;
   left: 12.3em;
+  ${Irr4}:hover ~ & {
+    transform: translateY(-10px);
+  }
 `;
 
-export const Irr4 = styled(SampleLink)<IImageProps>`
-  width: 12em;
-  height: 3.5em;
-  bottom: 0;
-  left: 11.9em;
+export const Irr8 = styled(SampleLink)<IImageProps>`
+  width: 4em;
+  height: 10em;
+  bottom: 0em;
+  left: 35.5em;
   &:hover {
-    transform: translateY(-3px) rotate(-2deg);
-    background-image: url(${irregular4_2});
+    transform: translateY(-15px);
+    background-image: url(${irregular8_2});
+  }
+`;
+
+export const Irr6 = styled(SampleLink)<IImageProps>`
+  width: 4.5em;
+  height: 11em;
+  bottom: 0em;
+  left: 28.55em;
+  &:hover {
+    transform: translateY(-5px);
+    background-image: url(${irregular6_2});
+  }
+
+  ${Irr8}:hover ~ & {
+    transform: translateX(-2px) rotate(-2deg);
   }
 `;
 
@@ -204,23 +244,18 @@ export const Irr5 = styled(SampleLink)<IImageProps>`
   height: 9em;
   bottom: 0em;
   left: 24em;
+
   &:hover {
     transform: translateY(-5px);
     background-image: url(${irregular5_2});
   }
-`;
 
-export const Irr6 = styled(SampleLink)<IImageProps>`
-  width: 5.5em;
-  height: 11em;
-  bottom: 0em;
-  left: 28.55em;
-  &:hover {
-    transform: translateY(-5px);
-    background-image: url(${irregular6_2});
+  ${Irr6}:hover ~ & {
+    transform: translateX(-2px) rotate(-2deg);
   }
-  &:hover ~ ${Irr5} {
-    transform: translateY(-50px);
+
+  ${Irr8}:hover ~ & {
+    transform: translateX(-2px) rotate(-2deg);
   }
 `;
 
@@ -229,24 +264,20 @@ export const Irr7 = styled(SampleLink)<IImageProps>`
   width: 4.2em;
   height: 10.3em;
   bottom: 0em;
-  left: 32em;
-`;
-
-export const Irr8 = styled(SampleLink)<IImageProps>`
-  width: 4em;
-  height: 10em;
-  bottom: 0em;
-  left: 35.5em;
+  left: 32.1em;
+  ${Irr8}:hover ~ & {
+    transform: translateX(-2px) rotate(-2deg);
+  }
 `;
 
 /////////////////////////
 
 export const IrregularRow2 = styled.div`
-  border: 3px solid blue;
+  border: 3px solid transparent;
   width: 950px;
   height: 177px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 63px;
   display: flex;
   justify-content: center;
   gap: 2em;
@@ -255,7 +286,7 @@ export const IrregularRow2 = styled.div`
 
 export const Irr9 = styled(SampleLink)<IImageProps>`
   width: 4em;
-  height: 10em;
+  height: 10.2em;
   bottom: 0em;
   left: 4.5em;
   &:hover {
@@ -266,27 +297,84 @@ export const Irr9 = styled(SampleLink)<IImageProps>`
 
 export const Irr10 = styled(SampleLink)<IImageProps>`
   width: 4em;
-  height: 7.5em;
+  height: 7.7em;
   bottom: 0em;
   left: 8.1em;
+
+  ${Irr9}:hover ~ & {
+    transform: translateX(0.5px) rotate(0.5deg);
+  }
+`;
+
+export const Irr16 = styled(SampleLink)<IImageProps>`
+  width: 5em;
+  height: 10.1em;
+  bottom: 0em;
+  left: 35.5em;
+  &:hover {
+    transform: translateY(-10px);
+    background-image: url(${irregular16_2});
+  }
+`;
+
+export const Irr15 = styled(SampleLink)<IImageProps>`
+  width: 4.5em;
+  height: 10.9em;
+  bottom: 0em;
+  left: 31.5em;
+  background-image: url(${irregular15_2});
+  &:hover {
+    transform: translateY(-5px);
+    background-image: url(${irregular15_2});
+  }
+  ${Irr16}:hover ~ & {
+    transform: translateX(-1px) rotate(-1.5deg);
+  }
+`;
+
+export const Irr14 = styled(SampleLink)<IImageProps>`
+  width: 9.9em;
+  height: 3.6em;
+  bottom: 2.95em;
+  left: 22.5em;
+  &:hover {
+    transform: translateY(-5px);
+    background-image: url(${irregular14_2});
+  }
+  ${Irr15}:hover ~ & {
+    transform: translateX(-2px);
+  }
 `;
 
 export const Irr11 = styled(SampleLink)<IImageProps>`
   width: 10em;
-  height: 8.6em;
+  height: 8.8em;
   bottom: 0em;
-  left: 10em;
+  left: 10.2em;
   &:hover {
     transform: translateY(-5px);
     background-image: url(${irregular11_2});
   }
+  ${Irr14}:hover ~ & {
+    transform: translate(3px, -2px) rotate(-2deg);
+  }
+  ${Irr15}:hover ~ & {
+    transform: translate(-2px, -2px) rotate(-2deg);
+  }
 `;
 
 export const Irr12 = styled(SampleLink)<IImageProps>`
+  pointer-events: none;
   width: 13.5em;
   height: 10.2em;
   bottom: 0em;
-  left: 14.2em;
+  left: 14.4em;
+  ${Irr14}:hover ~ & {
+    transform: translate(3px, -1px) rotate(-2deg);
+  }
+  ${Irr15}:hover ~ & {
+    transform: translateX(-2px);
+  }
 `;
 
 export const Irr13 = styled(SampleLink)<IImageProps>`
@@ -294,31 +382,4 @@ export const Irr13 = styled(SampleLink)<IImageProps>`
   height: 3.2em;
   bottom: 0em;
   left: 19em;
-`;
-
-export const Irr14 = styled(SampleLink)<IImageProps>`
-  width: 14em;
-  height: 3.6em;
-  bottom: 3em;
-  left: 22.38em;
-  &:hover {
-    transform: translateY(-5px);
-    background-image: url(${irregular14_2});
-  }
-`;
-
-export const Irr15 = styled(SampleLink)<IImageProps>`
-  width: 5.5em;
-  height: 10.5em;
-  bottom: 0em;
-  left: 31.5em;
-  background-image: url(${irregular15_2});
-`;
-
-export const Irr16 = styled(SampleLink)<IImageProps>`
-  width: 5em;
-  height: 10em;
-  bottom: 0em;
-  left: 35.5em;
-  background-image: url(${irregular16_2});
 `;

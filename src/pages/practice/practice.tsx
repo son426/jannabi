@@ -5,16 +5,11 @@ import { Canvas } from "@react-three/fiber";
 function Practice() {
   return (
     <>
-      <S.TestDiv></S.TestDiv>
-      <S.Div style={{ opacity: 0.99 }}>
-        <span className="red">1</span>
-      </S.Div>
-      <S.Div>
-        <span className="green">2</span>
-      </S.Div>
-      <S.Div>
-        <span className="blue">3</span>
-      </S.Div>
+      <S.TestDiv>
+        <S.Div1></S.Div1>
+        <S.Div2></S.Div2>
+        <S.Div3></S.Div3>
+      </S.TestDiv>
     </>
   );
 }

@@ -69,8 +69,8 @@ export const LineWrapper = styled.div`
   background-color: white;
 `;
 
-export const Line = styled.div`
-  border-left: 1px solid white;
+export const Line = styled.div<IColorProps>`
+  border-left: 1px solid ${(props) => props.color};
   height: 100%;
   position: absolute;
   left: 50%;

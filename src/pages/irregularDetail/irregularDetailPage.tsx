@@ -27,7 +27,7 @@ function IrregularDetailPage() {
 
   useEffect(() => {
     // getData
-    setAlbumData(irregularAlbumData[0]);
+    setAlbumData(irregularAlbumData[index]);
     setIsLoading(false);
   }, []);
 
@@ -52,7 +52,7 @@ function IrregularDetailPage() {
             <S.Meta>{albumData?.meta}</S.Meta>
 
             <S.LineWrapper>
-              <S.Line></S.Line>
+              <S.Line color={albumData?.fontColor}></S.Line>
             </S.LineWrapper>
 
             <S.Description>{albumData?.description}</S.Description>

@@ -2,10 +2,9 @@ import styled, { keyframes } from "styled-components";
 import backCursor from "./back.jpg";
 
 export const TestDiv = styled.div`
-  /* width: 500px;
-  height: 500px;
-  background-color: gray;
-  position: absolute; */
+  border: 3px solid black;
+  width: 500px;
+  height: 100px;
 `;
 
 export const Div = styled.div`
@@ -46,6 +45,9 @@ export const Div1 = styled.div`
   top: 20px;
   left: 20px;
   z-index: 1;
+  &:hover {
+    background-color: black;
+  }
 `;
 
 export const Div2 = styled.div`
@@ -55,6 +57,11 @@ export const Div2 = styled.div`
   position: absolute;
   top: 60px;
   left: 60px;
+  &:hover {
+    ${Div1} {
+      background-color: pink;
+    }
+  }
 `;
 export const Div3 = styled.div`
   width: 100px;
@@ -63,6 +70,9 @@ export const Div3 = styled.div`
   position: absolute;
   top: 100px;
   left: 100px;
+  ${Div1}:hover ~ & {
+    background-color: gray;
+  }
 `;
 
 // const typing = keyframes`
