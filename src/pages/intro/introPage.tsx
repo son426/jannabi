@@ -6,6 +6,13 @@ function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    setIsClicked((prev) => !prev);
+    setTimeout(() => {
+      navigate("/main", { state: { isIntro: true } });
+    }, 1500);
+  };
+
   return (
     <>
       <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
@@ -16,12 +23,7 @@ function IntroPage() {
         </S.FloatingButtonWrapper>
         <S.IntroImageDiv
           isclicked={isClicked}
-          onClick={() => {
-            setIsClicked((prev) => !prev);
-            setTimeout(() => {
-              navigate("/main", { state: { isIntro: true } });
-            }, 1500);
-          }}
+          onClick={handleClick}
         ></S.IntroImageDiv>
       </S.ImgWrapper>
     </>
