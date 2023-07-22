@@ -1,10 +1,15 @@
 import styled, { keyframes } from "styled-components";
 import backCursor from "./back.jpg";
 
+// media screen
+
 export const TestDiv = styled.div`
   border: 3px solid black;
   width: 500px;
   height: 100px;
+  @media screen and (max-width: 500px) {
+    background-color: aquamarine;
+  }
 `;
 
 export const Div = styled.div`

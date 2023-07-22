@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import * as image from "./image/index";
+import { Link } from "react-router-dom";
 
 interface IBackgroundProps {
   backgroundcolor: string | undefined;
@@ -9,20 +10,44 @@ interface IContentProps {
   fontcolor: string | undefined;
 }
 
-export const BackButton = styled.div`
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  border: 1px solid black;
-  z-index: 1;
-`;
+interface IImageProps {
+  image?: string;
+}
 
 interface IColorProps {
   color?: string;
+  color2?: string;
 }
+
+export const BackButton = styled.div<IColorProps>`
+  position: fixed;
+
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  border-left: 60px solid ${(props) => props.color2}; /* Left side */
+  border-bottom: 60px solid transparent; /* Bottom side (change the color to yellow) */
+
+  z-index: 1;
+
+  .arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    width: 70px;
+    height: 70px;
+    font-weight: 600;
+    font-size: 1.5em;
+    position: fixed;
+    top: -15px;
+    left: -20px;
+    color: ${(props) => props.color};
+    transform: rotate(
+      225deg
+    ); /* Rotate the text to match the arrow's direction */
+  }
+`;
 
 export const BackgroundDiv = styled.div<IColorProps>`
   width: 100vw;
@@ -41,24 +66,73 @@ export const TextWrapper = styled.div<IColorProps>`
   color: ${(props) => props.color};
   padding: 2em 2em;
   position: relative;
-  box-sizing: border-box;
+
   font-size: 16px;
+  overflow: hidden;
 `;
 export const Title = styled.div`
   font-weight: 600;
-  font-size: 3em;
+  font-size: 2.3em;
   margin-bottom: 3%;
 `;
 export const Subtitle = styled.h2`
-  font-size: 1em;
-  font-weight: 600;
+  font-size: 0.8em;
+  font-weight: 200;
   margin-bottom: 10%;
 `;
 
+export const Player = styled.div`
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const AlbumCover = styled.div<IImageProps>`
+  background-image: url(${(props) => props.image});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 60%;
+  aspect-ratio: 1/1;
+  position: relative;
+`;
+export const PrevDiv = styled.div`
+  background-image: url(${image.prev});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 12%;
+  cursor: pointer;
+`;
+export const NextDiv = styled.div`
+  display: block;
+  background-image: url(${image.next});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 12%;
+  cursor: pointer;
+`;
+export const PlayButton = styled.div`
+  background-image: url(${image.play});
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+`;
+
 export const Meta = styled.p`
-  font-size: 0.6em;
+  font-size: 10px;
   font-weight: 100;
-  margin-bottom: 10%;
+  margin-top: 1%;
+  margin-bottom: 8%;
+  opacity: 0.5;
 `;
 
 export const LineWrapper = styled.div`
@@ -78,14 +152,70 @@ export const Line = styled.div<IColorProps>`
 `;
 
 export const Description = styled.p`
-  font-size: 0.6em;
+  /* border: 1px solid black; */
+  font-size: 0.8em;
   font-weight: 600;
   word-break: keep-all;
-  margin-bottom: 50%;
-  line-height: 1.4em;
+  margin-bottom: 10%;
+  line-height: 1.5em;
 `;
+
+export const Playlist = styled.div`
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 20%;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const PlaylistIsTitle = styled.div<IColorProps>`
+  background-color: ${(props) => props.color2};
+  color: ${(props) => props.color};
+  border-radius: 0.5em;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3em;
+  height: 70%;
+  p {
+    font-size: 0.5em;
+    font-weight: 600;
+  }
+`;
+
+interface IPlayingRowProps extends IColorProps {
+  isplaying: boolean;
+}
+
+export const PlaylistRow = styled.div<IPlayingRowProps>`
+  /* border: 1px solid white; */
+  color: ${(props) => (props.isplaying ? props.color : "#C2D1C2")};
+  font-weight: ${(props) => (props.isplaying ? "600" : "200")};
+  font-size: ${(props) => (props.isplaying ? "0.8em" : "0.7em")};
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  transition: color 0.1s linear, font-size 0.1s linear, font-weight 0.1s linear;
+`;
+export const SongIndex = styled.div``;
+export const SongTitle = styled.p`
+  white-space: nowrap;
+  overflow: auto;
+  padding: 0.7em;
+`;
+
 export const Footer = styled.div`
-  font-size: 0.55em;
+  font-size: 10px;
   position: absolute;
   bottom: 5%;
   left: 50%;
@@ -93,11 +223,8 @@ export const Footer = styled.div`
   line-height: 1.5em;
 `;
 
-interface IImageProps {
-  image?: string;
-}
-
 export const ImageWrapper = styled.div<IImageProps>`
+  border: 1px solid black;
   width: 63%;
   height: 100vh;
   background-size: 115% 115%;

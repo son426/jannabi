@@ -13,7 +13,7 @@ function MainPage() {
 
   return (
     <>
-      {isIntro && <Intro />}
+      {/* {isIntro && <Intro />} */}
       <S.BackgroundDiv>
         <S.ShelfDiv>
           <S.Shelf>
@@ -101,17 +101,17 @@ function MainPage() {
       >
         샤라웃 페이지 버튼
       </Link>
-      {/* <Link
+      <Link
         to="/regulardetail/1"
         style={{
           fontWeight: 600,
           color: "red",
           fontSize: "30px",
-          marginLeft: "50px", 
+          marginLeft: "50px",
         }}
       >
         정규 1집 버튼
-      </Link> */}
+      </Link>
     </>
   );
 }

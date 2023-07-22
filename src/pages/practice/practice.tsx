@@ -1,15 +1,28 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import * as S from "./practice.style";
 import { Canvas } from "@react-three/fiber";
+import { useMediaQuery } from "react-responsive";
+import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
+import { ThemeContext } from "styled-components";
+import { CustomTheme } from "../../App";
 
 function Practice() {
   return (
     <>
-      <S.TestDiv>
+      <Desktop>
+        <p>컴퓨터</p>
+      </Desktop>
+      <Tablet>
+        <p>태블릿</p>
+      </Tablet>
+      <Mobile>
+        <p>모바일</p>
+      </Mobile>
+      {/* <S.TestDiv>
         <S.Div1></S.Div1>
         <S.Div2></S.Div2>
         <S.Div3></S.Div3>
-      </S.TestDiv>
+      </S.TestDiv> */}
     </>
   );
 }
