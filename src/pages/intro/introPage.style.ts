@@ -114,31 +114,86 @@ export const ImgWrapper = styled.div`
   overflow: hidden;
 `;
 
+const mobileSlideDownAnimation = keyframes`
+  0%{
+    pointer-events: none;
+  } 
+  95%{
+    pointer-events: none;
+  }
+  100%{
+    pointer-events: all;
+    cursor : pointer;
+    transform: translate(0, -20%);
+  }
+`;
+
 export const IntroImageDiv = styled.div<IClickedProps>`
+  @media screen and (max-width: 1535px) {
+    background-size: cover;
+    width: 50%;
+    height: 250%;
+    animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
+        forwards,
+      ${({ isclicked }) =>
+        isclicked
+          ? css`
+              ${zoomInAnimation} 2s ease-in forwards
+            `
+          : "none"};
+  }
+  @media screen and (min-width: 1536px) {
+    background-size: cover;
+    width: 60%;
+    height: 250%;
+    animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
+        forwards,
+      ${({ isclicked }) =>
+        isclicked
+          ? css`
+              ${zoomInAnimation} 2s ease-in forwards
+            `
+          : "none"};
+  }
+  @media screen and (max-width: 500px) {
+    background-size: 100% 100%;
+    width: 100%;
+    height: 250%;
+    transform: translateY(200px);
+    animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
+        forwards,
+      ${({ isclicked }) =>
+        isclicked
+          ? css`
+              ${zoomInAnimation} 2s ease-in forwards
+            `
+          : "none"};
+  }
   background-image: url(${introImage});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  width: 50%;
-  height: 250%;
-  border: 1px solid transparent;
-  animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s forwards,
-    ${({ isclicked }) =>
-      isclicked
-        ? css`
-            ${zoomInAnimation} 2s ease-in forwards
-          `
-        : "none"};
+  border: 1px solid black;
 `;
 
-export const Img = styled.img<IClickedProps>`
-  overflow: hidden;
-  animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s forwards;
-  transform: ${(props) => (props.isclicked ? "scale(4)" : "scale(2)")};
-  /* &:hover {
-    transform: ${(props) => (props.isclicked ? "scale(10)" : "scale(2.5)")}
-      translate(0, -430px);
-    transition: transform 5s cubic-bezier(0.42, 0, 0.58, 1);
-    cursor: pointer;
-  } */
+export const TestDiv = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 20px;
+
+  @media screen and (max-width: 1535px) {
+    &:after {
+      content: "작은 버젼";
+    }
+  }
+  @media screen and (min-width: 1536px) {
+    &:after {
+      content: "큰 버젼";
+    }
+  }
+  @media screen and (max-width: 500px) {
+    &:after {
+      content: "모바일";
+    }
+  }
 `;

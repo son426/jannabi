@@ -57,14 +57,14 @@ export const BackgroundDiv = styled.div<IColorProps>`
 `;
 
 export const TextWrapper = styled.div<IColorProps>`
-  width: 37%;
+  width: 100%;
   height: 100vh;
   white-space: pre-wrap;
   text-align: center;
   display: flex;
   flex-direction: column;
   color: ${(props) => props.color};
-  padding: 2em 2em;
+  padding: 4em 3em;
   position: relative;
 
   font-size: 16px;
@@ -84,7 +84,7 @@ export const Subtitle = styled.h2`
 export const Player = styled.div`
   /* border: 1px solid black; */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const AlbumCover = styled.div<IImageProps>`
@@ -92,10 +92,20 @@ export const AlbumCover = styled.div<IImageProps>`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  width: 60%;
+  width: 80%;
   aspect-ratio: 1/1;
   position: relative;
 `;
+
+export const ConsoleDiv = styled.div`
+  border: 1px solid white;
+  margin-top: 20%;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+`;
+
 export const PrevDiv = styled.div`
   background-image: url(${image.prev});
   background-position: center;
@@ -105,7 +115,6 @@ export const PrevDiv = styled.div`
   cursor: pointer;
 `;
 export const NextDiv = styled.div`
-  display: block;
   background-image: url(${image.next});
   background-position: center;
   background-size: contain;
@@ -118,12 +127,7 @@ export const PlayButton = styled.div`
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  position: absolute;
-  width: 32%;
-  height: 32%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 20%;
   cursor: pointer;
 `;
 

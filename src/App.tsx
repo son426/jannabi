@@ -4,8 +4,6 @@ import {
   createGlobalStyle,
 } from "styled-components";
 import Router from "./Router";
-import { Desktop } from "./components/mediaquery";
-import { useMediaQuery } from "react-responsive";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -67,12 +65,6 @@ const GlobalStyle = createGlobalStyle`
     color:inherit;
   }
 `;
-
-export interface CustomTheme extends DefaultTheme {
-  isPc: boolean;
-  isTablet: boolean;
-  isMobile: boolean;
-}
 
 function App(): JSX.Element {
   return (

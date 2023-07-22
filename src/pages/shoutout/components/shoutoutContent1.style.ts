@@ -25,7 +25,7 @@ const translateZAnimation = keyframes`
   }
 `;
 
-const content1Em = "20px";
+const content1Em = "1.4vw";
 
 export const Content1 = styled.div`
   height: 100vh;
@@ -38,8 +38,8 @@ export const LogoDiv = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 5em;
-  height: 10em;
+  width: 8em;
+  height: 12em;
   position: absolute;
   top: 12%;
   left: 50%;
@@ -56,7 +56,7 @@ export const MarginDiv = styled.div`
 export const Column = styled.div`
   /* border: 1px solid red; */
   position: relative;
-  width: 45%;
+  width: 40%;
   height: 70vh;
   display: flex;
   flex-direction: column;
@@ -68,7 +68,7 @@ export const Column = styled.div`
 export const Title = styled.div`
   /* border: 1px solid white; */
   white-space: pre-line;
-  font-size: 1.7em;
+  font-size: 2em;
   line-height: 1.25em;
   font-weight: 600;
   color: white;

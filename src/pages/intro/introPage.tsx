@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./introPage.style";
+import { useMediaQuery } from "react-responsive";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
@@ -16,6 +17,7 @@ function IntroPage() {
   return (
     <>
       <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
+      <S.TestDiv>test</S.TestDiv>
       <S.ImgWrapper>
         <S.FloatingButtonWrapper isclicked={isClicked}>
           <S.FloatingButton>Click !</S.FloatingButton>

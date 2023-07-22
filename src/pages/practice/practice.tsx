@@ -4,7 +4,6 @@ import { Canvas } from "@react-three/fiber";
 import { useMediaQuery } from "react-responsive";
 import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
 import { ThemeContext } from "styled-components";
-import { CustomTheme } from "../../App";
 
 function Practice() {
   return (
@@ -18,11 +17,6 @@ function Practice() {
       <Mobile>
         <p>모바일</p>
       </Mobile>
-      {/* <S.TestDiv>
-        <S.Div1></S.Div1>
-        <S.Div2></S.Div2>
-        <S.Div3></S.Div3>
-      </S.TestDiv> */}
     </>
   );
 }
