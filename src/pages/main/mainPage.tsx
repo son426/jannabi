@@ -26,6 +26,12 @@ function MainPage() {
           >
             반응형 공사중. 컴퓨터로 오세용
           </h1>
+          <div>
+            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
+          </div>
+          <div>
+            <Link to="/shoutout">샤라웃페이지 구경</Link>
+          </div>
         </>
       </Mobile>
       <Tablet>
@@ -40,6 +46,12 @@ function MainPage() {
           >
             반응형 공사중. 컴퓨터로 오세용
           </h1>
+          <div>
+            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
+          </div>
+          <div>
+            <Link to="/shoutout">샤라웃페이지 구경</Link>
+          </div>
         </>
       </Tablet>
       <Desktop>
@@ -138,17 +150,6 @@ function MainPage() {
             style={{ fontWeight: 600, color: "red", fontSize: "30px" }}
           >
             샤라웃 페이지 버튼
-          </Link>
-          <Link
-            to="/regulardetail/1"
-            style={{
-              fontWeight: 600,
-              color: "red",
-              fontSize: "30px",
-              marginLeft: "50px",
-            }}
-          >
-            정규 1집 버튼
           </Link>
         </>
       </Desktop>

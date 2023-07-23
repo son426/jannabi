@@ -54,6 +54,12 @@ function IrregularDetailPage() {
     setIsPlaying((prev) => !prev);
   };
 
+  const resetState = () => {
+    setIsPlayingIndex(0);
+    setIsPlaying(true);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     // getData
     setAlbumData(irregularAlbumData[index]);
@@ -125,7 +131,7 @@ function IrregularDetailPage() {
                 <S.Player>
                   <S.PrevDiv
                     onClick={() => {
-                      setIsPlayingIndex(0);
+                      resetState();
                       if (index === 0) {
                         navigate(`/irregularDetail/10`);
                       } else {
@@ -141,7 +147,7 @@ function IrregularDetailPage() {
                   </S.AlbumCover>
                   <S.NextDiv
                     onClick={() => {
-                      setIsPlayingIndex(0);
+                      resetState();
                       if (index === 9) {
                         navigate(`/irregularDetail/1`);
                       } else {
@@ -258,6 +264,7 @@ function IrregularDetailPage() {
                 <M.ConsoleDiv>
                   <M.PrevDiv
                     onClick={() => {
+                      resetState();
                       if (index === 0) {
                         navigate(`/irregularDetail/10`);
                       } else {
@@ -265,9 +272,13 @@ function IrregularDetailPage() {
                       }
                     }}
                   ></M.PrevDiv>
-                  <M.PlayButton onClick={togglePlaying}></M.PlayButton>
+                  <M.PlayButton
+                    onClick={togglePlaying}
+                    istrue={isPlaying}
+                  ></M.PlayButton>
                   <M.NextDiv
                     onClick={() => {
+                      resetState();
                       if (index === 9) {
                         navigate(`/irregularDetail/1`);
                       } else {

@@ -78,7 +78,8 @@ export const Title = styled.div`
   margin-bottom: 3%;
 `;
 export const Subtitle = styled.h2`
-  font-size: 0.8em;
+  font-family: PretendardThin;
+  font-size: 1.2em;
   font-weight: 200;
   margin-bottom: 10%;
 `;

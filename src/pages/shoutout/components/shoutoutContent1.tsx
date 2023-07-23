@@ -1,4 +1,5 @@
 import * as S from "./shoutoutContent1.style";
+import * as M from "./mobile1.style";
 import choi from "../assets/choi.png";
 import kim from "../assets/kim.png";
 import { useState, useEffect } from "react";
@@ -81,13 +82,13 @@ function ShoutoutContent1() {
         </S.Content1>
       </Default>
       <Mobile>
-        <S.Content1>
-          <S.LogoDiv
+        <M.Content1>
+          <M.LogoDiv
             onClick={() => {
               navigate("/main");
             }}
-          ></S.LogoDiv>
-          <S.MarginDiv></S.MarginDiv>
+          ></M.LogoDiv>
+          <M.MarginDiv></M.MarginDiv>
           <div
             style={{
               display: "flex",
@@ -95,19 +96,19 @@ function ShoutoutContent1() {
               alignItems: "center",
             }}
           >
-            <S.Column>
-              <S.Card
+            <M.Column>
+              <M.Card
                 img={kim}
                 style={{ transform: "rotateZ(-10deg)", zIndex: cardIndex }}
-              ></S.Card>
-              <S.Card
+              ></M.Card>
+              <M.Card
                 img={choi}
                 style={{ transform: "rotateZ(10deg)" }}
-              ></S.Card>
-            </S.Column>
-            <S.Column>
-              <S.CheckBox>
-                <S.CheckBoxRow
+              ></M.Card>
+            </M.Column>
+            <M.Column>
+              <M.CheckBox>
+                <M.CheckBoxRow
                   selected={selected === 1 ? true : false}
                   onClick={() => {
                     setSelected(1);
@@ -115,8 +116,8 @@ function ShoutoutContent1() {
                 >
                   <p>VOCALIST</p>
                   <p>최정훈</p>
-                </S.CheckBoxRow>
-                <S.CheckBoxRow
+                </M.CheckBoxRow>
+                <M.CheckBoxRow
                   selected={selected === 2 ? true : false}
                   onClick={() => {
                     setSelected(2);
@@ -124,11 +125,11 @@ function ShoutoutContent1() {
                 >
                   <p>GUITARIST</p>
                   <p>김도형</p>
-                </S.CheckBoxRow>
-              </S.CheckBox>
-            </S.Column>
+                </M.CheckBoxRow>
+              </M.CheckBox>
+            </M.Column>
           </div>
-        </S.Content1>
+        </M.Content1>
       </Mobile>
     </>
   );

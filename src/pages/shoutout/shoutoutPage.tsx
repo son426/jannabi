@@ -38,7 +38,6 @@ function ShoutoutPage() {
     const audioElement = audioRef.current;
 
     audioPlay();
-
     audioElement.addEventListener("ended", handleAudioEnd);
 
     return () => {

@@ -38,8 +38,8 @@ export const LogoDiv = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 8em;
-  height: 12em;
+  width: 35em;
+  height: 45em;
   position: absolute;
   top: 12%;
   left: 50%;
@@ -49,20 +49,19 @@ export const LogoDiv = styled.div`
 
 export const MarginDiv = styled.div`
   width: 100%;
-  height: 15vh;
+  height: 30vh;
   /* border: 1px white solid; */
 `;
 
 export const Column = styled.div`
-  /* border: 1px solid red; */
+  border: 1px solid red;
   position: relative;
-  width: 40%;
-  height: 70vh;
+  width: 100%;
+  height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2em;
 `;
 
 export const Title = styled.div`
@@ -86,12 +85,16 @@ export const SubTitle = styled.div`
 `;
 
 export const CheckBox = styled.div`
+  /* border: 1px solid white; */
   color: white;
   width: 80%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
-  font-size: 0.6em;
+  justify-content: end;
+  align-items: center;
+  gap: 2em;
+  padding-bottom: 5em;
 `;
 
 export const CheckBoxRow = styled.div<{ selected: boolean }>`
@@ -99,8 +102,11 @@ export const CheckBoxRow = styled.div<{ selected: boolean }>`
   font-weight: ${(props) => (props.selected ? "600" : "200")};
   cursor: pointer;
   display: flex;
+  gap: 10px;
   p {
-    width: 6em;
+    width: 100%;
+    font-size: 18px;
+    /* border: 1px solid white; */
   }
 `;
 
@@ -113,8 +119,8 @@ export const Card = styled.div<IImageProps>`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 15em;
-  height: 20em;
+  width: 50em;
+  height: 65em;
   position: absolute;
   animation: ${rotateAnimation} 3s linear infinite;
 `;
