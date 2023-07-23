@@ -4,7 +4,7 @@ import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import ShoutoutContent1 from "./components/shoutoutContent1";
 import ShoutoutContent2 from "./components/shoutoutContent2";
-
+import { Mobile, Default } from "../../components/mediaquery";
 import { AUDIOFILES } from "../../data/data";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../../hooks/useAudio";
@@ -20,6 +20,7 @@ function ShoutoutPage() {
   const [comments, setComments] = useState<IComment[]>([]);
   const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState(false);
+  const [scrollHeight, setScrollHeight] = useState<number>(0);
 
   const commentDataRef = collection(db, "comment");
 
@@ -28,7 +29,7 @@ function ShoutoutPage() {
   const navigate = useNavigate();
 
   const handleAudioEnd = () => {
-    navigate("/secretend");
+    alert("끝");
   };
 
   // audio 재생
@@ -67,6 +68,7 @@ function ShoutoutPage() {
 
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
+    setScrollHeight(scrollTop);
     const scrollThreshold = 500;
     if (scrollTop > scrollThreshold) {
       setIsSmall(true);
@@ -100,16 +102,30 @@ function ShoutoutPage() {
 
   return (
     <>
-      <S.Wrapper>
-        <ShoutoutContent1 />
-        <ShoutoutContent2
-          isSmall={isSmall}
-          isCommentVisible={isCommentVisible}
-          commentDataRef={commentDataRef}
-          fetchComments={fetchComments}
-          comments={comments}
-        />
-      </S.Wrapper>
+      <Default>
+        <S.Wrapper>
+          <ShoutoutContent1 />
+          <ShoutoutContent2
+            isSmall={isSmall}
+            isCommentVisible={isCommentVisible}
+            commentDataRef={commentDataRef}
+            fetchComments={fetchComments}
+            comments={comments}
+          />
+        </S.Wrapper>
+      </Default>
+      <Mobile>
+        <S.Wrapper>
+          <ShoutoutContent1 />
+          <ShoutoutContent2
+            isSmall={isSmall}
+            isCommentVisible={isCommentVisible}
+            commentDataRef={commentDataRef}
+            fetchComments={fetchComments}
+            comments={comments}
+          />
+        </S.Wrapper>
+      </Mobile>
     </>
   );
 }

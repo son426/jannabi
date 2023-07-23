@@ -57,6 +57,7 @@ export const BackgroundDiv = styled.div<IColorProps>`
 `;
 
 export const TextWrapper = styled.div<IColorProps>`
+  font-family: PretendardBold, sans-serif, Arial;
   width: 37%;
   height: 100vh;
   white-space: pre-wrap;
@@ -71,6 +72,7 @@ export const TextWrapper = styled.div<IColorProps>`
   overflow: hidden;
 `;
 export const Title = styled.div`
+  font-family: PretendardBold, sans-serif, Arial;
   font-weight: 600;
   font-size: 2.3em;
   margin-bottom: 3%;
@@ -113,8 +115,14 @@ export const NextDiv = styled.div`
   width: 12%;
   cursor: pointer;
 `;
-export const PlayButton = styled.div`
-  background-image: url(${image.play});
+
+interface IBooleanProps {
+  istrue: boolean;
+}
+
+export const PlayButton = styled.div<IBooleanProps>`
+  background-image: ${(props) =>
+    props.istrue ? `url(${image.stop})` : `url(${image.play})`};
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -123,13 +131,14 @@ export const PlayButton = styled.div`
   height: 32%;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
   cursor: pointer;
 `;
 
 export const Meta = styled.p`
+  font-family: PretendardThin, sans-serif, Arial;
   font-size: 10px;
-  font-weight: 100;
   margin-top: 1%;
   margin-bottom: 8%;
   opacity: 0.5;
@@ -154,7 +163,7 @@ export const Line = styled.div<IColorProps>`
 export const Description = styled.p`
   /* border: 1px solid black; */
   font-size: 0.8em;
-  font-weight: 600;
+  font-family: PretendardSemiBold, sans-serif, Arial;
   word-break: keep-all;
   margin-bottom: 10%;
   line-height: 1.5em;
@@ -215,6 +224,7 @@ export const SongTitle = styled.p`
 `;
 
 export const Footer = styled.div`
+  font-family: PretendardMedium, sans-serif, Arial;
   font-size: 10px;
   position: absolute;
   bottom: 5%;

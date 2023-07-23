@@ -29,9 +29,17 @@ const Wrapper = styled.div<{ end: boolean }>`
 `;
 
 const TextDiv = styled.div<{ end: boolean }>`
+  @media screen and (min-width: 501px) {
+    font-size: 3rem;
+  }
+  @media screen and (max-width: 500px) {
+    // 모바일
+    font-size: 2rem;
+  }
+
   color: white;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-size: 3rem;
+  width: 100%;
   font-weight: 600;
   position: fixed;
   z-index: 999;

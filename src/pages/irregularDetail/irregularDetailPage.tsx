@@ -31,6 +31,7 @@ function IrregularDetailPage() {
 
   const [albumData, setAlbumData] = useState<IIrregularAlbumData>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const navigate = useNavigate();
   const [isPlayingIndex, setIsPlayingIndex] = useState<number>(0);
@@ -39,9 +40,19 @@ function IrregularDetailPage() {
     new Audio(irregularAlbumData[index].songs[0].audioFile)
   );
 
-  const audioFilesArray = irregularAlbumData[index].songs.map(
-    (song) => song.audioFile
-  );
+  const togglePlaying = () => {
+    // 오디오 처리 로직
+    if (audioRef.current.paused) {
+      console.log("오디오 현재 정지상태. 다시 재생함");
+      audioRef.current.play();
+    } else {
+      console.log("오디오 현재 재생상태. 정지 들어간다");
+      audioRef.current.pause();
+    }
+
+    // css 목적의 state 변경
+    setIsPlaying((prev) => !prev);
+  };
 
   useEffect(() => {
     // getData
@@ -50,20 +61,40 @@ function IrregularDetailPage() {
   }, [id]);
 
   // audio 관련
+  // 곡이 바뀔 때
   useEffect(() => {
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-
-    audioRef.current = new Audio(
-      irregularAlbumData[index].songs[isPlayingIndex].audioFile
-    );
-    audioRef.current.play();
-
-    return () => {
+    // 첫 렌더링때는 실행시키지 말자.
+    // 첫 렌더링때는 이벤트리스너만 달자.
+    if (isPlayingIndex !== 0) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+
+      audioRef.current = new Audio(
+        irregularAlbumData[index].songs[isPlayingIndex].audioFile
+      );
+      audioRef.current.play();
+    }
+
+    audioRef.current.addEventListener("ended", () => {
+      setIsPlayingIndex((prev) => prev + 1);
+    });
+
+    return () => {
+      console.log("cleanup!");
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.removeEventListener("ended", () => {
+        setIsPlayingIndex((prev) => prev + 1);
+      });
     };
   }, [isPlayingIndex, id]);
+
+  // audio 관련
+  // 앨범이 바뀔 때
+  useEffect(() => {
+    audioRef.current = new Audio(irregularAlbumData[index].songs[0].audioFile);
+    audioRef.current.play();
+  }, [id]);
 
   if (isLoading) {
     return <>Loading...</>;
@@ -92,9 +123,9 @@ function IrregularDetailPage() {
                 </S.Title>
                 <S.Subtitle>{albumData?.subtitle}</S.Subtitle>
                 <S.Player>
-                  {/* <S.PrevDiv to={`/irregularDetail/${index - 1}`}></S.PrevDiv> */}
                   <S.PrevDiv
                     onClick={() => {
+                      setIsPlayingIndex(0);
                       if (index === 0) {
                         navigate(`/irregularDetail/10`);
                       } else {
@@ -103,10 +134,14 @@ function IrregularDetailPage() {
                     }}
                   ></S.PrevDiv>
                   <S.AlbumCover image={albumData?.image}>
-                    <S.PlayButton></S.PlayButton>
+                    <S.PlayButton
+                      onClick={togglePlaying}
+                      istrue={isPlaying}
+                    ></S.PlayButton>
                   </S.AlbumCover>
                   <S.NextDiv
                     onClick={() => {
+                      setIsPlayingIndex(0);
                       if (index === 9) {
                         navigate(`/irregularDetail/1`);
                       } else {
@@ -230,7 +265,7 @@ function IrregularDetailPage() {
                       }
                     }}
                   ></M.PrevDiv>
-                  <M.PlayButton></M.PlayButton>
+                  <M.PlayButton onClick={togglePlaying}></M.PlayButton>
                   <M.NextDiv
                     onClick={() => {
                       if (index === 9) {

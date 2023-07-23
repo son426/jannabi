@@ -5,6 +5,11 @@ import {
 } from "styled-components";
 import Router from "./Router";
 
+import PretendardBold from "./data/fonts/pretendard/pretendardbold.woff2";
+import PretendardSemiBold from "./data/fonts/pretendard/pretendardsemibold.woff2";
+import PretendardMedium from "./data/fonts/pretendard/pretendardmedium.woff2";
+import PretendardThin from "./data/fonts/pretendard/pretendardthin.woff2";
+
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -64,6 +69,31 @@ const GlobalStyle = createGlobalStyle`
     text-decoration:none;
     color:inherit;
   }
+  @font-face {
+    font-family: 'PretendardBold';
+    src: local('PretendardBold'), local('PretendardBold');
+    font-style: normal;
+    src: url(${PretendardBold}) format('woff2');
+  }
+  @font-face {
+    font-family: 'PretendardSemiBold';
+    src: local('PretendardSemiBold'), local('PretendardSemiBold');
+    font-style: normal;
+    src: url(${PretendardSemiBold}) format('woff2');
+  }
+  @font-face {
+    font-family: 'PretendardThin';
+    src: local('PretendardThin'), local('PretendardThin');
+    font-style: normal;
+    src: url(${PretendardThin}) format('woff2');
+  }
+  @font-face {
+    font-family: 'PretendardBold';
+    src: local('PretendardBold'), local('PretendardBold');
+    font-style: normal;
+    src: url(${PretendardBold}) format('woff2');
+  }
+ 
 `;
 
 function App(): JSX.Element {

@@ -123,7 +123,7 @@ export const NextDiv = styled.div`
   cursor: pointer;
 `;
 export const PlayButton = styled.div`
-  background-image: url(${image.play});
+  background-image: url(${image.stop});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

@@ -45,16 +45,25 @@ export const LogoDiv = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  @media screen and (min-width: 501px) {
+  }
+  @media screen and (max-width: 767px) {
+    width: 50%;
+    aspect-ratio: 2/1;
+  }
 `;
 
 export const MarginDiv = styled.div`
   width: 100%;
   height: 15vh;
   /* border: 1px white solid; */
+  @media screen and (max-width: 767px) {
+    height: 35vh;
+  }
 `;
 
 export const Column = styled.div`
-  /* border: 1px solid red; */
+  border: 1px solid red;
   position: relative;
   width: 40%;
   height: 70vh;
@@ -63,6 +72,10 @@ export const Column = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2em;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 30vh;
+  }
 `;
 
 export const Title = styled.div`
@@ -92,6 +105,13 @@ export const CheckBox = styled.div`
   flex-direction: column;
   gap: 0.5em;
   font-size: 0.6em;
+  @media screen and (max-width: 767px) {
+    height: 70%;
+    gap: 1em;
+    font-size: 2em;
+    align-items: center;
+    justify-content: end;
+  }
 `;
 
 export const CheckBoxRow = styled.div<{ selected: boolean }>`
@@ -117,4 +137,9 @@ export const Card = styled.div<IImageProps>`
   height: 20em;
   position: absolute;
   animation: ${rotateAnimation} 3s linear infinite;
+  @media screen and (max-width: 767px) {
+    width: 80%;
+    height: 180%;
+    align-items: center;
+  }
 `;

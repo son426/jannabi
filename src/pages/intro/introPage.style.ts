@@ -144,7 +144,7 @@ export const IntroImageDiv = styled.div<IClickedProps>`
   }
   @media screen and (min-width: 1536px) {
     background-size: cover;
-    width: 60%;
+    width: 50%;
     height: 250%;
     animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
         forwards,
@@ -172,7 +172,6 @@ export const IntroImageDiv = styled.div<IClickedProps>`
   background-image: url(${introImage});
   background-position: center;
   background-repeat: no-repeat;
-  border: 1px solid black;
 `;
 
 export const TestDiv = styled.div`

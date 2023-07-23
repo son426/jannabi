@@ -17,7 +17,6 @@ function IntroPage() {
   return (
     <>
       <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
-      <S.TestDiv>test</S.TestDiv>
       <S.ImgWrapper>
         <S.FloatingButtonWrapper isclicked={isClicked}>
           <S.FloatingButton>Click !</S.FloatingButton>

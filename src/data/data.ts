@@ -4,6 +4,7 @@
 import silent from "./silence.mp3";
 import * as a from "./index";
 import * as ir from "./irregular/index";
+import * as a_ir from "./irregular/audio/index";
 import { audioFile1, audioFile2 } from "./index";
 
 export const SONGDATA = [
@@ -43,13 +44,13 @@ export const irregularAlbumData = [
     pointColor2: "#450606",
     fontColor: "white",
     songs: [
-      { title: "봉춤을 추네", audioFile: audioFile1, isTitle: true },
       {
         title:
           "사랑하긴 했었나요 스쳐가는 인연이었나요 짧지 않은 우리 함께 했던 시간들이 자꾸 내 마음을 가둬두네",
-        audioFile: audioFile2,
+        audioFile: a_ir.loveme,
         isTitle: false,
       },
+      { title: "봉춤을 추네", audioFile: a_ir.poledance, isTitle: true },
     ],
   },
   {
@@ -61,7 +62,7 @@ export const irregularAlbumData = [
     pointColor: "#201E21",
     pointColor2: "#CD4881",
     fontColor: "white",
-    songs: [{ title: "로켓트", audioFile: audioFile1, isTitle: true }],
+    songs: [{ title: "로켓트", audioFile: a_ir.rocket, isTitle: true }],
   },
   {
     id: 3,
@@ -76,7 +77,7 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "She (Hidden Track No.1월 선정곡)",
-        audioFile: audioFile1,
+        audioFile: a_ir.she,
         isTitle: true,
       },
     ],
@@ -93,37 +94,37 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "Baby Maybe",
-        audioFile: a.audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: false,
       },
       {
         title: "See Your Eyes",
-        audioFile: a.audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: true,
       },
       {
         title: "너 같아",
-        audioFile: a.audioFile3,
+        audioFile: a_ir.likeyou,
         isTitle: false,
       },
       {
         title: "November Rain",
-        audioFile: a.audioFile4,
+        audioFile: a_ir.novemberrain,
         isTitle: false,
       },
       {
         title: "누구나 겨울이 오면 (With 이기림)",
-        audioFile: audioFile1,
+        audioFile: a_ir.whenwinter,
         isTitle: false,
       },
       {
         title: "달",
-        audioFile: audioFile1,
+        audioFile: a_ir.moon,
         isTitle: false,
       },
       {
         title: "See Your Eyes (Acoustic Ver.)",
-        audioFile: audioFile1,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
     ],
@@ -161,8 +162,8 @@ export const irregularAlbumData = [
     fontColor: "black",
     songs: [
       {
-        title: "Good Boy Twist ",
-        audioFile: audioFile1,
+        title: "Good Boy Twist",
+        audioFile: a_ir.goodboytwist,
         isTitle: true,
       },
     ],

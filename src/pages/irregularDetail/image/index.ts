@@ -5,5 +5,6 @@ import she4 from "./she/4.png";
 import prev from "./prev.png";
 import play from "./play.png";
 import next from "./next.png";
+import stop from "./stop.png";
 
-export { she1, she2, she3, she4, prev, play, next };
+export { she1, she2, she3, she4, prev, play, next, stop };

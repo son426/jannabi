@@ -9,13 +9,28 @@ function Practice() {
   return (
     <>
       <Desktop>
-        <p>컴퓨터</p>
+        <S.Div1>
+          123
+          <S.Div2>
+            <p>123</p>
+            <S.Div2>
+              <S.Div3></S.Div3>
+            </S.Div2>
+          </S.Div2>
+        </S.Div1>
       </Desktop>
       <Tablet>
         <p>태블릿</p>
       </Tablet>
       <Mobile>
-        <p>모바일</p>
+        <>
+          <S.Div1>
+            123
+            <S.Div2>
+              <S.Div3></S.Div3>
+            </S.Div2>
+          </S.Div1>
+        </>
       </Mobile>
     </>
   );
