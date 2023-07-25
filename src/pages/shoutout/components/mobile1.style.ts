@@ -54,7 +54,7 @@ export const MarginDiv = styled.div`
 `;
 
 export const Column = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: relative;
   width: 100%;
   height: 30vh;

@@ -1,5 +1,7 @@
 # 잔나비 프로젝트
 
+https://jannabi-faniste.web.app/
+
 ### `소개`
 
 잔나비의 모든 것을 담고자 했습니다.

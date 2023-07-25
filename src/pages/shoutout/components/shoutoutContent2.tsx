@@ -23,7 +23,7 @@ function ShoutoutContent2({
   fetchComments,
 }: IShoutoutProps) {
   const [inputData, setInputData] = useState<string>("");
-  const [scale, setScale] = useState<number>(100);
+  const [scale, setScale] = useState<number>(1);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,7 +48,7 @@ function ShoutoutContent2({
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = document.documentElement.scrollTop;
-      const scrollThreshold = 700;
+      const scrollThreshold = 1200;
       const scale = Math.min(1, 1 - (scrollTop - scrollThreshold) / 300);
       if (scale <= 0.5) return setScale(0.5);
       setScale(scale);
@@ -102,7 +102,7 @@ function ShoutoutContent2({
       </Default>
       <Mobile>
         <M.ViewDiv>
-          {/* <M.BackImageDiv></M.BackImageDiv> */}
+          <M.BackImageDiv></M.BackImageDiv>
           <M.Content2>
             <M.TextDiv>
               <M.Title>
@@ -135,7 +135,7 @@ function ShoutoutContent2({
                 })}
               </M.CommentUl>
             </M.CommentDiv>
-            <M.CommentForm onSubmit={handleSubmit}>
+            <M.CommentForm onSubmit={handleSubmit} visible={scale <= 0.7}>
               <M.CommentInput
                 name="comment"
                 type="text"

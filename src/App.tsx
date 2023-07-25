@@ -62,38 +62,21 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  body {
-    font-family: 'Source Sans Pro', sans-serif;
-  }
+  
   a {
     text-decoration:none;
     color:inherit;
   }
   @font-face {
-    font-family: 'PretendardBold';
-    src: local('PretendardBold'), local('PretendardBold');
+    font-family: 'Pretendard';
+    src: local('PretendardBold'), local('PretendardSemiBold'), local('PretendardMedium'), local('PretendardThin');
     font-style: normal;
-    src: url(${PretendardBold}) format('woff2');
+    src: url(${PretendardBold}) url(${PretendardSemiBold}) url(${PretendardMedium}) url(${PretendardThin}) format('woff2');
   }
-  @font-face {
-    font-family: 'PretendardSemiBold';
-    src: local('PretendardSemiBold'), local('PretendardSemiBold');
-    font-style: normal;
-    src: url(${PretendardSemiBold}) format('woff2');
+  body {
+    font-family: 'Pretendard', sans-serif;
   }
-  @font-face {
-    font-family: 'PretendardThin';
-    src: local('PretendardThin'), local('PretendardThin');
-    font-style: normal;
-    src: url(${PretendardThin}) format('woff2');
-  }
-  @font-face {
-    font-family: 'PretendardBold';
-    src: local('PretendardBold'), local('PretendardBold');
-    font-style: normal;
-    src: url(${PretendardBold}) format('woff2');
-  }
- 
+
 `;
 
 function App(): JSX.Element {

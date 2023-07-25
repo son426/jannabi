@@ -159,7 +159,7 @@ function IrregularDetailPage() {
                 <S.Meta>{albumData?.meta}</S.Meta>
                 <S.Description>{albumData?.description}</S.Description>
 
-                <S.Playlist>
+                <S.Playlist color={albumData?.pointColor}>
                   {albumData?.songs?.length === 1 && (
                     <S.PlaylistIsTitle
                       color={albumData?.pointColor}

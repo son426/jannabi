@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled, css } from "styled-components";
 import * as image from "./image/index";
 import { Link } from "react-router-dom";
 
@@ -170,7 +170,7 @@ export const Description = styled.p`
   line-height: 1.5em;
 `;
 
-export const Playlist = styled.div`
+export const Playlist = styled.div<IColorProps>`
   /* border: 1px solid black; */
   width: 100%;
   display: flex;
@@ -181,6 +181,28 @@ export const Playlist = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  ${({ theme }) =>
+    theme &&
+    css`
+      scrollbar-width: thin;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #939393;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #2f3542;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    `};
 `;
 
 export const PlaylistIsTitle = styled.div<IColorProps>`
