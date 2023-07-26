@@ -2,7 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./mainPage.style";
 import images from "./image/index";
 import Intro from "./intro";
-import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
 import { Default, Desktop, Mobile, Tablet } from "../../components/mediaquery";
