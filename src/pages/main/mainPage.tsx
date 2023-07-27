@@ -4,55 +4,34 @@ import images from "./image/index";
 import Intro from "./intro";
 import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
-import { Default, Desktop, Mobile, Tablet } from "../../components/mediaquery";
+import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
+import { useLayoutEffect } from "react";
+
+interface ImageObject {
+  [key: string]: string;
+}
 
 function MainPage() {
-  const location = useLocation();
-
   const [isIntro] = useRecoilState(isIntroAtom);
+
+  const hoverImgPreload = () => {
+    const urlArray: string[] = [];
+    const imgData: ImageObject = images;
+    for (let objKey in imgData) {
+      urlArray.push(imgData[objKey] as string);
+    }
+    urlArray.forEach((url) => {
+      let img = new Image();
+      img.src = url;
+    });
+  };
+
+  useLayoutEffect(() => {
+    hoverImgPreload();
+  }, []);
 
   return (
     <>
-      <Mobile>
-        <>
-          {isIntro && <Intro />}
-          <h1
-            style={{
-              fontSize: "30px",
-              textAlign: "center",
-              padding: "50% 0px",
-            }}
-          >
-            반응형 공사중. 컴퓨터로 오세용
-          </h1>
-          <div>
-            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
-          </div>
-          <div>
-            <Link to="/shoutout">샤라웃페이지 구경</Link>
-          </div>
-        </>
-      </Mobile>
-      <Tablet>
-        <>
-          {isIntro && <Intro />}
-          <h1
-            style={{
-              fontSize: "30px",
-              textAlign: "center",
-              padding: "50% 0px",
-            }}
-          >
-            반응형 공사중. 컴퓨터로 오세용
-          </h1>
-          <div>
-            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
-          </div>
-          <div>
-            <Link to="/shoutout">샤라웃페이지 구경</Link>
-          </div>
-        </>
-      </Tablet>
       <Desktop>
         <>
           {isIntro && <Intro />}
@@ -61,19 +40,28 @@ function MainPage() {
             <S.ShelfDiv>
               <S.Shelf>
                 <S.RegularRow>
-                  <S.RegularDiv to="/regulardetail/1" series={1}>
+                  <S.RegularDiv
+                    to="/regulardetail/1"
+                    hoveredImg={images.regular1_2}
+                  >
                     <S.RegularCoverDiv
                       img={images.regular1}
                     ></S.RegularCoverDiv>
                     <S.LpDiv></S.LpDiv>
                   </S.RegularDiv>
-                  <S.RegularDiv to="/regulardetail/2" series={2}>
+                  <S.RegularDiv
+                    to="/regulardetail/2"
+                    hoveredImg={images.regular2_2}
+                  >
                     <S.RegularCoverDiv
                       img={images.regular2}
                     ></S.RegularCoverDiv>
                     <S.LpDiv></S.LpDiv>
                   </S.RegularDiv>
-                  <S.RegularDiv to="/regulardetail/3" series={3}>
+                  <S.RegularDiv
+                    to="/regulardetail/3"
+                    hoveredImg={images.regular3_2}
+                  >
                     <S.RegularCoverDiv
                       img={images.regular3}
                     ></S.RegularCoverDiv>
@@ -152,6 +140,46 @@ function MainPage() {
           </Link>
         </>
       </Desktop>
+      <Mobile>
+        <>
+          {isIntro && <Intro />}
+          <h1
+            style={{
+              fontSize: "30px",
+              textAlign: "center",
+              padding: "50% 0px",
+            }}
+          >
+            반응형 공사중. 컴퓨터로 오세용
+          </h1>
+          <div>
+            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
+          </div>
+          <div>
+            <Link to="/shoutout">샤라웃페이지 구경</Link>
+          </div>
+        </>
+      </Mobile>
+      <Tablet>
+        <>
+          {isIntro && <Intro />}
+          <h1
+            style={{
+              fontSize: "30px",
+              textAlign: "center",
+              padding: "50% 0px",
+            }}
+          >
+            반응형 공사중. 컴퓨터로 오세용
+          </h1>
+          <div>
+            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
+          </div>
+          <div>
+            <Link to="/shoutout">샤라웃페이지 구경</Link>
+          </div>
+        </>
+      </Tablet>
     </>
   );
 }

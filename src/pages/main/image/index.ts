@@ -1,6 +1,9 @@
 import regular1 from "./regular/regular1.png";
 import regular2 from "./regular/regular2.png";
 import regular3 from "./regular/regular3.png";
+import regular1_2 from "./regular/regular1-2.png";
+import regular2_2 from "./regular/regular2-2.png";
+import regular3_2 from "./regular/regular3-2.png";
 import irregular1 from "./irregular/1.png";
 import irregular2 from "./irregular/2.png";
 import irregular3 from "./irregular/3.png";
@@ -32,6 +35,9 @@ export default {
   regular1,
   regular2,
   regular3,
+  regular1_2,
+  regular2_2,
+  regular3_2,
   irregular1,
   irregular2,
   irregular3,
