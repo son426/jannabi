@@ -1,9 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
-import backImg from "./image/background.png";
-import shelfImg from "./image/shelf.png";
-import LP from "./image/lp.png";
-
 import { Link } from "react-router-dom";
+import images from "./image";
 
 const slideLeftAnimation = keyframes`
   from {
@@ -24,7 +21,7 @@ const slideRightAnimation = keyframes`
 `;
 
 export const BackgroundDiv = styled.div`
-  background-image: url(${backImg});
+  background-image: url(${images.background});
   background-position: center;
   background-size: cover;
   width: 100vw;
@@ -47,7 +44,7 @@ export const ShelfDiv = styled.div`
 
 export const Shelf = styled.div`
   border: 5px solid transparent;
-  background-image: url(${shelfImg});
+  background-image: url(${images.shelf});
   background-size: contain;
   background-position: top;
   background-repeat: no-repeat;
@@ -86,7 +83,7 @@ export const RegularCoverDiv = styled.div<IImageProps>`
 `;
 
 export const LpDiv = styled.div`
-  background-image: url(${LP});
+  background-image: url(${images.lp});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

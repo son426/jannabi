@@ -6,28 +6,18 @@ import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
 import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
 import { useLayoutEffect } from "react";
-
-interface ImageObject {
-  [key: string]: string;
-}
+import { IObject, imgPreload, objectToArray } from "../../hooks/tools";
 
 function MainPage() {
   const [isIntro] = useRecoilState(isIntroAtom);
 
-  const hoverImgPreload = () => {
-    const urlArray: string[] = [];
-    const imgData: ImageObject = images;
-    for (let objKey in imgData) {
-      urlArray.push(imgData[objKey] as string);
-    }
-    urlArray.forEach((url) => {
-      let img = new Image();
-      img.src = url;
-    });
+  const allImgPreload = () => {
+    const imgUrls: string[] = objectToArray(images as IObject);
+    imgPreload(imgUrls);
   };
 
   useLayoutEffect(() => {
-    hoverImgPreload();
+    allImgPreload();
   }, []);
 
   return (

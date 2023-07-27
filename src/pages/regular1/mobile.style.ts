@@ -4,7 +4,7 @@ import introbg2 from "./backgreenMobile2.png";
 import albumCover from "./album.png";
 import lp from "./lp.png";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-import { r1 } from "./album";
+import { r1 } from "./data/album";
 
 const h1 = "40px";
 const h2 = "32px";

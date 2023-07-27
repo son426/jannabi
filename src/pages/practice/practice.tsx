@@ -1,23 +1,37 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import * as S from "./practice.style";
-import { Canvas } from "@react-three/fiber";
-import { useMediaQuery } from "react-responsive";
+
 import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
-import { ThemeContext } from "styled-components";
 
 function Practice() {
+  const cards = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+
+  const [currentIndex, setCurrentIndex] = useState(1);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex - 1 < 0 ? cards.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
+
   return (
     <>
       <Desktop>
-        <S.Div1>
-          123
-          <S.Div2>
-            <p>123</p>
-            <S.Div2>
-              <S.Div3></S.Div3>
-            </S.Div2>
-          </S.Div2>
-        </S.Div1>
+        <>
+          <S.CardContainer nowIndex={currentIndex}>
+            {cards.map((card, index) => (
+              <S.Card key={card.id} iscenter={index === currentIndex}>
+                {card.id}
+              </S.Card>
+            ))}
+          </S.CardContainer>
+          <button onClick={handlePrev}>Prev</button>
+          <button onClick={handleNext}>Next</button>
+        </>
       </Desktop>
       <Tablet>
         <p>태블릿</p>

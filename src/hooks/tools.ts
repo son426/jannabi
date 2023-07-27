@@ -1,8 +1,4 @@
 // 현재 시간으로부터 몇시간 전인지 계산
-
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
 // 입력 : Date / 반환 : string
 export function timeForToday(value: Date): string {
   const today = new Date();
@@ -32,3 +28,25 @@ export function timeForToday(value: Date): string {
 // custom 디자인한 alert 반환
 // 입력 : string / 반환 : void
 export function customAlert(message: string): void {}
+
+// 이미지 프리로드
+// 입력 : 문자배열 / 반환 : void
+export function imgPreload(array: string[]): void {
+  array.forEach((url) => {
+    let img = new Image();
+    img.src = url;
+  });
+}
+
+// 객체를 배열로 바꾸기
+export interface IObject {
+  [key: string]: string;
+}
+export function objectToArray(objectData: IObject): string[] {
+  const urlArray: string[] = [];
+
+  for (let objKey in objectData) {
+    urlArray.push(objectData[objKey] as string);
+  }
+  return urlArray;
+}

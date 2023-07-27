@@ -30,8 +30,14 @@ import irregular11_2 from "./irregular/11-2.png";
 import irregular14_2 from "./irregular/14-2.png";
 import irregular15_2 from "./irregular/15-2.png";
 import irregular16_2 from "./irregular/16-2.png";
+import background from "./background/background.png";
+import lp from "./background/lp.png";
+import shelf from "./background/shelf.png";
 
 export default {
+  background,
+  lp,
+  shelf,
   regular1,
   regular2,
   regular3,

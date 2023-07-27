@@ -3,14 +3,50 @@ import * as S from "./regularDetailPage1.style";
 import * as M from "./mobile.style";
 import { useState, useEffect, useRef } from "react";
 import { Title } from "../irregularDetail/irregularDetailPage.style";
-import { regularData } from "./data/data";
+import { IRegularData, regularData } from "./data/data";
 
 function RegularDetailPage1() {
-  const [scrollHeight, setScrollHeight] = useState<number>(0);
+  const [scrollHeight, setScrollHeight] = useState<number>(1);
   const [isScrolledMany, setIsScrolledMany] = useState<boolean>(false);
   const [nowIndex, setNowIndex] = useState(0);
+  const [titleVisible, setTitleVisible] = useState(false);
 
-  const albumData = regularData;
+  const audioRef = useRef<HTMLAudioElement>(
+    new Audio(regularData[0].audioFile)
+  );
+
+  const albumData: IRegularData[] = regularData;
+
+  const handlePrev = () => {
+    setNowIndex((prevIndex) =>
+      prevIndex - 1 < 0 ? albumData.length - 1 : prevIndex - 1
+    );
+  };
+  const handleNext = () => {
+    setNowIndex((prevIndex) => (prevIndex + 1) % albumData.length);
+  };
+  const handleClick = (index: number) => {
+    if (index !== nowIndex) setTitleVisible(false);
+    if (index === nowIndex - 1) handlePrev();
+    else if (index === nowIndex + 1) handleNext();
+  };
+
+  useEffect(() => {
+    // title 없앴다가 다시 보이게
+    const timeout = setTimeout(() => {
+      setTitleVisible(true);
+    }, 500);
+
+    // 오디오 관련
+    if (!audioRef.current.paused) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    audioRef.current = new Audio(albumData[nowIndex].audioFile);
+    audioRef.current.play();
+
+    return () => clearTimeout(timeout);
+  }, [nowIndex]);
 
   return (
     <>
@@ -41,15 +77,30 @@ function RegularDetailPage1() {
             </S.IntroContentBox>
           </S.IntroContentDiv>
           <S.ContentDiv>
-            {albumData.map((album, index) => (
-              <S.Column
-                stringvalue={albumData[index].scrollImg}
-                isboolean={index === nowIndex}
-                onClick={() => {
-                  setNowIndex(index);
-                }}
-              ></S.Column>
-            ))}
+            <S.CarouselDiv numbervalue={nowIndex}>
+              {albumData.map((album, index) => (
+                <>
+                  <S.Column
+                    stringvalue={albumData[index].scrollImg}
+                    isboolean={index === nowIndex}
+                    onClick={() => {
+                      handleClick(index);
+                    }}
+                  ></S.Column>
+                </>
+              ))}
+            </S.CarouselDiv>
+            {titleVisible && (
+              <S.ColumnTitle>
+                <p className="trackIndex">Track {nowIndex + 1}</p>
+                <p className="trackTitle">{albumData[nowIndex].title}</p>
+              </S.ColumnTitle>
+            )}
+            {titleVisible && (
+              <S.ColumnDescription>
+                {albumData[nowIndex].description}
+              </S.ColumnDescription>
+            )}
           </S.ContentDiv>
         </S.Wrapper>
       </Desktop>

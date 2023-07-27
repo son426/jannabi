@@ -31,20 +31,32 @@ export const Div3 = styled.div`
   background-color: green;
 `;
 
-// const typing = keyframes`
-//   from{
-//     width:0;
-//   }
-// `;
+export const CardContainer = styled.div<{ nowIndex: number }>`
+  position: relative;
+  left: 50%;
+  display: flex;
+  transform: translateX(
+    calc(${(props) => props.nowIndex * -25}vw - 25vw - 5px)
+  );
+  transition: transform 0.3s ease;
+  gap: 5px;
+`;
 
-// export const TestDiv = styled.div`
-//   animation: typing 1s steps(40, end);
-//   overflow: hidden;
-//   white-space: nowrap;
-//   border-right: 0.15em solid #000;
-//   font-family: monospace;
-// `;
+export const Card = styled.div<{ iscenter: boolean }>`
+  flex-shrink: 0;
+  width: ${(props) => (props.iscenter ? "50vw" : "25vw")};
+  opacity: ${(props) => (props.iscenter ? "1" : "0.5")};
+  transition: opacity 0.3s ease, width 0.3s ease;
+  height: 300px;
+  background-color: gray;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+`;
 
-export const BackgroundDiv = styled.div`
-  width: 100%;
+export const CenterCard = styled(Card)`
+  width: 50vw;
+  font-size: 28px;
 `;

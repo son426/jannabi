@@ -2,10 +2,8 @@
 // 이 파일에다가 더미로 작업해놓고, 후에 db로 옮기자
 
 import silent from "./silence.mp3";
-import * as a from "./index";
 import * as ir from "./irregular/index";
 import * as a_ir from "./irregular/audio/index";
-import { audioFile1, audioFile2 } from "./index";
 
 export const SONGDATA = [
   { index: 1, title: "Goodnight (Intro)" },
@@ -18,19 +16,6 @@ export const SONGDATA = [
   { index: 8, title: "JUNGLE" },
   { index: 9, title: "MONKEY HOTEL (Finale)" },
   { index: 10, title: "왕눈이 왈츠 (Bonus Track)" },
-];
-
-export const AUDIOFILES = [
-  a.audioFile1, // Goodnight
-  a.audioFile2, // 뜨거운 여름밤은 가고 ~
-  a.audioFile3, // Surprise!
-  a.audioFile4, // Wish
-  a.audioFile5, // The Secret Of HardRock
-  a.audioFile6, // HONG KONG
-  a.audioFile7, // 꿈나라 별나라
-  a.audioFile8, // JUNGLE
-  a.audioFile9, // MONEKY HOTEL
-  a.audioFile10, // 왕눈이 왈츠
 ];
 
 export const irregularAlbumData = [
@@ -141,12 +126,12 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "November Rain",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: true,
       },
       {
         title: "November Rain (Inst.)",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: false,
       },
     ],
@@ -180,7 +165,7 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "한밤의 뮤직",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: true,
       },
     ],
@@ -197,12 +182,12 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "pony",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: true,
       },
       {
         title: "pony (sketch ver.)",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
     ],
@@ -220,22 +205,22 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "레이디버드",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: false,
       },
       {
         title: "초록을거머쥔우리는",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: true,
       },
       {
         title: "여름가을겨울 봄.",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
       {
         title: "슬픔이여안녕",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
     ],
@@ -252,27 +237,27 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "가을밤에 든 생각",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: true,
       },
       {
         title: "한걸음",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
       {
         title: "그 밤 그 밤",
-        audioFile: audioFile1,
+        audioFile: a_ir.babymaybe,
         isTitle: false,
       },
       {
         title: "늙은 개",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
       {
         title: "작전명 청-춘!",
-        audioFile: audioFile2,
+        audioFile: a_ir.seeyoureyes,
         isTitle: false,
       },
     ],

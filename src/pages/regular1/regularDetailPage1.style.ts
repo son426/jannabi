@@ -141,23 +141,78 @@ export const Row3 = styled.div`
   line-height: ${h2};
 `;
 
+interface INumber {
+  numbervalue: number;
+}
+
+const gap = "5px";
+
 export const ContentDiv = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const CarouselDiv = styled.div<INumber>`
   height: 100vh;
-  overflow-x: scroll;
   display: flex;
+  align-items: end;
+  transform: translateX(
+    calc(${(props) => props.numbervalue * -26.7}vw - 27.8vw)
+  );
+  transition: transform 0.5s ease;
+  position: relative;
+  left: 50%;
 `;
 
 interface IColumnProps extends IString, IBoolean {}
 
 export const Column = styled.div<IColumnProps>`
+  cursor: pointer;
   flex-shrink: 0;
-  border: 1px solid white;
-  width: ${(props) => (props.isboolean ? "50%" : "25%")};
-  height: 100%;
+  width: ${(props) => (props.isboolean ? "56%" : "27%")};
+  height: ${(props) => (props.isboolean ? "80%" : "62%")};
   background-image: url(${(props) => props.stringvalue});
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: contain;
-  opacity: ${(props) => (props.isboolean ? "1" : "0.5")};
-  transition: opacity 0.2s linear, width 0.2s linear;
+  opacity: ${(props) => (props.isboolean ? "1" : "0.4")};
+  transition: opacity 0.4s linear, width 0.4s linear;
+`;
+
+export const ColumnTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: red;
+
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .trackIndex {
+    font-size: ${h1};
+    font-family: "Pinyon Script", cursive;
+  }
+  .trackTitle {
+    white-space: pre-line;
+    font-size: calc(${h3} + 6px);
+    font-weight: ${bold};
+    text-align: center;
+  }
+`;
+
+export const ColumnDescription = styled.div`
+  border: 1px solid white;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 30%;
+  transform: translate(-0%, -50%);
+  white-space: pre-line;
+  word-break: keep-all;
+  font-weight: ${medium};
+  font-size: calc(${h4} + 4px);
+  line-height: ${h3};
 `;
