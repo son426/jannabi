@@ -40,6 +40,7 @@ function RegularDetailPage1() {
   useEffect(() => {
     // Scroll event listener to update scrollHeight state
     const handleScroll = () => {
+      console.log(scrollHeight);
       setScrollHeight(window.scrollY);
     };
 
@@ -51,7 +52,7 @@ function RegularDetailPage1() {
   }, []);
 
   useEffect(() => {
-    if (scrollHeight >= 1000) setIsScrolledMany(true);
+    if (scrollHeight >= 2000) setIsScrolledMany(true);
     else setIsScrolledMany(false);
   }, [scrollHeight]);
 
@@ -81,13 +82,14 @@ function RegularDetailPage1() {
       <Desktop>
         <S.Wrapper>
           <S.IntroDiv isboolean={isScrolledMany}>
-            <S.LpDiv></S.LpDiv>
-            <S.AlbumDiv></S.AlbumDiv>
+            <S.LpDiv numbervalue={scrollHeight}></S.LpDiv>
+            <S.AlbumDiv numbervalue={scrollHeight}></S.AlbumDiv>
             <S.Footer>
               <div className="title">MONKEY HOTEL</div>
               <div className="jannabi">잔나비</div>
             </S.Footer>
           </S.IntroDiv>
+          <S.MarginDiv></S.MarginDiv>
           <S.IntroContentDiv>
             <S.IntroContentBox>
               <S.Row1>

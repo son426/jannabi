@@ -1,73 +1,81 @@
+import { useState, useEffect, useRef } from "react";
+import { Desktop, Mobile } from "../../components/mediaquery";
 import * as S from "./regularDetailPage3.style";
+import images from "@/data/images/regular3";
+import { PlayIcon } from "@/data/icon";
+import { regularData3 } from "@/data/meta/regular3";
 
 function RegularDetailPage3() {
+  const [scrollHeight, setScrollHeight] = useState<number>(1);
+  const [isScrolledMany, setIsScrolledMany] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [nowIndex, setNowIndex] = useState<number>(0);
+
   return (
-    <>
-      <S.IntroDiv>
-        <S.IntroBackgroundDiv>
-          <S.LpWrapper>
-            <S.LpCoverDiv></S.LpCoverDiv>
-            <S.LpDiv></S.LpDiv>
-          </S.LpWrapper>
-        </S.IntroBackgroundDiv>
-        <S.IntroBackgroundDiv>
-          <S.TextWrapper>
-            <S.TitleDiv>
-              환상의 나라 : 지오르보 대장과{"\n"}구닥다리 영웅들
-            </S.TitleDiv>
-            <S.SubtitleDiv>
-              THE LAND OF FANTASY :{"\n"}AND THE OLD FASHIONED HEROES
-            </S.SubtitleDiv>
-            <S.SummaryDiv>
+    <Desktop>
+      <S.Wrapper>
+        <S.IntroDiv isboolean={isScrolledMany}>
+          <S.LpDiv></S.LpDiv>
+          <S.AlbumDiv></S.AlbumDiv>
+          <S.Footer>
+            <div className="title">THE LAND OF FANTASY</div>
+            <div className="jannabi">잔나비</div>
+          </S.Footer>
+        </S.IntroDiv>
+        <S.IntroContentDiv>
+          <S.IntroContentBox>
+            <S.Row1>
+              <p>잔나비 정규 3집</p>
+            </S.Row1>
+            <S.Row2>
+              <p className="korean">
+                환상의 나라 : 지오르보 대장과{"\n"}구닥다리 영웅들
+              </p>
+              <p className="english">
+                THE LAND OF FANTASY :{"\n"}AND THE OLD FASHIONED HEROES
+              </p>
+            </S.Row2>
+            <S.Row3>
               환상의 나라에 대한 이야기가 있는 앨범입니다.{"\n"}유치찬란
               무지개를 겨눠 함부로 쏘아 올린 화살과,{"\n"}그토록 부르던 별과
               꿈을 향해 신나게 뻗어 보이던 손끝.{"\n"}영원히 깨어나지 못할
               환상의 나라로!
-            </S.SummaryDiv>
-          </S.TextWrapper>
-        </S.IntroBackgroundDiv>
-      </S.IntroDiv>
-      <S.ContentWrapper>
+            </S.Row3>
+          </S.IntroContentBox>
+        </S.IntroContentDiv>
         <S.ContentDiv>
-          <S.ContentImgDiv index={0}></S.ContentImgDiv>
-          <S.ContentTextDiv>
-            <S.ContentTextRow1>
-              <div className="index">Track 1</div>
-              <div className="length">01:07</div>
-            </S.ContentTextRow1>
-            <S.ContentTextRow2>환상의 나라</S.ContentTextRow2>
-            <S.ContentTextRow3>
-              <div>
-                이 곡에서부터 이 앨범의 구상이 시작되었어요.​{"\n"}2집의 마지막
-                수록곡 {"<"}꿈과 책과 힘과 벽{">"}에서{"\n"}시작한 앨범이라고도
-                볼 수 있는데요,
-              </div>
-              <div>
-                그 곡의 가사에서 나오는...{"\n"}자고나도 안 괜찮아지고{"\n"}
-                자고나도 어른이 안 되길래{"\n"}이런 가사를 썼습니다.
-              </div>
-            </S.ContentTextRow3>
-          </S.ContentTextDiv>
+          <S.MarginDiv></S.MarginDiv>
+          <S.CardWrapper>
+            {regularData3.map((album, index) => (
+              <S.CardDiv
+                img={album.coverImg}
+                isboolean={index === nowIndex}
+                onClick={() => {
+                  setNowIndex(index);
+                }}
+              >
+                <S.CardInfo>
+                  <S.CardRow1>
+                    <div>Track {album.index}</div>
+                    <div>{album.playTime}</div>
+                  </S.CardRow1>
+                  <S.CardRow2>
+                    <S.Column1>
+                      <div className="kor">{album.title}</div>
+                      <div className="eng">{album.engTitle}</div>
+                    </S.Column1>
+                    <S.Column2>
+                      <PlayIcon className="playicon" />
+                    </S.Column2>
+                  </S.CardRow2>
+                  <S.CardRow3></S.CardRow3>
+                </S.CardInfo>
+              </S.CardDiv>
+            ))}
+          </S.CardWrapper>
         </S.ContentDiv>
-        <S.ContentDiv>
-          <S.ContentImgDiv index={1}></S.ContentImgDiv>
-          <S.ContentTextDiv>
-            <S.ContentTextRow1>
-              <div className="index">Track 2</div>
-              <div className="length">03:15</div>
-            </S.ContentTextRow1>
-            <S.ContentTextRow2>용맹한 발걸음이여</S.ContentTextRow2>
-            <S.ContentTextRow3>
-              <div>
-                성실'이라고 하는, 저희 잔나비가 생각하는{"\n"}미덕에 대해서 쓴
-                곡입니다.{"\n"}성실한 여러분들 주제곡 삼아 아침에 출근길{"\n"}
-                힘차게 용맹한 발걸음으로 가시길 바랍니다.
-              </div>
-            </S.ContentTextRow3>
-          </S.ContentTextDiv>
-        </S.ContentDiv>
-      </S.ContentWrapper>
-    </>
+      </S.Wrapper>
+    </Desktop>
   );
 }
 

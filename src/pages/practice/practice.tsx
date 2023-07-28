@@ -1,31 +1,27 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  useLayoutEffect,
+} from "react";
 import * as S from "./practice.style";
-
 import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
+import { gsap } from "gsap";
 
 function Practice() {
-  const [scrollHeight, setScrollHeight] = useState<number>(0);
-  const [isScrolledMany, setIsScrolledMany] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollHeight(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    setIsScrolledMany(scrollHeight >= 1000);
-  }, [scrollHeight]);
+  const boxRef1 = useRef<HTMLDivElement>(null);
+  const boxRef2 = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <div>123</div>
+      <div
+        ref={boxRef1}
+        style={{ width: "100px", height: "100px", backgroundColor: "red" }}
+      >
+        123
+      </div>
+      <div ref={boxRef2}></div>
     </>
   );
 }

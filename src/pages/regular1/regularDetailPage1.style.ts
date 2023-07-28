@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import images from "../../data/images/regular1/";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
 
@@ -24,12 +24,26 @@ const yellow = "#fec800";
 const eaeaea = "eaeaea";
 const fff = "ffffff";
 
+const transitionDuration = "0.01s"; // Duration for the transition animation
+const lpRotation = "10deg"; // Rotation value for the lpDiv
+
+// Mixin for shared transition properties
+const transitionMixin = css`
+  transition-property: opacity, width, transform;
+  transition-duration: ${transitionDuration};
+  transition-timing-function: linear;
+`;
+
 interface IBoolean {
   isboolean: boolean;
 }
 
 interface IString {
   stringvalue: string;
+}
+
+interface INumber {
+  numbervalue: number;
 }
 
 export const Wrapper = styled.div`
@@ -42,35 +56,39 @@ export const IntroDiv = styled.div<IBoolean>`
   background-image: url(${introbg});
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  position: ${(props) => (props.isboolean ? "absolute" : "fixed")};
+  top: ${(props) => (props.isboolean ? "2100px" : "0")};
+  z-index: 1;
 `;
 
-export const MarginDiv = styled.div``;
-
-export const CenterDiv = styled.div`
-  border: 3px solid red;
-  width: 644px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
+export const MarginDiv = styled.div`
+  width: 100%;
+  height: calc(100vh + 2200px);
 `;
-export const AlbumDiv = styled.div`
+
+export const AlbumDiv = styled.div<INumber>`
   width: 400px;
   aspect-ratio: 1/1;
   background-image: url(${albumCover});
   ${backgroundImgDefault};
+  position: absolute;
   ${positionCenter};
-  transform: translate(-65%, -50%);
+  --translation: -${(props) => props.numbervalue * 0.1}px;
+  transform: translate(calc(-60% + var(--translation)), -50%);
 `;
-export const LpDiv = styled.div`
+export const LpDiv = styled.div<INumber>`
   ${backgroundImgDefault};
+  ${transitionMixin};
+
   background-image: url(${lp});
   background-size: 82% 82%;
   width: 400px;
   aspect-ratio: 1/1;
   ${positionCenter};
-  transform: translate(-35%, -50%);
+  --translation: ${(props) => props.numbervalue * 0.1}px;
+  --rotation: ${(props) => props.numbervalue * 0.1}deg;
+  transform: translate(calc(-40% + var(--translation)), -50%)
+    rotate(var(--rotation));
 `;
 export const Footer = styled.div`
   display: flex;
