@@ -10,18 +10,36 @@ import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
 import { gsap } from "gsap";
 
 function Practice() {
+  const [scrollHeight, setScrollHeight] = useState<number>(0);
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
+  const boxRef3 = useRef<HTMLDivElement>(null);
+  const boxRef4 = useRef<HTMLDivElement>(null);
+
+  //
+
+  // useEffect(() => {
+  //   gsap.to(boxRef1.current, {
+  //     scrollTrigger: {
+  //       trigger: boxRef1.current,
+  //       markers: true,
+  //       start: "top center",
+  //       scrub: true,
+  //     },
+  //     x: 400,
+  //     duration: 4,
+  //   });
+  // }, [scrollHeight]);
 
   return (
     <>
-      <div
-        ref={boxRef1}
-        style={{ width: "100px", height: "100px", backgroundColor: "red" }}
-      >
-        123
-      </div>
-      <div ref={boxRef2}></div>
+      <S.Container>
+        <S.Div1 ref={boxRef1}></S.Div1>
+        <S.MarginDiv ref={boxRef3}></S.MarginDiv>
+        <S.Div2 ref={boxRef2}></S.Div2>
+
+        <S.ScrollDiv ref={boxRef4}></S.ScrollDiv>
+      </S.Container>
     </>
   );
 }

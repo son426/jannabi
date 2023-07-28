@@ -36,14 +36,11 @@ function RegularDetailPage1() {
     if (index === nowIndex - 1) handlePrev();
     else if (index === nowIndex + 1) handleNext();
   };
-
+  const handleScroll = () => {
+    setScrollHeight(window.scrollY);
+  };
   useEffect(() => {
     // Scroll event listener to update scrollHeight state
-    const handleScroll = () => {
-      console.log(scrollHeight);
-      setScrollHeight(window.scrollY);
-    };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -52,8 +49,12 @@ function RegularDetailPage1() {
   }, []);
 
   useEffect(() => {
-    if (scrollHeight >= 2000) setIsScrolledMany(true);
-    else setIsScrolledMany(false);
+    const scrollThreshold = 1600;
+    console.log(scrollHeight);
+    if (scrollHeight >= scrollThreshold) {
+      console.log("many!");
+      setIsScrolledMany(true);
+    } else setIsScrolledMany(false);
   }, [scrollHeight]);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ function RegularDetailPage1() {
     <>
       <Desktop>
         <S.Wrapper>
-          <S.IntroDiv isboolean={isScrolledMany}>
+          <S.IntroDiv isboolean={isScrolledMany} numbervalue={scrollHeight}>
             <S.LpDiv numbervalue={scrollHeight}></S.LpDiv>
             <S.AlbumDiv numbervalue={scrollHeight}></S.AlbumDiv>
             <S.Footer>

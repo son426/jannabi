@@ -24,16 +24,6 @@ const yellow = "#fec800";
 const eaeaea = "eaeaea";
 const fff = "ffffff";
 
-const transitionDuration = "0.01s"; // Duration for the transition animation
-const lpRotation = "10deg"; // Rotation value for the lpDiv
-
-// Mixin for shared transition properties
-const transitionMixin = css`
-  transition-property: opacity, width, transform;
-  transition-duration: ${transitionDuration};
-  transition-timing-function: linear;
-`;
-
 interface IBoolean {
   isboolean: boolean;
 }
@@ -50,20 +40,31 @@ export const Wrapper = styled.div`
   background-color: black;
 `;
 
-export const IntroDiv = styled.div<IBoolean>`
+interface IIntroProps extends IBoolean, INumber {}
+
+const transitionDuration = "0.5s";
+const lpRotation = "10deg";
+const transitionMixin = css`
+  transition-property: opacity, width, transform;
+  transition-duration: ${transitionDuration};
+  transition-timing-function: linear;
+`;
+
+export const IntroDiv = styled.div<IIntroProps>`
   width: 100%;
   height: 100vh;
   background-image: url(${introbg});
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  position: ${(props) => (props.isboolean ? "absolute" : "fixed")};
-  top: ${(props) => (props.isboolean ? "2100px" : "0")};
+  position: ${(props) => (props.isboolean ? "absolute" : "sticky")};
+  top: ${(props) => (props.isboolean ? `1800px` : "0")};
   z-index: 1;
 `;
 
 export const MarginDiv = styled.div`
+  background-color: black;
   width: 100%;
-  height: calc(100vh + 2200px);
+  height: calc(100vh + 1800px);
 `;
 
 export const AlbumDiv = styled.div<INumber>`
@@ -73,7 +74,7 @@ export const AlbumDiv = styled.div<INumber>`
   ${backgroundImgDefault};
   position: absolute;
   ${positionCenter};
-  --translation: -${(props) => props.numbervalue * 0.1}px;
+  --translation: -${(props) => props.numbervalue * 0.025}px;
   transform: translate(calc(-60% + var(--translation)), -50%);
 `;
 export const LpDiv = styled.div<INumber>`
@@ -85,8 +86,8 @@ export const LpDiv = styled.div<INumber>`
   width: 400px;
   aspect-ratio: 1/1;
   ${positionCenter};
-  --translation: ${(props) => props.numbervalue * 0.1}px;
-  --rotation: ${(props) => props.numbervalue * 0.1}deg;
+  --translation: ${(props) => props.numbervalue * 0.025}px;
+  --rotation: ${(props) => props.numbervalue * 0.2}deg;
   transform: translate(calc(-40% + var(--translation)), -50%)
     rotate(var(--rotation));
 `;

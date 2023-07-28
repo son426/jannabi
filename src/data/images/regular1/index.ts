@@ -22,6 +22,7 @@ import album from "./album.png";
 import backgreen from "./backgreen.png";
 import backgreenmobile from "./backgreenmobile.png";
 import backgreenmobile2 from "./backgreenmobile2.png";
+import backgreencolor from "./backgreen4.png";
 import lp from "./lp.png";
 import floatingimg from "./floating.png";
 
@@ -50,6 +51,7 @@ export default {
   backgreen,
   backgreenmobile,
   backgreenmobile2,
+  backgreencolor,
   lp,
   floatingimg,
 };

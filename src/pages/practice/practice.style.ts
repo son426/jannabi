@@ -1,30 +1,38 @@
 import styled, { keyframes } from "styled-components";
 import backCursor from "./back.jpg";
+import { positionCenter } from "@/constants/style";
 
-// media screen
-export const TestDiv = styled.div`
-  border: 3px solid black;
-  width: 500px;
-  height: 100px;
-  @media screen and (max-width: 500px) {
-    background-color: aquamarine;
-  }
+export const Container = styled.div`
+  width: 100%;
+  background-color: white;
 `;
 
 export const Div1 = styled.div`
   border: 2px solid black;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  height: 80vh;
+  background-color: red;
+  position: fixed;
 `;
 
 export const Div2 = styled.div`
-  width: 50%;
-  height: 120%;
-  background-color: black;
-  color: white;
-  overflow: scroll;
+  width: 100%;
+  height: 80vh;
+  background-color: blue;
 `;
+
+export const MarginDiv = styled.div`
+  width: 100%;
+  height: 80vh;
+  background-color: pink;
+`;
+
+export const ScrollDiv = styled.div`
+  background-color: green;
+  width: 100%;
+  height: 200vh;
+`;
+
 export const Div3 = styled.div`
   width: 80%;
   height: 120%;
