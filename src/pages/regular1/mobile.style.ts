@@ -1,10 +1,11 @@
 import { styled } from "styled-components";
-import introbg from "./backgreenMobile.png";
-import introbg2 from "./backgreenMobile2.png";
-import albumCover from "./album.png";
-import lp from "./lp.png";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-import { r1 } from "./data/album";
+import images from "../../data/images/regular1";
+
+const introbg = images.backgreenmobile;
+const introbg2 = images.backgreenmobile2;
+const albumCover = images.album;
+const lp = images.lp;
 
 const h1 = "40px";
 const h2 = "32px";

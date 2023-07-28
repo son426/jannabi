@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import * as image from "./image/index";
+import image from "../../data/images/irregular";
 import { Link } from "react-router-dom";
 
 interface IBackgroundProps {

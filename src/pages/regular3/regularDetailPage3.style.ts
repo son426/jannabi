@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import * as image from "./image/index";
+import image from "../../data/images/regular3";
 
 export const IntroDiv = styled.div`
   width: 100%;

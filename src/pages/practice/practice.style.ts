@@ -60,3 +60,20 @@ export const CenterCard = styled(Card)`
   width: 50vw;
   font-size: 28px;
 `;
+
+interface IBoolean {
+  isboolean: boolean;
+}
+
+const Wrapper = styled.div`
+  overflow: hidden; /* Hide overflow to prevent content from scrolling before the transition */
+`;
+
+const ContentContainer = styled.div<IBoolean>`
+  position: ${(props) => (props.isboolean ? "static" : "fixed")};
+  top: ${(props) => (props.isboolean ? "0" : "1000px")};
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: top 0.5s ease; /* Add transition to create a smooth scrolling effect */
+`;

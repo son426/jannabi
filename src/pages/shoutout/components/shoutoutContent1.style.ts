@@ -1,5 +1,5 @@
 import { styled, keyframes } from "styled-components";
-import Logo from "../assets/logo.png";
+import Logo from "../../../data/images/shoutout/logo.png";
 
 const rotateAnimation = keyframes`
   0% {

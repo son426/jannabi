@@ -3,7 +3,7 @@ import MainPage from "../main/mainPage";
 import * as S from "./irregularDetailPage.style";
 import * as M from "./mobile.style";
 import { useState, useEffect, useRef } from "react";
-import { irregularAlbumData } from "../../data/data";
+import { irregularAlbumData } from "../../data/meta/irregular";
 import { motion } from "framer-motion";
 import { Default, Desktop, Mobile } from "../../components/mediaquery";
 

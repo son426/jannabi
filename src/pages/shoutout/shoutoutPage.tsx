@@ -5,7 +5,7 @@ import { db } from "../../config/firebase-config";
 import ShoutoutContent1 from "./components/shoutoutContent1";
 import ShoutoutContent2 from "./components/shoutoutContent2";
 import { Mobile, Default } from "../../components/mediaquery";
-import audioFiles from "../regular1/data/audio";
+import audioFile from "../../data/audio/regular1/monkeyHotel.mp3";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../../hooks/useAudio";
 
@@ -24,7 +24,7 @@ function ShoutoutPage() {
 
   const commentDataRef = collection(db, "comment");
 
-  const { audioPlay, audioStop, audioRef } = useAudio(audioFiles.audioFile8);
+  const { audioPlay, audioStop, audioRef } = useAudio(audioFile);
 
   const navigate = useNavigate();
 

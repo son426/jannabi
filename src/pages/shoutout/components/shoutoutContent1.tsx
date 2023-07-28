@@ -1,7 +1,7 @@
 import * as S from "./shoutoutContent1.style";
 import * as M from "./mobile1.style";
-import choi from "../assets/choi.png";
-import kim from "../assets/kim.png";
+import choi from "../../../data/images/shoutout/choi.png";
+import kim from "../../../data/images/shoutout/kim.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Default, Mobile } from "../../../components/mediaquery";

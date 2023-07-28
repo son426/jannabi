@@ -18,8 +18,14 @@ import s7 from "./7.png";
 import s8 from "./8.png";
 import s9 from "./9.png";
 import s10 from "./10.png";
+import album from "./album.png";
+import backgreen from "./backgreen.png";
+import backgreenmobile from "./backgreenmobile.png";
+import backgreenmobile2 from "./backgreenmobile2.png";
+import lp from "./lp.png";
+import floatingimg from "./floating.png";
 
-export {
+export default {
   r1,
   r2,
   r3,
@@ -40,4 +46,10 @@ export {
   s8,
   s9,
   s10,
+  album,
+  backgreen,
+  backgreenmobile,
+  backgreenmobile2,
+  lp,
+  floatingimg,
 };

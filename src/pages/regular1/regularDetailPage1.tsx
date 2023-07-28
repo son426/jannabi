@@ -3,17 +3,23 @@ import * as S from "./regularDetailPage1.style";
 import * as M from "./mobile.style";
 import { useState, useEffect, useRef } from "react";
 import { Title } from "../irregularDetail/irregularDetailPage.style";
-import { IRegularData, regularData } from "./data/data";
+import { IRegularData, regularData } from "../../data/meta/regular1";
+import { ExitIcon, PauseIcon, PlayIcon } from "../../data/icon";
+import { useNavigate } from "react-router-dom";
 
 function RegularDetailPage1() {
   const [scrollHeight, setScrollHeight] = useState<number>(1);
   const [isScrolledMany, setIsScrolledMany] = useState<boolean>(false);
   const [nowIndex, setNowIndex] = useState(0);
   const [titleVisible, setTitleVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
 
   const audioRef = useRef<HTMLAudioElement>(
     new Audio(regularData[0].audioFile)
   );
+
+  const navigate = useNavigate();
 
   const albumData: IRegularData[] = regularData;
 
@@ -32,6 +38,24 @@ function RegularDetailPage1() {
   };
 
   useEffect(() => {
+    // Scroll event listener to update scrollHeight state
+    const handleScroll = () => {
+      setScrollHeight(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollHeight >= 1000) setIsScrolledMany(true);
+    else setIsScrolledMany(false);
+  }, [scrollHeight]);
+
+  useEffect(() => {
     // title 없앴다가 다시 보이게
     const timeout = setTimeout(() => {
       setTitleVisible(true);
@@ -45,7 +69,11 @@ function RegularDetailPage1() {
     audioRef.current = new Audio(albumData[nowIndex].audioFile);
     audioRef.current.play();
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    };
   }, [nowIndex]);
 
   return (
@@ -77,6 +105,55 @@ function RegularDetailPage1() {
             </S.IntroContentBox>
           </S.IntroContentDiv>
           <S.ContentDiv>
+            <S.FloatingButton
+              onClick={() => {
+                setMenuVisible((prev) => !prev);
+              }}
+            ></S.FloatingButton>
+            {menuVisible && (
+              <S.MenuDiv>
+                {isAudioPlaying && (
+                  <S.Menu>
+                    <div>
+                      <PauseIcon />
+                    </div>
+                    <div
+                      onClick={() => {
+                        audioRef.current.pause();
+                        setIsAudioPlaying(false);
+                      }}
+                    >
+                      노래 일시정지
+                    </div>
+                  </S.Menu>
+                )}
+                {!isAudioPlaying && (
+                  <S.Menu>
+                    <div>
+                      <PlayIcon />
+                    </div>
+                    <div
+                      onClick={() => {
+                        audioRef.current.play();
+                        setIsAudioPlaying(true);
+                      }}
+                    >
+                      노래 재생
+                    </div>
+                  </S.Menu>
+                )}
+                <S.Menu
+                  onClick={() => {
+                    navigate("/main");
+                  }}
+                >
+                  <div>
+                    <ExitIcon />
+                  </div>
+                  <div>몽키호텔 나가기</div>
+                </S.Menu>
+              </S.MenuDiv>
+            )}
             <S.CarouselDiv numbervalue={nowIndex}>
               {albumData.map((album, index) => (
                 <>

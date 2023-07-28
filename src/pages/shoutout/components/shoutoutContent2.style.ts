@@ -1,6 +1,6 @@
 import { styled, css } from "styled-components";
-import Logo2 from "../assets/logo2.png";
-import backImg from "../assets/back.png";
+import Logo2 from "../../../data/images/shoutout/logo2.png";
+import backImg from "../../../data/images/shoutout/back.png";
 
 export const Content2 = styled.div`
   width: 100%;

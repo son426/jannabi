@@ -1,6 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
 import { Link } from "react-router-dom";
-import images from "./image";
 
 const slideLeftAnimation = keyframes`
   from {
@@ -10,7 +9,6 @@ const slideLeftAnimation = keyframes`
     transform: translateX(-5px);
   }
 `;
-
 const slideRightAnimation = keyframes`
   from {
     transform: translateX(0);
@@ -20,8 +18,13 @@ const slideRightAnimation = keyframes`
   }
 `;
 
-export const BackgroundDiv = styled.div`
-  background-image: url(${images.background});
+interface IImageProps {
+  img?: string;
+  hoveredImg?: string;
+}
+
+export const BackgroundDiv = styled.div<IImageProps>`
+  background-image: url(${(props) => props.img});
   background-position: center;
   background-size: cover;
   width: 100vw;
@@ -42,9 +45,9 @@ export const ShelfDiv = styled.div`
   margin: 20vh 0;
 `;
 
-export const Shelf = styled.div`
+export const Shelf = styled.div<IImageProps>`
   border: 5px solid transparent;
-  background-image: url(${images.shelf});
+  background-image: url(${(props) => props.img});
   background-size: contain;
   background-position: top;
   background-repeat: no-repeat;
@@ -65,11 +68,6 @@ export const RegularRow = styled.div`
   gap: 3.5%;
 `;
 
-interface IImageProps {
-  img?: string;
-  hoveredImg?: string;
-}
-
 export const RegularCoverDiv = styled.div<IImageProps>`
   background-image: url(${(props) => props.img});
   background-size: contain;
@@ -82,8 +80,8 @@ export const RegularCoverDiv = styled.div<IImageProps>`
   z-index: 2;
 `;
 
-export const LpDiv = styled.div`
-  background-image: url(${images.lp});
+export const LpDiv = styled.div<IImageProps>`
+  background-image: url(${(props) => props.img});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

@@ -10,7 +10,7 @@ import likeyou from "./likeyou.mp3";
 import babymaybe from "./babymaybe.mp3";
 import seeyoureyes from "./seeyoureyes.mp3";
 
-export {
+export default {
   she,
   goodboytwist,
   rocket,

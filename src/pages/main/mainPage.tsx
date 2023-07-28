@@ -1,24 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./mainPage.style";
-import images from "./image/index";
 import Intro from "./intro";
 import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
 import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
-import { useLayoutEffect } from "react";
-import { IObject, imgPreload, objectToArray } from "../../hooks/tools";
+import images from "@/data/images/main";
 
 function MainPage() {
   const [isIntro] = useRecoilState(isIntroAtom);
-
-  const allImgPreload = () => {
-    const imgUrls: string[] = objectToArray(images as IObject);
-    imgPreload(imgUrls);
-  };
-
-  useLayoutEffect(() => {
-    allImgPreload();
-  }, []);
 
   return (
     <>
@@ -26,9 +15,9 @@ function MainPage() {
         <>
           {isIntro && <Intro />}
 
-          <S.BackgroundDiv>
+          <S.BackgroundDiv img={images.background}>
             <S.ShelfDiv>
-              <S.Shelf>
+              <S.Shelf img={images.shelf}>
                 <S.RegularRow>
                   <S.RegularDiv
                     to="/regulardetail/1"
@@ -37,7 +26,7 @@ function MainPage() {
                     <S.RegularCoverDiv
                       img={images.regular1}
                     ></S.RegularCoverDiv>
-                    <S.LpDiv></S.LpDiv>
+                    <S.LpDiv img={images.lp}></S.LpDiv>
                   </S.RegularDiv>
                   <S.RegularDiv
                     to="/regulardetail/2"

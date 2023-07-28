@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./introPage.style";
-import { useMediaQuery } from "react-responsive";
+import { IObject, imgPreload, objectToArray } from "../../hooks/tools";
+import main_images from "@/data/images/main";
+import regular1_images from "@/data/images/regular1";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
@@ -13,6 +15,14 @@ function IntroPage() {
       navigate("/main", { state: { isIntro: true } });
     }, 1500);
   };
+
+  useEffect(() => {
+    const mainImgUrls: string[] = objectToArray(main_images as IObject);
+    imgPreload(mainImgUrls);
+
+    const regular1Urls: string[] = objectToArray(regular1_images as IObject);
+    imgPreload(regular1Urls);
+  }, []);
 
   return (
     <>

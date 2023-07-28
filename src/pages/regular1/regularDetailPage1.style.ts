@@ -1,8 +1,11 @@
 import { styled } from "styled-components";
-import introbg from "./backgreen.png";
-import albumCover from "./album.png";
-import lp from "./lp.png";
+import images from "../../data/images/regular1/";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
+
+const albumCover = images.album;
+const introbg = images.backgreen;
+const lp = images.lp;
+const floatingButtonImg = images.floatingimg;
 
 const h1 = "40px";
 const h2 = "32px";
@@ -40,6 +43,9 @@ export const IntroDiv = styled.div<IBoolean>`
   background-size: 100% 100%;
   background-repeat: no-repeat;
 `;
+
+export const MarginDiv = styled.div``;
+
 export const CenterDiv = styled.div`
   border: 3px solid red;
   width: 644px;
@@ -88,7 +94,6 @@ export const Footer = styled.div`
 export const IntroContentDiv = styled.div`
   width: 100%;
   height: 100vh;
-
   color: white;
   position: relative;
 `;
@@ -150,10 +155,41 @@ const gap = "5px";
 export const ContentDiv = styled.div`
   position: relative;
   width: 100%;
+  height: 100vh;
+  overflow: hidden;
+`;
+
+export const FloatingButton = styled.div`
+  cursor: pointer;
+
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  right: 50px;
+  background-image: url(${floatingButtonImg});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+`;
+
+export const MenuDiv = styled.div`
+  color: white;
+  position: absolute;
+  right: 50px;
+  top: 100px;
+  z-index: 1;
+`;
+export const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
 `;
 
 export const CarouselDiv = styled.div<INumber>`
-  height: 100vh;
+  height: 80%;
   display: flex;
   align-items: end;
   transform: translateX(
@@ -161,6 +197,7 @@ export const CarouselDiv = styled.div<INumber>`
   );
   transition: transform 0.5s ease;
   position: relative;
+  top: 21%;
   left: 50%;
 `;
 
@@ -170,7 +207,7 @@ export const Column = styled.div<IColumnProps>`
   cursor: pointer;
   flex-shrink: 0;
   width: ${(props) => (props.isboolean ? "56%" : "27%")};
-  height: ${(props) => (props.isboolean ? "80%" : "62%")};
+  height: ${(props) => (props.isboolean ? "100%" : "75%")};
   background-image: url(${(props) => props.stringvalue});
   background-position: bottom;
   background-repeat: no-repeat;
@@ -203,7 +240,6 @@ export const ColumnTitle = styled.div`
 `;
 
 export const ColumnDescription = styled.div`
-  border: 1px solid white;
   color: white;
   position: absolute;
   top: 50%;

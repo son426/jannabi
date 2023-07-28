@@ -3,7 +3,7 @@ import * as M from "./mobile2.style";
 import { useState, useEffect } from "react";
 import { timeForToday } from "../../../hooks/tools";
 import { addDoc, CollectionReference, DocumentData } from "firebase/firestore";
-import { FiSend } from "../../../assets/icon";
+import { FiSend } from "../../../data/icon";
 import { IComment } from "../shoutoutPage";
 import { Default, Mobile } from "../../../components/mediaquery";
 

@@ -1,7 +1,12 @@
 import styled, { keyframes, css } from "styled-components";
 import { Link } from "react-router-dom";
-import arrow from "./arrow.png";
-import introImage from "./intro.jpg";
+
+import arrow from "../../data/images/intro/arrow.png";
+import introImage from "../../data/images/intro/intro.jpg";
+
+// import arrow from "@data/images/intro/arrow.png";
+// import introImage from "@data/images/intro/intro.jpg";
+
 interface IClickedProps {
   isclicked: boolean;
 }
