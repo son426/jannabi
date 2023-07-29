@@ -5,38 +5,39 @@ import { positionCenter } from "@/constants/style";
 export const Container = styled.div`
   width: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 `;
 
-export const Div1 = styled.div`
-  border: 2px solid black;
+export const Container1 = styled.div`
   width: 100%;
-  height: 80vh;
-  background-color: red;
-  position: fixed;
+  border: 3px solid red;
+  height: 100vh;
+  position: relative;
 `;
 
 export const Div2 = styled.div`
-  width: 100%;
-  height: 80vh;
+  width: 300px;
+  height: 300px;
   background-color: blue;
-`;
-
-export const MarginDiv = styled.div`
-  width: 100%;
-  height: 80vh;
-  background-color: pink;
-`;
-
-export const ScrollDiv = styled.div`
-  background-color: green;
-  width: 100%;
-  height: 200vh;
+  position: absolute;
+  ${positionCenter};
 `;
 
 export const Div3 = styled.div`
-  width: 80%;
-  height: 120%;
+  width: 300px;
+  height: 300px;
   background-color: green;
+  position: absolute;
+  ${positionCenter};
+`;
+
+export const Container2 = styled.div`
+  width: 100%;
+  height: 100vh;
+  border: 3px solid pink;
+  background-color: pink;
+  margin-top: 700px;
 `;
 
 export const CardContainer = styled.div<{ nowIndex: number }>`

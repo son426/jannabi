@@ -42,7 +42,7 @@ export const Wrapper = styled.div`
 
 interface IIntroProps extends IBoolean, INumber {}
 
-const transitionDuration = "0.5s";
+const transitionDuration = "0.1s";
 const lpRotation = "10deg";
 const transitionMixin = css`
   transition-property: opacity, width, transform;
@@ -56,8 +56,6 @@ export const IntroDiv = styled.div<IIntroProps>`
   background-image: url(${introbg});
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  position: ${(props) => (props.isboolean ? "absolute" : "sticky")};
-  top: ${(props) => (props.isboolean ? `1800px` : "0")};
   z-index: 1;
 `;
 
@@ -74,22 +72,14 @@ export const AlbumDiv = styled.div<INumber>`
   ${backgroundImgDefault};
   position: absolute;
   ${positionCenter};
-  --translation: -${(props) => props.numbervalue * 0.025}px;
-  transform: translate(calc(-60% + var(--translation)), -50%);
 `;
 export const LpDiv = styled.div<INumber>`
   ${backgroundImgDefault};
-  ${transitionMixin};
-
   background-image: url(${lp});
   background-size: 82% 82%;
   width: 400px;
   aspect-ratio: 1/1;
   ${positionCenter};
-  --translation: ${(props) => props.numbervalue * 0.025}px;
-  --rotation: ${(props) => props.numbervalue * 0.2}deg;
-  transform: translate(calc(-40% + var(--translation)), -50%)
-    rotate(var(--rotation));
 `;
 export const Footer = styled.div`
   display: flex;
@@ -115,28 +105,29 @@ export const IntroContentDiv = styled.div`
   height: 100vh;
   color: white;
   position: relative;
+  border: 1px solid white;
 `;
 
 export const IntroContentBox = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 50%;
-  left: 5%;
   transform: translate(0%, -50%);
+  padding: 10%;
 `;
 
 export const Row1 = styled.div`
   font-size: ${h4};
-  width: 20%;
-  text-align: center;
-  p {
+  text-align: start;
+  margin-bottom: 16px;
+  padding: 12px 0px;
+  span {
     padding: 12px;
     border: 1px solid white;
-    border-radius: 20px;
+    border-radius: 24px;
   }
-  margin-bottom: 16px;
 `;
 export const Row2 = styled.div`
   width: 100%;
@@ -156,13 +147,18 @@ export const Row2 = styled.div`
   }
 `;
 export const Row3 = styled.div`
-  padding-left: 40px;
-
-  width: 50%;
+  margin: 0 auto;
+  width: 90%;
   word-break: keep-all;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6%;
   font-size: ${h4};
   font-weight: ${medium};
   line-height: ${h2};
+  div {
+    width: 43%;
+  }
 `;
 
 interface INumber {
