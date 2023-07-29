@@ -4,10 +4,11 @@ import * as M from "./mobile.style";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Title } from "../irregularDetail/irregularDetailPage.style";
 import { IRegularData, regularData } from "../../data/meta/regular1";
-import { ExitIcon, PauseIcon, PlayIcon } from "../../data/icon";
+import { ExitIcon, ListIcon, PauseIcon, PlayIcon } from "../../data/icon";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import useScrollAnimation from "@/hooks/useScroll";
 
 function RegularDetailPage1() {
   const [scrollHeight, setScrollHeight] = useState<number>(1);
@@ -17,15 +18,21 @@ function RegularDetailPage1() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(true);
 
-  const rootRef = useRef<HTMLDivElement>(null);
   const containerRef1 = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
-
-  const albumRef = useRef<HTMLDivElement>(null);
   const lpRef = useRef<HTMLDivElement>(null);
-
+  const albumRef = useRef<HTMLDivElement>(null);
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
+
+  useScrollAnimation(
+    containerRef1,
+    containerRef2,
+    lpRef,
+    albumRef,
+    boxRef1,
+    boxRef2
+  );
 
   const audioRef = useRef<HTMLAudioElement>(
     new Audio(regularData[0].audioFile)
@@ -48,18 +55,6 @@ function RegularDetailPage1() {
     if (index === nowIndex - 1) handlePrev();
     else if (index === nowIndex + 1) handleNext();
   };
-  const handleScroll = () => {
-    setScrollHeight(window.scrollY);
-  };
-
-  useEffect(() => {
-    const scrollThreshold = 1600;
-    console.log(scrollHeight);
-    if (scrollHeight >= scrollThreshold) {
-      console.log("many!");
-      setIsScrolledMany(true);
-    } else setIsScrolledMany(false);
-  }, [scrollHeight]);
 
   useEffect(() => {
     // title 없앴다가 다시 보이게
@@ -82,75 +77,13 @@ function RegularDetailPage1() {
     };
   }, [nowIndex]);
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger as any);
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef1.current,
-        endTrigger: containerRef1.current,
-        start: "center center",
-        end: "bottom top",
-        markers: false,
-        scrub: 2,
-        toggleActions: "restart pause reverse none",
-        pin: containerRef1.current,
-      },
-    });
-
-    tl.to(lpRef.current, {
-      x: 100,
-      duration: 3,
-      rotate: 360,
-      scrub: 1,
-    }).to(
-      albumRef.current,
-      {
-        x: -100,
-        duration: 3,
-      },
-      0 // the 0 here places the second tween at the beginning of the timeline
-    );
-
-    gsap.to(boxRef1.current, {
-      scrollTrigger: {
-        trigger: containerRef2.current,
-        endTrigger: containerRef2.current,
-        start: "100px center",
-        end: "100px center",
-        scrub: 2,
-        markers: false,
-      },
-
-      y: -50,
-      opacity: 1,
-    });
-
-    gsap.to(boxRef2.current, {
-      scrollTrigger: {
-        trigger: containerRef2.current,
-        endTrigger: containerRef2.current,
-        start: "250px center",
-        end: "250px center",
-        scrub: 2,
-        markers: false,
-      },
-
-      y: -50,
-      opacity: 1,
-    });
-  }, []);
-
   return (
     <>
       <Desktop>
-        <S.Wrapper ref={rootRef}>
-          <S.IntroDiv
-            ref={containerRef1}
-            isboolean={isScrolledMany}
-            numbervalue={scrollHeight}
-          >
-            <S.LpDiv ref={lpRef} numbervalue={scrollHeight}></S.LpDiv>
-            <S.AlbumDiv ref={albumRef} numbervalue={scrollHeight}></S.AlbumDiv>
+        <S.Wrapper>
+          <S.IntroDiv ref={containerRef1}>
+            <S.LpDiv ref={lpRef}></S.LpDiv>
+            <S.AlbumDiv ref={albumRef}></S.AlbumDiv>
             <S.Footer>
               <div className="title">MONKEY HOTEL</div>
               <div className="jannabi">잔나비</div>
@@ -197,47 +130,70 @@ function RegularDetailPage1() {
                 setMenuVisible((prev) => !prev);
               }}
             ></S.FloatingButton>
+
             {menuVisible && (
               <S.MenuDiv>
                 {isAudioPlaying && (
                   <S.Menu>
-                    <div>
+                    <S.MenuColumn1>
                       <PauseIcon />
-                    </div>
-                    <div
+                    </S.MenuColumn1>
+                    <S.MenuColumn2
                       onClick={() => {
                         audioRef.current.pause();
                         setIsAudioPlaying(false);
                       }}
                     >
                       노래 일시정지
-                    </div>
+                    </S.MenuColumn2>
                   </S.Menu>
                 )}
                 {!isAudioPlaying && (
                   <S.Menu>
-                    <div>
+                    <S.MenuColumn1>
                       <PlayIcon />
-                    </div>
-                    <div
+                    </S.MenuColumn1>
+                    <S.MenuColumn2
                       onClick={() => {
                         audioRef.current.play();
                         setIsAudioPlaying(true);
                       }}
                     >
                       노래 재생
-                    </div>
+                    </S.MenuColumn2>
                   </S.Menu>
                 )}
+                <S.Menu>
+                  <S.MenuColumn1>
+                    <ListIcon />
+                  </S.MenuColumn1>
+                  <S.MenuColumn2>수록곡 리스트</S.MenuColumn2>
+                </S.Menu>
+                <S.Menu>
+                  <S.PlayerDiv>
+                    {albumData.map((album, index) => (
+                      <S.PlayerRow
+                        key={index}
+                        isboolean={index === nowIndex}
+                        onClick={() => {
+                          setNowIndex(index);
+                        }}
+                      >
+                        <S.PlayerColumn1>{album.index}</S.PlayerColumn1>
+                        <S.PlayerColumn2>{album.title}</S.PlayerColumn2>
+                      </S.PlayerRow>
+                    ))}
+                  </S.PlayerDiv>
+                </S.Menu>
                 <S.Menu
                   onClick={() => {
                     navigate("/main");
                   }}
                 >
-                  <div>
+                  <S.MenuColumn1>
                     <ExitIcon />
-                  </div>
-                  <div>몽키호텔 나가기</div>
+                  </S.MenuColumn1>
+                  <S.MenuColumn2>몽키호텔 나가기</S.MenuColumn2>
                 </S.Menu>
               </S.MenuDiv>
             )}

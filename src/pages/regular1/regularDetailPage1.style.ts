@@ -50,7 +50,7 @@ const transitionMixin = css`
   transition-timing-function: linear;
 `;
 
-export const IntroDiv = styled.div<IIntroProps>`
+export const IntroDiv = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url(${introbg});
@@ -65,7 +65,7 @@ export const MarginDiv = styled.div`
   height: calc(100vh + 1800px);
 `;
 
-export const AlbumDiv = styled.div<INumber>`
+export const AlbumDiv = styled.div`
   width: 400px;
   aspect-ratio: 1/1;
   background-image: url(${albumCover});
@@ -73,7 +73,7 @@ export const AlbumDiv = styled.div<INumber>`
   ${positionCenter};
   left: 48%;
 `;
-export const LpDiv = styled.div<INumber>`
+export const LpDiv = styled.div`
   ${backgroundImgDefault};
   background-image: url(${lp});
   background-size: 82% 82%;
@@ -177,35 +177,6 @@ export const ContentDiv = styled.div`
   overflow: hidden;
 `;
 
-export const FloatingButton = styled.div`
-  cursor: pointer;
-
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  right: 50px;
-  background-image: url(${floatingButtonImg});
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-`;
-
-export const MenuDiv = styled.div`
-  color: white;
-  position: absolute;
-  right: 50px;
-  top: 100px;
-  z-index: 1;
-`;
-export const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid white;
-  cursor: pointer;
-`;
-
 export const CarouselDiv = styled.div<INumber>`
   height: 80%;
   display: flex;
@@ -269,4 +240,76 @@ export const ColumnDescription = styled.div`
   font-weight: ${medium};
   font-size: calc(${h4} + 4px);
   line-height: ${h3};
+`;
+
+export const FloatingButton = styled.div`
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  right: 50px;
+  background-image: url(${floatingButtonImg});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+`;
+
+export const MenuDiv = styled.div`
+  color: white;
+  position: absolute;
+  right: 50px;
+  top: 100px;
+  z-index: 1;
+  width: 300px;
+  font-size: ${h2};
+  font-weight: ${semibold};
+`;
+export const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: ${h4};
+  border-bottom: 1px solid white;
+  cursor: pointer;
+`;
+
+export const MenuColumn1 = styled.div`
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const MenuColumn2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
+`;
+
+export const PlayerDiv = styled.div`
+  width: 80%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: ${h4};
+`;
+
+export const PlayerRow = styled.div<IBoolean>`
+  display: flex;
+  cursor: pointer;
+  color: ${(props) => (props.isboolean ? "red" : "white")};
+  z-index: 2;
+  gap: 12px;
+  padding: 10px;
+`;
+export const PlayerColumn1 = styled.div`
+  display: flex;
+  justify-content: baseline;
+`;
+export const PlayerColumn2 = styled.div`
+  display: flex;
+  justify-content: baseline;
+
+  width: 100%;
 `;
