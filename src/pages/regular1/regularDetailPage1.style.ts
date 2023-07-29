@@ -70,8 +70,8 @@ export const AlbumDiv = styled.div<INumber>`
   aspect-ratio: 1/1;
   background-image: url(${albumCover});
   ${backgroundImgDefault};
-  position: absolute;
   ${positionCenter};
+  left: 48%;
 `;
 export const LpDiv = styled.div<INumber>`
   ${backgroundImgDefault};
@@ -80,6 +80,7 @@ export const LpDiv = styled.div<INumber>`
   width: 400px;
   aspect-ratio: 1/1;
   ${positionCenter};
+  left: 52%;
 `;
 export const Footer = styled.div`
   display: flex;
@@ -105,7 +106,6 @@ export const IntroContentDiv = styled.div`
   height: 100vh;
   color: white;
   position: relative;
-  border: 1px solid white;
 `;
 
 export const IntroContentBox = styled.div`
@@ -116,6 +116,9 @@ export const IntroContentBox = styled.div`
   top: 50%;
   transform: translate(0%, -50%);
   padding: 10%;
+  .test {
+    opacity: 0;
+  }
 `;
 
 export const Row1 = styled.div`

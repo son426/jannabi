@@ -18,10 +18,14 @@ function RegularDetailPage1() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(true);
 
   const rootRef = useRef<HTMLDivElement>(null);
+  const containerRef1 = useRef<HTMLDivElement>(null);
+  const containerRef2 = useRef<HTMLDivElement>(null);
+
+  const albumRef = useRef<HTMLDivElement>(null);
+  const lpRef = useRef<HTMLDivElement>(null);
+
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
-  const boxRef3 = useRef<HTMLDivElement>(null);
-  const boxRef4 = useRef<HTMLDivElement>(null);
 
   const audioRef = useRef<HTMLAudioElement>(
     new Audio(regularData[0].audioFile)
@@ -47,14 +51,6 @@ function RegularDetailPage1() {
   const handleScroll = () => {
     setScrollHeight(window.scrollY);
   };
-  useEffect(() => {
-    // Scroll event listener to update scrollHeight state
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const scrollThreshold = 1600;
@@ -87,30 +83,61 @@ function RegularDetailPage1() {
   }, [nowIndex]);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      // Our animations can use selector text like ".box"
-      // this will only select '.box' elements that are children of the component
-      gsap.registerPlugin(ScrollTrigger as any);
+    gsap.registerPlugin(ScrollTrigger as any);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef1.current,
+        endTrigger: containerRef1.current,
+        start: "center center",
+        end: "bottom top",
+        markers: false,
+        scrub: 2,
+        toggleActions: "restart pause reverse none",
+        pin: containerRef1.current,
+      },
+    });
 
-      gsap.to(boxRef2.current, {
-        scrollTrigger: {
-          trigger: boxRef1.current,
-          endTrigger: boxRef1.current,
-          start: "0px 0px",
-          end: "1000px 300px",
-          markers: true,
-          scrub: 1,
-          // 속도인듯. true하면 엄청 빠르고, 숫자 크게 줄수록 느려짐.
-          // 그리고 scrub 하면 역스크롤할때 되돌아가는 것도 되는듯.
-          toggleActions: "restart pause reverse none", //
-          pin: boxRef1.current, // 스크롤하는동안 pinning
-        },
-        x: 200, //
-        rotation: 540, //
-      });
-    }, rootRef); // <- IMPORTANT! Scopes selector text
+    tl.to(lpRef.current, {
+      x: 100,
+      duration: 3,
+      rotate: 360,
+      scrub: 1,
+    }).to(
+      albumRef.current,
+      {
+        x: -100,
+        duration: 3,
+      },
+      0 // the 0 here places the second tween at the beginning of the timeline
+    );
 
-    return () => ctx.revert(); // cleanup
+    gsap.to(boxRef1.current, {
+      scrollTrigger: {
+        trigger: containerRef2.current,
+        endTrigger: containerRef2.current,
+        start: "100px center",
+        end: "100px center",
+        scrub: 2,
+        markers: false,
+      },
+
+      y: -50,
+      opacity: 1,
+    });
+
+    gsap.to(boxRef2.current, {
+      scrollTrigger: {
+        trigger: containerRef2.current,
+        endTrigger: containerRef2.current,
+        start: "250px center",
+        end: "250px center",
+        scrub: 2,
+        markers: false,
+      },
+
+      y: -50,
+      opacity: 1,
+    });
   }, []);
 
   return (
@@ -118,45 +145,50 @@ function RegularDetailPage1() {
       <Desktop>
         <S.Wrapper ref={rootRef}>
           <S.IntroDiv
-            ref={boxRef1}
+            ref={containerRef1}
             isboolean={isScrolledMany}
             numbervalue={scrollHeight}
           >
-            <S.LpDiv ref={boxRef2} numbervalue={scrollHeight}></S.LpDiv>
-            <S.AlbumDiv ref={boxRef3} numbervalue={scrollHeight}></S.AlbumDiv>
+            <S.LpDiv ref={lpRef} numbervalue={scrollHeight}></S.LpDiv>
+            <S.AlbumDiv ref={albumRef} numbervalue={scrollHeight}></S.AlbumDiv>
             <S.Footer>
               <div className="title">MONKEY HOTEL</div>
               <div className="jannabi">잔나비</div>
             </S.Footer>
           </S.IntroDiv>
-          <S.IntroContentDiv ref={boxRef4}>
+          <S.IntroContentDiv ref={containerRef2}>
             <S.IntroContentBox>
-              <S.Row1>
-                <span>잔나비 정규 1집</span>
-              </S.Row1>
-              <S.Row2>
-                <p className="korean">몽키호텔</p>
-                <p className="english">MONKEY HOTEL</p>
-              </S.Row2>
-              <S.Row3>
-                <div>
-                  듣는 재미를 더해드리기 위해 고민을 하던 중에 스토리가 이어지는
-                  시리즈 앨범이 나오면 어떨까? 라는 생각을 했어요. 이번 앨범은
-                  몽키호텔 시리즈의 첫 시작이 되겠습니다.잘 만든 드라마들을 보면
-                  초반부에는 스토리 전개보다는 인물들의 캐릭터와 관계들을 먼저
-                  쭈욱 보여주더라구요. 그것처럼 [몽키호텔1] 도 시작인 만큼
-                  서두르지 않고 각 곡마다 인물들의 인격을 부여해봤어요.
-                </div>
-                <div>
-                  각 장면과 함께 소소한 관계들을 그려주는 10장의 삽화도 앨범
-                  책자에 함께 담았구요.작업하는 동안엔 정말 우리가 몽키호텔의
-                  원숭이들인 양 역할놀이 하듯 지냈고, 그 덕분에 유치 혹은
-                  촌스럽다는 강박에 그 동안 쓰지 못했던 표현들을 거리낌 없이
-                  쏟아낼 수 있었고, 또 그런 덕분에 트랜드와는 한 발짝 더 멀어질
-                  수 있게 되었고, 결국엔 우리 잔나비만의 색을 찾아낸 것 같아
-                  뿌듯한 마음입니다.
-                </div>
-              </S.Row3>
+              <div ref={boxRef1} className="test">
+                <S.Row1>
+                  <span>잔나비 정규 1집</span>
+                </S.Row1>
+                <S.Row2>
+                  <p className="korean">몽키호텔</p>
+                  <p className="english">MONKEY HOTEL</p>
+                </S.Row2>
+              </div>
+              <div ref={boxRef2} className="test">
+                <S.Row3>
+                  <div>
+                    듣는 재미를 더해드리기 위해 고민을 하던 중에 스토리가
+                    이어지는 시리즈 앨범이 나오면 어떨까? 라는 생각을 했어요.
+                    이번 앨범은 몽키호텔 시리즈의 첫 시작이 되겠습니다.잘 만든
+                    드라마들을 보면 초반부에는 스토리 전개보다는 인물들의
+                    캐릭터와 관계들을 먼저 쭈욱 보여주더라구요. 그것처럼
+                    [몽키호텔1] 도 시작인 만큼 서두르지 않고 각 곡마다 인물들의
+                    인격을 부여해봤어요.
+                  </div>
+                  <div>
+                    각 장면과 함께 소소한 관계들을 그려주는 10장의 삽화도 앨범
+                    책자에 함께 담았구요.작업하는 동안엔 정말 우리가 몽키호텔의
+                    원숭이들인 양 역할놀이 하듯 지냈고, 그 덕분에 유치 혹은
+                    촌스럽다는 강박에 그 동안 쓰지 못했던 표현들을 거리낌 없이
+                    쏟아낼 수 있었고, 또 그런 덕분에 트랜드와는 한 발짝 더
+                    멀어질 수 있게 되었고, 결국엔 우리 잔나비만의 색을 찾아낸 것
+                    같아 뿌듯한 마음입니다.
+                  </div>
+                </S.Row3>
+              </div>
             </S.IntroContentBox>
           </S.IntroContentDiv>
           <S.ContentDiv>

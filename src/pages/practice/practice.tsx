@@ -17,33 +17,38 @@ function Practice() {
   const boxRef2 = useRef<HTMLDivElement>(null);
   const boxRef3 = useRef<HTMLDivElement>(null);
   const boxRef4 = useRef<HTMLDivElement>(null);
+  const boxRef5 = useRef<HTMLDivElement>(null);
 
   //
 
-  useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      // Our animations can use selector text like ".box"
-      // this will only select '.box' elements that are children of the component
-      gsap.registerPlugin(ScrollTrigger as any);
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger as any);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: boxRef1.current,
+        endTrigger: boxRef2.current,
+        start: "center center",
+        end: "bottom center",
+        markers: true,
+        scrub: 1,
+        toggleActions: "restart pause reverse none",
+        pin: boxRef1.current,
+      },
+    });
 
-      gsap.to(boxRef3.current, {
-        scrollTrigger: {
-          trigger: boxRef1.current,
-          endTrigger: boxRef1.current,
-          start: "0px 0px",
-          end: "1000px 300px",
-          markers: true,
-          scrub: 1,
-          // 속도인듯. true하면 엄청 빠르고, 숫자 크게 줄수록 느려짐.
-          // 그리고 scrub 하면 역스크롤할때 되돌아가는 것도 되는듯.
-          toggleActions: "restart pause reverse none", //
-          pin: boxRef1.current, // 스크롤하는동안 pinning
-        },
-        x: 50, //
-      });
-    }, rootRef); // <- IMPORTANT! Scopes selector text
-
-    return () => ctx.revert(); // cleanup
+    tl.to(boxRef3.current, {
+      x: 50,
+      duration: 3,
+      rotate: 360,
+      scrub: 1,
+    }).to(
+      boxRef2.current,
+      {
+        x: -50,
+        duration: 3,
+      },
+      0 // the 0 here places the second tween at the beginning of the timeline
+    );
   }, []);
 
   return (
@@ -53,7 +58,9 @@ function Practice() {
           <S.Div2 ref={boxRef2}></S.Div2>
           <S.Div3 ref={boxRef3}></S.Div3>
         </S.Container1>
-        <S.Container2 ref={boxRef4}></S.Container2>
+        <S.Container2 ref={boxRef4}>
+          <S.Div4 ref={boxRef5}></S.Div4>
+        </S.Container2>
       </S.Container>
     </>
   );
