@@ -6,10 +6,10 @@ const albumCover = images.album;
 const introbg = images.bg;
 const lp = images.lp;
 
-const h1 = "40px";
-const h2 = "32px";
-const h3 = "24px";
-const h4 = "16px";
+const h1 = "36px";
+const h2 = "28px";
+const h3 = "20px";
+const h4 = "14px";
 const h5 = "12px";
 
 const bold = "700";
@@ -38,7 +38,7 @@ export const Wrapper = styled.div`
   background-color: black;
 `;
 
-export const IntroDiv = styled.div<IBoolean>`
+export const IntroDiv = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url(${introbg});
@@ -60,7 +60,7 @@ export const AlbumDiv = styled.div`
   background-image: url(${albumCover});
   ${backgroundImgDefault};
   ${positionCenter};
-  transform: translate(-65%, -50%);
+  left: 48%;
 `;
 export const LpDiv = styled.div`
   ${backgroundImgDefault};
@@ -69,7 +69,7 @@ export const LpDiv = styled.div`
   width: 400px;
   aspect-ratio: 1/1;
   ${positionCenter};
-  transform: translate(-35%, -50%);
+  left: 52%;
 `;
 export const Footer = styled.div`
   display: flex;
@@ -105,6 +105,9 @@ export const IntroContentBox = styled.div`
   top: 50%;
   left: 5%;
   transform: translate(0%, -50%);
+  .test {
+    opacity: 0;
+  }
 `;
 
 export const Row1 = styled.div`
@@ -164,61 +167,60 @@ export const MarginDiv = styled.div`
 
 export const CardWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  margin: 0 auto;
   padding: 20px;
   gap: 12px;
+  width: 55%;
 `;
 
 interface ICardProps extends IBoolean, IImageProps {}
 
 export const CardDiv = styled.div<ICardProps>`
-  width: ${(props) => (props.isboolean ? "1280px" : "418px")};
-  height: ${(props) => (props.isboolean ? "840px" : "493px")};
-  background-image: ${(props) =>
-    props.isboolean ? `url(${props.img})` : `url(${props.img})`};
+  width: ${(props) => (props.isboolean ? "100%" : "32%")};
+  aspect-ratio: ${(props) => (props.isboolean ? "1/0.72" : "1/1.18")};
+  background-image: url(${(props) => props.img});
   background-size: ${(props) => (props.isboolean ? "100% 100%" : "contain")};
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   position: relative;
   cursor: pointer;
-  transition: width 1s linear, height 1s linear, background-size 5s linear;
+  transition: width 0.5s linear, height 0.5s linear, background-size 0.5s linear;
 `;
 
-export const CardInfo = styled.div`
+export const CardInfo = styled.div<IBoolean>`
   width: 100%;
-  height: 170px;
+  min-height: ${(props) => (props.isboolean ? "25%" : "33%")};
   position: absolute;
   bottom: 0;
-
   border-radius: 8px 40px 8px 8px;
   background-color: #ededed;
   opacity: 0.9;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
   padding: 20px;
   color: ${red};
 `;
-export const CardRow1 = styled.div`
+export const CardRow1 = styled.div<IBoolean>`
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: ${(props) => (props.isboolean ? `${h3}` : `${h4}`)};
   font-weight: ${semibold};
 `;
-export const CardRow2 = styled.div`
+export const CardRow2 = styled.div<IBoolean>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
   .kor {
-    font-size: 24px;
+    font-size: ${(props) => (props.isboolean ? `${h2}` : `${h3}`)};
     font-weight: ${bold};
   }
   .eng {
-    font-size: 14px;
+    font-size: ${(props) => (props.isboolean ? `${h4}` : `${h5}`)};
     font-weight: ${semibold};
     color: gray;
     opacity: 0.8;
@@ -228,7 +230,7 @@ export const CardRow2 = styled.div`
     color: #ededed;
     opacity: 0.9;
     border-radius: 50%;
-    font-size: 30px;
+    font-size: ${(props) => (props.isboolean ? `${h2}` : `${h3}`)};
     text-align: center;
   }
 `;

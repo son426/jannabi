@@ -5,6 +5,7 @@ import * as M from "./mobile.style";
 import images from "@/data/images/regular3";
 import { PlayIcon } from "@/data/icon";
 import { regularData3 } from "@/data/meta/regular3";
+import useScrollAnimation from "@/hooks/useScroll";
 
 function RegularDetailPage3() {
   const [scrollHeight, setScrollHeight] = useState<number>(1);
@@ -12,37 +13,57 @@ function RegularDetailPage3() {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [nowIndex, setNowIndex] = useState<number>(0);
 
+  const containerRef1 = useRef<HTMLDivElement>(null);
+  const containerRef2 = useRef<HTMLDivElement>(null);
+  const lpRef = useRef<HTMLDivElement>(null);
+  const albumRef = useRef<HTMLDivElement>(null);
+  const boxRef1 = useRef<HTMLDivElement>(null);
+  const boxRef2 = useRef<HTMLDivElement>(null);
+
+  useScrollAnimation(
+    containerRef1,
+    containerRef2,
+    lpRef,
+    albumRef,
+    boxRef1,
+    boxRef2
+  );
+
   return (
     <>
       <Default>
         <S.Wrapper>
-          <S.IntroDiv isboolean={isScrolledMany}>
-            <S.LpDiv></S.LpDiv>
-            <S.AlbumDiv></S.AlbumDiv>
+          <S.IntroDiv ref={containerRef1}>
+            <S.LpDiv ref={lpRef}></S.LpDiv>
+            <S.AlbumDiv ref={albumRef}></S.AlbumDiv>
             <S.Footer>
               <div className="title">THE LAND OF FANTASY</div>
               <div className="jannabi">잔나비</div>
             </S.Footer>
           </S.IntroDiv>
-          <S.IntroContentDiv>
+          <S.IntroContentDiv ref={containerRef2}>
             <S.IntroContentBox>
-              <S.Row1>
-                <p>잔나비 정규 3집</p>
-              </S.Row1>
-              <S.Row2>
-                <p className="korean">
-                  환상의 나라 : 지오르보 대장과{"\n"}구닥다리 영웅들
-                </p>
-                <p className="english">
-                  THE LAND OF FANTASY :{"\n"}AND THE OLD FASHIONED HEROES
-                </p>
-              </S.Row2>
-              <S.Row3>
-                환상의 나라에 대한 이야기가 있는 앨범입니다.{"\n"}유치찬란
-                무지개를 겨눠 함부로 쏘아 올린 화살과,{"\n"}그토록 부르던 별과
-                꿈을 향해 신나게 뻗어 보이던 손끝.{"\n"}영원히 깨어나지 못할
-                환상의 나라로!
-              </S.Row3>
+              <div ref={boxRef1} className="test">
+                <S.Row1>
+                  <p>잔나비 정규 3집</p>
+                </S.Row1>
+                <S.Row2>
+                  <p className="korean">
+                    환상의 나라 : 지오르보 대장과{"\n"}구닥다리 영웅들
+                  </p>
+                  <p className="english">
+                    THE LAND OF FANTASY :{"\n"}AND THE OLD FASHIONED HEROES
+                  </p>
+                </S.Row2>
+              </div>
+              <div ref={boxRef2} className="test">
+                <S.Row3>
+                  환상의 나라에 대한 이야기가 있는 앨범입니다.{"\n"}유치찬란
+                  무지개를 겨눠 함부로 쏘아 올린 화살과,{"\n"}그토록 부르던 별과
+                  꿈을 향해 신나게 뻗어 보이던 손끝.{"\n"}영원히 깨어나지 못할
+                  환상의 나라로!
+                </S.Row3>
+              </div>
             </S.IntroContentBox>
           </S.IntroContentDiv>
           <S.ContentDiv>
@@ -56,12 +77,12 @@ function RegularDetailPage3() {
                     setNowIndex(index);
                   }}
                 >
-                  <S.CardInfo>
-                    <S.CardRow1>
+                  <S.CardInfo isboolean={index === nowIndex}>
+                    <S.CardRow1 isboolean={index === nowIndex}>
                       <div>Track {album.index}</div>
                       <div>{album.playTime}</div>
                     </S.CardRow1>
-                    <S.CardRow2>
+                    <S.CardRow2 isboolean={index === nowIndex}>
                       <S.Column1>
                         <div className="kor">{album.title}</div>
                         <div className="eng">{album.engTitle}</div>

@@ -131,7 +131,7 @@ interface ICardProps extends IBoolean, IImageProps {}
 
 export const CardDiv = styled.div<ICardProps>`
   width: 80%;
-  aspect-ratio: 1/1.17;
+  aspect-ratio: 1/1.18;
 
   background-image: url(${(props) => props.img});
   background-size: ${(props) => (props.isboolean ? "100% 100%" : "contain")};
@@ -140,12 +140,12 @@ export const CardDiv = styled.div<ICardProps>`
   display: flex;
   position: relative;
   cursor: pointer;
-  transition: width 1s linear, height 1s linear, background-size 5s linear;
+  transition: width 0.5s linear, height 0.5s linear, background-size 5s linear;
 `;
 
 export const CardInfo = styled.div`
   width: 100%;
-  height: 100px;
+  min-height: 33%;
   position: absolute;
   bottom: 0;
   border-radius: 8px 40px 8px 8px;

@@ -4,6 +4,7 @@ import * as S from "./introPage.style";
 import { IObject, imgPreload, objectToArray } from "../../hooks/tools";
 import main_images from "@/data/images/main";
 import regular1_images from "@/data/images/regular1";
+import regular3_images from "@/data/images/regular3";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
@@ -22,6 +23,9 @@ function IntroPage() {
 
     const regular1Urls: string[] = objectToArray(regular1_images as IObject);
     imgPreload(regular1Urls);
+
+    const regular3Urls: string[] = objectToArray(regular3_images as IObject);
+    imgPreload(regular3Urls);
   }, []);
 
   return (

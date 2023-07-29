@@ -56,13 +56,6 @@ export const IntroDiv = styled.div`
   background-image: url(${introbg});
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  z-index: 1;
-`;
-
-export const MarginDiv = styled.div`
-  background-color: black;
-  width: 100%;
-  height: calc(100vh + 1800px);
 `;
 
 export const AlbumDiv = styled.div`
