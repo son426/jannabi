@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import images from "@/data/images/regular3";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
 
@@ -6,11 +6,17 @@ const albumCover = images.album;
 const introbg = images.bg;
 const lp = images.lp;
 
-const h1 = "36px";
-const h2 = "28px";
-const h3 = "20px";
-const h4 = "14px";
-const h5 = "12px";
+const h1 = "64px";
+const h2 = "48px";
+const h3 = "24px";
+const h4 = "16px";
+const h5 = "14px";
+
+const b1 = "28px";
+const b2 = "24px";
+const b3 = "18px";
+const b4 = "16px";
+const b5 = "12px";
 
 const bold = "700";
 const semibold = "500";
@@ -106,7 +112,7 @@ export const IntroContentBox = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 5%;
   transform: translate(0%, -50%);
   .test {
@@ -115,13 +121,13 @@ export const IntroContentBox = styled.div`
 `;
 
 export const Row1 = styled.div`
-  font-size: ${h4};
+  font-size: ${b4};
   width: 20%;
   text-align: center;
   p {
-    padding: 12px;
+    padding: ${b3};
     border: 1px solid white;
-    border-radius: 20px;
+    border-radius: ${b2};
   }
   margin-bottom: 16px;
 `;
@@ -132,25 +138,28 @@ export const Row2 = styled.div`
   justify-content: baseline;
   align-items: baseline;
   gap: 20px;
-  margin-bottom: 64px;
+  margin-bottom: ${h2};
+
   white-space: pre-line;
 
   .korean {
-    font-size: ${h1};
+    line-height: ${h1};
+    font-size: ${h2};
     font-weight: ${bold};
   }
   .english {
-    font-size: ${h4};
+    font-size: ${b2};
     font-weight: ${medium};
+    opacity: 0.8;
   }
 `;
 export const Row3 = styled.div`
-  padding-left: 40px;
+  padding-left: 36px;
   width: 50%;
   word-break: keep-all;
-  font-size: ${h4};
+  font-size: ${b3};
   font-weight: ${medium};
-  line-height: ${h2};
+  line-height: ${b1};
 `;
 
 interface INumber {
@@ -192,6 +201,12 @@ export const CardDiv = styled.div<ICardProps>`
   position: relative;
   cursor: pointer;
   transition: width 0.5s linear, height 0.5s linear, background-size 0.5s linear;
+  &:hover {
+    transform: ${(props) => (props.isboolean ? "" : "scale(1.1)")};
+    transition: ${(props) =>
+      props.isboolean ? "" : "transform 0.2s ease-in-out"};
+    z-index: 2;
+  }
 `;
 
 export const CardInfo = styled.div<IBoolean>`
@@ -215,8 +230,9 @@ export const CardInfo = styled.div<IBoolean>`
 export const CardRow1 = styled.div<IBoolean>`
   display: flex;
   justify-content: space-between;
-  font-size: ${(props) => (props.isboolean ? `${h3}` : `${h4}`)};
-  font-weight: ${semibold};
+  font-size: ${(props) => (props.isboolean ? `${h3}` : `${b3}`)};
+  font-weight: ${(props) => (props.isboolean ? `${bold}` : `${semibold};`)};
+  margin-bottom: ${h4};
 `;
 export const CardRow2 = styled.div<IBoolean>`
   display: flex;
@@ -228,7 +244,7 @@ export const CardRow2 = styled.div<IBoolean>`
     font-weight: ${bold};
   }
   .eng {
-    font-size: ${(props) => (props.isboolean ? `${h4}` : `${h5}`)};
+    font-size: ${(props) => (props.isboolean ? `${h3}` : `${h5}`)};
     font-weight: ${semibold};
     color: gray;
     opacity: 0.8;
@@ -241,23 +257,33 @@ export const CardRow2 = styled.div<IBoolean>`
     font-size: ${(props) => (props.isboolean ? `${h2}` : `${h3}`)};
     text-align: center;
   }
+  .pauseicon {
+    background-color: ${red};
+    color: #ededed;
+    opacity: 0.9;
+    border-radius: 50%;
+    font-size: ${(props) => (props.isboolean ? `${h2}` : `${h3}`)};
+    text-align: center;
+  }
 `;
 
-export const CardRow3 = styled.div`
+export const CardRow3 = styled.div<IBoolean>`
   height: 10px;
-  /* background: linear-gradient(to right, ${red}, ${red} 20%, transparent); */
+
   display: flex;
-  align-items: center;
+  align-items: end;
 `;
 
 export const CardRow4 = styled.div`
   height: 70%;
   width: 100%;
   margin-top: 36px;
-  border: 1px solid pink;
   display: flex;
-  font-size: 16px;
-  font-weight: ${medium};
+  gap: ${h3};
+  font-size: ${b4};
+  font-weight: ${semibold};
+  line-height: ${b3};
+  justify-content: space-between;
   color: black;
   word-break: keep-all;
 `;
@@ -266,6 +292,8 @@ export const CardRowColumn1 = styled.div`
   width: 64%;
   height: 100%;
   display: flex;
+  gap: ${h4};
+
   .col1 {
     width: 50%;
   }
@@ -274,24 +302,62 @@ export const CardRowColumn1 = styled.div`
   }
 `;
 export const CardRowColumn2 = styled.div`
-  width: 36%;
   height: 100%;
+  width: 30%;
+  background-color: white;
+  padding: ${h4};
+  overflow: scroll;
+  ${({ theme }) =>
+    theme &&
+    css`
+      scrollbar-width: thin;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: ${red};
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: ${darkred};
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    `};
+
+  .row1 {
+    color: ${red};
+    text-decoration: underline;
+  }
+  .row2 {
+    padding: 8px 0px;
+    line-height: ${h3};
+    color: #525252;
+  }
 `;
 
-export const TotalBar = styled.div`
+export const TotalBar = styled.div<IBoolean>`
   width: 100%;
-  height: 3px;
-  background: rgba(0, 0, 0, 0.5);
+  height: ${(props) => (props.isboolean ? "5px" : "3px")};
+  background: ${(props) =>
+    props.isboolean
+      ? "rgba(0, 0, 0, 0.5)"
+      : `linear-gradient(to right, ${red}, ${red} 20%, transparent)`};
   display: flex;
   align-items: center;
   justify-content: baseline;
 `;
 
 export const ProgressBar = styled.div<INumber>`
-  height: 2px;
+  height: 4px;
   width: ${(props) => props.numbervalue * 100}%;
   /* width: 50%; */
-  background-color: red;
+  background-color: ${red};
 `;
 
 export const Column1 = styled.div`
@@ -299,8 +365,4 @@ export const Column1 = styled.div`
   flex-direction: column;
   gap: 8px;
 `;
-export const Column2 = styled.div`
-  .pauseicon {
-    font-size: 1.5em;
-  }
-`;
+export const Column2 = styled.div``;
