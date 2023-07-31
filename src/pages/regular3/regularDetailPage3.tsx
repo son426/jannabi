@@ -3,13 +3,31 @@ import { Default, Desktop, Mobile } from "../../components/mediaquery";
 import * as S from "./regularDetailPage3.style";
 import * as M from "./mobile.style";
 import images from "@/data/images/regular3";
-import { PauseIcon, PlayIcon } from "@/data/icon";
+import { DownArrowIcon, PauseIcon, PlayIcon } from "@/data/icon";
 import { regularData3 } from "@/data/meta/regular3";
 import useScrollAnimation from "@/hooks/useScroll";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
 
+interface ILyricIndex {
+  [key: number]: boolean;
+}
+
+const initialLyricObject = {
+  0: false,
+  1: false,
+  2: false,
+  3: false,
+  4: false,
+  5: false,
+  6: false,
+  7: false,
+  8: false,
+  9: false,
+  10: false,
+};
+
 function RegularDetailPage3() {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [lyricIndex, setLyricIndex] = useState<ILyricIndex>(initialLyricObject);
   const [nowIndex, setNowIndex] = useState<number>(0);
 
   const containerRef1 = useRef<HTMLDivElement>(null);
@@ -195,14 +213,13 @@ function RegularDetailPage3() {
             <M.MarginDiv></M.MarginDiv>
             <M.CardWrapper>
               {regularData3.map((album, index) => (
-                <M.CardDiv
-                  img={album.coverImg}
-                  isboolean={index === nowIndex}
-                  onClick={() => {
-                    setNowIndex(index);
-                  }}
-                >
-                  <M.CardInfo>
+                <M.CardDiv isboolean={index === nowIndex}>
+                  <M.CardAlbumCover img={album.coverImg}></M.CardAlbumCover>
+                  <M.CardInfo
+                    onClick={() => {
+                      setNowIndex(index);
+                    }}
+                  >
                     <M.CardRow1>
                       <div>Track {album.index}</div>
                       <div>{album.playTime}</div>
@@ -217,7 +234,28 @@ function RegularDetailPage3() {
                       </M.Column2>
                     </M.CardRow2>
                     <M.CardRow3></M.CardRow3>
+                    <M.CardRow4>{album.description}</M.CardRow4>
                   </M.CardInfo>
+                  <M.CardLyrics
+                    isboolean={lyricIndex[index]}
+                    onClick={() => {
+                      setLyricIndex((prev) => {
+                        const newValue = !prev[index];
+                        return { ...prev, [index]: newValue };
+                      });
+                    }}
+                  >
+                    <div className="row1">
+                      <div>전체 가사보기</div>
+                      <div>
+                        <DownArrowIcon className="icon" />
+                      </div>
+                    </div>
+                    <div className="row2">
+                      <div>{album.lyrics}</div>
+                    </div>
+                  </M.CardLyrics>
+                  <M.MarginDiv2></M.MarginDiv2>
                 </M.CardDiv>
               ))}
             </M.CardWrapper>
