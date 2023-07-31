@@ -122,6 +122,7 @@ function MainPage() {
       </Desktop>
       <Mobile>
         <>
+          {isIntro && <Intro />}
           <M.BackgroundDiv img={images.background}>
             <M.ShelfDiv img={images.shelf}>
               <M.RegularRow>
@@ -129,22 +130,22 @@ function MainPage() {
                   to="/regularDetail/1"
                   hoveredImg={images.regular1_2}
                 >
-                  <M.RegularCoverDiv img={images.regular1}></M.RegularCoverDiv>
                   <M.LpDiv img={images.lp}></M.LpDiv>
+                  <M.RegularCoverDiv img={images.regular1}></M.RegularCoverDiv>
                 </M.RegularDiv>
                 <M.RegularDiv
                   to="/regularDetail/2"
                   hoveredImg={images.regular2_2}
                 >
-                  <M.RegularCoverDiv img={images.regular2}></M.RegularCoverDiv>
                   <M.LpDiv img={images.lp}></M.LpDiv>
+                  <M.RegularCoverDiv img={images.regular2}></M.RegularCoverDiv>
                 </M.RegularDiv>
                 <M.RegularDiv
                   to="/regularDetail/3"
                   hoveredImg={images.regular3_2}
                 >
-                  <M.RegularCoverDiv img={images.regular3}></M.RegularCoverDiv>
                   <M.LpDiv img={images.lp}></M.LpDiv>
+                  <M.RegularCoverDiv img={images.regular3}></M.RegularCoverDiv>
                 </M.RegularDiv>
               </M.RegularRow>
               <M.IrregularRow1>

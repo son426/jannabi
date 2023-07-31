@@ -1,5 +1,5 @@
 import images from "@/data/images/regular3";
-import audio from "@/data/audio/regular1";
+import audio from "@/data/audio/regular3";
 
 // db 역할
 // 이 파일에다가 더미로 작업해놓고, 후에 db로 옮기자
@@ -29,7 +29,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a1,
   },
   {
     index: 2,
@@ -45,7 +45,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a2,
   },
   {
     index: 3,
@@ -61,7 +61,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a3,
   },
   {
     index: 4,
@@ -77,7 +77,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a4,
   },
   {
     index: 5,
@@ -93,7 +93,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a5,
   },
   {
     index: 6,
@@ -109,7 +109,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a6,
   },
   {
     index: 7,
@@ -125,7 +125,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile7,
+    audioFile: audio.a7,
   },
   {
     index: 8,
@@ -141,7 +141,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a8,
   },
   {
     index: 9,
@@ -157,7 +157,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile9,
+    audioFile: audio.a9,
   },
   {
     index: 10,
@@ -173,7 +173,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile10,
+    audioFile: audio.a10,
   },
   {
     index: 11,
@@ -189,7 +189,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile10,
+    audioFile: audio.a11,
   },
   {
     index: 12,
@@ -205,7 +205,7 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a12,
   },
   {
     index: 13,
@@ -221,6 +221,6 @@ export const regularData3 = [
     자고나도 안 괜찮아지고
     자고나도 어른이 안 되길래
     이런 가사를 썼습니다.`,
-    audioFile: audio.audioFile1,
+    audioFile: audio.a13,
   },
 ];

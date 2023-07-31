@@ -52,7 +52,6 @@ export const RegularCoverDiv = styled.div<IImageProps>`
   height: 100%;
   /* border: 1px solid red; */
   position: absolute;
-  z-index: 2;
 `;
 
 export const LpDiv = styled.div<IImageProps>`

@@ -46,14 +46,6 @@ export const IntroDiv = styled.div`
   background-repeat: no-repeat;
 `;
 
-export const CenterDiv = styled.div`
-  width: 644px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-`;
 export const AlbumDiv = styled.div`
   width: 400px;
   aspect-ratio: 1/1;
@@ -95,6 +87,18 @@ export const IntroContentDiv = styled.div`
   height: 100vh;
   color: white;
   position: relative;
+`;
+
+export const IntroBackground = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background-image: url(${images.bg2});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const IntroContentBox = styled.div`
@@ -172,7 +176,7 @@ export const CardWrapper = styled.div`
   margin: 0 auto;
   padding: 20px;
   gap: 12px;
-  width: 55%;
+  width: 70%;
 `;
 
 interface ICardProps extends IBoolean, IImageProps {}
@@ -191,10 +195,13 @@ export const CardDiv = styled.div<ICardProps>`
 `;
 
 export const CardInfo = styled.div<IBoolean>`
-  width: 100%;
-  min-height: ${(props) => (props.isboolean ? "25%" : "33%")};
+  width: ${(props) => (props.isboolean ? "85%" : "100%")};
+  height: ${(props) => (props.isboolean ? "85%" : "33%")};
   position: absolute;
-  bottom: 0;
+  top: ${(props) => (props.isboolean ? "50%" : "")};
+  left: ${(props) => (props.isboolean ? "50%" : "")};
+  bottom: ${(props) => (props.isboolean ? "" : "0%")};
+  transform: ${(props) => (props.isboolean ? "translate(-50%, -50%)" : "")};
   border-radius: 8px 40px 8px 8px;
   background-color: #ededed;
   opacity: 0.9;
@@ -203,6 +210,7 @@ export const CardInfo = styled.div<IBoolean>`
   justify-content: center;
   padding: 20px;
   color: ${red};
+  white-space: pre-line;
 `;
 export const CardRow1 = styled.div<IBoolean>`
   display: flex;
@@ -234,9 +242,56 @@ export const CardRow2 = styled.div<IBoolean>`
     text-align: center;
   }
 `;
+
 export const CardRow3 = styled.div`
+  height: 10px;
+  /* background: linear-gradient(to right, ${red}, ${red} 20%, transparent); */
+  display: flex;
+  align-items: center;
+`;
+
+export const CardRow4 = styled.div`
+  height: 70%;
+  width: 100%;
+  margin-top: 36px;
+  border: 1px solid pink;
+  display: flex;
+  font-size: 16px;
+  font-weight: ${medium};
+  color: black;
+  word-break: keep-all;
+`;
+
+export const CardRowColumn1 = styled.div`
+  width: 64%;
+  height: 100%;
+  display: flex;
+  .col1 {
+    width: 50%;
+  }
+  .col2 {
+    width: 50%;
+  }
+`;
+export const CardRowColumn2 = styled.div`
+  width: 36%;
+  height: 100%;
+`;
+
+export const TotalBar = styled.div`
+  width: 100%;
   height: 3px;
-  background: linear-gradient(to right, ${red}, ${red} 20%, transparent);
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+`;
+
+export const ProgressBar = styled.div<INumber>`
+  height: 2px;
+  width: ${(props) => props.numbervalue * 100}%;
+  /* width: 50%; */
+  background-color: red;
 `;
 
 export const Column1 = styled.div`
@@ -244,4 +299,8 @@ export const Column1 = styled.div`
   flex-direction: column;
   gap: 8px;
 `;
-export const Column2 = styled.div``;
+export const Column2 = styled.div`
+  .pauseicon {
+    font-size: 1.5em;
+  }
+`;

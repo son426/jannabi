@@ -1,4 +1,5 @@
 import bg from "./bg.png";
+import bg2 from "./r3_bg.png";
 import album from "./cover.png";
 import lp from "./lp.png";
 import c1 from "./1.png";
@@ -17,6 +18,7 @@ import c13 from "./13.png";
 
 export default {
   bg,
+  bg2,
   album,
   lp,
   c1,

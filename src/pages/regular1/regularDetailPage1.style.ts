@@ -253,16 +253,15 @@ export const MenuDiv = styled.div`
   right: 50px;
   top: 100px;
   z-index: 1;
-  width: 300px;
-  font-size: ${h2};
+  font-size: ${h3};
   font-weight: ${semibold};
 `;
 export const Menu = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: baseline;
   gap: 25px;
-  padding: ${h4};
+  padding: ${h4} 0px;
   border-bottom: 1px solid white;
   cursor: pointer;
 `;
@@ -281,7 +280,6 @@ export const MenuColumn2 = styled.div`
 `;
 
 export const PlayerDiv = styled.div`
-  width: 80%;
   color: white;
   display: flex;
   flex-direction: column;

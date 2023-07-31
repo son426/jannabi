@@ -11,8 +11,6 @@ import { ScrollTrigger } from "gsap/all";
 import useScrollAnimation from "@/hooks/useScroll";
 
 function RegularDetailPage1() {
-  const [scrollHeight, setScrollHeight] = useState<number>(1);
-  const [isScrolledMany, setIsScrolledMany] = useState<boolean>(false);
   const [nowIndex, setNowIndex] = useState(0);
   const [titleVisible, setTitleVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -163,11 +161,15 @@ function RegularDetailPage1() {
                     </S.MenuColumn2>
                   </S.Menu>
                 )}
-                <S.Menu>
+                <S.Menu
+                  onClick={() => {
+                    navigate("/main");
+                  }}
+                >
                   <S.MenuColumn1>
-                    <ListIcon />
+                    <ExitIcon />
                   </S.MenuColumn1>
-                  <S.MenuColumn2>수록곡 리스트</S.MenuColumn2>
+                  <S.MenuColumn2>몽키호텔 나가기</S.MenuColumn2>
                 </S.Menu>
                 <S.Menu>
                   <S.PlayerDiv>
@@ -184,16 +186,6 @@ function RegularDetailPage1() {
                       </S.PlayerRow>
                     ))}
                   </S.PlayerDiv>
-                </S.Menu>
-                <S.Menu
-                  onClick={() => {
-                    navigate("/main");
-                  }}
-                >
-                  <S.MenuColumn1>
-                    <ExitIcon />
-                  </S.MenuColumn1>
-                  <S.MenuColumn2>몽키호텔 나가기</S.MenuColumn2>
                 </S.Menu>
               </S.MenuDiv>
             )}
