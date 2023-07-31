@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./mainPage.style";
+import * as M from "./mobile.style";
 import Intro from "./intro";
 import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
@@ -121,22 +122,93 @@ function MainPage() {
       </Desktop>
       <Mobile>
         <>
-          {isIntro && <Intro />}
-          <h1
-            style={{
-              fontSize: "30px",
-              textAlign: "center",
-              padding: "50% 0px",
-            }}
-          >
-            반응형 공사중. 컴퓨터로 오세용
-          </h1>
-          <div>
-            <Link to="/irregularDetail/1">비정규앨범페이지 구경</Link>
-          </div>
-          <div>
-            <Link to="/shoutout">샤라웃페이지 구경</Link>
-          </div>
+          <M.BackgroundDiv img={images.background}>
+            <M.ShelfDiv img={images.shelf}>
+              <M.RegularRow>
+                <M.RegularDiv
+                  to="/regularDetail/1"
+                  hoveredImg={images.regular1_2}
+                >
+                  <M.RegularCoverDiv img={images.regular1}></M.RegularCoverDiv>
+                  <M.LpDiv img={images.lp}></M.LpDiv>
+                </M.RegularDiv>
+                <M.RegularDiv
+                  to="/regularDetail/2"
+                  hoveredImg={images.regular2_2}
+                >
+                  <M.RegularCoverDiv img={images.regular2}></M.RegularCoverDiv>
+                  <M.LpDiv img={images.lp}></M.LpDiv>
+                </M.RegularDiv>
+                <M.RegularDiv
+                  to="/regularDetail/3"
+                  hoveredImg={images.regular3_2}
+                >
+                  <M.RegularCoverDiv img={images.regular3}></M.RegularCoverDiv>
+                  <M.LpDiv img={images.lp}></M.LpDiv>
+                </M.RegularDiv>
+              </M.RegularRow>
+              <M.IrregularRow1>
+                <M.Irr4
+                  img={images.irregular4}
+                  hoveredImg={images.irregular4_2}
+                  to="/irregularDetail/2"
+                ></M.Irr4>
+                <M.Irr1
+                  img={images.irregular1}
+                  hoveredImg={images.irregular1_2}
+                  to="/irregularDetail/1"
+                ></M.Irr1>
+                <M.Irr2 img={images.irregular2} to="/main"></M.Irr2>
+                <M.Irr3 img={images.irregular3} to="/main"></M.Irr3>
+                <M.Irr8
+                  img={images.irregular8}
+                  hoveredImg={images.irregular8_2}
+                  to="/irregularDetail/5"
+                ></M.Irr8>
+                <M.Irr6
+                  img={images.irregular6}
+                  hoveredImg={images.irregular6_2}
+                  to="/irregularDetail/4"
+                ></M.Irr6>
+                <M.Irr5
+                  img={images.irregular5}
+                  hoveredImg={images.irregular5_2}
+                  to="/irregularDetail/3"
+                ></M.Irr5>
+                <M.Irr7 img={images.irregular7} to="/main"></M.Irr7>
+              </M.IrregularRow1>
+              <M.IrregularRow2>
+                <M.Irr9
+                  img={images.irregular9}
+                  hoveredImg={images.irregular9_2}
+                  to="/irregularDetail/6"
+                ></M.Irr9>
+                <M.Irr10 img={images.irregular10} to="/main"></M.Irr10>
+                <M.Irr16
+                  img={images.irregular16}
+                  hoveredImg={images.irregular16_2}
+                  to="/irregularDetail/10"
+                ></M.Irr16>
+                <M.Irr15
+                  img={images.irregular15}
+                  hoveredImg={images.irregular15_2}
+                  to="/irregularDetail/9"
+                ></M.Irr15>
+                <M.Irr14
+                  img={images.irregular14}
+                  hoveredImg={images.irregular14_2}
+                  to="/irregularDetail/8"
+                ></M.Irr14>
+                <M.Irr11
+                  img={images.irregular11}
+                  hoveredImg={images.irregular11_2}
+                  to="/irregularDetail/7"
+                ></M.Irr11>
+                <M.Irr12 img={images.irregular12} to="/main"></M.Irr12>
+                <M.Irr13 img={images.irregular13} to="/main"></M.Irr13>
+              </M.IrregularRow2>
+            </M.ShelfDiv>
+          </M.BackgroundDiv>
         </>
       </Mobile>
       <Tablet>
