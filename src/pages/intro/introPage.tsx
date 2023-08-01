@@ -5,6 +5,7 @@ import { IObject, imgPreload, objectToArray } from "../../hooks/tools";
 import main_images from "@/data/images/main";
 import regular1_images from "@/data/images/regular1";
 import regular3_images from "@/data/images/regular3";
+import { Default } from "@/components/mediaquery";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
@@ -32,10 +33,12 @@ function IntroPage() {
     <>
       <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
       <S.ImgWrapper>
-        <S.FloatingButtonWrapper isclicked={isClicked}>
-          <S.FloatingButton>Click !</S.FloatingButton>
-          <S.FloatingArrow></S.FloatingArrow>
-        </S.FloatingButtonWrapper>
+        <Default>
+          <S.FloatingButtonWrapper isclicked={isClicked}>
+            <S.FloatingButton>Click !</S.FloatingButton>
+            <S.FloatingArrow></S.FloatingArrow>
+          </S.FloatingButtonWrapper>
+        </Default>
         <S.IntroImageDiv
           isclicked={isClicked}
           onClick={handleClick}

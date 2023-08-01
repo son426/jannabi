@@ -180,11 +180,11 @@ export const MarginDiv = styled.div`
 
 export const CardWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
   margin: 0 auto;
   padding: 20px;
-  gap: 12px;
   width: 70%;
 `;
 
@@ -200,7 +200,6 @@ export const CardDiv = styled.div<ICardProps>`
   display: flex;
   position: relative;
   cursor: pointer;
-  transition: width 0.5s linear, height 0.5s linear, background-size 0.5s linear;
   &:hover {
     transform: ${(props) => (props.isboolean ? "" : "scale(1.1)")};
     transition: ${(props) =>
@@ -210,13 +209,24 @@ export const CardDiv = styled.div<ICardProps>`
 `;
 
 export const CardInfo = styled.div<IBoolean>`
-  width: ${(props) => (props.isboolean ? "85%" : "100%")};
-  height: ${(props) => (props.isboolean ? "85%" : "33%")};
+  width: 100%;
+  height: 33%;
   position: absolute;
-  top: ${(props) => (props.isboolean ? "50%" : "")};
-  left: ${(props) => (props.isboolean ? "50%" : "")};
-  bottom: ${(props) => (props.isboolean ? "" : "0%")};
-  transform: ${(props) => (props.isboolean ? "translate(-50%, -50%)" : "")};
+  bottom: 0%;
+  border-radius: 8px 40px 8px 8px;
+  background-color: #ededed;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  color: ${red};
+  white-space: pre-line;
+`;
+export const FocusedCardInfo = styled.div<IBoolean>`
+  width: 85%;
+  height: 85%;
+  margin: auto;
   border-radius: 8px 40px 8px 8px;
   background-color: #ededed;
   opacity: 0.9;

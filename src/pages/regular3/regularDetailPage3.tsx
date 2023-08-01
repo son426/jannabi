@@ -7,7 +7,7 @@ import { DownArrowIcon, PauseIcon, PlayIcon } from "@/data/icon";
 import { regularData3 } from "@/data/meta/regular3";
 import useScrollAnimation from "@/hooks/useScroll";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
-
+import { wrapGrid } from "animate-css-grid";
 interface ILyricIndex {
   [key: number]: boolean;
 }
@@ -36,6 +36,9 @@ function RegularDetailPage3() {
   const albumRef = useRef<HTMLDivElement>(null);
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
+  const flexContainerRef = useRef<HTMLDivElement>(null);
+
+  const cardRefs = useRef<HTMLDivElement[]>([]);
 
   const albumData = regularData3;
   const initialTrack: string = albumData[nowIndex].audioFile;
@@ -58,6 +61,13 @@ function RegularDetailPage3() {
     boxRef1,
     boxRef2
   );
+
+  useEffect(() => {
+    if (flexContainerRef.current)
+      wrapGrid(flexContainerRef.current, {
+        duration: 500,
+      });
+  }, []);
 
   useEffect(() => {
     // 오디오 관련
@@ -127,58 +137,76 @@ function RegularDetailPage3() {
           </S.IntroContentDiv>
           <S.ContentDiv>
             <S.MarginDiv></S.MarginDiv>
-            <S.CardWrapper>
+            <S.CardWrapper ref={flexContainerRef}>
               {regularData3.map((album, index) => (
                 <S.CardDiv
                   img={album.coverImg}
+                  className={index === nowIndex ? "expanded" : ""}
                   isboolean={index === nowIndex}
+                  ref={(el: HTMLDivElement) => (cardRefs.current[index] = el)}
                   onClick={() => {
                     toggleAudio();
                     setNowIndex(index);
+                    setTimeout(() => {
+                      cardRefs.current[index].scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    }, 500);
                   }}
                 >
-                  <S.CardInfo isboolean={index === nowIndex}>
-                    <S.CardRow1 isboolean={index === nowIndex}>
-                      <div>Track {album.index}</div>
-                      <div>{album.playTime}</div>
-                    </S.CardRow1>
-                    <S.CardRow2 isboolean={index === nowIndex}>
-                      <S.Column1>
-                        <div className="kor">{album.title}</div>
-                        <div className="eng">{album.engTitle}</div>
-                      </S.Column1>
-                      <S.Column2>
-                        {isAudioPlaying && index === nowIndex ? (
-                          <PauseIcon className="pauseicon" />
-                        ) : (
-                          <PlayIcon className="playicon" />
-                        )}
-                      </S.Column2>
-                    </S.CardRow2>
-                    <S.CardRow3
-                      onClick={handleAudioTime}
-                      isboolean={index === nowIndex}
-                    >
-                      <S.TotalBar isboolean={index === nowIndex}>
-                        {index === nowIndex && (
-                          <S.ProgressBar
-                            numbervalue={audioProgress}
-                          ></S.ProgressBar>
-                        )}
-                      </S.TotalBar>
-                    </S.CardRow3>
-                    {index === nowIndex && (
-                      <S.CardRow4>
-                        <S.CardRowColumn1>
-                          <div>{album?.description}</div>
-                        </S.CardRowColumn1>
-                        <S.CardRowColumn2>
-                          <div className="row1">전체 가사보기</div>
-                          <div className="row2">{album?.lyrics}</div>
-                        </S.CardRowColumn2>
-                      </S.CardRow4>
-                    )}
-                  </S.CardInfo>
+                  {index === nowIndex && (
+                    <S.FocusedCardInfo isboolean={index === nowIndex}>
+                      <S.CardRow1 isboolean={index === nowIndex}>
+                        <div>Track {album.index}</div>
+                        <div>{album.playTime}</div>
+                      </S.CardRow1>
+                      <S.CardRow2 isboolean={index === nowIndex}>
+                        <S.Column1>
+                          <div className="kor">{album.title}</div>
+                          <div className="eng">{album.engTitle}</div>
+                        </S.Column1>
+                      </S.CardRow2>
+
+                      {index === nowIndex && (
+                        <S.CardRow4>
+                          <S.CardRowColumn1>
+                            <div>{album?.description}</div>
+                          </S.CardRowColumn1>
+                          <S.CardRowColumn2>
+                            <div className="row1">전체 가사보기</div>
+                            <div className="row2">{album?.lyrics}</div>
+                          </S.CardRowColumn2>
+                        </S.CardRow4>
+                      )}
+                    </S.FocusedCardInfo>
+                  )}
+                  {index !== nowIndex && (
+                    <S.CardInfo isboolean={index === nowIndex}>
+                      <S.CardRow1 isboolean={index === nowIndex}>
+                        <div>Track {album.index}</div>
+                        <div>{album.playTime}</div>
+                      </S.CardRow1>
+                      <S.CardRow2 isboolean={index === nowIndex}>
+                        <S.Column1>
+                          <div className="kor">{album.title}</div>
+                          <div className="eng">{album.engTitle}</div>
+                        </S.Column1>
+                      </S.CardRow2>
+
+                      {index === nowIndex && (
+                        <S.CardRow4>
+                          <S.CardRowColumn1>
+                            <div>{album?.description}</div>
+                          </S.CardRowColumn1>
+                          <S.CardRowColumn2>
+                            <div className="row1">전체 가사보기</div>
+                            <div className="row2">{album?.lyrics}</div>
+                          </S.CardRowColumn2>
+                        </S.CardRow4>
+                      )}
+                    </S.CardInfo>
+                  )}
                 </S.CardDiv>
               ))}
             </S.CardWrapper>
