@@ -1,11 +1,13 @@
 import * as S from "./shoutoutContent2.style";
 import * as M from "./mobile2.style";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { timeForToday } from "../../../hooks/tools";
 import { addDoc, CollectionReference, DocumentData } from "firebase/firestore";
 import { FiSend } from "../../../data/icon";
 import { IComment } from "../shoutoutPage";
 import { Default, Mobile } from "../../../components/mediaquery";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
 interface IShoutoutProps {
   isSmall: boolean;
@@ -23,7 +25,11 @@ function ShoutoutContent2({
   fetchComments,
 }: IShoutoutProps) {
   const [inputData, setInputData] = useState<string>("");
-  const [scale, setScale] = useState<number>(1);
+
+  const logoRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const commentDivRef = useRef<HTMLDivElement>(null);
+  const commentFormRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,21 +52,29 @@ function ShoutoutContent2({
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const scrollThreshold = 1200;
-      const scale = Math.min(1, 1 - (scrollTop - scrollThreshold) / 300);
-      if (scale <= 0.5) return setScale(0.5);
-      setScale(scale);
-      console.log(scale);
-    };
+    gsap.registerPlugin(ScrollTrigger as any);
+    gsap.to(logoRef.current, {
+      scrollTrigger: {
+        trigger: logoRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        markers: false,
+      },
+      scale: 0.5,
+    });
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scale]);
+    gsap.to(commentFormRef.current, {
+      scrollTrigger: {
+        trigger: logoRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        markers: false,
+      },
+      opacity: 1,
+    });
+  }, []);
 
   return (
     <>
@@ -102,7 +116,7 @@ function ShoutoutContent2({
       </Default>
       <Mobile>
         <M.ViewDiv>
-          <M.BackImageDiv></M.BackImageDiv>
+          <M.BackImageDiv ref={bgRef}></M.BackImageDiv>
           <M.Content2>
             <M.TextDiv>
               <M.Title>
@@ -116,8 +130,8 @@ function ShoutoutContent2({
                 밴드이다.
               </M.SubTitle>
             </M.TextDiv>
-            <M.LogoDiv2 scalevalue={scale}></M.LogoDiv2>
-            <M.CommentDiv>
+            <M.LogoDiv2 ref={logoRef}></M.LogoDiv2>
+            <M.CommentDiv ref={commentDivRef}>
               <M.CommentUl>
                 {comments.map((comment, index) => {
                   const time = timeForToday(comment.date);
@@ -135,7 +149,7 @@ function ShoutoutContent2({
                 })}
               </M.CommentUl>
             </M.CommentDiv>
-            <M.CommentForm onSubmit={handleSubmit} visible={scale <= 0.7}>
+            <M.CommentForm ref={commentFormRef} onSubmit={handleSubmit}>
               <M.CommentInput
                 name="comment"
                 type="text"

@@ -36,7 +36,7 @@ function MainPage() {
                     <S.RegularCoverDiv
                       img={images.regular2}
                     ></S.RegularCoverDiv>
-                    <S.LpDiv></S.LpDiv>
+                    <S.LpDiv img={images.lp}></S.LpDiv>
                   </S.RegularDiv>
                   <S.RegularDiv
                     to="/regulardetail/3"
@@ -45,7 +45,7 @@ function MainPage() {
                     <S.RegularCoverDiv
                       img={images.regular3}
                     ></S.RegularCoverDiv>
-                    <S.LpDiv></S.LpDiv>
+                    <S.LpDiv img={images.lp}></S.LpDiv>
                   </S.RegularDiv>
                 </S.RegularRow>
                 <S.IrregularRow1>

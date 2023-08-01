@@ -41,7 +41,7 @@ export const BackgroundDiv = styled.div<IImageProps>`
 export const ShelfDiv = styled.div`
   border: 5px solid transparent;
   width: 100%;
-  height: 150vh;
+  height: 100vh;
   margin: 20vh 0;
 `;
 

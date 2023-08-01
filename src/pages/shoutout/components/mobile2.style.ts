@@ -2,6 +2,15 @@ import { styled, css } from "styled-components";
 import Logo2 from "../../../data/images/shoutout/logo2.png";
 import backImg from "../../../data/images/shoutout/back.png";
 
+const h1 = "24px";
+const h2 = "14px";
+const h3 = "10px";
+
+const bold = "700";
+const semibold = "500";
+const medium = "300";
+const thin = "100";
+
 interface ISmall {
   issmall: boolean;
 }
@@ -32,14 +41,15 @@ export const BackImageDiv = styled.div`
   opacity: 0.2;
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: sticky;
+  position: -webkit-sticky; /* 사파리 브라우저 지원 */
   top: 0;
 `;
 
 export const Content2 = styled.div`
   width: 100%;
-
   position: relative;
+  margin-top: -100vh;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -58,24 +68,24 @@ export const TextDiv = styled.div`
 
 export const Title = styled.div`
   white-space: pre-line;
-  font-size: 2.4em;
-  line-height: 1.25em;
-  font-weight: 600;
+  font-size: ${h1};
+  line-height: calc(${h1} + 6px);
+  font-weight: ${bold};
   color: white;
   width: 100%;
 `;
 
 export const SubTitle = styled.div`
   white-space: pre-line;
-  font-size: 1.4em;
-  line-height: 1.3em;
-  font-weight: 200;
+  font-size: ${h2};
+  line-height: calc(${h2} + 6px);
+  font-weight: ${thin};
   color: white;
   width: 100%;
   word-break: keep-all;
 `;
 
-export const LogoDiv2 = styled.div<INumberProps>`
+export const LogoDiv2 = styled.div`
   background-image: url(${Logo2});
   background-size: contain;
   background-repeat: no-repeat;
@@ -83,16 +93,16 @@ export const LogoDiv2 = styled.div<INumberProps>`
   margin-top: 25vh;
   width: 100%;
   height: 30vh;
-  transform: scale(${(props) => props.scalevalue});
+
   position: sticky;
   position: -webkit-sticky; /* 사파리 브라우저 지원 */
   top: -30px;
   transition: scale 1s linear forwards;
 `;
 
-export const CommentForm = styled.form<IVisible>`
+export const CommentForm = styled.form`
+  opacity: 0;
   width: calc(100% - 3.2em);
-
   height: 60px;
   display: flex;
   justify-items: space-between;
@@ -100,9 +110,6 @@ export const CommentForm = styled.form<IVisible>`
   color: white;
   position: fixed;
   bottom: 5%;
-  opacity: ${(props) => (props.visible ? "1" : "0")};
-  transition: opacity 0.5s linear;
-  background-color: black;
 `;
 
 export const CommentDiv = styled.div`
