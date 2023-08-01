@@ -4,7 +4,7 @@ import * as S from "./regularDetailPage3.style";
 import * as M from "./mobile.style";
 import images from "@/data/images/regular3";
 import { DownArrowIcon, PauseIcon, PlayIcon } from "@/data/icon";
-import { regularData3 } from "@/data/meta/regular3";
+import { ILyric, regularData3 } from "@/data/meta/regular3";
 import useScrollAnimation from "@/hooks/useScroll";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
 import { wrapGrid } from "animate-css-grid";
@@ -29,6 +29,9 @@ const initialLyricObject = {
 function RegularDetailPage3() {
   const [lyricIndex, setLyricIndex] = useState<ILyricIndex>(initialLyricObject);
   const [nowIndex, setNowIndex] = useState<number>(0);
+  const [selectedLyric, setSelectedLyric] = useState<ILyric>(
+    regularData3[0].lyricData[0]
+  );
 
   const containerRef1 = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -62,10 +65,17 @@ function RegularDetailPage3() {
     boxRef2
   );
 
+  const handleLyricClick = (lyric: ILyric) => {
+    setSelectedLyric(lyric);
+    audioRef.current.currentTime = lyric.startTime;
+    console.log(lyric);
+  };
+
   useEffect(() => {
     if (flexContainerRef.current)
       wrapGrid(flexContainerRef.current, {
         duration: 500,
+        easing: "backOut",
       });
   }, []);
 
@@ -90,6 +100,14 @@ function RegularDetailPage3() {
   useEffect(() => {
     const handleTimeUpdate = () => {
       const { currentTime, duration } = audioRef.current;
+      const reversedLyrics = albumData[nowIndex]?.lyricData.slice().reverse();
+      const foundLyric: ILyric | undefined = reversedLyrics.find(
+        (lyric: ILyric) => lyric.startTime <= currentTime
+      );
+      if (foundLyric && foundLyric.content !== selectedLyric.content) {
+        setSelectedLyric(foundLyric);
+      }
+
       setAudioProgress(currentTime / duration);
     };
     audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
@@ -181,9 +199,11 @@ function RegularDetailPage3() {
                         isboolean={index === nowIndex}
                       >
                         <S.TotalBar isboolean={index === nowIndex}>
-                          {/* {index === nowIndex && (
-                            <S.ProgressBar numbervalue={test}></S.ProgressBar>
-                          )} */}
+                          {index === nowIndex && (
+                            <S.ProgressBar
+                              numbervalue={audioProgress}
+                            ></S.ProgressBar>
+                          )}
                         </S.TotalBar>
                       </S.CardRow3>
                       {index === nowIndex && (
@@ -193,12 +213,31 @@ function RegularDetailPage3() {
                           </S.CardRowColumn1>
                           <S.CardRowColumn2>
                             <div className="row1">전체 가사보기</div>
-                            <div className="row2">{album?.lyrics}</div>
+                            <div className="row2">
+                              {album?.lyricData.map(
+                                (lyric: ILyric, index: number) => {
+                                  return (
+                                    <S.LyricRow
+                                      key={index}
+                                      isboolean={selectedLyric === lyric}
+                                      className="lyricRow"
+                                      onClick={(e: any) => {
+                                        e.stopPropagation();
+                                        handleLyricClick(lyric);
+                                      }}
+                                    >
+                                      {lyric.content}
+                                    </S.LyricRow>
+                                  );
+                                }
+                              )}
+                            </div>
                           </S.CardRowColumn2>
                         </S.CardRow4>
                       )}
                     </S.FocusedCardInfo>
                   )}
+
                   {index !== nowIndex && (
                     <S.CardInfo isboolean={index === nowIndex}>
                       <S.CardRow1 isboolean={index === nowIndex}>
@@ -224,17 +263,6 @@ function RegularDetailPage3() {
                       >
                         <S.TotalBar isboolean={index === nowIndex}></S.TotalBar>
                       </S.CardRow3>
-                      {index === nowIndex && (
-                        <S.CardRow4>
-                          <S.CardRowColumn1>
-                            <div>{album?.description}</div>
-                          </S.CardRowColumn1>
-                          <S.CardRowColumn2>
-                            <div className="row1">전체 가사보기</div>
-                            <div className="row2">{album?.lyrics}</div>
-                          </S.CardRowColumn2>
-                        </S.CardRow4>
-                      )}
                     </S.CardInfo>
                   )}
                 </S.CardDiv>

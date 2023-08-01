@@ -350,6 +350,11 @@ export const CardRowColumn2 = styled.div`
   }
 `;
 
+export const LyricRow = styled.div<IBoolean>`
+  color: ${(props) => (props.isboolean ? `${red}` : "")};
+  font-weight: ${(props) => (props.isboolean ? `${bold}` : "")};
+`;
+
 export const TotalBar = styled.div<IBoolean>`
   z-index: 1;
   width: 100%;

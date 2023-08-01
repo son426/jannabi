@@ -585,13 +585,22 @@ hover했을 때, 사진 두장 갈아끼우는거 말고
 ; ---> grid animation 라이브러리 + grid : 이렇게 해도 똑같이 깨짐.
 ; 깨지는 거
 ; 1. 화면이 덜덜 떨림.
+; ---> CardRow3를 빼니까 안일어남.
+; ---> progressBar 빼니까 안일어남.
+; ---> numbervalue를 audioProgress로 주면서 문제가 생기는거같음.
+---> 임시 해결책 : easing option을 linear 말고 빠르게 진행되는걸로 바꾸니까 티 안남.
+---> state 계속 바뀌는 걸 style props로 넘겨줄 때 변화 관련 체크
+
 ; 2. transform : translate()가 늦게 반영됨. 줄바꿈이 다 일어나고 나서, transform이 실행되는 듯함.
 ---> 원리가 뭔지. 라이브러리 코드 뜯어보기
 https://github.com/aholachek/animate-css-grid
 ; ---> 가운데 정렬을 transform 안쓰는 방향으로 해결가능.
 
 모바일 화면에서 재생했을때 화면.
-음악 따라서 가사 트래킹.
+[작업중]음악 따라서 가사 트래킹.
+
+[정규앨범 1집]
+- 노래 틀때마다 음파.
 
 [비정규]
 폰트, 크기 비율 깨지는거 작업.
@@ -600,26 +609,9 @@ https://github.com/aholachek/animate-css-grid
 
 ; [인트로]
 ; 모바일에서 사진 비율 맞추기.
+- 사진 다 로딩되면 첫페이지 띄울 수 있게, 로딩페이지 제작
 
 ; [샤라웃 페이지]
 ; 모바일에서 댓글 올라갈 때 배경사진 고정시키기.
 ; -> gsap 써서 ?
 ; -> 사이즈 조정도
-
-
-[공부할 것]
-[작업중]css 사이즈가 갑자기 바뀜. 상관없는 페이지 작업(shoutout gsap)했는데, 모든페이지 크기가 다 바뀜. 뭐 잘못했는지 확인해봐야함.
-lp album판을 400px로 고정했는데도, 크기가 더 커짐.
--> 그냥 화면으로 보면 더 커짐
--> f12 찍고 보면 원래대로 돌아옴.
-
-콜백 안에 state 콘솔 찍으면 초기값만 찍히는 이슈.
-- 이벤트리스너 두번째 인자로 콜백 바로 쓸 때, 콜백 안에 setState 넣어주면, setState가 작동안함.
-const handleTimeUpdate = () => {
-      const { currentTime, duration } = audioRef.current;
-      setAudioProgress(currentTime / duration);
-      console.log(audioProgress)
-};
-- 이렇게 찍으면 계속 초깃값만 찍힘. 두번째부터도.
-
-overflow : scroll 주면, 안에 텍스트가 뿌옇게 보이는 문제.
