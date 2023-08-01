@@ -85,6 +85,8 @@ function RegularDetailPage3() {
     };
   }, [nowIndex]);
 
+  const [test, setTest] = useState<number>(0);
+
   useEffect(() => {
     const handleTimeUpdate = () => {
       const { currentTime, duration } = audioRef.current;
@@ -166,8 +168,24 @@ function RegularDetailPage3() {
                           <div className="kor">{album.title}</div>
                           <div className="eng">{album.engTitle}</div>
                         </S.Column1>
+                        <S.Column2>
+                          {isAudioPlaying && index === nowIndex ? (
+                            <PauseIcon className="pauseicon" />
+                          ) : (
+                            <PlayIcon className="playicon" />
+                          )}
+                        </S.Column2>
                       </S.CardRow2>
-
+                      <S.CardRow3
+                        onClick={handleAudioTime}
+                        isboolean={index === nowIndex}
+                      >
+                        <S.TotalBar isboolean={index === nowIndex}>
+                          {/* {index === nowIndex && (
+                            <S.ProgressBar numbervalue={test}></S.ProgressBar>
+                          )} */}
+                        </S.TotalBar>
+                      </S.CardRow3>
                       {index === nowIndex && (
                         <S.CardRow4>
                           <S.CardRowColumn1>
@@ -192,8 +210,20 @@ function RegularDetailPage3() {
                           <div className="kor">{album.title}</div>
                           <div className="eng">{album.engTitle}</div>
                         </S.Column1>
+                        <S.Column2>
+                          {isAudioPlaying && index === nowIndex ? (
+                            <PauseIcon className="pauseicon" />
+                          ) : (
+                            <PlayIcon className="playicon" />
+                          )}
+                        </S.Column2>
                       </S.CardRow2>
-
+                      <S.CardRow3
+                        onClick={handleAudioTime}
+                        isboolean={index === nowIndex}
+                      >
+                        <S.TotalBar isboolean={index === nowIndex}></S.TotalBar>
+                      </S.CardRow3>
                       {index === nowIndex && (
                         <S.CardRow4>
                           <S.CardRowColumn1>

@@ -279,7 +279,6 @@ export const CardRow2 = styled.div<IBoolean>`
 
 export const CardRow3 = styled.div<IBoolean>`
   height: 10px;
-
   display: flex;
   align-items: end;
 `;
@@ -352,8 +351,10 @@ export const CardRowColumn2 = styled.div`
 `;
 
 export const TotalBar = styled.div<IBoolean>`
+  z-index: 1;
   width: 100%;
-  height: ${(props) => (props.isboolean ? "5px" : "3px")};
+
+  min-height: ${(props) => (props.isboolean ? "5px" : "3px")};
   background: ${(props) =>
     props.isboolean
       ? "rgba(0, 0, 0, 0.5)"
@@ -364,7 +365,7 @@ export const TotalBar = styled.div<IBoolean>`
 `;
 
 export const ProgressBar = styled.div<INumber>`
-  height: 4px;
+  height: 5px;
   width: ${(props) => props.numbervalue * 100}%;
   /* width: 50%; */
   background-color: ${red};
