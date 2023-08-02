@@ -181,13 +181,22 @@ export const Description = styled.div`
   white-space: pre-line;
 `;
 
-export const FloatingButton = styled.div`
-  cursor: pointer;
-  width: 55px;
-  height: 55px;
+export const FloatingButtonDiv = styled.div`
+  width: 70px;
+  height: 70px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  background-color: #e1321b;
   position: fixed;
   top: 20px;
   right: 20px;
+  z-index: 3;
+`;
+
+export const FloatingButton = styled.div`
+  cursor: pointer;
+  width: 100%;
+  height: 80%;
   background-image: url(${floatingButtonImg});
   background-size: contain;
   background-position: center;

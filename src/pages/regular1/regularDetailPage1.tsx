@@ -34,6 +34,7 @@ function RegularDetailPage1() {
   const albumRef = useRef<HTMLDivElement>(null);
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement[]>([]);
 
   useScrollAnimation(
     containerRef1,
@@ -103,6 +104,11 @@ function RegularDetailPage1() {
     }
     audioRef.current = new Audio(albumData[nowIndex].audioFile);
     audioRef.current.play();
+
+    // 스크롤 관련
+    contentRef.current[nowIndex].scrollIntoView({
+      behavior: "smooth",
+    });
 
     return () => {
       clearTimeout(timeout);
@@ -203,17 +209,18 @@ function RegularDetailPage1() {
       <Mobile>
         <M.Wrapper
           onClick={() => {
-            console.log("Wrapper clicked!");
             if (menuVisible) setMenuVisible(false);
           }}
         >
           <Draggable onDrag={(e, data) => handleDrag(data)}>
-            <M.FloatingButton
-              onClick={(e: React.MouseEvent) => {
-                e.stopPropagation();
-                handleButtonClick();
-              }}
-            ></M.FloatingButton>
+            <M.FloatingButtonDiv>
+              <M.FloatingButton
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  handleButtonClick();
+                }}
+              ></M.FloatingButton>
+            </M.FloatingButtonDiv>
           </Draggable>
           {menuVisible && (
             <Regular1Menu
@@ -249,7 +256,9 @@ function RegularDetailPage1() {
             </M.Footer>
           </M.IntroDiv>
           {albumData.map((album, index) => (
-            <M.ContentDiv>
+            <M.ContentDiv
+              ref={(el: HTMLDivElement) => (contentRef.current[index] = el)}
+            >
               <M.Index>Track {album.index}</M.Index>
               <M.Title>{album.title}</M.Title>
               <M.AlbumCoverImage image={album.coverImg}></M.AlbumCoverImage>
