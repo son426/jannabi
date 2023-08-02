@@ -301,8 +301,10 @@ function RegularDetailPage3() {
               {regularData3.map((album, index) => (
                 <M.CardDiv isboolean={index === nowIndex}>
                   <M.CardAlbumCover img={album.coverImg}></M.CardAlbumCover>
+
                   <M.CardInfo
                     onClick={() => {
+                      toggleAudio();
                       setNowIndex(index);
                     }}
                   >
@@ -316,10 +318,30 @@ function RegularDetailPage3() {
                         <div className="eng">{album.engTitle}</div>
                       </M.Column1>
                       <M.Column2>
-                        <PlayIcon className="playicon" />
+                        {isAudioPlaying && index === nowIndex ? (
+                          <PauseIcon className="pauseicon" />
+                        ) : (
+                          <PlayIcon className="playicon" />
+                        )}
                       </M.Column2>
                     </M.CardRow2>
-                    <M.CardRow3></M.CardRow3>
+                    <M.CardRow3>
+                      {index === nowIndex && (
+                        <M.TotalBar
+                          onClick={handleAudioTime}
+                          isboolean={index === nowIndex}
+                        >
+                          <M.ProgressBar
+                            numbervalue={audioProgress}
+                          ></M.ProgressBar>
+                        </M.TotalBar>
+                      )}
+                      {index !== nowIndex && (
+                        <M.TotalBar isboolean={index === nowIndex}>
+                          <M.ProgressBar numbervalue={0}></M.ProgressBar>
+                        </M.TotalBar>
+                      )}
+                    </M.CardRow3>
                     <M.CardRow4>{album.description}</M.CardRow4>
                   </M.CardInfo>
                   <M.CardLyrics
@@ -338,7 +360,29 @@ function RegularDetailPage3() {
                       </div>
                     </div>
                     <div className="row2">
-                      <div>{album.lyrics}</div>
+                      {index === nowIndex && (
+                        <>
+                          {album?.lyricData.map(
+                            (lyric: ILyric, index: number) => {
+                              return (
+                                <S.LyricRow
+                                  key={index}
+                                  isboolean={selectedLyric === lyric}
+                                  className="lyricRow"
+                                  onClick={(e: any) => {
+                                    e.stopPropagation();
+                                    handleLyricClick(lyric);
+                                  }}
+                                >
+                                  {lyric.content}
+                                </S.LyricRow>
+                              );
+                            }
+                          )}
+                        </>
+                      )}
+
+                      {index !== nowIndex && <div>{album.lyrics}</div>}
                     </div>
                   </M.CardLyrics>
                   <M.MarginDiv2></M.MarginDiv2>

@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/all";
 import useScrollAnimation from "@/hooks/useScroll";
 import Regular1Menu from "@/components/regular1PlayList";
 import Draggable, { DraggableData } from "react-draggable";
+import { useMediaQuery } from "react-responsive";
 
 interface IButtonPosition {
   x: number;
@@ -35,6 +36,8 @@ function RegularDetailPage1() {
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement[]>([]);
+
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   useScrollAnimation(
     containerRef1,
@@ -106,9 +109,10 @@ function RegularDetailPage1() {
     audioRef.current.play();
 
     // 스크롤 관련
-    contentRef.current[nowIndex].scrollIntoView({
-      behavior: "smooth",
-    });
+    if (isMobile && nowIndex > 0)
+      contentRef.current[nowIndex].scrollIntoView({
+        behavior: "smooth",
+      });
 
     return () => {
       clearTimeout(timeout);

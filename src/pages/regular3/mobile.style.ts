@@ -6,17 +6,17 @@ const albumCover = images.album;
 const introbg = images.bg;
 const lp = images.lp;
 
-const h1 = "64px";
-const h2 = "48px";
-const h3 = "24px";
-const h4 = "16px";
-const h5 = "14px";
+const h1 = "4rem";
+const h2 = "3rem";
+const h3 = "1.5rem";
+const h4 = "1rem";
+const h5 = "0.875rem";
 
-const b1 = "28px";
-const b2 = "24px";
-const b3 = "18px";
-const b4 = "16px";
-const b5 = "12px";
+const b1 = "1.75rem";
+const b2 = "1.5rem";
+const b3 = "1.125rem";
+const b4 = "1rem";
+const b5 = "0.75rem";
 
 const bold = "700";
 const semibold = "500";
@@ -64,6 +64,7 @@ export const IntroContentBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${h3};
+  margin-top: ${h3};
 `;
 
 export const Row1 = styled.div`
@@ -71,7 +72,7 @@ export const Row1 = styled.div`
   width: 40%;
   text-align: center;
   p {
-    padding: 12px;
+    padding: ${b5};
     border: 1px solid white;
     border-radius: 20px;
   }
@@ -134,7 +135,6 @@ export const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
 `;
 
 interface ICardProps extends IBoolean, IImageProps {}
@@ -200,10 +200,19 @@ export const CardRow2 = styled.div`
     font-size: 30px;
     text-align: center;
   }
+  .pauseicon {
+    background-color: ${red};
+    color: #ededed;
+    opacity: 0.9;
+    border-radius: 50%;
+    font-size: 30px;
+    text-align: center;
+  }
 `;
 export const CardRow3 = styled.div`
-  height: 3px;
-  background: linear-gradient(to right, ${red}, ${red} 20%, transparent);
+  height: 8px;
+  display: flex;
+  align-items: end;
 `;
 
 export const CardRow4 = styled.div`
@@ -254,4 +263,26 @@ export const CardLyrics = styled.div<IBoolean>`
     height: ${(props) => (props.isboolean ? "" : "20px")};
     overflow: hidden;
   }
+`;
+
+export const TotalBar = styled.div<IBoolean>`
+  z-index: 1;
+  width: 100%;
+  height: 5px;
+  background: ${(props) =>
+    props.isboolean
+      ? "rgba(0, 0, 0, 0.5)"
+      : `linear-gradient(to right, ${red}, ${red} 20%, transparent)`};
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  transition: all 1s linear;
+`;
+
+export const ProgressBar = styled.div<INumber>`
+  height: 5px;
+  width: ${(props) => props.numbervalue * 100}%;
+  /* width: 50%; */
+  background-color: ${red};
+  transition: all 0.3s linear;
 `;
