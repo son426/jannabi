@@ -11,95 +11,130 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { wrapGrid } from "animate-css-grid";
 import { regularData3 } from "@/data/meta/regular3";
+import Draggable, { DraggableData } from "react-draggable";
 
 function Practice() {
-  const [testBoolean, setTestBoolean] = useState<boolean>(false);
-  const [size, setSize] = useState<string>("33%");
-  const [nowIndex, setNowIndex] = useState<number>(0);
-  const [infoVisible, setInfoVisible] = useState<boolean>(true);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [dragged, setDragged] = useState(false); // State to track if drag has occurred
 
-  const albumData = regularData3;
-
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (gridRef.current)
-      wrapGrid(gridRef.current, {
-        duration: 500,
-      });
-  }, []);
+  const handleDrag = (data: DraggableData) => {
+    setPosition({ x: data.x, y: data.y });
+    setDragged(true); // Set to true when drag starts
+  };
+  const handleClick = () => {
+    if (!dragged) {
+      setMenuVisible((prev) => !prev);
+    }
+    setDragged(false);
+  };
 
   return (
     <>
-      <S.Container ref={gridRef} isboolean={testBoolean}>
-        {regularData3.map((album, index) => (
-          <S.CardDiv
-            key={index}
-            onClick={() => {
-              setNowIndex(index);
-            }}
-            isboolean={index === nowIndex}
-            img={album.coverImg}
-            className={index === nowIndex ? "expanded" : ""}
-          >
-            {index === nowIndex && (
-              <S.FocusedCardInfo isboolean={index === nowIndex}>
-                <S.CardRow1 isboolean={index === nowIndex}>
-                  <div>Track {album.index}</div>
-                  <div>{album.playTime}</div>
-                </S.CardRow1>
-                <S.CardRow2 isboolean={index === nowIndex}>
-                  <S.Column1>
-                    <div className="kor">{album.title}</div>
-                    <div className="eng">{album.engTitle}</div>
-                  </S.Column1>
-                </S.CardRow2>
-
-                {index === nowIndex && (
-                  <S.CardRow4>
-                    <S.CardRowColumn1>
-                      <div>{album?.description}</div>
-                    </S.CardRowColumn1>
-                    <S.CardRowColumn2>
-                      <div className="row1">전체 가사보기</div>
-                      <div className="row2">{album?.lyrics}</div>
-                    </S.CardRowColumn2>
-                  </S.CardRow4>
-                )}
-              </S.FocusedCardInfo>
-            )}
-            {index !== nowIndex && (
-              <S.CardInfo isboolean={index === nowIndex}>
-                <S.CardRow1 isboolean={index === nowIndex}>
-                  <div>Track {album.index}</div>
-                  <div>{album.playTime}</div>
-                </S.CardRow1>
-                <S.CardRow2 isboolean={index === nowIndex}>
-                  <S.Column1>
-                    <div className="kor">{album.title}</div>
-                    <div className="eng">{album.engTitle}</div>
-                  </S.Column1>
-                </S.CardRow2>
-
-                {index === nowIndex && (
-                  <S.CardRow4>
-                    <S.CardRowColumn1>
-                      <div>{album?.description}</div>
-                    </S.CardRowColumn1>
-                    <S.CardRowColumn2>
-                      <div className="row1">전체 가사보기</div>
-                      <div className="row2">{album?.lyrics}</div>
-                    </S.CardRowColumn2>
-                  </S.CardRow4>
-                )}
-              </S.CardInfo>
-            )}
-          </S.CardDiv>
-        ))}
-      </S.Container>
+      <Draggable onDrag={(e, data) => handleDrag(data)}>
+        <S.DragDiv1 onClick={handleClick}>
+          <div>draggable box</div>
+          <div>
+            x:{position.x.toFixed(0)} y:{position.y.toFixed(0)}
+          </div>
+        </S.DragDiv1>
+      </Draggable>
+      {menuVisible && <S.MenuDiv></S.MenuDiv>}
+      <S.DragDiv1>123</S.DragDiv1>
+      <S.DragDiv1>123</S.DragDiv1>
     </>
   );
 }
+
+// line break 애니메이션
+// function Practice() {
+//   const [testBoolean, setTestBoolean] = useState<boolean>(false);
+//   const [size, setSize] = useState<string>("33%");
+//   const [nowIndex, setNowIndex] = useState<number>(0);
+//   const [infoVisible, setInfoVisible] = useState<boolean>(true);
+
+//   const albumData = regularData3;
+
+//   const gridRef = useRef<HTMLDivElement>(null);
+
+//   useEffect(() => {
+//     if (gridRef.current)
+//       wrapGrid(gridRef.current, {
+//         duration: 500,
+//       });
+//   }, []);
+
+//   return (
+//     <>
+//       <S.Container ref={gridRef} isboolean={testBoolean}>
+//         {regularData3.map((album, index) => (
+//           <S.CardDiv
+//             key={index}
+//             onClick={() => {
+//               setNowIndex(index);
+//             }}
+//             isboolean={index === nowIndex}
+//             img={album.coverImg}
+//             className={index === nowIndex ? "expanded" : ""}
+//           >
+//             {index === nowIndex && (
+//               <S.FocusedCardInfo isboolean={index === nowIndex}>
+//                 <S.CardRow1 isboolean={index === nowIndex}>
+//                   <div>Track {album.index}</div>
+//                   <div>{album.playTime}</div>
+//                 </S.CardRow1>
+//                 <S.CardRow2 isboolean={index === nowIndex}>
+//                   <S.Column1>
+//                     <div className="kor">{album.title}</div>
+//                     <div className="eng">{album.engTitle}</div>
+//                   </S.Column1>
+//                 </S.CardRow2>
+
+//                 {index === nowIndex && (
+//                   <S.CardRow4>
+//                     <S.CardRowColumn1>
+//                       <div>{album?.description}</div>
+//                     </S.CardRowColumn1>
+//                     <S.CardRowColumn2>
+//                       <div className="row1">전체 가사보기</div>
+//                       <div className="row2">{album?.lyrics}</div>
+//                     </S.CardRowColumn2>
+//                   </S.CardRow4>
+//                 )}
+//               </S.FocusedCardInfo>
+//             )}
+//             {index !== nowIndex && (
+//               <S.CardInfo isboolean={index === nowIndex}>
+//                 <S.CardRow1 isboolean={index === nowIndex}>
+//                   <div>Track {album.index}</div>
+//                   <div>{album.playTime}</div>
+//                 </S.CardRow1>
+//                 <S.CardRow2 isboolean={index === nowIndex}>
+//                   <S.Column1>
+//                     <div className="kor">{album.title}</div>
+//                     <div className="eng">{album.engTitle}</div>
+//                   </S.Column1>
+//                 </S.CardRow2>
+
+//                 {index === nowIndex && (
+//                   <S.CardRow4>
+//                     <S.CardRowColumn1>
+//                       <div>{album?.description}</div>
+//                     </S.CardRowColumn1>
+//                     <S.CardRowColumn2>
+//                       <div className="row1">전체 가사보기</div>
+//                       <div className="row2">{album?.lyrics}</div>
+//                     </S.CardRowColumn2>
+//                   </S.CardRow4>
+//                 )}
+//               </S.CardInfo>
+//             )}
+//           </S.CardDiv>
+//         ))}
+//       </S.Container>
+//     </>
+//   );
+// }
 
 // gsap
 // function Practice() {

@@ -6,6 +6,7 @@ const introbg = images.backgreenmobile;
 const introbg2 = images.backgreenmobile2;
 const albumCover = images.album;
 const lp = images.lp;
+const floatingButtonImg = images.floatingimg;
 
 const h1 = "40px";
 const h2 = "32px";
@@ -26,6 +27,10 @@ const fff = "ffffff";
 
 interface IImageProps {
   image: string;
+}
+
+interface IBoolean {
+  isboolean: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -174,4 +179,84 @@ export const Description = styled.div`
   font-size: ${h4};
   line-height: ${h3};
   white-space: pre-line;
+`;
+
+export const FloatingButton = styled.div`
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-image: url(${floatingButtonImg});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+`;
+
+export const MenuDiv = styled.div`
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  z-index: 1;
+  background-color: #1b1b1b;
+  opacity: 0.9;
+  font-size: ${h3};
+  font-weight: ${semibold};
+  border-radius: 10px;
+`;
+export const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  gap: 25px;
+  padding: ${h4} 0px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+export const MenuColumn1 = styled.div`
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const MenuColumn2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
+`;
+
+export const PlayerDiv = styled.div`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: ${h4};
+  padding-left: ${h3};
+`;
+
+export const PlayerRow = styled.div<IBoolean>`
+  display: flex;
+  cursor: pointer;
+  color: ${(props) => (props.isboolean ? "red" : "white")};
+  z-index: 2;
+  gap: 12px;
+  padding: 10px;
+`;
+export const PlayerColumn1 = styled.div`
+  display: flex;
+  justify-content: baseline;
+`;
+export const PlayerColumn2 = styled.div`
+  display: flex;
+  justify-content: baseline;
+  width: 100%;
 `;

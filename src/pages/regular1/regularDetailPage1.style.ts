@@ -245,6 +245,7 @@ export const FloatingButton = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 2;
 `;
 
 export const MenuDiv = styled.div`

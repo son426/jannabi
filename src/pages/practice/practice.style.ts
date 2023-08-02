@@ -23,6 +23,21 @@ const red = "#A0262D";
 const darkred = "#401F1F";
 const gray = "#A3A3A3";
 
+export const DragDiv1 = styled.div`
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  margin: 30px auto;
+  cursor: pointer;
+  position: relative;
+`;
+
+export const MenuDiv = styled.div`
+  width: 300px;
+  height: 300px;
+  background-color: blue;
+`;
+
 export const Container = styled.div<{ isboolean: boolean }>`
   /* display: grid;
   grid-template-columns: 1fr 1fr 1fr;

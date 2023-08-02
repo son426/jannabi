@@ -47,11 +47,11 @@ export const regularData3 = [
     lyricData: [
       { content: "저기 저 굽은 어깨너머", startTime: 0 },
       { content: "저물어만 가는 꿈", startTime: 10 },
-      { content: "철없던 밤과 낮을 기억하는가", startTime: 20 },
-      { content: "밟히우면 또 꿈틀대는", startTime: 30 },
-      { content: "촌스러운 이 생명들과", startTime: 40 },
-      { content: "고요한 우리의 밤", startTime: 50 },
-      { content: "고요한 우리의 밤", startTime: 60 },
+      { content: "철없던 밤과 낮을 기억하는가", startTime: 13 },
+      { content: "밟히우면 또 꿈틀대는", startTime: 19.5 },
+      { content: "촌스러운 이 생명들과", startTime: 23.5 },
+      { content: "고요한 우리의 밤", startTime: 27.5 },
+      { content: "고요한 우리의 밤", startTime: 47 },
     ],
   },
   {

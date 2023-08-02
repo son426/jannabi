@@ -1,4 +1,4 @@
-import { Desktop, Mobile } from "../../components/mediaquery";
+import { Default, Desktop, Mobile } from "../../components/mediaquery";
 import * as S from "./regularDetailPage1.style";
 import * as M from "./mobile.style";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
@@ -9,12 +9,24 @@ import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import useScrollAnimation from "@/hooks/useScroll";
+import Regular1Menu from "@/components/regular1PlayList";
+import Draggable, { DraggableData } from "react-draggable";
+
+interface IButtonPosition {
+  x: number;
+  y: number;
+}
 
 function RegularDetailPage1() {
-  const [nowIndex, setNowIndex] = useState(0);
-  const [titleVisible, setTitleVisible] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
+  const [nowIndex, setNowIndex] = useState<number>(0);
+  const [titleVisible, setTitleVisible] = useState<boolean>(false);
+  const [menuVisible, setMenuVisible] = useState<boolean>(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(true);
+  const [isButtonDragging, setIsButtonDragging] = useState<boolean>(false);
+  const [buttonPosition, setButtonPosition] = useState<IButtonPosition>({
+    x: 0,
+    y: 0,
+  });
 
   const containerRef1 = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -53,6 +65,30 @@ function RegularDetailPage1() {
     if (index === nowIndex - 1) handlePrev();
     else if (index === nowIndex + 1) handleNext();
   };
+  const handleAudioPause = () => {
+    audioRef.current.pause();
+    setIsAudioPlaying(false);
+  };
+  const handleAudioPlay = () => {
+    audioRef.current.play();
+    setIsAudioPlaying(true);
+  };
+  const handleExit = () => {
+    navigate("/main");
+  };
+  const handleTrackClick = (index: number) => {
+    setNowIndex(index);
+  };
+  const handleDrag = (data: DraggableData) => {
+    setButtonPosition({ x: data.x, y: data.y });
+    setIsButtonDragging(true);
+  };
+  const handleButtonClick = () => {
+    if (!isButtonDragging) {
+      setMenuVisible((prev) => !prev);
+    }
+    setIsButtonDragging(false);
+  };
 
   useEffect(() => {
     // title 없앴다가 다시 보이게
@@ -77,7 +113,7 @@ function RegularDetailPage1() {
 
   return (
     <>
-      <Desktop>
+      <Default>
         <S.Wrapper>
           <S.IntroDiv ref={containerRef1}>
             <S.LpDiv ref={lpRef}></S.LpDiv>
@@ -123,71 +159,19 @@ function RegularDetailPage1() {
             </S.IntroContentBox>
           </S.IntroContentDiv>
           <S.ContentDiv>
-            <S.FloatingButton
-              onClick={() => {
-                setMenuVisible((prev) => !prev);
-              }}
-            ></S.FloatingButton>
-
+            <Draggable onDrag={(e, data) => handleDrag(data)}>
+              <S.FloatingButton onClick={handleButtonClick}></S.FloatingButton>
+            </Draggable>
             {menuVisible && (
-              <S.MenuDiv>
-                {isAudioPlaying && (
-                  <S.Menu>
-                    <S.MenuColumn1>
-                      <PauseIcon />
-                    </S.MenuColumn1>
-                    <S.MenuColumn2
-                      onClick={() => {
-                        audioRef.current.pause();
-                        setIsAudioPlaying(false);
-                      }}
-                    >
-                      노래 일시정지
-                    </S.MenuColumn2>
-                  </S.Menu>
-                )}
-                {!isAudioPlaying && (
-                  <S.Menu>
-                    <S.MenuColumn1>
-                      <PlayIcon />
-                    </S.MenuColumn1>
-                    <S.MenuColumn2
-                      onClick={() => {
-                        audioRef.current.play();
-                        setIsAudioPlaying(true);
-                      }}
-                    >
-                      노래 재생
-                    </S.MenuColumn2>
-                  </S.Menu>
-                )}
-                <S.Menu
-                  onClick={() => {
-                    navigate("/main");
-                  }}
-                >
-                  <S.MenuColumn1>
-                    <ExitIcon />
-                  </S.MenuColumn1>
-                  <S.MenuColumn2>몽키호텔 나가기</S.MenuColumn2>
-                </S.Menu>
-                <S.Menu>
-                  <S.PlayerDiv>
-                    {albumData.map((album, index) => (
-                      <S.PlayerRow
-                        key={index}
-                        isboolean={index === nowIndex}
-                        onClick={() => {
-                          setNowIndex(index);
-                        }}
-                      >
-                        <S.PlayerColumn1>{album.index}</S.PlayerColumn1>
-                        <S.PlayerColumn2>{album.title}</S.PlayerColumn2>
-                      </S.PlayerRow>
-                    ))}
-                  </S.PlayerDiv>
-                </S.Menu>
-              </S.MenuDiv>
+              <Regular1Menu
+                isAudioPlaying={isAudioPlaying}
+                onAudioPause={handleAudioPause}
+                onAudioPlay={handleAudioPlay}
+                onExit={handleExit}
+                albumData={albumData}
+                nowIndex={nowIndex}
+                onTrackClick={handleTrackClick}
+              />
             )}
             <S.CarouselDiv numbervalue={nowIndex}>
               {albumData.map((album, index) => (
@@ -215,9 +199,33 @@ function RegularDetailPage1() {
             )}
           </S.ContentDiv>
         </S.Wrapper>
-      </Desktop>
+      </Default>
       <Mobile>
-        <M.Wrapper>
+        <M.Wrapper
+          onClick={() => {
+            console.log("Wrapper clicked!");
+            if (menuVisible) setMenuVisible(false);
+          }}
+        >
+          <Draggable onDrag={(e, data) => handleDrag(data)}>
+            <M.FloatingButton
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation();
+                handleButtonClick();
+              }}
+            ></M.FloatingButton>
+          </Draggable>
+          {menuVisible && (
+            <Regular1Menu
+              isAudioPlaying={isAudioPlaying}
+              onAudioPause={handleAudioPause}
+              onAudioPlay={handleAudioPlay}
+              onExit={handleExit}
+              albumData={albumData}
+              nowIndex={nowIndex}
+              onTrackClick={handleTrackClick}
+            />
+          )}
           <M.IntroDiv>
             <M.LpDiv></M.LpDiv>
             <M.AlbumDiv></M.AlbumDiv>
