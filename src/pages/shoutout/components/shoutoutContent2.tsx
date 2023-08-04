@@ -30,6 +30,8 @@ function ShoutoutContent2({
   const bgRef = useRef<HTMLDivElement>(null);
   const commentDivRef = useRef<HTMLDivElement>(null);
   const commentFormRef = useRef<HTMLFormElement>(null);
+  const commentLiRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const [isCommentFormVisible, setIsCommentFormVisible] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,8 +75,25 @@ function ShoutoutContent2({
         markers: false,
       },
       opacity: 1,
+      onStart: () => {
+        console.log("!!");
+        setIsCommentFormVisible(true);
+      },
     });
   }, []);
+
+  function commentOverlapsWithForm(
+    commentLiElement: HTMLLIElement | null,
+    commentFormRef: React.RefObject<HTMLFormElement>
+  ) {
+    if (!commentFormRef.current || !commentLiElement) {
+      return false;
+    }
+    const commentLiRect = commentLiElement.getBoundingClientRect();
+    const commentFormRect = commentFormRef.current.getBoundingClientRect();
+
+    return commentLiRect.bottom - 15 >= commentFormRect.top;
+  }
 
   return (
     <>
@@ -135,8 +154,22 @@ function ShoutoutContent2({
               <M.CommentUl>
                 {comments.map((comment, index) => {
                   const time = timeForToday(comment.date);
+
+                  const hideComment =
+                    isCommentFormVisible &&
+                    commentOverlapsWithForm(
+                      commentLiRefs.current[index],
+                      commentFormRef
+                    );
+
                   return (
-                    <M.CommentLi key={index}>
+                    <M.CommentLi
+                      key={index}
+                      isboolean={hideComment}
+                      ref={(el: HTMLLIElement) =>
+                        (commentLiRefs.current[index] = el)
+                      }
+                    >
                       <M.CommentRow1>
                         <M.CommentContent>{comment.content}</M.CommentContent>
                       </M.CommentRow1>

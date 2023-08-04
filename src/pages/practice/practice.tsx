@@ -12,41 +12,60 @@ import { ScrollTrigger } from "gsap/all";
 import { wrapGrid } from "animate-css-grid";
 import { regularData3 } from "@/data/meta/regular3";
 import Draggable, { DraggableData } from "react-draggable";
+import Spinner from "@/data/images/spinner.gif";
 
+// svg
 function Practice() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [dragged, setDragged] = useState(false); // State to track if drag has occurred
+  const [height, setHeight] = useState(100);
 
-  const handleDrag = (data: DraggableData) => {
-    setPosition({ x: data.x, y: data.y });
-    setDragged(true); // Set to true when drag starts
-  };
-  const handleClick = () => {
-    if (!dragged) {
-      setMenuVisible((prev) => !prev);
-    }
-    setDragged(false);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newHeight = Math.random() * 100 + 50; // Random height between 50 and 150
+      setHeight(newHeight);
+    }, 1000);
 
-  return (
-    <>
-      <Draggable onDrag={(e, data) => handleDrag(data)}>
-        <S.DragDiv1 onClick={handleClick}>
-          <div>draggable box</div>
-          <div>
-            x:{position.x.toFixed(0)} y:{position.y.toFixed(0)}
-          </div>
-        </S.DragDiv1>
-      </Draggable>
-      {menuVisible && <S.MenuDiv></S.MenuDiv>}
-      <S.DragDiv1>123</S.DragDiv1>
-      <S.DragDiv1>123</S.DragDiv1>
-    </>
-  );
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  return <div className="div1" style={{ height: `${height}px` }}></div>;
 }
 
-// line break 애니메이션
+// 드래그
+// function Practice() {
+//   const [position, setPosition] = useState({ x: 0, y: 0 });
+//   const [menuVisible, setMenuVisible] = useState(false);
+//   const [dragged, setDragged] = useState(false); // State to track if drag has occurred
+
+//   const handleDrag = (data: DraggableData) => {
+//     setPosition({ x: data.x, y: data.y });
+//     setDragged(true); // Set to true when drag starts
+//   };
+//   const handleClick = () => {
+//     if (!dragged) {
+//       setMenuVisible((prev) => !prev);
+//     }
+//     setDragged(false);
+//   };
+
+//   return (
+//     <>
+//       <Draggable onDrag={(e, data) => handleDrag(data)}>
+//         <S.DragDiv1 onClick={handleClick}>
+//           <div>draggable box</div>
+//           <div>
+//             x:{position.x.toFixed(0)} y:{position.y.toFixed(0)}
+//           </div>
+//         </S.DragDiv1>
+//       </Draggable>
+//       {menuVisible && <S.MenuDiv></S.MenuDiv>}
+//       <S.DragDiv1>123</S.DragDiv1>
+//       <S.DragDiv1>123</S.DragDiv1>
+//     </>
+//   );
+// }
+
+// // line break 애니메이션
 // function Practice() {
 //   const [testBoolean, setTestBoolean] = useState<boolean>(false);
 //   const [size, setSize] = useState<string>("33%");
@@ -136,7 +155,7 @@ function Practice() {
 //   );
 // }
 
-// gsap
+// // gsap
 // function Practice() {
 //   const [scrollHeight, setScrollHeight] = useState<number>(0);
 //   const rootRef = useRef<HTMLDivElement>(null);

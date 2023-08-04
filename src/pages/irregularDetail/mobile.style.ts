@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import image from "../../data/images/irregular";
 import { Link } from "react-router-dom";
+import { bold, medium, semibold } from "@/constants/style";
 
 interface IBackgroundProps {
   backgroundcolor: string | undefined;
@@ -25,8 +26,8 @@ export const BackButton = styled.div<IColorProps>`
   cursor: pointer;
   width: 0;
   height: 0;
-  border-left: 60px solid ${(props) => props.color2}; /* Left side */
-  border-bottom: 60px solid transparent; /* Bottom side (change the color to yellow) */
+  border-left: 60px solid ${(props) => props.color2};
+  border-bottom: 60px solid transparent;
 
   z-index: 1;
 
@@ -34,18 +35,12 @@ export const BackButton = styled.div<IColorProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid black; */
-    width: 70px;
-    height: 70px;
-    font-weight: 600;
-    font-size: 1.5em;
+    font-size: 1.6em;
     position: fixed;
-    top: -15px;
-    left: -20px;
+    top: 5px;
+    left: 3px;
     color: ${(props) => props.color};
-    transform: rotate(
-      225deg
-    ); /* Rotate the text to match the arrow's direction */
+    transform: rotate(-45deg);
   }
 `;
 
@@ -65,6 +60,7 @@ export const TextWrapper = styled.div<IColorProps>`
   flex-direction: column;
   color: ${(props) => props.color};
   padding: 4em 3em;
+  padding-bottom: 2em;
   position: relative;
 
   font-size: 16px;
@@ -77,7 +73,6 @@ export const Title = styled.div`
   margin-bottom: 3%;
 `;
 export const Subtitle = styled.h2`
-  font-family: PretendardThin;
   font-size: 1.2em;
   font-weight: 200;
   margin-bottom: 10%;
@@ -100,10 +95,10 @@ export const AlbumCover = styled.div<IImageProps>`
 `;
 
 export const ConsoleDiv = styled.div`
-  /* border: 1px solid white; */
   margin-top: 20%;
   width: 100%;
-  height: 10%;
+  height: 15%;
+
   display: flex;
   justify-content: space-around;
 `;
@@ -140,10 +135,9 @@ export const PlayButton = styled.div<IBooleanProps>`
 `;
 
 export const Meta = styled.p`
-  font-family: PretendardThin;
   font-size: 10px;
-  font-weight: 100;
-  margin-top: 1%;
+  font-weight: ${semibold};
+  margin-top: 10px;
   margin-bottom: 8%;
   opacity: 0.5;
 `;
@@ -165,10 +159,8 @@ export const Line = styled.div<IColorProps>`
 `;
 
 export const Description = styled.p`
-  /* border: 1px solid black; */
-  font-family: PretendardSemiBold;
-  font-size: 0.8em;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: ${semibold};
   word-break: keep-all;
   margin-bottom: 10%;
   line-height: 1.5em;
@@ -180,7 +172,7 @@ export const Playlist = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 20%;
+  max-height: 15%;
   overflow: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -190,16 +182,17 @@ export const Playlist = styled.div`
 export const PlaylistIsTitle = styled.div<IColorProps>`
   background-color: ${(props) => props.color2};
   color: ${(props) => props.color};
-  border-radius: 0.5em;
   letter-spacing: 0.5px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.3em;
   height: 70%;
+  border-radius: 100px;
+  padding: 3px 5px;
   p {
-    font-size: 0.5em;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: ${bold};
   }
 `;
 
@@ -210,7 +203,7 @@ interface IPlayingRowProps extends IColorProps {
 export const PlaylistRow = styled.div<IPlayingRowProps>`
   /* border: 1px solid white; */
   color: ${(props) => (props.isplaying ? props.color : "#C2D1C2")};
-  font-weight: ${(props) => (props.isplaying ? "600" : "200")};
+  font-weight: ${(props) => (props.isplaying ? `${bold}` : `${medium}`)};
   font-size: ${(props) => (props.isplaying ? "0.8em" : "0.7em")};
   width: 100%;
 

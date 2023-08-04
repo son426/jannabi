@@ -25,6 +25,7 @@ import backgreenmobile2 from "./backgreenmobile2.png";
 import backgreencolor from "./backgreen4.png";
 import lp from "./lp.png";
 import floatingimg from "./floating.png";
+import introbg from "./introbg.png";
 
 export default {
   r1,
@@ -54,4 +55,5 @@ export default {
   backgreencolor,
   lp,
   floatingimg,
+  introbg,
 };

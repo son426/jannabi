@@ -16,11 +16,11 @@ interface ISmall {
 }
 
 interface IBoolean {
-  booleanvalue: boolean;
+  isboolean: boolean;
 }
 
 interface INumberProps {
-  scalevalue: number;
+  numbervalue: number;
 }
 
 interface IVisible {
@@ -93,7 +93,6 @@ export const LogoDiv2 = styled.div`
   margin-top: 25vh;
   width: 100%;
   height: 30vh;
-
   position: sticky;
   position: -webkit-sticky; /* 사파리 브라우저 지원 */
   top: -30px;
@@ -101,15 +100,17 @@ export const LogoDiv2 = styled.div`
 `;
 
 export const CommentForm = styled.form`
+  border: 1px solid pink;
   opacity: 0;
   width: calc(100% - 3.2em);
-  height: 60px;
+  height: 80px;
   display: flex;
   justify-items: space-between;
   gap: 10px;
   color: white;
   position: fixed;
-  bottom: 5%;
+  bottom: 0%;
+  padding-bottom: 30px;
 `;
 
 export const CommentDiv = styled.div`
@@ -118,12 +119,13 @@ export const CommentDiv = styled.div`
   padding: 1.6em;
 `;
 export const CommentUl = styled.ul``;
-export const CommentLi = styled.li`
+export const CommentLi = styled.li<IBoolean>`
   display: flex;
   flex-direction: column;
   padding: 1.2em;
   gap: 8px;
   font-weight: 300;
+  opacity: ${(props) => (props.isboolean ? 0 : 1)};
 `;
 export const CommentRow1 = styled.div``;
 export const CommentRow2 = styled.div`

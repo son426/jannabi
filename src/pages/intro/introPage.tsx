@@ -5,10 +5,13 @@ import { IObject, imgPreload, objectToArray } from "../../hooks/tools";
 import main_images from "@/data/images/main";
 import regular1_images from "@/data/images/regular1";
 import regular3_images from "@/data/images/regular3";
+import irregular_images from "@/data/images/irregular";
 import { Default } from "@/components/mediaquery";
+import Loading from "@/components/loading";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -20,14 +23,28 @@ function IntroPage() {
 
   useEffect(() => {
     const mainImgUrls: string[] = objectToArray(main_images as IObject);
-    imgPreload(mainImgUrls);
-
     const regular1Urls: string[] = objectToArray(regular1_images as IObject);
-    imgPreload(regular1Urls);
-
     const regular3Urls: string[] = objectToArray(regular3_images as IObject);
-    imgPreload(regular3Urls);
+    const irregularUrls: string[] = objectToArray(irregular_images as IObject);
+
+    const allImageUrls: string[] = [
+      ...mainImgUrls,
+      ...regular1Urls,
+      ...regular3Urls,
+      ...irregularUrls,
+    ];
+
+    imgPreload(allImageUrls)
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <>

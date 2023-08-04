@@ -33,11 +33,15 @@ import irregular16_2 from "./irregular/16-2.png";
 import background from "./background/background.png";
 import lp from "./background/lp.png";
 import shelf from "./background/shelf.png";
+import shelf2 from "./background/shelf2.png";
+import typer from "./background/typer.png";
 
 export default {
   background,
   lp,
   shelf,
+  shelf2,
+  typer,
   regular1,
   regular2,
   regular3,

@@ -134,6 +134,7 @@ function RegularDetailPage1() {
             </S.Footer>
           </S.IntroDiv>
           <S.IntroContentDiv ref={containerRef2}>
+            <S.IntroContentBg />
             <S.IntroContentBox>
               <div ref={boxRef1} className="test">
                 <S.Row1>

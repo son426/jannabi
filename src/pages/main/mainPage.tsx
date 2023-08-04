@@ -18,7 +18,7 @@ function MainPage() {
 
           <S.BackgroundDiv img={images.background}>
             <S.ShelfDiv>
-              <S.Shelf img={images.shelf}>
+              <S.Shelf img={images.shelf2}>
                 <S.RegularRow>
                   <S.RegularDiv
                     to="/regulardetail/1"
@@ -108,23 +108,21 @@ function MainPage() {
                   <S.Irr12 img={images.irregular12} to="/main"></S.Irr12>
                   <S.Irr13 img={images.irregular13} to="/main"></S.Irr13>
                 </S.IrregularRow2>
+                <S.BottomRow>
+                  <S.ClickDiv></S.ClickDiv>
+                  <S.ClickDiv2></S.ClickDiv2>
+                  <S.TyperDiv to="/shoutout" img={images.typer} />
+                </S.BottomRow>
               </S.Shelf>
             </S.ShelfDiv>
           </S.BackgroundDiv>
-
-          <Link
-            to="/shoutout"
-            style={{ fontWeight: 600, color: "red", fontSize: "30px" }}
-          >
-            샤라웃 페이지 버튼
-          </Link>
         </>
       </Desktop>
       <Mobile>
         <>
           {isIntro && <Intro />}
           <M.BackgroundDiv img={images.background}>
-            <M.ShelfDiv img={images.shelf}>
+            <M.ShelfDiv img={images.shelf2}>
               <M.RegularRow>
                 <M.RegularDiv
                   to="/regularDetail/1"
@@ -208,6 +206,9 @@ function MainPage() {
                 <M.Irr12 img={images.irregular12} to="/main"></M.Irr12>
                 <M.Irr13 img={images.irregular13} to="/main"></M.Irr13>
               </M.IrregularRow2>
+              <M.BottomRow>
+                <M.TyperDiv to="/shoutout" img={images.typer} />
+              </M.BottomRow>
             </M.ShelfDiv>
           </M.BackgroundDiv>
         </>

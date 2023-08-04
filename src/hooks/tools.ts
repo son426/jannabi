@@ -31,11 +31,18 @@ export function customAlert(message: string): void {}
 
 // 이미지 프리로드
 // 입력 : 문자배열 / 반환 : void
-export function imgPreload(array: string[]): void {
-  array.forEach((url) => {
-    let img = new Image();
-    img.src = url;
+export function imgPreload(array: string[]): Promise<void[]> {
+  const promises = array.map((url) => {
+    return new Promise<void>((resolve, reject) => {
+      const img = new Image();
+      img.src = url;
+
+      img.onload = () => resolve();
+      img.onerror = (error) => reject(error);
+    });
   });
+
+  return Promise.all(promises);
 }
 
 // 객체를 배열로 바꾸기

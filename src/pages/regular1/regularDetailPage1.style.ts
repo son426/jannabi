@@ -101,6 +101,16 @@ export const IntroContentDiv = styled.div`
   position: relative;
 `;
 
+export const IntroContentBg = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${images.introbg});
+  background-size: 100% 120%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+`;
+
 export const IntroContentBox = styled.div`
   width: 100%;
   display: flex;

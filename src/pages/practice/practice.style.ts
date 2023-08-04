@@ -23,6 +23,10 @@ const red = "#A0262D";
 const darkred = "#401F1F";
 const gray = "#A3A3A3";
 
+export const TestSvg = styled.rect`
+  transition: height 1s ease;
+`;
+
 export const DragDiv1 = styled.div`
   width: 100px;
   height: 100px;

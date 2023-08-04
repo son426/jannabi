@@ -57,9 +57,11 @@ export const Shelf = styled.div<IImageProps>`
   position: relative;
 `;
 
+const rowWidth = "950px";
+
 export const RegularRow = styled.div`
   border: 3px solid transparent;
-  width: 950px;
+  width: ${rowWidth};
   margin: 0 auto;
   margin-top: 105px;
   height: 19.5%;
@@ -117,7 +119,7 @@ export const RegularDiv = styled(Link)<IImageProps>`
 
 export const IrregularRow1 = styled.div`
   border: 3px solid transparent;
-  width: 950px;
+  width: ${rowWidth};
   height: 185px;
   margin: 0 auto;
   margin-top: 102px;
@@ -138,9 +140,9 @@ const SampleLink = styled(Link)<IImageProps>`
 
 export const Irr4 = styled(SampleLink)<IImageProps>`
   width: 12em;
-  height: 3.5em;
-  bottom: 0;
-  left: 11.9em;
+  aspect-ratio: 227.4/67.79;
+  bottom: 0.1em;
+  left: 11.3em;
   &:hover {
     transform: translateY(-5px) rotate(-2deg);
     background-image: url(${(props) => props.hoveredImg});
@@ -148,9 +150,9 @@ export const Irr4 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr1 = styled(SampleLink)<IImageProps>`
-  width: 12em;
+  width: 12.5em;
   height: 3.6em;
-  bottom: 8.6em;
+  bottom: 8.45em;
   left: 12.3em;
   &:hover {
     transform: translateY(-5px) rotate(3deg);
@@ -164,18 +166,18 @@ export const Irr1 = styled(SampleLink)<IImageProps>`
 export const Irr2 = styled(SampleLink)<IImageProps>`
   width: 12em;
   height: 2.97em;
-  bottom: 5.8em;
-  left: 11.2em;
+  bottom: 5.6em;
+  left: 10.5em;
   ${Irr4}:hover ~ & {
     transform: translateY(-7px);
   }
 `;
 
 export const Irr3 = styled(SampleLink)<IImageProps>`
-  width: 12em;
-  height: 2.55em;
-  bottom: 3.4em;
-  left: 12.3em;
+  width: 11em;
+  aspect-ratio: 211/44;
+  bottom: 3.55em;
+  left: 12.9em;
   ${Irr4}:hover ~ & {
     transform: translateY(-7px);
   }
@@ -239,7 +241,7 @@ export const Irr7 = styled(SampleLink)<IImageProps>`
 
 export const IrregularRow2 = styled.div`
   border: 3px solid transparent;
-  width: 950px;
+  width: ${rowWidth};
   height: 177px;
   margin: 0 auto;
   margin-top: 63px;
@@ -314,13 +316,13 @@ export const Irr11 = styled(SampleLink)<IImageProps>`
   width: 10em;
   height: 8.8em;
   bottom: 0em;
-  left: 10.2em;
+  left: 10em;
   &:hover {
     transform: translateY(-5px);
     background-image: url(${(props) => props.hoveredImg});
   }
   ${Irr14}:hover ~ & {
-    transform: translate(3px, -2px) rotate(-2deg);
+    transform: translate(1px, -2px) rotate(-1deg);
   }
   ${Irr15}:hover ~ & {
     transform: translate(-2px, -2px) rotate(-2deg);
@@ -332,9 +334,9 @@ export const Irr12 = styled(SampleLink)<IImageProps>`
   width: 13.5em;
   height: 10.2em;
   bottom: 0em;
-  left: 14.4em;
+  left: 14.2em;
   ${Irr14}:hover ~ & {
-    transform: translate(3px, -1px) rotate(-2deg);
+    transform: translate(1px, -2px) rotate(-1deg);
   }
   ${Irr15}:hover ~ & {
     transform: translateX(-2px);
@@ -346,4 +348,42 @@ export const Irr13 = styled(SampleLink)<IImageProps>`
   height: 3.2em;
   bottom: 0em;
   left: 19em;
+`;
+
+////
+
+export const BottomRow = styled.div`
+  width: ${rowWidth};
+  height: 185px;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  position: relative;
+`;
+
+export const TyperDiv = styled(SampleLink)<IImageProps>`
+  width: 240px;
+  height: 100%;
+  bottom: 0em;
+  right: 7.5em;
+`;
+
+export const ClickDiv = styled.div`
+  position: absolute;
+  width: 200px;
+  height: 100%;
+  bottom: 0.7em;
+  left: 4.4em;
+  cursor: pointer;
+`;
+
+export const ClickDiv2 = styled.div`
+  position: absolute;
+  width: 200px;
+  height: 100%;
+  bottom: 0.7em;
+  left: 17.5em;
+  cursor: pointer;
 `;
