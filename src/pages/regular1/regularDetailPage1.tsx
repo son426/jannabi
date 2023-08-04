@@ -12,6 +12,7 @@ import useScrollAnimation from "@/hooks/useScroll";
 import Regular1Menu from "@/components/regular1PlayList";
 import Draggable, { DraggableData } from "react-draggable";
 import { useMediaQuery } from "react-responsive";
+import Soundwave from "@/components/soundwave";
 
 interface IButtonPosition {
   x: number;
@@ -171,7 +172,10 @@ function RegularDetailPage1() {
           </S.IntroContentDiv>
           <S.ContentDiv>
             <Draggable onDrag={(e, data) => handleDrag(data)}>
-              <S.FloatingButton onClick={handleButtonClick}></S.FloatingButton>
+              <S.FloatingButton onClick={handleButtonClick}>
+                <S.FloatingButtonImg />
+                <Soundwave width={5} stop={!isAudioPlaying} maxheight={30} />
+              </S.FloatingButton>
             </Draggable>
             {menuVisible && (
               <Regular1Menu
@@ -225,6 +229,7 @@ function RegularDetailPage1() {
                   handleButtonClick();
                 }}
               ></M.FloatingButton>
+              <Soundwave width={3} maxheight={20} stop={!isAudioPlaying} />
             </M.FloatingButtonDiv>
           </Draggable>
           {menuVisible && (

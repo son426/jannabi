@@ -251,11 +251,18 @@ export const FloatingButton = styled.div`
   height: 100px;
   position: absolute;
   right: 50px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FloatingButtonImg = styled.div`
+  width: 100px;
+  height: 70px;
   background-image: url(${floatingButtonImg});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 2;
 `;
 
 export const MenuDiv = styled.div`

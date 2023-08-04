@@ -28,7 +28,7 @@ function useScrollAnimation(
     tl.to(lpRef.current, {
       x: 100,
       duration: 3,
-      rotate: 360,
+      rotate: 180,
       scrub: 1,
     }).to(
       albumRef.current,

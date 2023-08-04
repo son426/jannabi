@@ -57,3 +57,17 @@ export function objectToArray(objectData: IObject): string[] {
   }
   return urlArray;
 }
+
+// 1번 요소가 2번 요소에 겹치는지 아닌지 판단
+export function commentOverlapsWithForm(
+  commentLiElement: HTMLLIElement | null,
+  commentFormRef: React.RefObject<HTMLFormElement>
+) {
+  if (!commentFormRef.current || !commentLiElement) {
+    return false;
+  }
+  const commentLiRect = commentLiElement.getBoundingClientRect();
+  const commentFormRect = commentFormRef.current.getBoundingClientRect();
+
+  return commentLiRect.bottom - 15 >= commentFormRect.top;
+}

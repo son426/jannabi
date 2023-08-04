@@ -13,22 +13,18 @@ import { wrapGrid } from "animate-css-grid";
 import { regularData3 } from "@/data/meta/regular3";
 import Draggable, { DraggableData } from "react-draggable";
 import Spinner from "@/data/images/spinner.gif";
+import Soundwave from "@/components/soundwave";
 
 // svg
+
 function Practice() {
-  const [height, setHeight] = useState(100);
+  const [stop, setStop] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newHeight = Math.random() * 100 + 50; // Random height between 50 and 150
-      setHeight(newHeight);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-  return <div className="div1" style={{ height: `${height}px` }}></div>;
+  return (
+    <>
+      <button onClick={() => setStop((prev) => !prev)}>stop</button>
+    </>
+  );
 }
 
 // 드래그

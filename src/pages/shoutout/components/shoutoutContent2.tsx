@@ -1,7 +1,7 @@
 import * as S from "./shoutoutContent2.style";
 import * as M from "./mobile2.style";
 import { useState, useEffect, useRef } from "react";
-import { timeForToday } from "../../../hooks/tools";
+import { commentOverlapsWithForm, timeForToday } from "../../../hooks/tools";
 import { addDoc, CollectionReference, DocumentData } from "firebase/firestore";
 import { FiSend } from "../../../data/icon";
 import { IComment } from "../shoutoutPage";
@@ -76,24 +76,10 @@ function ShoutoutContent2({
       },
       opacity: 1,
       onStart: () => {
-        console.log("!!");
         setIsCommentFormVisible(true);
       },
     });
   }, []);
-
-  function commentOverlapsWithForm(
-    commentLiElement: HTMLLIElement | null,
-    commentFormRef: React.RefObject<HTMLFormElement>
-  ) {
-    if (!commentFormRef.current || !commentLiElement) {
-      return false;
-    }
-    const commentLiRect = commentLiElement.getBoundingClientRect();
-    const commentFormRect = commentFormRef.current.getBoundingClientRect();
-
-    return commentLiRect.bottom - 15 >= commentFormRect.top;
-  }
 
   return (
     <>

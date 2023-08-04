@@ -191,12 +191,14 @@ export const FloatingButtonDiv = styled.div`
   top: 20px;
   right: 20px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const FloatingButton = styled.div`
   cursor: pointer;
   width: 100%;
-  height: 80%;
+  height: 70%;
   background-image: url(${floatingButtonImg});
   background-size: contain;
   background-position: center;

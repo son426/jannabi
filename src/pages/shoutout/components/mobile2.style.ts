@@ -100,7 +100,6 @@ export const LogoDiv2 = styled.div`
 `;
 
 export const CommentForm = styled.form`
-  border: 1px solid pink;
   opacity: 0;
   width: calc(100% - 3.2em);
   height: 80px;
