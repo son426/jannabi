@@ -10,6 +10,8 @@ import Firebase from "./pages/practice/firebase/firebase";
 import ShoutoutPage from "./pages/shoutout/shoutoutPage";
 import EndPage from "./pages/end/endPage";
 import { AnimatePresence } from "framer-motion";
+import HiddenPage from "./pages/hidden/hidden";
+import { motion } from "framer-motion";
 
 function Router() {
   return (
@@ -29,6 +31,7 @@ function Router() {
           <Route path="/practice" element={<Practice />} />
           <Route path="/shoutout" element={<ShoutoutPage />} />
           <Route path="/secretend" element={<EndPage />} />
+          <Route path="/hidden" element={<HiddenPage />} />
           <Route path="/firebase" element={<Firebase />} />
         </Routes>
       </AnimatePresence>

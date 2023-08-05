@@ -174,7 +174,7 @@ function RegularDetailPage1() {
             <Draggable onDrag={(e, data) => handleDrag(data)}>
               <S.FloatingButton onClick={handleButtonClick}>
                 <S.FloatingButtonImg />
-                <Soundwave width={5} stop={!isAudioPlaying} maxheight={30} />
+                <Soundwave width={3.73} stop={!isAudioPlaying} maxheight={30} />
               </S.FloatingButton>
             </Draggable>
             {menuVisible && (

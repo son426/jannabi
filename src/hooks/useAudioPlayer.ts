@@ -28,10 +28,23 @@ function useAudioPlayer(initialTrack: string) {
     setAudioProgress(newAudioTime / audioRef.current.duration);
   };
 
+  const handleAudioTimeByY = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation(); // 버블링 처리 (toggleAudio 안일어나게)
+    const progressBar = event.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    const clickY = event.clientY - rect.top;
+    const progressBarHeight = rect.height;
+    const newAudioTime =
+      (1 - clickY / progressBarHeight) * audioRef.current.duration;
+    audioRef.current.currentTime = newAudioTime;
+    setAudioProgress(newAudioTime / audioRef.current.duration);
+  };
+
   return {
     audioRef,
     toggleAudio,
     handleAudioTime,
+    handleAudioTimeByY,
     isAudioPlaying,
     setIsAudioPlaying,
     audioProgress,

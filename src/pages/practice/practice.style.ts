@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 import backCursor from "./back.jpg";
 import { positionCenter } from "@/constants/style";
+import image from "@/data/images/irregular";
 
 const h1 = "64px";
 const h2 = "48px";
@@ -22,6 +23,90 @@ const thin = "100";
 const red = "#A0262D";
 const darkred = "#401F1F";
 const gray = "#A3A3A3";
+
+const drift = keyframes`
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+`;
+
+const waveAnimation = keyframes`
+    0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+`;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 500vh;
+  background-color: black;
+`;
+
+export const WaveContainer = styled.div`
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border: 3px solid red;
+  overflow: hidden;
+`;
+
+export const Wave = styled.svg`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  /* animation: ${waveAnimation} 4s linear infinite; */
+`;
+
+export const TestDiv3 = styled.div`
+  height: 100vh;
+  aspect-ratio: 1/1;
+  background-color: red;
+  background-image: url(${image.she});
+  background-size: contain;
+  position: relative;
+`;
+
+export const TestDiv2 = styled.div`
+  width: 100%;
+  height: 300px;
+  background-color: pink;
+  opacity: 0.5;
+  position: absolute;
+  bottom: 0;
+`;
+
+export const ImageWaveBox = styled.div`
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  opacity: 0.5;
+  position: relative;
+  overflow: hidden;
+`;
+export const ImageWave = styled.div`
+  opacity: 0.4;
+  position: absolute;
+  left: -160%;
+  bottom: 40%;
+  background: transparent;
+  height: calc(400vh);
+  aspect-ratio: 1/1;
+  border-radius: 43%;
+  animation: ${drift} 3000ms infinite linear;
+`;
+export const ImageWave1 = styled(ImageWave)``;
+export const ImageWave2 = styled(ImageWave)`
+  animation: ${drift} 5000ms infinite linear;
+`;
+export const ImageWave3 = styled(ImageWave)`
+  animation: ${drift} 7000ms infinite linear;
+  opacity: 0.1;
+  background: #fff;
+`;
 
 export const TestSvg = styled.rect`
   transition: height 1s ease;

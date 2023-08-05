@@ -52,7 +52,7 @@ function Soundwave({ width, maxheight, stop }: ISoundwaveProps) {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          gap: "3.7px",
+          gap: "4px",
         }}
       >
         {rectangles}

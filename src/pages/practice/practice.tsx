@@ -14,17 +14,15 @@ import { regularData3 } from "@/data/meta/regular3";
 import Draggable, { DraggableData } from "react-draggable";
 import Spinner from "@/data/images/spinner.gif";
 import Soundwave from "@/components/soundwave";
+import { motion } from "framer-motion";
 
 // svg
-
 function Practice() {
-  const [stop, setStop] = useState(false);
-
-  return (
-    <>
-      <button onClick={() => setStop((prev) => !prev)}>stop</button>
-    </>
-  );
+  const variants = {
+    start: { pathLength: 0, fill: "rgba(255, 255, 255,0)" },
+    end: { pathLength: 1, fill: "rgba(255, 255, 255, 1)" },
+  };
+  return <S.Wrapper></S.Wrapper>;
 }
 
 // 드래그

@@ -6,7 +6,16 @@ import { useState, useEffect, useRef } from "react";
 import { irregularAlbumData } from "../../data/meta/irregular";
 import { motion } from "framer-motion";
 import { Default, Desktop, Mobile } from "../../components/mediaquery";
-import { UpArrowIcon, UpLeftArrowIcon } from "@/data/icon";
+import {
+  NextIcon,
+  PrevIcon,
+  PlayIcon2,
+  ShuffleIcon,
+  RepeatIcon,
+  UpArrowIcon,
+  UpLeftArrowIcon,
+} from "@/data/icon";
+import useAudioPlayer from "@/hooks/useAudioPlayer";
 
 interface songData {
   title: string;
@@ -32,13 +41,21 @@ function IrregularDetailPage() {
 
   const [albumData, setAlbumData] = useState<IIrregularAlbumData>();
   const [isPlaying, setIsPlaying] = useState(true);
+  const [nowIndex, setNowIndex] = useState<number>(0);
 
   const navigate = useNavigate();
-  const [isPlayingIndex, setIsPlayingIndex] = useState<number>(0);
 
-  const audioRef = useRef<HTMLAudioElement>(
-    new Audio(irregularAlbumData[index].songs[0].audioFile)
-  );
+  const initialTrack: string = irregularAlbumData[index].songs[0].audioFile;
+
+  const {
+    audioRef,
+    toggleAudio,
+    handleAudioTimeByY,
+    isAudioPlaying,
+    setIsAudioPlaying,
+    audioProgress,
+    setAudioProgress,
+  } = useAudioPlayer(initialTrack);
 
   const togglePlaying = () => {
     // 오디오 처리 로직
@@ -49,7 +66,7 @@ function IrregularDetailPage() {
   };
 
   const resetState = () => {
-    setIsPlayingIndex(0);
+    setNowIndex(0);
     setIsPlaying(true);
   };
 
@@ -63,18 +80,18 @@ function IrregularDetailPage() {
   useEffect(() => {
     // 첫 렌더링때는 실행시키지 말자.
     // 첫 렌더링때는 이벤트리스너만 달자.
-    if (isPlayingIndex !== 0) {
+    if (nowIndex !== 0) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
 
       audioRef.current = new Audio(
-        irregularAlbumData[index].songs[isPlayingIndex].audioFile
+        irregularAlbumData[index].songs[nowIndex].audioFile
       );
       audioRef.current.play();
     }
 
     audioRef.current.addEventListener("ended", () => {
-      setIsPlayingIndex((prev) => prev + 1);
+      setNowIndex((prev) => prev + 1);
     });
 
     return () => {
@@ -82,10 +99,10 @@ function IrregularDetailPage() {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       audioRef.current.removeEventListener("ended", () => {
-        setIsPlayingIndex((prev) => prev + 1);
+        setNowIndex((prev) => prev + 1);
       });
     };
-  }, [isPlayingIndex, id]);
+  }, [nowIndex, id]);
 
   // audio 관련
   // 앨범이 바뀔 때
@@ -93,6 +110,19 @@ function IrregularDetailPage() {
     audioRef.current = new Audio(irregularAlbumData[index].songs[0].audioFile);
     audioRef.current.play();
   }, [id]);
+
+  useEffect(() => {
+    const handleTimeUpdate = () => {
+      const { currentTime, duration } = audioRef.current;
+      setAudioProgress(currentTime / duration);
+    };
+
+    audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+
+    return () => {
+      audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [nowIndex]);
 
   return (
     <>
@@ -107,49 +137,44 @@ function IrregularDetailPage() {
               color={albumData?.pointColor}
               color2={albumData?.pointColor2}
               onClick={() => {
-                navigate("/main");
+                resetState();
+                if (index === 0) {
+                  navigate(`/irregularDetail/10`);
+                } else {
+                  navigate(`/irregularDetail/${index}`);
+                }
               }}
             >
               <div className="arrow">
                 <UpArrowIcon />
               </div>
             </S.BackButton>
+            <S.NextButton
+              color={albumData?.pointColor}
+              color2={albumData?.pointColor2}
+              onClick={() => {
+                resetState();
+                if (index === 9) {
+                  navigate(`/irregularDetail/1`);
+                } else {
+                  navigate(`/irregularDetail/${index + 2}`);
+                }
+              }}
+            ></S.NextButton>
+            <S.PrevButton
+              color={albumData?.pointColor}
+              color2={albumData?.pointColor2}
+              onClick={() => {
+                navigate("/main");
+              }}
+            ></S.PrevButton>
             <S.TextWrapper color={albumData?.fontColor}>
               <S.Title>
                 <p>{albumData?.title}</p>
               </S.Title>
               <S.Subtitle>{albumData?.subtitle}</S.Subtitle>
-              <S.Player>
-                <S.PrevDiv
-                  onClick={() => {
-                    resetState();
-                    if (index === 0) {
-                      navigate(`/irregularDetail/10`);
-                    } else {
-                      navigate(`/irregularDetail/${index}`);
-                    }
-                  }}
-                ></S.PrevDiv>
-                <S.AlbumCover image={albumData?.image}>
-                  <S.PlayButton
-                    onClick={togglePlaying}
-                    istrue={isPlaying}
-                  ></S.PlayButton>
-                </S.AlbumCover>
-                <S.NextDiv
-                  onClick={() => {
-                    resetState();
-                    if (index === 9) {
-                      navigate(`/irregularDetail/1`);
-                    } else {
-                      navigate(`/irregularDetail/${index + 2}`);
-                    }
-                  }}
-                ></S.NextDiv>
-              </S.Player>
-              <S.Meta>{albumData?.meta}</S.Meta>
+              <S.Meta color={albumData?.pointColor2}>{albumData?.meta}</S.Meta>
               <S.Description>{albumData?.description}</S.Description>
-
               <S.Playlist color={albumData?.pointColor}>
                 {albumData?.songs?.length === 1 && (
                   <S.PlaylistIsTitle
@@ -163,9 +188,9 @@ function IrregularDetailPage() {
                   return (
                     <S.PlaylistRow
                       color={albumData?.fontColor}
-                      isplaying={index === isPlayingIndex}
+                      isplaying={index === nowIndex}
                       onClick={() => {
-                        setIsPlayingIndex(index);
+                        setNowIndex(index);
                       }}
                     >
                       <S.SongTitle>
@@ -183,11 +208,36 @@ function IrregularDetailPage() {
                   );
                 })}
               </S.Playlist>
-              <S.Footer>
-                발매사 카카오엔터테인먼트{"\n"}기획사 페포니 뮤직
-              </S.Footer>
+              <S.TapeDiv color={albumData?.pointColor2}>
+                <S.TapeColumn1>
+                  <S.Button1 color={albumData?.pointColor}>
+                    <RepeatIcon />
+                  </S.Button1>
+                  <S.Button2 color={albumData?.pointColor}>
+                    <PrevIcon />
+                  </S.Button2>
+                  <S.Button3 color={albumData?.pointColor}>
+                    <PlayIcon2 />
+                  </S.Button3>
+                  <S.Button4 color={albumData?.pointColor}>
+                    <NextIcon />
+                  </S.Button4>
+                  <S.Button5 color={albumData?.pointColor}>
+                    <ShuffleIcon />
+                  </S.Button5>
+                </S.TapeColumn1>
+                <S.TapeColumn2>
+                  <S.TapeAlbumCover image={albumData?.image} />
+                </S.TapeColumn2>
+              </S.TapeDiv>
+              <S.Footer>발매사 카카오엔터테인먼트</S.Footer>
             </S.TextWrapper>
-            <S.ImageWrapper image={albumData?.image}></S.ImageWrapper>
+            <S.ImageWrapper
+              onClick={handleAudioTimeByY}
+              image={albumData?.image}
+            >
+              <S.ImageProgress numbervalue={audioProgress * 100} />
+            </S.ImageWrapper>
           </S.BackgroundDiv>
         </motion.div>
       </Default>
@@ -234,9 +284,9 @@ function IrregularDetailPage() {
                   return (
                     <M.PlaylistRow
                       color={albumData?.fontColor}
-                      isplaying={index === isPlayingIndex}
+                      isplaying={index === nowIndex}
                       onClick={() => {
-                        setIsPlayingIndex(index);
+                        setNowIndex(index);
                       }}
                     >
                       <M.SongTitle>
@@ -288,4 +338,34 @@ function IrregularDetailPage() {
   );
 }
 
+{
+  /* <S.Player>
+                <S.PrevDiv
+                  onClick={() => {
+                    resetState();
+                    if (index === 0) {
+                      navigate(`/irregularDetail/10`);
+                    } else {
+                      navigate(`/irregularDetail/${index}`);
+                    }
+                  }}
+                ></S.PrevDiv>
+                <S.AlbumCover image={albumData?.image}>
+                  <S.PlayButton
+                    onClick={togglePlaying}
+                    istrue={isPlaying}
+                  ></S.PlayButton>
+                </S.AlbumCover>
+                <S.NextDiv
+                  onClick={() => {
+                    resetState();
+                    if (index === 9) {
+                      navigate(`/irregularDetail/1`);
+                    } else {
+                      navigate(`/irregularDetail/${index + 2}`);
+                    }
+                  }}
+                ></S.NextDiv>
+              </S.Player> */
+}
 export default IrregularDetailPage;

@@ -71,6 +71,7 @@ function RegularDetailPage3() {
     console.log(lyric);
   };
 
+  // flexbox line break 설정
   useEffect(() => {
     if (flexContainerRef.current)
       wrapGrid(flexContainerRef.current, {
@@ -79,8 +80,9 @@ function RegularDetailPage3() {
       });
   }, []);
 
+  // 오디오 관련
+  // 노래 바뀔때마다
   useEffect(() => {
-    // 오디오 관련
     setIsAudioPlaying(true);
     if (!audioRef.current.paused) {
       audioRef.current.pause();
@@ -97,6 +99,8 @@ function RegularDetailPage3() {
 
   const [test, setTest] = useState<number>(0);
 
+  // 오디오 관련
+  // 매 시간마다 체크해야하는 부분
   useEffect(() => {
     const handleTimeUpdate = () => {
       const { currentTime, duration } = audioRef.current;
