@@ -70,11 +70,30 @@ export const BackButton = styled.div<IColorProps>`
   }
 `;
 
-export const NextButton = styled.div<IColorProps>``;
-export const PrevButton = styled.div<IColorProps>``;
+export const PrevButton = styled.div<IColorProps>`
+  width: 50px;
+  height: 50px;
+  font-size: 50px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0%, -50%);
+`;
+
+export const NextButton = styled.div<IColorProps>`
+  width: 50px;
+  height: 50px;
+  font-size: 50px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0%, -50%);
+`;
 
 export const BackgroundDiv = styled.div<IColorProps>`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: space-between;
@@ -83,17 +102,17 @@ export const BackgroundDiv = styled.div<IColorProps>`
 `;
 
 export const TextWrapper = styled.div<IColorProps>`
-  border: 1px solid white;
   height: 100vh;
-  white-space: pre-wrap;
+  min-width: 52%;
+  max-width: 60%;
 
+  white-space: pre-wrap;
   display: flex;
   flex-direction: column;
   color: ${(props) => props.color};
   padding: 80px;
   padding-bottom: 0px;
   position: relative;
-  overflow: hidden;
 `;
 export const Title = styled.div`
   font-weight: ${bold};
@@ -164,8 +183,8 @@ export const Meta = styled.div<IColorProps>`
   margin-bottom: 0.67em;
 `;
 
-export const Description = styled.div`
-  border-bottom: 1px solid white;
+export const Description = styled.div<IColorProps>`
+  border-bottom: 1px solid ${(props) => props.color};
   font-size: 1.4em;
   font-weight: ${semibold};
   word-break: keep-all;
@@ -177,6 +196,8 @@ export const Description = styled.div`
 export const Playlist = styled.div<IColorProps>`
   width: 100%;
   display: flex;
+  min-height: 200px;
+
   flex-direction: column;
   align-items: baseline;
   margin-bottom: 5em;
@@ -214,11 +235,11 @@ export const PlaylistIsTitle = styled.div<IColorProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 7px;
+  padding: 7px;
   border-radius: 100px;
-  height: 70%;
+  height: 60%;
   p {
-    font-size: 10px;
+    font-size: 0.8em;
     font-weight: ${bold};
   }
 `;

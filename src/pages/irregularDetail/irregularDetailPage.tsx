@@ -14,6 +14,9 @@ import {
   RepeatIcon,
   UpArrowIcon,
   UpLeftArrowIcon,
+  RightArrowIcon,
+  LeftArrowIcon,
+  PauseIcon,
 } from "@/data/icon";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
 
@@ -136,54 +139,54 @@ function IrregularDetailPage() {
             <S.BackButton
               color={albumData?.pointColor}
               color2={albumData?.pointColor2}
-              onClick={() => {
-                resetState();
-                if (index === 0) {
-                  navigate(`/irregularDetail/10`);
-                } else {
-                  navigate(`/irregularDetail/${index}`);
-                }
-              }}
+              onClick={() => navigate("/main")}
             >
               <div className="arrow">
                 <UpArrowIcon />
               </div>
             </S.BackButton>
-            <S.NextButton
-              color={albumData?.pointColor}
-              color2={albumData?.pointColor2}
-              onClick={() => {
-                resetState();
-                if (index === 9) {
-                  navigate(`/irregularDetail/1`);
-                } else {
-                  navigate(`/irregularDetail/${index + 2}`);
-                }
-              }}
-            ></S.NextButton>
-            <S.PrevButton
-              color={albumData?.pointColor}
-              color2={albumData?.pointColor2}
-              onClick={() => {
-                navigate("/main");
-              }}
-            ></S.PrevButton>
             <S.TextWrapper color={albumData?.fontColor}>
+              <S.PrevButton
+                color={albumData?.pointColor}
+                color2={albumData?.pointColor2}
+                onClick={() => {
+                  resetState();
+                  if (index === 0) {
+                    navigate(`/irregularDetail/10`);
+                  } else {
+                    navigate(`/irregularDetail/${index}`);
+                  }
+                }}
+              >
+                <div className="arrow">
+                  <LeftArrowIcon />
+                </div>
+              </S.PrevButton>
+              <S.NextButton
+                color={albumData?.pointColor}
+                color2={albumData?.pointColor2}
+                onClick={() => {
+                  resetState();
+                  if (index === 9) {
+                    navigate(`/irregularDetail/1`);
+                  } else {
+                    navigate(`/irregularDetail/${index + 2}`);
+                  }
+                }}
+              >
+                <div className="arrow">
+                  <RightArrowIcon />
+                </div>
+              </S.NextButton>
               <S.Title>
                 <p>{albumData?.title}</p>
               </S.Title>
               <S.Subtitle>{albumData?.subtitle}</S.Subtitle>
               <S.Meta color={albumData?.pointColor2}>{albumData?.meta}</S.Meta>
-              <S.Description>{albumData?.description}</S.Description>
+              <S.Description color={albumData?.pointColor2}>
+                {albumData?.description}
+              </S.Description>
               <S.Playlist color={albumData?.pointColor}>
-                {albumData?.songs?.length === 1 && (
-                  <S.PlaylistIsTitle
-                    color={albumData?.pointColor}
-                    color2={albumData?.pointColor2}
-                  >
-                    <p>TITLE</p>
-                  </S.PlaylistIsTitle>
-                )}
                 {albumData?.songs?.map((song, index) => {
                   return (
                     <S.PlaylistRow
@@ -196,7 +199,7 @@ function IrregularDetailPage() {
                       <S.SongTitle>
                         {index + 1} | {song?.title}
                       </S.SongTitle>
-                      {albumData?.songs?.length !== 1 && song.isTitle && (
+                      {song.isTitle && (
                         <S.PlaylistIsTitle
                           color={albumData?.pointColor}
                           color2={albumData?.pointColor2}
@@ -213,13 +216,37 @@ function IrregularDetailPage() {
                   <S.Button1 color={albumData?.pointColor}>
                     <RepeatIcon />
                   </S.Button1>
-                  <S.Button2 color={albumData?.pointColor}>
+                  <S.Button2
+                    onClick={() => {
+                      if (!albumData) return;
+                      const changedIndex =
+                        nowIndex === 0
+                          ? albumData?.songs.length - 1
+                          : nowIndex - 1;
+                      setNowIndex(changedIndex);
+                    }}
+                    color={albumData?.pointColor}
+                  >
                     <PrevIcon />
                   </S.Button2>
-                  <S.Button3 color={albumData?.pointColor}>
-                    <PlayIcon2 />
+                  <S.Button3
+                    onClick={togglePlaying}
+                    color={albumData?.pointColor}
+                  >
+                    {isPlaying && <PauseIcon />}
+                    {!isPlaying && <PlayIcon2 />}
                   </S.Button3>
-                  <S.Button4 color={albumData?.pointColor}>
+                  <S.Button4
+                    onClick={() => {
+                      if (!albumData) return;
+                      const changedIndex =
+                        nowIndex === albumData?.songs.length - 1
+                          ? 0
+                          : nowIndex + 1;
+                      setNowIndex(changedIndex);
+                    }}
+                    color={albumData?.pointColor}
+                  >
                     <NextIcon />
                   </S.Button4>
                   <S.Button5 color={albumData?.pointColor}>
