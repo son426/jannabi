@@ -363,27 +363,55 @@ export const BottomRow = styled.div`
   position: relative;
 `;
 
-export const TyperDiv = styled(SampleLink)<IImageProps>`
+export const TyperLink = styled(SampleLink)<IImageProps>`
   width: 240px;
   height: 100%;
   bottom: 0em;
   right: 7.5em;
 `;
 
-export const ClickDiv = styled.div`
+export const DoorDiv = styled.div`
+  width: 430px;
+  height: 100%;
   position: absolute;
-  width: 200px;
+
+  display: flex;
+  bottom: 15px;
+  left: 60px;
+`;
+
+export const ClickDiv = styled.div`
+  width: 130px;
+  height: 100px;
+  z-index: 2;
+  position: absolute;
+  top: 50px;
+  left: 90px;
+  cursor: pointer;
+`;
+
+export const LeftDoor = styled.div<IImageProps>`
+  background-image: url(${(props) => props.img});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 50%;
   height: 100%;
   bottom: 0.7em;
   left: 4.4em;
   cursor: pointer;
+  transition: all 0.2s linear;
+  z-index: 3;
 `;
 
-export const ClickDiv2 = styled.div`
-  position: absolute;
-  width: 200px;
+export const RightDoor = styled.div<IImageProps>`
+  background-image: url(${(props) => props.img});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 50%;
   height: 100%;
   bottom: 0.7em;
   left: 17.5em;
   cursor: pointer;
+  z-index: 4;
+  transition: all 0.2s linear;
 `;

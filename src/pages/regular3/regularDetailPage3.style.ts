@@ -227,7 +227,7 @@ export const FocusedCardInfo = styled.div<IBoolean>`
   width: 85%;
   height: 85%;
   margin: auto;
-  border-radius: 8px 40px 8px 8px;
+  border-radius: 30px 30px 30px 30px;
   background-color: #ededed;
   opacity: 0.9;
   display: flex;
@@ -314,6 +314,7 @@ export const CardRowColumn2 = styled.div`
   height: 100%;
   width: 30%;
   background-color: white;
+  border-radius: 8px;
   padding: ${h4};
   overflow: scroll;
   ${({ theme }) =>
@@ -361,7 +362,7 @@ export const TotalBar = styled.div<IBoolean>`
   min-height: ${(props) => (props.isboolean ? "5px" : "3px")};
   background: ${(props) =>
     props.isboolean
-      ? "rgba(0, 0, 0, 0.5)"
+      ? "#999999"
       : `linear-gradient(to right, ${red}, ${red} 20%, transparent)`};
   display: flex;
   align-items: center;

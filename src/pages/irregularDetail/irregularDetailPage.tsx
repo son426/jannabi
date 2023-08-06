@@ -45,6 +45,7 @@ function IrregularDetailPage() {
   const [albumData, setAlbumData] = useState<IIrregularAlbumData>();
   const [isPlaying, setIsPlaying] = useState(true);
   const [nowIndex, setNowIndex] = useState<number>(0);
+  const [isShuffleMode, setIsShuffleMode] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -60,12 +61,32 @@ function IrregularDetailPage() {
     setAudioProgress,
   } = useAudioPlayer(initialTrack);
 
+  const getRandomIndex = (maxIndex: number, excludeIndex: number) => {
+    let randomIndex = Math.floor(Math.random() * maxIndex);
+    while (randomIndex === excludeIndex) {
+      randomIndex = Math.floor(Math.random() * maxIndex);
+    }
+    return randomIndex;
+  };
+
   const togglePlaying = () => {
     // 오디오 처리 로직
     audioRef.current.paused
       ? audioRef.current.play()
       : audioRef.current.pause();
     setIsPlaying((prev) => !prev);
+  };
+  const toggleShuffleMode = () => setIsShuffleMode((prev) => !prev);
+  const handleNextMusic = () => {
+    if (!albumData) return;
+    if (isShuffleMode) {
+      const changedIndex = getRandomIndex(albumData.songs.length - 1, nowIndex);
+      setNowIndex(changedIndex);
+    } else {
+      const changedIndex =
+        nowIndex === albumData?.songs.length - 1 ? 0 : nowIndex + 1;
+      setNowIndex(changedIndex);
+    }
   };
 
   const resetState = () => {
@@ -159,7 +180,24 @@ function IrregularDetailPage() {
                 }}
               >
                 <div className="arrow">
-                  <LeftArrowIcon />
+                  {" "}
+                  <svg
+                    width="100"
+                    height="100"
+                    viewBox="0 0 50 100"
+                    fill="none"
+                    transform="rotate(-135)"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M51.9925 0.999686L5.94975 47.0424C3.21608 49.7761 3.21608 54.2083 5.94975 56.9419L51.9925 102.985V0.999686Z"
+                      fill={albumData?.pointColor2}
+                    />
+                    <path
+                      d="M29.7778 38.1273L26.5208 41.3227L35.1487 50.0082L14.7895 49.9404L14.7737 54.6694L35.1329 54.7373L26.4476 63.325L29.6831 66.542L43.9577 52.4021L29.7778 38.1273Z"
+                      fill={albumData?.pointColor}
+                    />
+                  </svg>
                 </div>
               </S.PrevButton>
               <S.NextButton
@@ -175,7 +213,25 @@ function IrregularDetailPage() {
                 }}
               >
                 <div className="arrow">
-                  <RightArrowIcon />
+                  <svg
+                    width="100"
+                    height="100"
+                    viewBox="0 0 50 100"
+                    fill="none"
+                    transform="rotate(45)"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M51.9925 0.999686L5.94975 47.0424C3.21608 49.7761 3.21608 54.2083 5.94975 56.9419L51.9925 102.985V0.999686Z"
+                      fill={albumData?.pointColor2}
+                    />
+                    <path
+                      d="M29.7778 38.1273L26.5208 41.3227L35.1487 50.0082L14.7895 49.9404L14.7737 54.6694L35.1329 54.7373L26.4476 63.325L29.6831 66.542L43.9577 52.4021L29.7778 38.1273Z"
+                      fill={albumData?.pointColor}
+                    />
+                  </svg>
+
+                  {/* <RightArrowIcon /> */}
                 </div>
               </S.NextButton>
               <S.Title>
@@ -237,19 +293,16 @@ function IrregularDetailPage() {
                     {!isPlaying && <PlayIcon2 />}
                   </S.Button3>
                   <S.Button4
-                    onClick={() => {
-                      if (!albumData) return;
-                      const changedIndex =
-                        nowIndex === albumData?.songs.length - 1
-                          ? 0
-                          : nowIndex + 1;
-                      setNowIndex(changedIndex);
-                    }}
+                    onClick={handleNextMusic}
                     color={albumData?.pointColor}
                   >
                     <NextIcon />
                   </S.Button4>
-                  <S.Button5 color={albumData?.pointColor}>
+                  <S.Button5
+                    onClick={toggleShuffleMode}
+                    color={albumData?.pointColor}
+                    isboolean={isShuffleMode}
+                  >
                     <ShuffleIcon />
                   </S.Button5>
                 </S.TapeColumn1>
@@ -363,36 +416,5 @@ function IrregularDetailPage() {
       </Mobile>
     </>
   );
-}
-
-{
-  /* <S.Player>
-                <S.PrevDiv
-                  onClick={() => {
-                    resetState();
-                    if (index === 0) {
-                      navigate(`/irregularDetail/10`);
-                    } else {
-                      navigate(`/irregularDetail/${index}`);
-                    }
-                  }}
-                ></S.PrevDiv>
-                <S.AlbumCover image={albumData?.image}>
-                  <S.PlayButton
-                    onClick={togglePlaying}
-                    istrue={isPlaying}
-                  ></S.PlayButton>
-                </S.AlbumCover>
-                <S.NextDiv
-                  onClick={() => {
-                    resetState();
-                    if (index === 9) {
-                      navigate(`/irregularDetail/1`);
-                    } else {
-                      navigate(`/irregularDetail/${index + 2}`);
-                    }
-                  }}
-                ></S.NextDiv>
-              </S.Player> */
 }
 export default IrregularDetailPage;

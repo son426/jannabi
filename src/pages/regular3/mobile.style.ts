@@ -271,7 +271,7 @@ export const TotalBar = styled.div<IBoolean>`
   height: 5px;
   background: ${(props) =>
     props.isboolean
-      ? "rgba(0, 0, 0, 0.5)"
+      ? "#999999"
       : `linear-gradient(to right, ${red}, ${red} 20%, transparent)`};
   display: flex;
   align-items: center;

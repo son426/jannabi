@@ -38,6 +38,8 @@ function RegularDetailPage1() {
   const boxRef2 = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement[]>([]);
 
+  const navigate = useNavigate();
+
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   useScrollAnimation(
@@ -52,8 +54,6 @@ function RegularDetailPage1() {
   const audioRef = useRef<HTMLAudioElement>(
     new Audio(regularData[0].audioFile)
   );
-
-  const navigate = useNavigate();
 
   const albumData: IRegularData[] = regularData;
 

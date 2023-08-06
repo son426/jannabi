@@ -10,7 +10,6 @@ import a9 from "./9.mp3";
 import a10 from "./10.mp3";
 import a11 from "./11.mp3";
 import a12 from "./12.mp3";
-import a13 from "./13.mp3";
 
 export default {
   a1,
@@ -25,5 +24,4 @@ export default {
   a10,
   a11,
   a12,
-  a13,
 };

@@ -34,14 +34,20 @@ import background from "./background/background.png";
 import lp from "./background/lp.png";
 import shelf from "./background/shelf.png";
 import shelf2 from "./background/shelf2.png";
+import shelf3 from "./background/shelf3.png";
 import typer from "./background/typer.png";
+import leftdoor from "./background/leftdoor.png";
+import rightdoor from "./background/rightdoor.png";
 
 export default {
   background,
   lp,
   shelf,
   shelf2,
+  shelf3,
   typer,
+  leftdoor,
+  rightdoor,
   regular1,
   regular2,
   regular3,

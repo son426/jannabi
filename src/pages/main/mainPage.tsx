@@ -6,19 +6,64 @@ import { useRecoilState } from "recoil";
 import { isIntroAtom } from "../../constants/atom";
 import { Desktop, Mobile, Tablet } from "../../components/mediaquery";
 import images from "@/data/images/main";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 function MainPage() {
+  const [isMoved, setIsMoved] = useState<boolean>(false);
   const [isIntro] = useRecoilState(isIntroAtom);
+
+  const leftDoorRef = useRef<HTMLDivElement>(null);
+  const rightDoorRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
+
+  const handleLeftDoor = () => {
+    if (leftDoorRef.current && rightDoorRef.current) {
+      const leftDoor = leftDoorRef.current;
+      const rightDoor = rightDoorRef.current;
+
+      const targetPosition = isMoved ? "translateX(0)" : "translateX(180px)";
+      if (isMoved) {
+        leftDoor.style.transform = targetPosition;
+        rightDoor.style.transform = targetPosition;
+      } else {
+        leftDoor.style.transform = targetPosition;
+      }
+
+      setIsMoved((prev) => !prev);
+    }
+  };
+
+  const handleRightDoor = () => {
+    if (leftDoorRef.current && rightDoorRef.current) {
+      const leftDoor = leftDoorRef.current;
+      const rightDoor = rightDoorRef.current;
+      const targetPosition = isMoved ? "translateX(0)" : "translateX(-180px)";
+      if (isMoved) {
+        leftDoor.style.transform = targetPosition;
+        rightDoor.style.transform = targetPosition;
+      } else {
+        rightDoor.style.transform = targetPosition;
+      }
+
+      setIsMoved((prev) => !prev);
+    }
+  };
+
+  const handleDollClick = () => {
+    navigate("/hidden");
+  };
 
   return (
     <>
       <Desktop>
         <>
-          {isIntro && <Intro />}
+          {/* {isIntro && <Intro />} */}
 
           <S.BackgroundDiv img={images.background}>
             <S.ShelfDiv>
-              <S.Shelf img={images.shelf2}>
+              <S.Shelf img={images.shelf3}>
                 <S.RegularRow>
                   <S.RegularDiv
                     to="/regulardetail/1"
@@ -109,9 +154,21 @@ function MainPage() {
                   <S.Irr13 img={images.irregular13} to="/main"></S.Irr13>
                 </S.IrregularRow2>
                 <S.BottomRow>
-                  <S.ClickDiv></S.ClickDiv>
-                  <S.ClickDiv2></S.ClickDiv2>
-                  <S.TyperDiv to="/shoutout" img={images.typer} />
+                  <S.ClickDiv onClick={handleDollClick}></S.ClickDiv>
+                  <S.DoorDiv>
+                    <S.LeftDoor
+                      ref={leftDoorRef}
+                      onClick={handleLeftDoor}
+                      img={images.leftdoor}
+                    ></S.LeftDoor>
+
+                    <S.RightDoor
+                      ref={rightDoorRef}
+                      onClick={handleRightDoor}
+                      img={images.rightdoor}
+                    ></S.RightDoor>
+                  </S.DoorDiv>
+                  <S.TyperLink to="/shoutout" img={images.typer} />
                 </S.BottomRow>
               </S.Shelf>
             </S.ShelfDiv>
@@ -120,7 +177,7 @@ function MainPage() {
       </Desktop>
       <Mobile>
         <>
-          {isIntro && <Intro />}
+          {/* {isIntro && <Intro />} */}
           <M.BackgroundDiv img={images.background}>
             <M.ShelfDiv img={images.shelf2}>
               <M.RegularRow>

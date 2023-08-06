@@ -71,25 +71,41 @@ export const BackButton = styled.div<IColorProps>`
 `;
 
 export const PrevButton = styled.div<IColorProps>`
-  width: 50px;
-  height: 50px;
-  font-size: 50px;
+  font-size: 25px;
   cursor: pointer;
   position: absolute;
+
+  width: 50px;
+  height: 50px;
   top: 50%;
   left: 0;
-  transform: translate(0%, -50%);
+  border-radius: 20px;
+  transform: translate(0, -50%);
+  .arrow {
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+    transform: rotate(-45deg);
+  }
 `;
 
 export const NextButton = styled.div<IColorProps>`
-  width: 50px;
-  height: 50px;
-  font-size: 50px;
+  font-size: 25px;
   cursor: pointer;
   position: absolute;
+  border-radius: 20px;
+
+  width: 50px;
+  height: 50px;
   top: 50%;
   right: 0;
-  transform: translate(0%, -50%);
+  transform: translate(0, -50%);
+  .arrow {
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    transform: rotate(-45deg);
+  }
 `;
 
 export const BackgroundDiv = styled.div<IColorProps>`
@@ -103,8 +119,7 @@ export const BackgroundDiv = styled.div<IColorProps>`
 
 export const TextWrapper = styled.div<IColorProps>`
   height: 100vh;
-  min-width: 52%;
-  max-width: 60%;
+  flex-grow: 1;
 
   white-space: pre-wrap;
   display: flex;
@@ -138,31 +153,14 @@ export const AlbumCover = styled.div<IImageProps>`
   aspect-ratio: 1/1;
   position: relative;
 `;
-export const PrevDiv = styled.div`
-  background-image: url(${image.prev});
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 12%;
-  cursor: pointer;
-`;
-export const NextDiv = styled.div`
-  display: block;
-  background-image: url(${image.next});
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 12%;
-  cursor: pointer;
-`;
 
 interface IBooleanProps {
-  istrue: boolean;
+  isboolean: boolean;
 }
 
 export const PlayButton = styled.div<IBooleanProps>`
   background-image: ${(props) =>
-    props.istrue ? `url(${image.stop})` : `url(${image.play})`};
+    props.isboolean ? `url(${image.stop})` : `url(${image.play})`};
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -319,9 +317,11 @@ export const Button4 = styled(ButtonDiv)<IColorProps>`
   font-size: 3em;
   color: ${(props) => props.color};
 `;
-export const Button5 = styled(ButtonDiv)<IColorProps>`
+
+interface IButtonProps extends IColorProps, IBooleanProps {}
+export const Button5 = styled(ButtonDiv)<IButtonProps>`
   font-size: 2em;
-  color: ${(props) => props.color};
+  color: ${(props) => (props.isboolean ? "white" : props.color)};
 `;
 export const TapeAlbumCover = styled.div<IImageProps>`
   width: 150px;
@@ -353,6 +353,7 @@ export const ImageWrapper = styled.div<IImageProps>`
   display: flex;
   align-items: end;
   cursor: pointer;
+  z-index: 2;
 `;
 
 export const ImageProgress = styled.div<INumber>`
