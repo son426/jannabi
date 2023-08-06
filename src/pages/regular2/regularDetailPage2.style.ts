@@ -5,23 +5,23 @@ import { backgroundImgDefault, positionCenter } from "../../constants/style";
 const albumCover = images.cover;
 const lp = images.lp;
 
-const h1 = "48px";
-const h2 = "32px";
-const h3 = "24px";
-const h4 = "16px";
-const h5 = "12px";
+export const h1 = "48px";
+export const h2 = "32px";
+export const h3 = "24px";
+export const h4 = "16px";
+export const h5 = "12px";
 
-const bold = "700";
-const semibold = "500";
-const medium = "300";
-const thin = "100";
+export const bold = "700";
+export const semibold = "500";
+export const medium = "300";
+export const thin = "100";
 
-const white = "#FAFAFA";
-const white2 = "#eaeaea";
-const lightgray = "#c1c1c1";
-const gray = "#646464";
-const yellow = "#FCCF02";
-const black = "#1B1B1B";
+export const white = "#FAFAFA";
+export const white2 = "#eaeaea";
+export const lightgray = "#c1c1c1";
+export const gray = "#646464";
+export const yellow = "#FCCF02";
+export const black = "#1B1B1B";
 
 interface IBoolean {
   isboolean: boolean;
@@ -32,7 +32,7 @@ interface IString {
 }
 
 interface INumber {
-  numbervalue: number;
+  numbervalue?: number;
 }
 
 export const Wrapper = styled.div`
@@ -169,10 +169,6 @@ export const Row3 = styled.div`
   }
 `;
 
-interface INumber {
-  numbervalue: number;
-}
-
 const gap = "5px";
 
 export const ContentDiv = styled.div`
@@ -229,19 +225,28 @@ export const ContentMeta = styled.div`
   align-items: start;
   border-bottom: 1px solid black;
   font-weight: ${bold};
-  .kor {
-    font-size: ${h1};
-  }
-  .eng {
-    font-size: ${h3};
-    color: ${lightgray};
-  }
 `;
-export const MetaColumn = styled.div`
+
+export const MetaColumn = styled.div<INumber>`
   display: flex;
   flex-direction: column;
   justify-content: baseline;
   gap: 12px;
+  .kor {
+    font-size: ${h1};
+  }
+  .engText {
+    cursor: pointer;
+    font-size: ${h3};
+    color: ${lightgray};
+    background: linear-gradient(
+      to right,
+      ${yellow} ${(props) => props.numbervalue}%,
+      ${lightgray} ${(props) => props.numbervalue}% 100%
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 `;
 export const LyricDiv = styled.div`
   width: 300px;

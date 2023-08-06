@@ -81,7 +81,6 @@ function RegularDetailPage2() {
       if (foundLyric && foundLyric.content !== selectedLyric.content) {
         setSelectedLyric(foundLyric);
       }
-
       setAudioProgress(currentTime / duration);
     };
     audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
@@ -202,9 +201,13 @@ function RegularDetailPage2() {
                       transition={{ duration: 0.5 }}
                     >
                       <S.ContentMeta>
-                        <S.MetaColumn>
+                        <S.MetaColumn numbervalue={audioProgress * 100}>
                           <div className="kor">{album?.title}</div>
-                          <div className="eng">{album?.engTitle}</div>
+                          <div className="eng">
+                            <span onClick={handleAudioTime} className="engText">
+                              {album?.engTitle}
+                            </span>
+                          </div>
                         </S.MetaColumn>
                         <S.MetaColumn>
                           <S.LyricDiv>
