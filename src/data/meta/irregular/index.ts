@@ -12,13 +12,13 @@ export const irregularAlbumData = [
     pointColor2: "#450606",
     fontColor: "white",
     songs: [
+      { title: "봉춤을 추네", audioFile: a_ir.poledance, isTitle: true },
       {
         title:
           "사랑하긴 했었나요 스쳐가는 인연이었나요 짧지 않은 우리 함께 했던 시간들이 자꾸 내 마음을 가둬두네",
         audioFile: a_ir.loveme,
         isTitle: false,
       },
-      { title: "봉춤을 추네", audioFile: a_ir.poledance, isTitle: true },
     ],
   },
   {

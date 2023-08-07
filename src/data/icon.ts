@@ -16,6 +16,7 @@ import {
   BiShuffle,
   BiRepeat,
 } from "react-icons/bi";
+import { AiFillHeart } from "react-icons/ai";
 
 export {
   FiSend,
@@ -34,4 +35,5 @@ export {
   BiPlay as PlayIcon2,
   BiShuffle as ShuffleIcon,
   BiRepeat as RepeatIcon,
+  AiFillHeart as FilledHeartIcon,
 };

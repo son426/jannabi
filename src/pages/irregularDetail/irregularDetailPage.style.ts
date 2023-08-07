@@ -74,7 +74,6 @@ export const PrevButton = styled.div<IColorProps>`
   font-size: 25px;
   cursor: pointer;
   position: absolute;
-
   width: 50px;
   height: 50px;
   top: 50%;

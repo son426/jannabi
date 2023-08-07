@@ -5,8 +5,8 @@ import { backgroundImgDefault, positionCenter } from "../../constants/style";
 const albumCover = images.cover;
 const lp = images.lp;
 
-export const h1 = "48px";
-export const h2 = "32px";
+export const h1 = "64px";
+export const h2 = "48px";
 export const h3 = "24px";
 export const h4 = "16px";
 export const h5 = "12px";
@@ -116,13 +116,19 @@ export const IntroContentBg = styled.div`
 export const IntroContentBox = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);
   padding: 10%;
   .test {
     opacity: 0;
+  }
+  .test:first-child {
+    width: 20%;
+    transform: translateY(-200px);
+  }
+  .test:last-child {
+    width: 80%;
   }
 `;
 
@@ -140,7 +146,6 @@ export const Row1 = styled.div`
 export const Row2 = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: baseline;
   align-items: baseline;
   gap: 20px;
@@ -150,7 +155,7 @@ export const Row2 = styled.div`
     font-weight: ${bold};
   }
   .english {
-    font-size: ${h4};
+    font-size: ${h3};
     font-weight: ${medium};
   }
 `;
@@ -159,13 +164,15 @@ export const Row3 = styled.div`
   width: 90%;
   word-break: keep-all;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 0 6%;
   font-size: ${h4};
   font-weight: ${medium};
-  line-height: ${h2};
+  line-height: ${h3};
+  gap: 30px;
   div {
-    width: 43%;
+    width: 80%;
   }
 `;
 

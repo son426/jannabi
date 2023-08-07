@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled, css } from "styled-components";
 import image from "../../data/images/irregular";
 import { Link } from "react-router-dom";
 import { bold, medium, semibold } from "@/constants/style";
@@ -18,6 +18,10 @@ interface IImageProps {
 interface IColorProps {
   color?: string;
   color2?: string;
+}
+
+interface INumber {
+  numbervalue: number;
 }
 
 export const BackButton = styled.div<IColorProps>`
@@ -45,7 +49,7 @@ export const BackButton = styled.div<IColorProps>`
 `;
 
 export const BackgroundDiv = styled.div<IColorProps>`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   background-color: ${(props) => props.color};
@@ -54,32 +58,30 @@ export const BackgroundDiv = styled.div<IColorProps>`
 export const TextWrapper = styled.div<IColorProps>`
   width: 100%;
   height: 100vh;
+  font-size: 10px;
   white-space: pre-wrap;
-  text-align: center;
+  text-align: start;
   display: flex;
   flex-direction: column;
   color: ${(props) => props.color};
-  padding: 4em 3em;
+  padding: 8em 4em;
   padding-bottom: 2em;
   position: relative;
-
-  font-size: 16px;
   overflow: hidden;
 `;
+
 export const Title = styled.div`
-  font-family: PretendardBold;
-  font-weight: 600;
-  font-size: 2.3em;
+  font-weight: 800;
+  font-size: 3.5em;
   margin-bottom: 3%;
 `;
 export const Subtitle = styled.h2`
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: 200;
   margin-bottom: 10%;
 `;
 
 export const Player = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
 `;
@@ -94,14 +96,98 @@ export const AlbumCover = styled.div<IImageProps>`
   position: relative;
 `;
 
-export const ConsoleDiv = styled.div`
-  margin-top: 20%;
+export const ConsoleDiv = styled.div<IColorProps>`
   width: 100%;
-  height: 15%;
-
+  height: 23%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: ${(props) => props.color};
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-direction: column;
 `;
+
+export const ConsoleRow1 = styled.div`
+  width: 100%;
+  height: 40%;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+export const ButtonWrapper = styled.div<IColorProps>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10%;
+  font-size: 3em;
+  color: ${(props) => props.color};
+  div {
+    cursor: pointer;
+  }
+`;
+
+export const ConsoleRow2 = styled.div`
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10%;
+`;
+
+export const TapeAlbumCover = styled.div<IImageProps>`
+  width: 130px;
+  height: 130px;
+  background-image: url(${(props) => props.image});
+  background-position: center;
+  background-size: contain;
+  border-radius: 50%;
+  position: absolute;
+  top: -110%;
+  left: 50%;
+  transform: translate(-50%, 0);
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+`;
+
+export const Button1 = styled(ButtonDiv)<IColorProps>`
+  font-size: 2em;
+  color: ${(props) => props.color};
+`;
+export const Button2 = styled(ButtonDiv)<IColorProps>`
+  border: 2px solid ${(props) => props.color};
+  font-size: 3em;
+  color: ${(props) => props.color};
+`;
+export const Button3 = styled(ButtonDiv)<IColorProps>`
+  border: 2px solid ${(props) => props.color};
+  font-size: 5em;
+  color: ${(props) => props.color};
+`;
+export const Button4 = styled(ButtonDiv)<IColorProps>`
+  border: 2px solid ${(props) => props.color};
+  font-size: 3em;
+  color: ${(props) => props.color};
+`;
+
+interface IButtonProps extends IColorProps, IBooleanProps {}
+export const Button5 = styled(ButtonDiv)<IButtonProps>`
+  font-size: 2em;
+  color: ${(props) => (props.isboolean ? "white" : props.color)};
+`;
+
+/////////////
 
 export const PrevDiv = styled.div`
   background-image: url(${image.prev});
@@ -121,12 +207,12 @@ export const NextDiv = styled.div`
 `;
 
 interface IBooleanProps {
-  istrue: boolean;
+  isboolean: boolean;
 }
 
 export const PlayButton = styled.div<IBooleanProps>`
   background-image: ${(props) =>
-    props.istrue ? `url(${image.stop})` : `url(${image.play})`};
+    props.isboolean ? `url(${image.stop})` : `url(${image.play})`};
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -135,10 +221,10 @@ export const PlayButton = styled.div<IBooleanProps>`
 `;
 
 export const Meta = styled.p`
-  font-size: 10px;
+  font-size: 1.2em;
   font-weight: ${semibold};
-  margin-top: 10px;
-  margin-bottom: 8%;
+  margin-top: 1em;
+  margin-bottom: 10px;
   opacity: 0.5;
 `;
 
@@ -159,11 +245,13 @@ export const Line = styled.div<IColorProps>`
 `;
 
 export const Description = styled.p`
-  font-size: 12px;
+  font-size: 1.2em;
   font-weight: ${semibold};
   word-break: keep-all;
+  padding-bottom: 3%;
   margin-bottom: 10%;
   line-height: 1.5em;
+  border-bottom: 1px solid white;
 `;
 
 export const Playlist = styled.div`
@@ -171,12 +259,34 @@ export const Playlist = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-height: 15%;
+  align-items: baseline;
+  height: 30%;
   overflow: auto;
   ::-webkit-scrollbar {
     display: none;
   }
+  ${({ theme }) =>
+    theme &&
+    css`
+      scrollbar-width: thin;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #939393;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #2f3542;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    `};
 `;
 
 export const PlaylistIsTitle = styled.div<IColorProps>`
@@ -186,10 +296,9 @@ export const PlaylistIsTitle = styled.div<IColorProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.3em;
-  height: 70%;
   border-radius: 100px;
-  padding: 3px 5px;
+  padding: 5px 5px;
+  margin-left: 10px;
   p {
     font-size: 10px;
     font-weight: ${bold};
@@ -204,25 +313,67 @@ export const PlaylistRow = styled.div<IPlayingRowProps>`
   /* border: 1px solid white; */
   color: ${(props) => (props.isplaying ? props.color : "#C2D1C2")};
   font-weight: ${(props) => (props.isplaying ? `${bold}` : `${medium}`)};
-  font-size: ${(props) => (props.isplaying ? "0.8em" : "0.7em")};
+  font-size: ${(props) => (props.isplaying ? "1.5em" : "1.4em")};
   width: 100%;
-
   display: flex;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
   cursor: pointer;
-
+  overflow-x: hidden;
   transition: color 0.1s linear, font-size 0.1s linear, font-weight 0.1s linear;
 `;
-export const SongIndex = styled.div``;
-export const SongTitle = styled.p`
-  white-space: nowrap;
-  overflow: auto;
-  padding: 0.7em;
-`;
 
+interface ITitle {
+  isboolean: boolean;
+  numbervalue: number;
+}
+export const SongIndex = styled.div``;
+// export const SongTitle = styled.div<ITitle>`
+//   white-space: nowrap;
+//   padding: 0.7em 0em;
+
+//   ${(props) =>
+//     props.isboolean &&
+//     props.numbervalue > 0 &&
+//     css`
+//       p {
+//         animation: scrollText 2s linear infinite;
+//       }
+
+//       @keyframes scrollText {
+//         from {
+//           transform: translateX(0);
+//         }
+//         to {
+//           transform: translateX(-${props.numbervalue}px);
+//         }
+//       }
+//     `}
+// `;
+
+export const SongTitle = styled.div<ITitle>`
+  white-space: nowrap;
+  padding: 0.7em 0em;
+
+  @keyframes scrollText {
+    from {
+      transform: translateX(5%);
+    }
+    to {
+      transform: translateX(-${(props) => props.numbervalue}px);
+    }
+  }
+
+  ${(props) =>
+    props.isboolean &&
+    props.numbervalue > 0 &&
+    css`
+      p {
+        animation: scrollText 5s linear infinite; /* Adjust the animation duration as needed */
+      }
+    `}
+`;
 export const Footer = styled.div`
-  font-family: PretendardMedium;
   font-size: 10px;
   position: absolute;
   bottom: 5%;
@@ -232,7 +383,6 @@ export const Footer = styled.div`
 `;
 
 export const ImageWrapper = styled.div<IImageProps>`
-  /* border: 1px solid black; */
   width: 63%;
   height: 100vh;
   background-size: 115% 115%;
@@ -242,59 +392,3 @@ export const ImageWrapper = styled.div<IImageProps>`
   width: 100%;
   height: 100%;
 `;
-
-// export const ImageWrapper = styled.div`
-//   width: 63%;
-//   height: 100vh;
-
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-//   grid-template-rows: 2fr 1fr;
-
-//   gap: 5px; /* Adjust this value for the desired gap between images */
-// `;
-
-// const ImageDiv = styled.div`
-//   background-repeat: no-repeat;
-// `;
-
-// export const ImageDiv1 = styled(ImageDiv)`
-//   background-size: 115% 115%;
-//   background-position: center;
-//   background-image: url(${image.she1});
-//   grid-column-start: 1;
-//   grid-column-end: 4;
-//   grid-row: 1;
-//   width: 100%;
-//   height: 100%;
-// `;
-// export const ImageDiv2 = styled(ImageDiv)`
-//   background-image: url(${image.she2});
-//   background-size: 115% 115%;
-//   background-position: left;
-//   grid-column-start: 4;
-//   grid-column-end: 6;
-//   grid-row: 1;
-//   width: 100%;
-//   height: 100%;
-// `;
-// export const ImageDiv3 = styled(ImageDiv)`
-//   background-image: url(${image.she3});
-//   background-size: 110% 100%;
-//   background-position: center;
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row: 2;
-//   width: 100%;
-//   height: 100%;
-// `;
-// export const ImageDiv4 = styled(ImageDiv)`
-//   background-image: url(${image.she4});
-//   background-size: 100% 100%;
-//   background-position: center;
-//   grid-column-start: 3;
-//   grid-column-end: 6;
-//   grid-row: 2;
-//   width: 100%;
-//   height: 100%;
-// `;

@@ -17,6 +17,7 @@ import {
   RightArrowIcon,
   LeftArrowIcon,
   PauseIcon,
+  FilledHeartIcon,
 } from "@/data/icon";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
 
@@ -46,10 +47,24 @@ function IrregularDetailPage() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [nowIndex, setNowIndex] = useState<number>(0);
   const [isShuffleMode, setIsShuffleMode] = useState<boolean>(false);
+  const [showHeart, setShowHeart] = useState(false);
+  const [transitionWidth, setTransitionWidth] = useState<number>(-1);
+  const [movingOn, setMovingOn] = useState<boolean>(false);
+
+  const songTitleRefs = useRef<Array<HTMLParagraphElement | null>>([]);
+  const songTitleBoxRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
 
   const initialTrack: string = irregularAlbumData[index].songs[0].audioFile;
+
+  const handleTapeAlbumCoverClick = () => {
+    setShowHeart(true);
+
+    setTimeout(() => {
+      setShowHeart(false);
+    }, 1000);
+  };
 
   const {
     audioRef,
@@ -92,6 +107,8 @@ function IrregularDetailPage() {
   const resetState = () => {
     setNowIndex(0);
     setIsPlaying(true);
+    setMovingOn(false);
+    setTransitionWidth(-1);
   };
 
   useEffect(() => {
@@ -147,6 +164,22 @@ function IrregularDetailPage() {
       audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [nowIndex]);
+
+  useEffect(() => {
+    if (id !== "1") return;
+    const songTitleWidth = songTitleRefs.current[nowIndex]?.offsetWidth;
+    const boxWidth = songTitleBoxRef.current?.offsetWidth;
+
+    if (songTitleWidth && boxWidth) {
+      const movingWidth = songTitleWidth - boxWidth;
+      if (movingWidth > 0) {
+        setMovingOn(true);
+        setTransitionWidth(songTitleWidth / 1.6);
+      } else {
+        setMovingOn(false);
+      }
+    }
+  }, [nowIndex, id]);
 
   return (
     <>
@@ -340,26 +373,16 @@ function IrregularDetailPage() {
                 <UpArrowIcon />
               </div>
             </M.BackButton>
+
             <M.TextWrapper color={albumData?.fontColor}>
               <M.Title>
                 <p>{albumData?.title}</p>
               </M.Title>
               <M.Subtitle>{albumData?.subtitle}</M.Subtitle>
-              <M.Player>
-                <M.AlbumCover image={albumData?.image}></M.AlbumCover>
-              </M.Player>
               <M.Meta>{albumData?.meta}</M.Meta>
               <M.Description>{albumData?.description}</M.Description>
 
-              <M.Playlist>
-                {albumData?.songs?.length === 1 && (
-                  <M.PlaylistIsTitle
-                    color={albumData?.pointColor}
-                    color2={albumData?.pointColor2}
-                  >
-                    <p>TITLE</p>
-                  </M.PlaylistIsTitle>
-                )}
+              <M.Playlist ref={songTitleBoxRef}>
                 {albumData?.songs?.map((song, index) => {
                   return (
                     <M.PlaylistRow
@@ -369,10 +392,19 @@ function IrregularDetailPage() {
                         setNowIndex(index);
                       }}
                     >
-                      <M.SongTitle>
-                        {index + 1} | {song?.title}
+                      <M.SongTitle
+                        isboolean={index === nowIndex && movingOn}
+                        numbervalue={transitionWidth}
+                      >
+                        <p
+                          ref={(el: HTMLParagraphElement) =>
+                            (songTitleRefs.current[index] = el)
+                          }
+                        >
+                          {index + 1} | {song?.title}
+                        </p>
                       </M.SongTitle>
-                      {albumData?.songs?.length !== 1 && song.isTitle && (
+                      {song.isTitle && (
                         <M.PlaylistIsTitle
                           color={albumData?.pointColor}
                           color2={albumData?.pointColor2}
@@ -384,31 +416,79 @@ function IrregularDetailPage() {
                   );
                 })}
               </M.Playlist>
-              <M.ConsoleDiv>
-                <M.PrevDiv
-                  onClick={() => {
-                    resetState();
-                    if (index === 0) {
-                      navigate(`/irregularDetail/10`);
-                    } else {
-                      navigate(`/irregularDetail/${index}`);
-                    }
-                  }}
-                ></M.PrevDiv>
-                <M.PlayButton
-                  onClick={togglePlaying}
-                  istrue={isPlaying}
-                ></M.PlayButton>
-                <M.NextDiv
-                  onClick={() => {
-                    resetState();
-                    if (index === 9) {
-                      navigate(`/irregularDetail/1`);
-                    } else {
-                      navigate(`/irregularDetail/${index + 2}`);
-                    }
-                  }}
-                ></M.NextDiv>
+              <M.ConsoleDiv color={albumData?.pointColor2}>
+                <M.ConsoleRow1>
+                  <M.ButtonWrapper color={albumData?.pointColor}>
+                    <div
+                      onClick={() => {
+                        resetState();
+                        if (index === 0) {
+                          navigate(`/irregularDetail/10`);
+                        } else {
+                          navigate(`/irregularDetail/${index}`);
+                        }
+                      }}
+                    >
+                      <LeftArrowIcon />
+                    </div>
+                    <div
+                      onClick={() => {
+                        resetState();
+                        if (index === 9) {
+                          navigate(`/irregularDetail/1`);
+                        } else {
+                          navigate(`/irregularDetail/${index + 2}`);
+                        }
+                      }}
+                    >
+                      <RightArrowIcon />
+                    </div>
+                  </M.ButtonWrapper>
+                  <M.TapeAlbumCover
+                    onClick={handleTapeAlbumCoverClick}
+                    image={albumData?.image}
+                  >
+                    {showHeart && <FilledHeartIcon />}
+                  </M.TapeAlbumCover>
+                </M.ConsoleRow1>
+                <M.ConsoleRow2>
+                  <M.Button1 color={albumData?.pointColor}>
+                    <RepeatIcon />
+                  </M.Button1>
+                  <M.Button2
+                    onClick={() => {
+                      if (!albumData) return;
+                      const changedIndex =
+                        nowIndex === 0
+                          ? albumData?.songs.length - 1
+                          : nowIndex - 1;
+                      setNowIndex(changedIndex);
+                    }}
+                    color={albumData?.pointColor}
+                  >
+                    <PrevIcon />
+                  </M.Button2>
+                  <M.Button3
+                    onClick={togglePlaying}
+                    color={albumData?.pointColor}
+                  >
+                    {isPlaying && <PauseIcon />}
+                    {!isPlaying && <PlayIcon2 />}
+                  </M.Button3>
+                  <M.Button4
+                    onClick={handleNextMusic}
+                    color={albumData?.pointColor}
+                  >
+                    <NextIcon />
+                  </M.Button4>
+                  <M.Button5
+                    onClick={toggleShuffleMode}
+                    color={albumData?.pointColor}
+                    isboolean={isShuffleMode}
+                  >
+                    <ShuffleIcon />
+                  </M.Button5>
+                </M.ConsoleRow2>
               </M.ConsoleDiv>
             </M.TextWrapper>
           </M.BackgroundDiv>
