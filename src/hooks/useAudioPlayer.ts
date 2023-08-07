@@ -16,6 +16,8 @@ function useAudioPlayer(initialTrack: string) {
     }
   };
 
+  // totalBar에 onClick으로 걸어놓으면 됨.
+  // totalBar 클릭한 곳 기준으로, audioProgress 조정해줌.
   const handleAudioTime = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation(); // 버블링 처리 (toggleAudio 안일어나게)
     const progressBar = event.currentTarget;

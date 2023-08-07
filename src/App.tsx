@@ -9,6 +9,7 @@ import PretendardBold from "./data/fonts/pretendard/pretendardbold.woff2";
 import PretendardSemiBold from "./data/fonts/pretendard/pretendardsemibold.woff2";
 import PretendardMedium from "./data/fonts/pretendard/pretendardmedium.woff2";
 import PretendardThin from "./data/fonts/pretendard/pretendardthin.woff2";
+import theme from "./constants/theme";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,

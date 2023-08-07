@@ -46,6 +46,7 @@ function RegularDetailPage2() {
   );
 
   const handleRowClick = (index: number) => {
+    setAudioProgress(0);
     setNowIndex(index);
   };
   const handleLyricClick = (lyric: ILyric) => {
@@ -200,7 +201,7 @@ function RegularDetailPage2() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <S.ContentMeta>
+                      <S.ContentMeta onClick={toggleAudio}>
                         <S.MetaColumn numbervalue={audioProgress * 100}>
                           <div className="kor">{album?.title}</div>
                           <div className="eng">

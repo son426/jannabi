@@ -1,30 +1,54 @@
+import styled, { keyframes, css } from "styled-components";
 import { Link } from "react-router-dom";
-import { styled } from "styled-components";
+import { useMediaQuery } from "react-responsive";
+import { useRecoilValue } from "recoil";
+import { fontSizeAtom, rowWidthAtom, shelfHeightAtom } from "@/constants/atom";
 
-// shelf height
-// 컴퓨터 1100
-// 모바일 650
+const slideLeftAnimation = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-5px);
+  }
+`;
+const slideRightAnimation = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(5px);
+  }
+`;
 
 interface IImageProps {
   img?: string;
   hoveredImg?: string;
 }
 
-const rowWidth = "560px";
-const shelfHeight = "650px";
-const fontSize = "9.4px";
-
 export const BackgroundDiv = styled.div<IImageProps>`
   background-image: url(${(props) => props.img});
+  background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
-  width: 200%;
-  min-width: 800px;
-  min-height: 100vh;
-  display: flex;
-  align-items: end;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  position: absolute;
+  z-index: -2;
+  overflow: scroll;
 `;
+
+// margin 체크
+// irregular 에서 어떻게 할지.
+
+// const rowWidth = "690px";
+// const shelfHeight = "800px";
+// const fontSize = "11.6px";
+
+const rowWidth = "780px";
+const shelfHeight = "900px";
+const fontSize = "13.1px";
+
 export const ShelfDiv = styled.div`
   width: 100%;
   margin: 20vh 0;

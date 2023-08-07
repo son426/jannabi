@@ -225,6 +225,7 @@ export const ContentMeta = styled.div`
   align-items: start;
   border-bottom: 1px solid black;
   font-weight: ${bold};
+  cursor: pointer;
 `;
 
 export const MetaColumn = styled.div<INumber>`
@@ -267,12 +268,11 @@ export const LyricDiv = styled.div`
       scrollbar-width: thin;
 
       &::-webkit-scrollbar {
-        width: 5px;
+        width: 7px;
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: ${lightgray};
-        border-radius: 10px;
+        background-color: ${black};
       }
 
       &::-webkit-scrollbar-thumb:hover {
