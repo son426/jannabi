@@ -133,7 +133,7 @@ export const Row1 = styled.div`
   padding: 12px 0px;
   span {
     padding: 12px;
-    border: 1px solid white;
+    border: 1px solid black;
     border-radius: 24px;
   }
 `;
@@ -207,7 +207,7 @@ export const ContentLine = styled.div`
   display: flex;
   border-bottom: 1px solid black;
   justify-content: space-between;
-  padding: 8px 0px;
+  padding: 16px 0px;
   cursor: pointer;
 `;
 export const ContentColumn = styled.div`

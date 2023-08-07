@@ -4,6 +4,7 @@ import {
   FiArrowUpLeft,
   FiArrowLeft,
   FiArrowRight,
+  FiChevronDown,
 } from "react-icons/fi";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import { ImExit } from "react-icons/im";
@@ -27,6 +28,7 @@ export {
   FaArrowUp as UpArrowIcon,
   FiArrowLeft as LeftArrowIcon,
   FiArrowRight as RightArrowIcon,
+  FiChevronDown as DownChevronIcon,
   BiSkipNext as NextIcon,
   BiSkipPrevious as PrevIcon,
   BiPlay as PlayIcon2,
