@@ -14,15 +14,32 @@ import { regularData3 } from "@/data/meta/regular3";
 import Draggable, { DraggableData } from "react-draggable";
 import Spinner from "@/data/images/spinner.gif";
 import Soundwave from "@/components/soundwave";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 // svg
 function Practice() {
-  const variants = {
-    start: { pathLength: 0, fill: "rgba(255, 255, 255,0)" },
-    end: { pathLength: 1, fill: "rgba(255, 255, 255, 1)" },
-  };
-  return <S.Wrapper></S.Wrapper>;
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <S.Wrapper>
+      <button onClick={() => setIsLoading((prev) => !prev)}>로딩토글</button>
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            style={{
+              backgroundColor: "black",
+              width: "100px",
+              height: "100px",
+            }}
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        )}
+      </AnimatePresence>
+    </S.Wrapper>
+  );
 }
 
 // 드래그

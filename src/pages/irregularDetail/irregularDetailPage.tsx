@@ -104,6 +104,7 @@ function IrregularDetailPage() {
     setNowIndex(0);
     setIsPlaying(true);
     setMovingOn(false);
+    setAudioProgress(0);
     setTransitionWidth(-1);
   };
 

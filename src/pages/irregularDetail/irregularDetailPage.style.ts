@@ -193,11 +193,11 @@ export const Description = styled.div<IColorProps>`
 export const Playlist = styled.div<IColorProps>`
   width: 100%;
   display: flex;
-  min-height: 200px;
+  min-height: 230px;
 
   flex-direction: column;
   align-items: baseline;
-  margin-bottom: 10em;
+  margin-bottom: 30px;
   ::-webkit-scrollbar {
     display: none;
   }

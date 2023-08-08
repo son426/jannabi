@@ -2,6 +2,7 @@ import styled, { css, keyframes } from "styled-components";
 import backCursor from "./back.jpg";
 import { positionCenter } from "@/constants/style";
 import image from "@/data/images/irregular";
+import { motion } from "framer-motion";
 
 const h1 = "64px";
 const h2 = "48px";
@@ -40,7 +41,12 @@ const waveAnimation = keyframes`
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 500vh;
+  height: 100vh;
+`;
+
+export const TestMotionDiv = styled(motion.div)`
+  width: 500px;
+  height: 500px;
   background-color: black;
 `;
 
