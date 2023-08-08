@@ -84,7 +84,7 @@ function RegularDetailPage2() {
       },
     });
     tl2.to(introContentBgRef.current, {
-      x: "100vw",
+      width: 0,
       scrub: 1,
     });
   }, [containerRef1, containerRef2, lpRef, albumRef, boxRef1, boxRef2]);

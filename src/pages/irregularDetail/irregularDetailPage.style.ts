@@ -118,8 +118,7 @@ export const BackgroundDiv = styled.div<IColorProps>`
 
 export const TextWrapper = styled.div<IColorProps>`
   height: 100vh;
-  flex-grow: 1;
-
+  width: 50%;
   white-space: pre-wrap;
   display: flex;
   flex-direction: column;
@@ -193,11 +192,9 @@ export const Description = styled.div<IColorProps>`
 export const Playlist = styled.div<IColorProps>`
   width: 100%;
   display: flex;
-  min-height: 230px;
-
+  min-height: 220px;
   flex-direction: column;
   align-items: baseline;
-  margin-bottom: 30px;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -266,7 +263,7 @@ export const SongTitle = styled.p`
 `;
 
 export const TapeDiv = styled.div<IColorProps>`
-  width: 100%;
+  width: calc(100% - 160px);
   height: 100px;
   background-color: ${(props) => props.color};
   border-radius: 8px;
@@ -274,6 +271,10 @@ export const TapeDiv = styled.div<IColorProps>`
   justify-content: space-between;
   align-items: center;
   padding: 0px 10px;
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 export const TapeColumn1 = styled.div`
   display: flex;
@@ -354,9 +355,9 @@ export const Footer = styled.div`
 `;
 
 export const ImageWrapper = styled.div<IImageProps>`
-  height: 100vh;
+  width: 50%;
   aspect-ratio: 1/1;
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(${(props) => props.image});

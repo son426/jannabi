@@ -78,7 +78,7 @@ function MainPage() {
     <>
       <BigDesktop>
         <>
-          {/* {isIntro && <Intro />} */}
+          {isIntro && <Intro />}
 
           <B.BackgroundDiv img={images.background}>
             <B.ShelfDiv>
@@ -195,7 +195,7 @@ function MainPage() {
       </BigDesktop>
       <Desktop>
         <>
-          {/* {isIntro && <Intro />} */}
+          {isIntro && <Intro />}
 
           <S.BackgroundDiv img={images.background}>
             <S.ShelfDiv>
@@ -313,7 +313,7 @@ function MainPage() {
       </Desktop>
       <Mobile>
         <>
-          {/* {isIntro && <Intro />} */}
+          {isIntro && <Intro />}
           <M.BackgroundDiv img={images.background}>
             <M.ShelfDiv>
               <M.Shelf img={images.shelf3}>
@@ -429,7 +429,7 @@ function MainPage() {
       </Mobile>
       <Tablet>
         <>
-          {/* {isIntro && <Intro />} */}
+          {isIntro && <Intro />}
 
           <T.BackgroundDiv img={images.background}>
             <T.ShelfDiv>

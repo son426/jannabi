@@ -195,6 +195,7 @@ const zoomInAnimation3 = keyframes`
 `;
 
 export const IntroImageDiv = styled.div<IClickedProps>`
+  pointer-events: none;
   @media screen and (min-width: 1536px) {
     background-size: cover;
     width: 50%;

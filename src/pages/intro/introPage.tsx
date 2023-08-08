@@ -12,12 +12,16 @@ import intro_images from "@/data/images/intro";
 import { Default } from "@/components/mediaquery";
 import Loading from "@/components/loading";
 import { AnimatePresence, motion } from "framer-motion";
+import { isIntroAtom } from "@/constants/atom";
+import { useRecoilState } from "recoil";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<number>(0);
   const [totalImages, setTotalImages] = useState<number>(0);
+
+  const [isIntro, setIsIntro] = useRecoilState(isIntroAtom);
 
   const navigate = useNavigate();
 
@@ -76,8 +80,8 @@ function IntroPage() {
   }, []);
 
   useEffect(() => {
-    console.log(loadedImages / totalImages);
-  }, [loadedImages]);
+    setIsIntro(true);
+  }, []);
 
   if (isLoading)
     return (
