@@ -59,11 +59,7 @@ function IrregularDetailPage() {
   const initialTrack: string = irregularAlbumData[index].songs[0].audioFile;
 
   const handleTapeAlbumCoverClick = () => {
-    setShowHeart(true);
-
-    setTimeout(() => {
-      setShowHeart(false);
-    }, 1000);
+    setShowHeart((prev) => !prev);
   };
 
   const {
@@ -174,7 +170,7 @@ function IrregularDetailPage() {
       const movingWidth = songTitleWidth - boxWidth;
       if (movingWidth > 0) {
         setMovingOn(true);
-        setTransitionWidth(songTitleWidth / 1.6);
+        setTransitionWidth(songTitleWidth / 1.3);
       } else {
         setMovingOn(false);
       }
@@ -340,7 +336,29 @@ function IrregularDetailPage() {
                   </S.Button5>
                 </S.TapeColumn1>
                 <S.TapeColumn2>
-                  <S.TapeAlbumCover image={albumData?.image} />
+                  <S.TapeAlbumCover
+                    onClick={handleTapeAlbumCoverClick}
+                    image={albumData?.image}
+                  >
+                    {showHeart && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1 }}
+                        animate={{
+                          opacity: [0, 1, 1, 0],
+                          scale: [1, 1.5, 1.5, 1],
+                          rotate: [180, 0, 0, 0],
+                          y: [0, 0, 0, -20],
+                        }}
+                        transition={{
+                          duration: 1,
+                          times: [0, 0.2, 0.5, 1],
+                        }}
+                      >
+                        <FilledHeartIcon className="icon" />
+                      </motion.div>
+                    )}
+                  </S.TapeAlbumCover>
                 </S.TapeColumn2>
               </S.TapeDiv>
               <S.Footer>발매사 카카오엔터테인먼트</S.Footer>
@@ -350,6 +368,7 @@ function IrregularDetailPage() {
               image={albumData?.image}
             >
               <S.ImageProgress numbervalue={audioProgress * 100} />
+              <S.Footer style={{ color: "white" }}>기획사 페포니뮤직</S.Footer>
             </S.ImageWrapper>
           </S.BackgroundDiv>
         </motion.div>
@@ -378,7 +397,9 @@ function IrregularDetailPage() {
               <M.Title>
                 <p>{albumData?.title}</p>
               </M.Title>
-              <M.Subtitle>{albumData?.subtitle}</M.Subtitle>
+              {albumData?.subtitle && (
+                <M.Subtitle>{albumData?.subtitle}</M.Subtitle>
+              )}
               <M.Meta>{albumData?.meta}</M.Meta>
               <M.Description>{albumData?.description}</M.Description>
 
@@ -448,7 +469,24 @@ function IrregularDetailPage() {
                     onClick={handleTapeAlbumCoverClick}
                     image={albumData?.image}
                   >
-                    {showHeart && <FilledHeartIcon />}
+                    {showHeart && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1 }}
+                        animate={{
+                          opacity: [0, 1, 1, 0],
+                          scale: [1, 1.5, 1.5, 1],
+                          rotate: [180, 0, 0, 0],
+                          y: [0, 0, 0, -20],
+                        }}
+                        transition={{
+                          duration: 1,
+                          times: [0, 0.2, 0.5, 1],
+                        }}
+                      >
+                        <FilledHeartIcon className="icon" />
+                      </motion.div>
+                    )}
                   </M.TapeAlbumCover>
                 </M.ConsoleRow1>
                 <M.ConsoleRow2>

@@ -171,6 +171,7 @@ function RegularDetailPage3() {
                   onClick={() => {
                     toggleAudio();
                     setNowIndex(index);
+                    setAudioProgress(0);
                     setTimeout(() => {
                       cardRefs.current[index].scrollIntoView({
                         behavior: "smooth",
@@ -281,7 +282,7 @@ function RegularDetailPage3() {
             <M.AlbumDiv></M.AlbumDiv>
             <M.IntroContentBox>
               <M.Row1>
-                <p>잔나비 정규 3집</p>
+                <span>잔나비 정규 3집</span>
               </M.Row1>
               <M.Row2>
                 <p className="korean">
@@ -294,8 +295,8 @@ function RegularDetailPage3() {
               <M.Row3>
                 환상의 나라에 대한 이야기가 있는 앨범입니다.{"\n"}유치찬란
                 무지개를 겨눠 함부로 쏘아 올린 화살과,{"\n"}그토록 부르던 별과
-                꿈을 향해 신나게 뻗어 보이던 손끝.{"\n"}영원히 깨어나지 못할
-                환상의 나라로!
+                꿈을 향해 신나게{"\n"}뻗어 보이던 손끝.{"\n"}영원히 깨어나지
+                못할 환상의 나라로!
               </M.Row3>
             </M.IntroContentBox>
           </M.IntroContentDiv>
@@ -369,7 +370,7 @@ function RegularDetailPage3() {
                           {album?.lyricData.map(
                             (lyric: ILyric, index: number) => {
                               return (
-                                <S.LyricRow
+                                <M.LyricRow
                                   key={index}
                                   isboolean={selectedLyric === lyric}
                                   className="lyricRow"
@@ -379,14 +380,16 @@ function RegularDetailPage3() {
                                   }}
                                 >
                                   {lyric.content}
-                                </S.LyricRow>
+                                </M.LyricRow>
                               );
                             }
                           )}
                         </>
                       )}
 
-                      {index !== nowIndex && <div>{album.lyrics}</div>}
+                      {index !== nowIndex && (
+                        <M.LyricRow>{album.lyrics}</M.LyricRow>
+                      )}
                     </div>
                   </M.CardLyrics>
                   <M.MarginDiv2></M.MarginDiv2>

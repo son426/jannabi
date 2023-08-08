@@ -366,12 +366,12 @@ export const DoorDiv = styled.div`
 `;
 
 export const ClickDiv = styled.div`
-  width: 130px;
+  width: 12em;
   height: 100px;
   z-index: 2;
   position: absolute;
-  top: 50px;
-  left: 90px;
+  bottom: 0em;
+  left: 3.9em;
   cursor: pointer;
 `;
 

@@ -109,12 +109,12 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "November Rain",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.novemberrain,
         isTitle: true,
       },
       {
         title: "November Rain (Inst.)",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.novemberrain,
         isTitle: false,
       },
     ],
@@ -148,14 +148,14 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "한밤의 뮤직",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.nightmusic,
         isTitle: true,
       },
     ],
   },
   {
     id: 8,
-    title: "pony",
+    title: "Pony",
     meta: "2023.6.21 | 인디뮤직, 락 | 2곡, 5분 56초",
     description: `어릴 적, 엄마 차에서는 늘 엄마의 호시절 음악들이 울려 퍼졌어요. 그 시간들을 떠올리며 부를 수 있는 노래를 쓰고 싶었어요.`,
     image: ir.pony,
@@ -165,12 +165,12 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "pony",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.pony,
         isTitle: true,
       },
       {
         title: "pony (sketch ver.)",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.pony_sketch,
         isTitle: false,
       },
     ],
@@ -188,22 +188,22 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "레이디버드",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.s2_1,
         isTitle: false,
       },
       {
         title: "초록을거머쥔우리는",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.s2_2,
         isTitle: true,
       },
       {
         title: "여름가을겨울 봄.",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.s2_3,
         isTitle: false,
       },
       {
         title: "슬픔이여안녕",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.s2_4,
         isTitle: false,
       },
     ],
@@ -220,27 +220,27 @@ export const irregularAlbumData = [
     songs: [
       {
         title: "가을밤에 든 생각",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.s1_1,
         isTitle: true,
       },
       {
         title: "한걸음",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.s1_2,
         isTitle: false,
       },
       {
         title: "그 밤 그 밤",
-        audioFile: a_ir.babymaybe,
+        audioFile: a_ir.s1_3,
         isTitle: false,
       },
       {
         title: "늙은 개",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.s1_4,
         isTitle: false,
       },
       {
         title: "작전명 청-춘!",
-        audioFile: a_ir.seeyoureyes,
+        audioFile: a_ir.s1_5,
         isTitle: false,
       },
     ],

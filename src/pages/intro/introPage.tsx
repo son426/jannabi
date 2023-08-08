@@ -7,6 +7,7 @@ import regular1_images from "@/data/images/regular1";
 import regular2_images from "@/data/images/regular2";
 import regular3_images from "@/data/images/regular3";
 import irregular_images from "@/data/images/irregular";
+import shoutout_images from "@/data/images/shoutout";
 import { Default } from "@/components/mediaquery";
 import Loading from "@/components/loading";
 
@@ -28,6 +29,7 @@ function IntroPage() {
     const regular2Urls: string[] = objectToArray(regular2_images as IObject);
     const regular3Urls: string[] = objectToArray(regular3_images as IObject);
     const irregularUrls: string[] = objectToArray(irregular_images as IObject);
+    const shoutoutUrls: string[] = objectToArray(shoutout_images as IObject);
 
     const allImageUrls: string[] = [
       ...mainImgUrls,
@@ -35,6 +37,7 @@ function IntroPage() {
       ...regular2Urls,
       ...regular3Urls,
       ...irregularUrls,
+      ...shoutoutUrls,
     ];
 
     imgPreload(allImageUrls)
@@ -42,7 +45,6 @@ function IntroPage() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
       });
   }, []);

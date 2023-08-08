@@ -65,8 +65,6 @@ function useScrollAnimation(
       opacity: 1,
     });
   }, [containerRef1, containerRef2, lpRef, albumRef, boxRef1, boxRef2]);
-
-  return {};
 }
 
 export default useScrollAnimation;

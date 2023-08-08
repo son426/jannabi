@@ -197,7 +197,7 @@ export const Playlist = styled.div<IColorProps>`
 
   flex-direction: column;
   align-items: baseline;
-  margin-bottom: 5em;
+  margin-bottom: 10em;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -235,6 +235,7 @@ export const PlaylistIsTitle = styled.div<IColorProps>`
   padding: 7px;
   border-radius: 100px;
   height: 60%;
+  margin-left: 10px;
   p {
     font-size: 0.8em;
     font-weight: ${bold};
@@ -248,7 +249,7 @@ interface IPlayingRowProps extends IColorProps {
 export const PlaylistRow = styled.div<IPlayingRowProps>`
   color: ${(props) => (props.isplaying ? props.color : "#C2D1C2")};
   font-weight: ${(props) => (props.isplaying ? `${bold}` : `${medium}`)};
-  font-size: ${(props) => (props.isplaying ? "1.8em" : "1.4em")};
+  font-size: ${(props) => (props.isplaying ? "1.5em" : "1.4em")};
   width: 100%;
   line-height: ${(props) => (props.isplaying ? "1em" : "0.5em")};
   display: flex;
@@ -261,7 +262,7 @@ export const SongIndex = styled.div``;
 export const SongTitle = styled.p`
   white-space: nowrap;
   overflow: auto;
-  padding: 0.7em;
+  padding: 0.7em 0px;
 `;
 
 export const TapeDiv = styled.div<IColorProps>`
@@ -329,6 +330,16 @@ export const TapeAlbumCover = styled.div<IImageProps>`
   background-position: center;
   background-size: contain;
   border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    font-size: 50px;
+    color: #ff6153;
+  }
 `;
 
 export const Footer = styled.div`
@@ -353,6 +364,7 @@ export const ImageWrapper = styled.div<IImageProps>`
   align-items: end;
   cursor: pointer;
   z-index: 2;
+  position: relative;
 `;
 
 export const ImageProgress = styled.div<INumber>`

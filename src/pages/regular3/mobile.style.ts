@@ -6,11 +6,11 @@ const albumCover = images.album;
 const introbg = images.bg;
 const lp = images.lp;
 
-const h1 = "4rem";
-const h2 = "3rem";
-const h3 = "1.5rem";
-const h4 = "1rem";
-const h5 = "0.875rem";
+const h1 = "64px";
+const h2 = "48px";
+const h3 = "24px";
+const h4 = "16px";
+const h5 = "12px";
 
 const b1 = "1.75rem";
 const b2 = "1.5rem";
@@ -28,7 +28,7 @@ const darkred = "#401F1F";
 const gray = "#A3A3A3";
 
 interface IBoolean {
-  isboolean: boolean;
+  isboolean?: boolean;
 }
 
 interface IString {
@@ -63,20 +63,22 @@ export const IntroContentBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: ${h3};
+  padding: 2% 10%;
   margin-top: ${h3};
+  gap: 12px;
 `;
 
 export const Row1 = styled.div`
-  font-size: ${h4};
-  width: 40%;
-  text-align: center;
-  p {
-    padding: ${b5};
+  font-size: ${h5};
+  text-align: start;
+  height: auto;
+  padding: 8px 0px;
+  margin-bottom: 4px;
+  span {
+    padding: 8px 12px;
     border: 1px solid white;
     border-radius: 20px;
   }
-  margin-bottom: 16px;
 `;
 export const Row2 = styled.div`
   width: 100%;
@@ -85,16 +87,16 @@ export const Row2 = styled.div`
   justify-content: baseline;
   align-items: baseline;
   gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
   white-space: pre-line;
 
   .korean {
-    font-size: calc(${h3} + 6px);
-    line-height: calc(${h3} + 12px);
+    font-size: calc(${h3});
+    line-height: calc(${h3} + 6px);
     font-weight: ${bold};
   }
   .english {
-    font-size: ${h4};
+    font-size: ${h5};
     font-weight: ${medium};
     opacity: 0.8;
     color: #e5e5e5;
@@ -103,9 +105,9 @@ export const Row2 = styled.div`
 export const Row3 = styled.div`
   width: 100%;
   word-break: keep-all;
-  font-size: calc(${h4} + 2px);
+  font-size: calc(${h4});
   font-weight: ${medium};
-  line-height: ${h2};
+  line-height: calc(${h3} + 6px);
   white-space: pre-line;
 `;
 
@@ -163,7 +165,7 @@ export const CardInfo = styled.div`
   border-radius: 8px 40px 8px 8px;
   background-color: white;
   /* background-color: #ededed; */
-  opacity: 0.9;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -234,7 +236,6 @@ export const Column2 = styled.div``;
 
 export const CardLyrics = styled.div<IBoolean>`
   width: 95%;
-
   border-radius: 8px;
   background-color: #ededed;
   opacity: 0.9;
@@ -260,9 +261,16 @@ export const CardLyrics = styled.div<IBoolean>`
     color: #525252;
     font-size: ${b3};
     line-height: ${b2};
-    height: ${(props) => (props.isboolean ? "" : "20px")};
+    height: ${(props) => (props.isboolean ? "" : "28px")};
     overflow: hidden;
   }
+`;
+
+export const LyricRow = styled.div<IBoolean>`
+  color: ${(props) => (props.isboolean ? `${red}` : "")};
+  font-weight: ${(props) => (props.isboolean ? `${bold}` : "")};
+  font-size: ${h4};
+  line-height: calc(${h3} + 6px);
 `;
 
 export const TotalBar = styled.div<IBoolean>`

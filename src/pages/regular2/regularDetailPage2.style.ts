@@ -105,12 +105,20 @@ export const IntroContentDiv = styled.div`
 `;
 
 export const IntroContentBg = styled.div`
-  width: 100%;
+  position: absolute;
   height: 100%;
-  background-size: 100% 120%;
+  width: 100%;
+  background-size: 100% 100%;
+  background-image: url(${images.introcontentbg});
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.15;
+`;
+
+export const IntroContentBg2 = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: white;
 `;
 
 export const IntroContentBox = styled.div`
@@ -120,9 +128,7 @@ export const IntroContentBox = styled.div`
   top: 50%;
   transform: translate(0%, -50%);
   padding: 10%;
-  .test {
-    opacity: 0;
-  }
+
   .test:first-child {
     width: 20%;
     transform: translateY(-200px);

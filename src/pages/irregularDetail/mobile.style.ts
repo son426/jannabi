@@ -78,7 +78,7 @@ export const Title = styled.div`
 export const Subtitle = styled.h2`
   font-size: 1.5em;
   font-weight: 200;
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 `;
 
 export const Player = styled.div`
@@ -141,16 +141,25 @@ export const ConsoleRow2 = styled.div`
 `;
 
 export const TapeAlbumCover = styled.div<IImageProps>`
-  width: 130px;
-  height: 130px;
+  width: 110px;
+  height: 110px;
   background-image: url(${(props) => props.image});
   background-position: center;
   background-size: contain;
   border-radius: 50%;
   position: absolute;
-  top: -110%;
+  top: -80%;
   left: 50%;
   transform: translate(-50%, 0);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    font-size: 50px;
+    color: #ff6153;
+  }
 `;
 
 const ButtonDiv = styled.div`
@@ -297,10 +306,10 @@ export const PlaylistIsTitle = styled.div<IColorProps>`
   align-items: center;
   justify-content: center;
   border-radius: 100px;
-  padding: 5px 5px;
   margin-left: 10px;
   p {
     font-size: 10px;
+    padding: 5px 5px;
     font-weight: ${bold};
   }
 `;
@@ -310,7 +319,6 @@ interface IPlayingRowProps extends IColorProps {
 }
 
 export const PlaylistRow = styled.div<IPlayingRowProps>`
-  /* border: 1px solid white; */
   color: ${(props) => (props.isplaying ? props.color : "#C2D1C2")};
   font-weight: ${(props) => (props.isplaying ? `${bold}` : `${medium}`)};
   font-size: ${(props) => (props.isplaying ? "1.5em" : "1.4em")};
@@ -328,33 +336,10 @@ interface ITitle {
   numbervalue: number;
 }
 export const SongIndex = styled.div``;
-// export const SongTitle = styled.div<ITitle>`
-//   white-space: nowrap;
-//   padding: 0.7em 0em;
-
-//   ${(props) =>
-//     props.isboolean &&
-//     props.numbervalue > 0 &&
-//     css`
-//       p {
-//         animation: scrollText 2s linear infinite;
-//       }
-
-//       @keyframes scrollText {
-//         from {
-//           transform: translateX(0);
-//         }
-//         to {
-//           transform: translateX(-${props.numbervalue}px);
-//         }
-//       }
-//     `}
-// `;
 
 export const SongTitle = styled.div<ITitle>`
   white-space: nowrap;
   padding: 0.7em 0em;
-
   @keyframes scrollText {
     from {
       transform: translateX(5%);
