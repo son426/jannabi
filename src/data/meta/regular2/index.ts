@@ -1,6 +1,3 @@
-import images from "@/data/images/regular3";
-import audio from "@/data/audio/regular2";
-
 // db 역할
 // 이 파일에다가 더미로 작업해놓고, 후에 db로 옮기자
 export interface ILyric {
@@ -13,7 +10,6 @@ export interface IRegularData {
   title: string;
   engTitle: string;
   playTime: string;
-  audioFile: string;
   lyrics?: string;
   lyricData: ILyric[];
 }
@@ -24,7 +20,6 @@ export const regularData2 = [
     title: "나의 기쁨 나의 노래 (Intro)",
     engTitle: "Good Good Night (Intro)",
     playTime: "3:36",
-    audioFile: audio.a1,
     lyricData: [
       { content: "별 볼 일 없는 섭섭한 밤도 있어요", startTime: 7 },
       { content: "오늘도 그런 밤이었죠", startTime: 15 },
@@ -53,7 +48,6 @@ export const regularData2 = [
     title: "투게더!",
     engTitle: "TOGETHER!",
     playTime: "3:06",
-    audioFile: audio.a2,
     lyricData: [
       { content: "몇 달은 품던 그 말로", startTime: 16 },
       { content: "멋진 옷을 지어 입곤", startTime: 20 },
@@ -99,7 +93,6 @@ export const regularData2 = [
     title: "조이풀 조이풀",
     engTitle: "joyful joyful",
     playTime: "4:03",
-    audioFile: audio.a3,
     lyricData: [
       { content: "오늘도 염치없는 이 아침은", startTime: 0 },
       { content: "아무 일 없었다는 듯 날 약 올려", startTime: 10 },
@@ -137,7 +130,6 @@ export const regularData2 = [
     title: "거울",
     engTitle: "mirror",
     playTime: "3:20",
-    audioFile: audio.a4,
     lyricData: [
       { content: "얼룩진 얼굴로 심통이 나서는", startTime: 22 },
       { content: "웬 못된 어른이 우두커니 날 꼬나봐요", startTime: 30 },
@@ -160,7 +152,6 @@ export const regularData2 = [
     title: "우리 애는요",
     engTitle: "about a boy ",
     playTime: "2:39",
-    audioFile: audio.a5,
     lyricData: [
       { content: "어린애야 아직도 난", startTime: 0 },
       { content: "나사 빠진 애처럼", startTime: 2.5 },
@@ -202,7 +193,6 @@ export const regularData2 = [
     title: "DOLMARO",
     engTitle: "DOLMARO",
     playTime: "3:54",
-    audioFile: audio.a6,
     lyricData: [
       { content: "늦었어 이제 집에 가야 해", startTime: 4 },
       { content: "엄마가 뭐라 그런단말이야", startTime: 11 },
@@ -235,7 +225,6 @@ export const regularData2 = [
     title: "전설",
     engTitle: "Legend",
     playTime: "3:47",
-    audioFile: audio.a7,
     lyricData: [
       { content: `전설`, startTime: 3 },
       { content: `그 푸르른 눈동자에 날 태워줘`, startTime: 8 },
@@ -275,7 +264,6 @@ export const regularData2 = [
     title: "주저하는 연인들을 위해",
     engTitle: "for lovers who hesitate",
     playTime: "4:25",
-    audioFile: audio.a8,
     lyricData: [
       { content: "나는 읽기 쉬운 마음이야", startTime: 7 },
       { content: "당신도 스윽 훑고 가셔요", startTime: 13 },
@@ -313,7 +301,6 @@ export const regularData2 = [
     title: "신나는 잠",
     engTitle: "geum ui hwan hyang",
     playTime: "3:42",
-    audioFile: audio.a9,
     lyricData: [
       { content: "밤의 파수꾼", startTime: 0 },
       { content: "오 그대여 내게로 와주오", startTime: 2 },
@@ -348,7 +335,6 @@ export const regularData2 = [
     title: "나쁜 꿈",
     engTitle: "bad dreams",
     playTime: "4:52",
-    audioFile: audio.a10,
     lyricData: [
       { content: "푸르르른", startTime: 44 },
       { content: "오솔길에", startTime: 46.5 },
@@ -379,7 +365,6 @@ export const regularData2 = [
     title: "새 어둠 새 눈",
     engTitle: "land of night",
     playTime: "4:26",
-    audioFile: audio.a11,
     lyricData: [
       { content: `잠든 빛 따돌리고 저 바닷속 헤엄쳐 가자`, startTime: 42 },
       { content: `새 어둠이 오면은 그제서야 새 눈을 뜨자`, startTime: 55 },
@@ -416,7 +401,6 @@ export const regularData2 = [
     title: "꿈과 힘과 책과 벽",
     engTitle: "dreams, books, power and walls",
     playTime: "4:57",
-    audioFile: audio.a12,
     lyricData: [
       { content: "해가 뜨고 다시 지는 것에", startTime: 14 },
       { content: "연연하였던 나의 작은방", startTime: 20 },

@@ -10,6 +10,8 @@ import useAudioPlayer from "@/hooks/useAudioPlayer";
 import { DownChevronIcon } from "@/data/icon";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { fetchAudios, loadAudios, loadImages } from "@/hooks/tools";
+import Loading from "@/components/loading";
 
 function RegularDetailPage2() {
   const [nowIndex, setNowIndex] = useState<number>(0);
@@ -18,6 +20,11 @@ function RegularDetailPage2() {
   );
   const [visibleContentMetaIndex, setVisibleContentMetaIndex] =
     useState<number>(-1);
+  const [audioFiles, setAudioFiles] = useState<string[]>([]);
+  const [audioFetched, setAudioFetched] = useState<boolean>(false);
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const [imageFetched, setImageFetched] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const containerRef1 = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -30,7 +37,8 @@ function RegularDetailPage2() {
   const navigate = useNavigate();
 
   const albumData: IRegularData[] = regularData2;
-  const initialTrack: string = albumData[nowIndex].audioFile;
+  // const initialTrack: string = albumData[nowIndex].audioFile;
+  const initialTrack: string = "";
 
   const {
     audioRef,
@@ -40,8 +48,32 @@ function RegularDetailPage2() {
     setIsAudioPlaying,
     audioProgress,
     setAudioProgress,
+    changeAudio,
   } = useAudioPlayer(initialTrack);
 
+  useEffect(() => {
+    const fetchAudioFiles = async () => {
+      const fetchedAudios = await loadAudios("regular2");
+      setAudioFiles(fetchedAudios);
+      setAudioFetched(true);
+    };
+
+    const fetchImageFiles = async () => {
+      const fetchedImages = await loadImages("regular2");
+      setImageFiles(fetchedImages);
+      setImageFetched(true);
+    };
+
+    const fetchAllFiles = async () => {
+      await fetchAudioFiles();
+      await fetchImageFiles();
+      setIsLoading(false);
+    };
+
+    fetchAllFiles();
+  }, []);
+
+  // 스크롤 이벤트
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger as any);
     const tl = gsap.timeline({
@@ -107,19 +139,13 @@ function RegularDetailPage2() {
   };
 
   useEffect(() => {
-    setIsAudioPlaying(true);
-    if (!audioRef.current.paused) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    audioRef.current = new Audio(albumData[nowIndex].audioFile);
-    audioRef.current.play();
+    if (audioFetched) changeAudio(audioFiles[nowIndex]);
 
     return () => {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     };
-  }, [nowIndex]);
+  }, [nowIndex, audioFetched]);
 
   // 오디오 관련
   // 매 시간마다 체크해야하는 부분
@@ -140,10 +166,11 @@ function RegularDetailPage2() {
     return () => {
       audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, [nowIndex]);
+  }, [nowIndex, audioFetched]);
 
   return (
     <>
+      <Loading isloading={isLoading} />
       <Default>
         <S.Wrapper>
           <S.IntroDiv ref={containerRef1}>
@@ -195,15 +222,15 @@ function RegularDetailPage2() {
                 />
               </svg>
             </S.LogoDiv2>
-            <S.LpDiv ref={lpRef}></S.LpDiv>
-            <S.AlbumDiv ref={albumRef}></S.AlbumDiv>
+            <S.LpDiv ref={lpRef} img={imageFiles[3]}></S.LpDiv>
+            <S.AlbumDiv ref={albumRef} img={imageFiles[1]}></S.AlbumDiv>
             <S.Footer>
               <div className="title">LEGEND</div>
               <div className="jannabi">잔나비</div>
             </S.Footer>
           </S.IntroDiv>
           <S.IntroContentDiv ref={containerRef2}>
-            <S.IntroContentBg />
+            <S.IntroContentBg img={imageFiles[2]} />
             <S.IntroContentBg2 ref={introContentBgRef} />
             <S.IntroContentBox>
               <div ref={boxRef1} className="test">
@@ -238,8 +265,8 @@ function RegularDetailPage2() {
             </S.IntroContentBox>
           </S.IntroContentDiv>
           <S.ContentDiv>
-            <S.ContentBg />
-            <S.ContentBox>
+            <S.ContentBg img={imageFiles[0]} />
+            <S.ContentBox img={imageFiles[0]}>
               {albumData.map((album, index) => (
                 <S.ContentRow>
                   <S.ContentLine onClick={() => handleRowClick(index)}>
@@ -343,15 +370,14 @@ function RegularDetailPage2() {
                 />
               </svg>
             </M.LogoDiv2>
-            <M.LpDiv></M.LpDiv>
-            <M.AlbumDiv></M.AlbumDiv>
+            <M.LpDiv img={imageFiles[3]}></M.LpDiv>
+            <M.AlbumDiv img={imageFiles[1]}></M.AlbumDiv>
             <M.Footer>
               <div className="title">LEGEND</div>
               <div className="jannabi">잔나비</div>
             </M.Footer>
           </M.IntroDiv>
           <M.IntroContentDiv>
-            <M.IntroContentBg />
             <M.IntroContentBox>
               <M.Row1>
                 <span>잔나비 정규 2집</span>
@@ -381,7 +407,7 @@ function RegularDetailPage2() {
             </M.IntroContentBox>
           </M.IntroContentDiv>
           <M.ContentDiv>
-            <M.ContentBg />
+            <M.ContentBg img={imageFiles[0]} />
             <M.ContentBox>
               <M.ContentTitle>TrackList</M.ContentTitle>
               {albumData.map((album, index) => (

@@ -5,7 +5,6 @@ import { db } from "../../config/firebase-config";
 import ShoutoutContent1 from "./components/shoutoutContent1";
 import ShoutoutContent2 from "./components/shoutoutContent2";
 import { Mobile, Default } from "../../components/mediaquery";
-import audioFile from "../../data/audio/regular1/monkeyHotel.mp3";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../../hooks/useAudio";
 
@@ -24,7 +23,9 @@ function ShoutoutPage() {
 
   const commentDataRef = collection(db, "comment");
 
-  const { audioPlay, audioStop, audioRef } = useAudio(audioFile);
+  const { audioPlay, audioStop, audioRef } = useAudio(
+    "https://firebasestorage.googleapis.com/v0/b/jannabi-faniste.appspot.com/o/audio%2Fregular1%2F08.mp3?alt=media&token=bd6ffce1-bb48-46e7-b54f-31aed47dcb9d"
+  );
 
   const navigate = useNavigate();
 

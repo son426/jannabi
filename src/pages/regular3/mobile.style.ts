@@ -1,10 +1,5 @@
 import { styled } from "styled-components";
-import images from "@/data/images/regular3";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-
-const albumCover = images.album;
-const introbg = images.bg;
-const lp = images.lp;
 
 const h1 = "64px";
 const h2 = "48px";
@@ -52,11 +47,13 @@ export const IntroContentDiv = styled.div`
   flex-direction: column;
 `;
 
-export const AlbumDiv = styled.div`
+export const AlbumDiv = styled.div<IImageProps>`
   width: 100%;
   aspect-ratio: 1/1;
-  background-image: url(${albumCover});
-  background-size: 100% 100%;
+  background-image: url(${(props) => props.img});
+  background-size: 125% 125%;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const IntroContentBox = styled.div`

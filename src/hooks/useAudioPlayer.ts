@@ -4,7 +4,7 @@ function useAudioPlayer(initialTrack: string) {
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(true);
   const [audioProgress, setAudioProgress] = useState<number>(0);
 
-  const audioRef = useRef<HTMLAudioElement>(new Audio(initialTrack));
+  const audioRef = useRef<HTMLAudioElement>(new Audio());
 
   const toggleAudio = () => {
     if (audioRef.current.paused) {
@@ -14,6 +14,16 @@ function useAudioPlayer(initialTrack: string) {
       audioRef.current.pause();
       setIsAudioPlaying(false);
     }
+  };
+
+  const changeAudio = (newFile: string) => {
+    setIsAudioPlaying(true);
+    if (!audioRef.current.paused) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    audioRef.current = new Audio(newFile);
+    audioRef.current.play();
   };
 
   // totalBar에 onClick으로 걸어놓으면 됨.
@@ -51,6 +61,7 @@ function useAudioPlayer(initialTrack: string) {
     setIsAudioPlaying,
     audioProgress,
     setAudioProgress,
+    changeAudio,
   };
 }
 

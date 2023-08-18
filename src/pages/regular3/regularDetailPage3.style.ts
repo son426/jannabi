@@ -1,10 +1,5 @@
 import { css, styled } from "styled-components";
-import images from "@/data/images/regular3";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-
-const albumCover = images.album;
-const introbg = images.bg;
-const lp = images.lp;
 
 const h1 = "64px";
 const h2 = "48px";
@@ -44,25 +39,25 @@ export const Wrapper = styled.div`
   background-color: black;
 `;
 
-export const IntroDiv = styled.div`
+export const IntroDiv = styled.div<IImageProps>`
   width: 100%;
   height: 100vh;
-  background-image: url(${introbg});
+  background-image: url(${(props) => props.img});
   background-size: 100% 100%;
   background-repeat: no-repeat;
 `;
 
-export const AlbumDiv = styled.div`
+export const AlbumDiv = styled.div<IImageProps>`
   width: 400px;
   aspect-ratio: 1/1;
-  background-image: url(${albumCover});
+  background-image: url(${(props) => props.img});
   ${backgroundImgDefault};
   ${positionCenter};
   left: 48%;
 `;
-export const LpDiv = styled.div`
+export const LpDiv = styled.div<IImageProps>`
   ${backgroundImgDefault};
-  background-image: url(${lp});
+  background-image: url(${(props) => props.img});
   background-size: 82% 82%;
   width: 400px;
   aspect-ratio: 1/1;
@@ -95,13 +90,13 @@ export const IntroContentDiv = styled.div`
   position: relative;
 `;
 
-export const IntroBackground = styled.div`
+export const IntroBackground = styled.div<IImageProps>`
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   opacity: 0.5;
-  background-image: url(${images.bg2});
+  background-image: url(${(props) => props.img});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;

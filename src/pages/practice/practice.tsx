@@ -15,30 +15,24 @@ import Draggable, { DraggableData } from "react-draggable";
 import Spinner from "@/data/images/spinner.gif";
 import Soundwave from "@/components/soundwave";
 import { AnimatePresence, motion } from "framer-motion";
+import Loading, { LoadingText, LoadingWrapper } from "@/components/loading";
 
 // svg
 function Practice() {
   const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
+
   return (
-    <S.Wrapper>
-      <button onClick={() => setIsLoading((prev) => !prev)}>로딩토글</button>
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            style={{
-              backgroundColor: "black",
-              width: "100px",
-              height: "100px",
-            }}
-            key="modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-        )}
-      </AnimatePresence>
-    </S.Wrapper>
+    <>
+      <Loading isloading={isLoading} />
+
+      <>하이</>
+    </>
   );
 }
 

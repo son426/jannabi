@@ -4,7 +4,7 @@ import * as S from "./irregularDetailPage.style";
 import * as M from "./mobile.style";
 import { useState, useEffect, useRef } from "react";
 import { irregularAlbumData } from "../../data/meta/irregular";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Default, Desktop, Mobile } from "../../components/mediaquery";
 import {
   NextIcon,
@@ -20,6 +20,9 @@ import {
   FilledHeartIcon,
 } from "@/data/icon";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
+import { imgPreload, loadAudios, loadImages } from "@/hooks/tools";
+import irregular from "@/data/images/irregular";
+import Loading, { LoadingText, LoadingWrapper } from "@/components/loading";
 
 interface songData {
   title: string;
@@ -32,7 +35,6 @@ interface IIrregularAlbumData {
   subtitle?: string;
   meta: string;
   description: string;
-  image: string;
   pointColor: string;
   pointColor2?: string;
   fontColor: string;
@@ -43,6 +45,8 @@ function IrregularDetailPage() {
   const { id } = useParams<string>();
   const index = Number(id) - 1;
 
+  const [totalAlbumData, setTotalAlbumData] =
+    useState<IIrregularAlbumData[]>(irregularAlbumData);
   const [albumData, setAlbumData] = useState<IIrregularAlbumData>();
   const [isPlaying, setIsPlaying] = useState(true);
   const [nowIndex, setNowIndex] = useState<number>(0);
@@ -50,17 +54,54 @@ function IrregularDetailPage() {
   const [showHeart, setShowHeart] = useState(false);
   const [transitionWidth, setTransitionWidth] = useState<number>(-1);
   const [movingOn, setMovingOn] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const songTitleRefs = useRef<Array<HTMLParagraphElement | null>>([]);
   const songTitleBoxRef = useRef<HTMLDivElement>(null);
 
+  const [audioFiles, setAudioFiles] = useState<string[]>([]);
+  const [audioFetched, setAudioFetched] = useState<boolean>(false);
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const [imageFetched, setImageFetched] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchImageFiles = async () => {
+      const fetchedImages = await loadImages("irregular");
+      setImageFiles(fetchedImages);
+      setImageFetched(true);
+      imgPreload(fetchedImages);
+    };
+
+    const fetchAudioFiles = async () => {
+      const fetchedAudios = await loadAudios("irregular");
+      let insertIndex = 0;
+      const updatedAlbumData = irregularAlbumData.map(
+        (eachAlbum: IIrregularAlbumData, index: number) => {
+          const updatedSongs = eachAlbum.songs.map((song, index: number) => {
+            return {
+              ...song,
+              audioFile: `${fetchedAudios[insertIndex++]}`,
+            };
+          });
+          return {
+            ...eachAlbum,
+            songs: updatedSongs,
+          };
+        }
+      );
+      setTotalAlbumData(updatedAlbumData);
+      setAudioFetched(true);
+    };
+
+    const fetchAllFiles = async () => {
+      if (!imageFetched) await fetchImageFiles();
+      if (!audioFetched) await fetchAudioFiles();
+      setIsLoading(false);
+    };
+    fetchAllFiles();
+  }, []);
+
   const navigate = useNavigate();
-
-  const initialTrack: string = irregularAlbumData[index].songs[0].audioFile;
-
-  const handleTapeAlbumCoverClick = () => {
-    setShowHeart((prev) => !prev);
-  };
 
   const {
     audioRef,
@@ -70,7 +111,10 @@ function IrregularDetailPage() {
     setIsAudioPlaying,
     audioProgress,
     setAudioProgress,
-  } = useAudioPlayer(initialTrack);
+    changeAudio,
+  } = useAudioPlayer("");
+
+  const handleTapeAlbumCoverClick = () => setShowHeart((prev) => !prev);
 
   const getRandomIndex = (maxIndex: number, excludeIndex: number) => {
     let randomIndex = Math.floor(Math.random() * maxIndex);
@@ -79,7 +123,6 @@ function IrregularDetailPage() {
     }
     return randomIndex;
   };
-
   const togglePlaying = () => {
     // 오디오 처리 로직
     audioRef.current.paused
@@ -108,26 +151,8 @@ function IrregularDetailPage() {
     setTransitionWidth(-1);
   };
 
-  useEffect(() => {
-    // getData
-    setAlbumData(irregularAlbumData[index]);
-  }, [id]);
-
   // audio 관련
-  // 곡이 바뀔 때
   useEffect(() => {
-    // 첫 렌더링때는 실행시키지 말자.
-    // 첫 렌더링때는 이벤트리스너만 달자.
-    if (nowIndex !== 0) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-
-      audioRef.current = new Audio(
-        irregularAlbumData[index].songs[nowIndex].audioFile
-      );
-      audioRef.current.play();
-    }
-
     audioRef.current.addEventListener("ended", () => {
       setNowIndex((prev) => prev + 1);
     });
@@ -140,15 +165,26 @@ function IrregularDetailPage() {
         setNowIndex((prev) => prev + 1);
       });
     };
-  }, [nowIndex, id]);
+  }, [nowIndex, id, audioFetched]);
 
   // audio 관련
-  // 앨범이 바뀔 때
+  // 앨범이 바뀔 때 (index 변경)
   useEffect(() => {
-    audioRef.current = new Audio(irregularAlbumData[index].songs[0].audioFile);
-    audioRef.current.play();
-  }, [id]);
+    if (audioFetched) {
+      changeAudio(totalAlbumData[index].songs[0].audioFile);
+      setAlbumData(totalAlbumData[index]);
+    }
+  }, [id, audioFetched]);
 
+  // audio 관련
+  // nowIndex 바뀔 때 (nowIndex 변경)
+  useEffect(() => {
+    if (audioFetched) {
+      changeAudio(totalAlbumData[index].songs[nowIndex].audioFile);
+    }
+  }, [nowIndex]);
+
+  // audioProgress 트래킹
   useEffect(() => {
     const handleTimeUpdate = () => {
       const { currentTime, duration } = audioRef.current;
@@ -162,6 +198,7 @@ function IrregularDetailPage() {
     };
   }, [nowIndex]);
 
+  // 물결차는거
   useEffect(() => {
     if (id !== "1") return;
     const songTitleWidth = songTitleRefs.current[nowIndex]?.offsetWidth;
@@ -180,12 +217,9 @@ function IrregularDetailPage() {
 
   return (
     <>
-      <Default>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
+      <Loading isloading={isLoading} />
+      <>
+        <Default>
           <S.BackgroundDiv color={albumData?.pointColor}>
             <S.BackButton
               color={albumData?.pointColor}
@@ -339,7 +373,7 @@ function IrregularDetailPage() {
                 <S.TapeColumn2>
                   <S.TapeAlbumCover
                     onClick={handleTapeAlbumCoverClick}
-                    image={albumData?.image}
+                    image={imageFiles[index]}
                   >
                     {showHeart && (
                       <motion.div
@@ -366,21 +400,14 @@ function IrregularDetailPage() {
             </S.TextWrapper>
             <S.ImageWrapper
               onClick={handleAudioTimeByY}
-              image={albumData?.image}
+              image={imageFiles[index]}
             >
               <S.ImageProgress numbervalue={audioProgress * 100} />
               <S.Footer style={{ color: "white" }}>기획사 페포니뮤직</S.Footer>
             </S.ImageWrapper>
           </S.BackgroundDiv>
-        </motion.div>
-      </Default>
-
-      <Mobile>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
+        </Default>
+        <Mobile>
           <M.BackgroundDiv color={albumData?.pointColor}>
             <M.BackButton
               color={albumData?.pointColor}
@@ -468,7 +495,7 @@ function IrregularDetailPage() {
                   </M.ButtonWrapper>
                   <M.TapeAlbumCover
                     onClick={handleTapeAlbumCoverClick}
-                    image={albumData?.image}
+                    image={imageFiles[index]}
                   >
                     {showHeart && (
                       <motion.div
@@ -531,8 +558,8 @@ function IrregularDetailPage() {
               </M.ConsoleDiv>
             </M.TextWrapper>
           </M.BackgroundDiv>
-        </motion.div>
-      </Mobile>
+        </Mobile>
+      </>
     </>
   );
 }

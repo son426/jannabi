@@ -67,15 +67,6 @@ export const Wave = styled.svg`
   /* animation: ${waveAnimation} 4s linear infinite; */
 `;
 
-export const TestDiv3 = styled.div`
-  height: 100vh;
-  aspect-ratio: 1/1;
-  background-color: red;
-  background-image: url(${image.she});
-  background-size: contain;
-  position: relative;
-`;
-
 export const TestDiv2 = styled.div`
   width: 100%;
   height: 300px;

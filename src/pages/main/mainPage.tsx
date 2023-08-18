@@ -5,12 +5,7 @@ import * as T from "./tablet.style";
 import * as B from "./big.style";
 import Intro from "./intro";
 import { useRecoilState } from "recoil";
-import {
-  fontSizeAtom,
-  isIntroAtom,
-  rowWidthAtom,
-  shelfHeightAtom,
-} from "../../constants/atom";
+import { isIntroAtom } from "../../constants/atom";
 import {
   BigDesktop,
   Desktop,
@@ -28,12 +23,6 @@ function MainPage() {
 
   const leftDoorRef = useRef<HTMLDivElement>(null);
   const rightDoorRef = useRef<HTMLDivElement>(null);
-
-  const tablet1 = useMediaQuery({ query: "(max-width: 767px)" });
-  const tablet2 = useMediaQuery({
-    query: "(min-width: 768px) and (max-width: 991px)",
-  });
-  const tablet3 = useMediaQuery({ query: "(max-width: 767px)" });
 
   const navigate = useNavigate();
 
@@ -70,42 +59,28 @@ function MainPage() {
     }
   };
 
-  const handleDollClick = () => {
-    navigate("/hidden");
-  };
-
   return (
     <>
       <BigDesktop>
         <>
           {isIntro && <Intro />}
-
           <B.BackgroundDiv img={images.background}>
             <B.ShelfDiv>
-              <B.Shelf img={images.shelf3}>
+              <B.Shelf img={images.shelf}>
                 <B.RegularRow>
-                  <B.RegularDiv
-                    to="/regulardetail/1"
-                    hoveredImg={images.regular1_2}
-                  >
+                  <B.RegularDiv to="/regulardetail/1">
                     <B.RegularCoverDiv
                       img={images.regular1}
                     ></B.RegularCoverDiv>
                     <B.LpDiv img={images.lp}></B.LpDiv>
                   </B.RegularDiv>
-                  <B.RegularDiv
-                    to="/regulardetail/2"
-                    hoveredImg={images.regular2_2}
-                  >
+                  <B.RegularDiv to="/regulardetail/2">
                     <B.RegularCoverDiv
                       img={images.regular2}
                     ></B.RegularCoverDiv>
                     <B.LpDiv img={images.lp}></B.LpDiv>
                   </B.RegularDiv>
-                  <B.RegularDiv
-                    to="/regulardetail/3"
-                    hoveredImg={images.regular3_2}
-                  >
+                  <B.RegularDiv to="/regulardetail/3">
                     <B.RegularCoverDiv
                       img={images.regular3}
                     ></B.RegularCoverDiv>
@@ -115,29 +90,24 @@ function MainPage() {
                 <B.IrregularRow1>
                   <B.Irr4
                     img={images.irregular4}
-                    hoveredImg={images.irregular4_2}
                     to="/irregularDetail/2"
                   ></B.Irr4>
                   <B.Irr1
                     img={images.irregular1}
-                    hoveredImg={images.irregular1_2}
                     to="/irregularDetail/1"
                   ></B.Irr1>
                   <B.Irr2 img={images.irregular2} to="/main"></B.Irr2>
                   <B.Irr3 img={images.irregular3} to="/main"></B.Irr3>
                   <B.Irr8
                     img={images.irregular8}
-                    hoveredImg={images.irregular8_2}
                     to="/irregularDetail/5"
                   ></B.Irr8>
                   <B.Irr6
                     img={images.irregular6}
-                    hoveredImg={images.irregular6_2}
                     to="/irregularDetail/4"
                   ></B.Irr6>
                   <B.Irr5
                     img={images.irregular5}
-                    hoveredImg={images.irregular5_2}
                     to="/irregularDetail/3"
                   ></B.Irr5>
                   <B.Irr7 img={images.irregular7} to="/main"></B.Irr7>
@@ -145,35 +115,30 @@ function MainPage() {
                 <B.IrregularRow2>
                   <B.Irr9
                     img={images.irregular9}
-                    hoveredImg={images.irregular9_2}
                     to="/irregularDetail/6"
                   ></B.Irr9>
                   <B.Irr10 img={images.irregular10} to="/main"></B.Irr10>
                   <B.Irr16
                     img={images.irregular16}
-                    hoveredImg={images.irregular16_2}
                     to="/irregularDetail/10"
                   ></B.Irr16>
                   <B.Irr15
                     img={images.irregular15}
-                    hoveredImg={images.irregular15_2}
                     to="/irregularDetail/9"
                   ></B.Irr15>
                   <B.Irr14
                     img={images.irregular14}
-                    hoveredImg={images.irregular14_2}
                     to="/irregularDetail/8"
                   ></B.Irr14>
                   <B.Irr11
                     img={images.irregular11}
-                    hoveredImg={images.irregular11_2}
                     to="/irregularDetail/7"
                   ></B.Irr11>
                   <B.Irr12 img={images.irregular12} to="/main"></B.Irr12>
                   <B.Irr13 img={images.irregular13} to="/main"></B.Irr13>
                 </B.IrregularRow2>
                 <B.BottomRow>
-                  <B.ClickDiv onClick={handleDollClick}></B.ClickDiv>
+                  <B.ClickDiv onClick={() => navigate("/hidden")}></B.ClickDiv>
                   <B.DoorDiv>
                     <B.LeftDoor
                       ref={leftDoorRef}
@@ -199,30 +164,21 @@ function MainPage() {
 
           <S.BackgroundDiv img={images.background}>
             <S.ShelfDiv>
-              <S.Shelf img={images.shelf3}>
+              <S.Shelf img={images.shelf}>
                 <S.RegularRow>
-                  <S.RegularDiv
-                    to="/regulardetail/1"
-                    hoveredImg={images.regular1_2}
-                  >
+                  <S.RegularDiv to="/regulardetail/1">
                     <S.RegularCoverDiv
                       img={images.regular1}
                     ></S.RegularCoverDiv>
                     <S.LpDiv img={images.lp}></S.LpDiv>
                   </S.RegularDiv>
-                  <S.RegularDiv
-                    to="/regulardetail/2"
-                    hoveredImg={images.regular2_2}
-                  >
+                  <S.RegularDiv to="/regulardetail/2">
                     <S.RegularCoverDiv
                       img={images.regular2}
                     ></S.RegularCoverDiv>
                     <S.LpDiv img={images.lp}></S.LpDiv>
                   </S.RegularDiv>
-                  <S.RegularDiv
-                    to="/regulardetail/3"
-                    hoveredImg={images.regular3_2}
-                  >
+                  <S.RegularDiv to="/regulardetail/3">
                     <S.RegularCoverDiv
                       img={images.regular3}
                     ></S.RegularCoverDiv>
@@ -232,29 +188,24 @@ function MainPage() {
                 <S.IrregularRow1>
                   <S.Irr4
                     img={images.irregular4}
-                    hoveredImg={images.irregular4_2}
                     to="/irregularDetail/2"
                   ></S.Irr4>
                   <S.Irr1
                     img={images.irregular1}
-                    hoveredImg={images.irregular1_2}
                     to="/irregularDetail/1"
                   ></S.Irr1>
                   <S.Irr2 img={images.irregular2} to="/main"></S.Irr2>
                   <S.Irr3 img={images.irregular3} to="/main"></S.Irr3>
                   <S.Irr8
                     img={images.irregular8}
-                    hoveredImg={images.irregular8_2}
                     to="/irregularDetail/5"
                   ></S.Irr8>
                   <S.Irr6
                     img={images.irregular6}
-                    hoveredImg={images.irregular6_2}
                     to="/irregularDetail/4"
                   ></S.Irr6>
                   <S.Irr5
                     img={images.irregular5}
-                    hoveredImg={images.irregular5_2}
                     to="/irregularDetail/3"
                   ></S.Irr5>
                   <S.Irr7 img={images.irregular7} to="/main"></S.Irr7>
@@ -262,35 +213,30 @@ function MainPage() {
                 <S.IrregularRow2>
                   <S.Irr9
                     img={images.irregular9}
-                    hoveredImg={images.irregular9_2}
                     to="/irregularDetail/6"
                   ></S.Irr9>
                   <S.Irr10 img={images.irregular10} to="/main"></S.Irr10>
                   <S.Irr16
                     img={images.irregular16}
-                    hoveredImg={images.irregular16_2}
                     to="/irregularDetail/10"
                   ></S.Irr16>
                   <S.Irr15
                     img={images.irregular15}
-                    hoveredImg={images.irregular15_2}
                     to="/irregularDetail/9"
                   ></S.Irr15>
                   <S.Irr14
                     img={images.irregular14}
-                    hoveredImg={images.irregular14_2}
                     to="/irregularDetail/8"
                   ></S.Irr14>
                   <S.Irr11
                     img={images.irregular11}
-                    hoveredImg={images.irregular11_2}
                     to="/irregularDetail/7"
                   ></S.Irr11>
                   <S.Irr12 img={images.irregular12} to="/main"></S.Irr12>
                   <S.Irr13 img={images.irregular13} to="/main"></S.Irr13>
                 </S.IrregularRow2>
                 <S.BottomRow>
-                  <S.ClickDiv onClick={handleDollClick}></S.ClickDiv>
+                  <S.ClickDiv onClick={() => navigate("/hidden")}></S.ClickDiv>
                   <S.DoorDiv>
                     <S.LeftDoor
                       ref={leftDoorRef}
@@ -316,30 +262,21 @@ function MainPage() {
           {isIntro && <Intro />}
           <M.BackgroundDiv img={images.background}>
             <M.ShelfDiv>
-              <M.Shelf img={images.shelf3}>
+              <M.Shelf img={images.shelf}>
                 <M.RegularRow>
-                  <M.RegularDiv
-                    to="/regularDetail/1"
-                    hoveredImg={images.regular1_2}
-                  >
+                  <M.RegularDiv to="/regularDetail/1">
                     <M.LpDiv img={images.lp}></M.LpDiv>
                     <M.RegularCoverDiv
                       img={images.regular1}
                     ></M.RegularCoverDiv>
                   </M.RegularDiv>
-                  <M.RegularDiv
-                    to="/regularDetail/2"
-                    hoveredImg={images.regular2_2}
-                  >
+                  <M.RegularDiv to="/regularDetail/2">
                     <M.LpDiv img={images.lp}></M.LpDiv>
                     <M.RegularCoverDiv
                       img={images.regular2}
                     ></M.RegularCoverDiv>
                   </M.RegularDiv>
-                  <M.RegularDiv
-                    to="/regularDetail/3"
-                    hoveredImg={images.regular3_2}
-                  >
+                  <M.RegularDiv to="/regularDetail/3">
                     <M.LpDiv img={images.lp}></M.LpDiv>
                     <M.RegularCoverDiv
                       img={images.regular3}
@@ -349,29 +286,24 @@ function MainPage() {
                 <M.IrregularRow1>
                   <M.Irr4
                     img={images.irregular4}
-                    hoveredImg={images.irregular4_2}
                     to="/irregularDetail/2"
                   ></M.Irr4>
                   <M.Irr1
                     img={images.irregular1}
-                    hoveredImg={images.irregular1_2}
                     to="/irregularDetail/1"
                   ></M.Irr1>
                   <M.Irr2 img={images.irregular2} to="/main"></M.Irr2>
                   <M.Irr3 img={images.irregular3} to="/main"></M.Irr3>
                   <M.Irr8
                     img={images.irregular8}
-                    hoveredImg={images.irregular8_2}
                     to="/irregularDetail/5"
                   ></M.Irr8>
                   <M.Irr6
                     img={images.irregular6}
-                    hoveredImg={images.irregular6_2}
                     to="/irregularDetail/4"
                   ></M.Irr6>
                   <M.Irr5
                     img={images.irregular5}
-                    hoveredImg={images.irregular5_2}
                     to="/irregularDetail/3"
                   ></M.Irr5>
                   <M.Irr7 img={images.irregular7} to="/main"></M.Irr7>
@@ -379,35 +311,30 @@ function MainPage() {
                 <M.IrregularRow2>
                   <M.Irr9
                     img={images.irregular9}
-                    hoveredImg={images.irregular9_2}
                     to="/irregularDetail/6"
                   ></M.Irr9>
                   <M.Irr10 img={images.irregular10} to="/main"></M.Irr10>
                   <M.Irr16
                     img={images.irregular16}
-                    hoveredImg={images.irregular16_2}
                     to="/irregularDetail/10"
                   ></M.Irr16>
                   <M.Irr15
                     img={images.irregular15}
-                    hoveredImg={images.irregular15_2}
                     to="/irregularDetail/9"
                   ></M.Irr15>
                   <M.Irr14
                     img={images.irregular14}
-                    hoveredImg={images.irregular14_2}
                     to="/irregularDetail/8"
                   ></M.Irr14>
                   <M.Irr11
                     img={images.irregular11}
-                    hoveredImg={images.irregular11_2}
                     to="/irregularDetail/7"
                   ></M.Irr11>
                   <M.Irr12 img={images.irregular12} to="/main"></M.Irr12>
                   <M.Irr13 img={images.irregular13} to="/main"></M.Irr13>
                 </M.IrregularRow2>
                 <M.BottomRow>
-                  <M.ClickDiv onClick={handleDollClick}></M.ClickDiv>
+                  <M.ClickDiv onClick={() => navigate("/hidden")}></M.ClickDiv>
                   <M.DoorDiv>
                     <M.LeftDoor
                       ref={leftDoorRef}
@@ -433,30 +360,21 @@ function MainPage() {
 
           <T.BackgroundDiv img={images.background}>
             <T.ShelfDiv>
-              <T.Shelf img={images.shelf3}>
+              <T.Shelf img={images.shelf}>
                 <T.RegularRow>
-                  <T.RegularDiv
-                    to="/regulardetail/1"
-                    hoveredImg={images.regular1_2}
-                  >
+                  <T.RegularDiv to="/regulardetail/1">
                     <T.RegularCoverDiv
                       img={images.regular1}
                     ></T.RegularCoverDiv>
                     <T.LpDiv img={images.lp}></T.LpDiv>
                   </T.RegularDiv>
-                  <T.RegularDiv
-                    to="/regulardetail/2"
-                    hoveredImg={images.regular2_2}
-                  >
+                  <T.RegularDiv to="/regulardetail/2">
                     <T.RegularCoverDiv
                       img={images.regular2}
                     ></T.RegularCoverDiv>
                     <T.LpDiv img={images.lp}></T.LpDiv>
                   </T.RegularDiv>
-                  <T.RegularDiv
-                    to="/regulardetail/3"
-                    hoveredImg={images.regular3_2}
-                  >
+                  <T.RegularDiv to="/regulardetail/3">
                     <T.RegularCoverDiv
                       img={images.regular3}
                     ></T.RegularCoverDiv>
@@ -466,29 +384,24 @@ function MainPage() {
                 <T.IrregularRow1>
                   <T.Irr4
                     img={images.irregular4}
-                    hoveredImg={images.irregular4_2}
                     to="/irregularDetail/2"
                   ></T.Irr4>
                   <T.Irr1
                     img={images.irregular1}
-                    hoveredImg={images.irregular1_2}
                     to="/irregularDetail/1"
                   ></T.Irr1>
                   <T.Irr2 img={images.irregular2} to="/main"></T.Irr2>
                   <T.Irr3 img={images.irregular3} to="/main"></T.Irr3>
                   <T.Irr8
                     img={images.irregular8}
-                    hoveredImg={images.irregular8_2}
                     to="/irregularDetail/5"
                   ></T.Irr8>
                   <T.Irr6
                     img={images.irregular6}
-                    hoveredImg={images.irregular6_2}
                     to="/irregularDetail/4"
                   ></T.Irr6>
                   <T.Irr5
                     img={images.irregular5}
-                    hoveredImg={images.irregular5_2}
                     to="/irregularDetail/3"
                   ></T.Irr5>
                   <T.Irr7 img={images.irregular7} to="/main"></T.Irr7>
@@ -496,35 +409,30 @@ function MainPage() {
                 <T.IrregularRow2>
                   <T.Irr9
                     img={images.irregular9}
-                    hoveredImg={images.irregular9_2}
                     to="/irregularDetail/6"
                   ></T.Irr9>
                   <T.Irr10 img={images.irregular10} to="/main"></T.Irr10>
                   <T.Irr16
                     img={images.irregular16}
-                    hoveredImg={images.irregular16_2}
                     to="/irregularDetail/10"
                   ></T.Irr16>
                   <T.Irr15
                     img={images.irregular15}
-                    hoveredImg={images.irregular15_2}
                     to="/irregularDetail/9"
                   ></T.Irr15>
                   <T.Irr14
                     img={images.irregular14}
-                    hoveredImg={images.irregular14_2}
                     to="/irregularDetail/8"
                   ></T.Irr14>
                   <T.Irr11
                     img={images.irregular11}
-                    hoveredImg={images.irregular11_2}
                     to="/irregularDetail/7"
                   ></T.Irr11>
                   <T.Irr12 img={images.irregular12} to="/main"></T.Irr12>
                   <T.Irr13 img={images.irregular13} to="/main"></T.Irr13>
                 </T.IrregularRow2>
                 <T.BottomRow>
-                  <T.ClickDiv onClick={handleDollClick}></T.ClickDiv>
+                  <T.ClickDiv onClick={() => navigate("/hidden")}></T.ClickDiv>
                   <T.DoorDiv>
                     <T.LeftDoor
                       ref={leftDoorRef}

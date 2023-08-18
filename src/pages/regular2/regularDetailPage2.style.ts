@@ -1,9 +1,5 @@
 import { css, styled } from "styled-components";
-import images from "../../data/images/regular2";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-
-const albumCover = images.cover;
-const lp = images.lp;
 
 export const h1 = "64px";
 export const h2 = "48px";
@@ -35,6 +31,10 @@ interface INumber {
   numbervalue?: number;
 }
 
+interface IImageProps {
+  img?: string;
+}
+
 export const Wrapper = styled.div`
   background-color: white;
 `;
@@ -61,17 +61,17 @@ export const LogoDiv2 = styled.div`
   right: 50px;
 `;
 
-export const AlbumDiv = styled.div`
+export const AlbumDiv = styled.div<IImageProps>`
   width: 400px;
   aspect-ratio: 1/1;
-  background-image: url(${albumCover});
+  background-image: url(${(props) => props.img});
   ${backgroundImgDefault};
   ${positionCenter};
   left: 48%;
 `;
-export const LpDiv = styled.div`
+export const LpDiv = styled.div<IImageProps>`
   ${backgroundImgDefault};
-  background-image: url(${lp});
+  background-image: url(${(props) => props.img});
   background-size: 82% 82%;
   width: 400px;
   aspect-ratio: 1/1;
@@ -104,12 +104,12 @@ export const IntroContentDiv = styled.div`
   position: relative;
 `;
 
-export const IntroContentBg = styled.div`
+export const IntroContentBg = styled.div<IImageProps>`
   position: absolute;
   height: 100%;
   width: 100%;
   background-size: 100% 100%;
-  background-image: url(${images.introcontentbg});
+  background-image: url(${(props) => props.img});
   background-position: center;
   background-repeat: no-repeat;
 `;
@@ -189,19 +189,20 @@ export const ContentDiv = styled.div`
   width: 100%;
 `;
 
-export const ContentBg = styled.div`
+export const ContentBg = styled.div<IImageProps>`
   position: absolute;
   top: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   opacity: 0.3;
-  background-image: url(${images.contentbg});
+`;
+
+export const ContentBox = styled.div<IImageProps>`
+  background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
-`;
-
-export const ContentBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -85,6 +85,7 @@ export const RegularCoverDiv = styled.div<IImageProps>`
   background-position: center;
   width: 100%;
   height: 100%;
+
   /* border: 1px solid red; */
   position: absolute;
   z-index: 2;
@@ -115,7 +116,7 @@ export const RegularDiv = styled(Link)<IImageProps>`
     cursor: pointer;
     ${RegularCoverDiv} {
       transform: translateX(-10px);
-      background-image: url(${(props) => props.hoveredImg});
+      filter: brightness(1.1);
     }
     ${LpDiv} {
       transform: translateX(15px);
@@ -153,7 +154,7 @@ export const Irr4 = styled(SampleLink)<IImageProps>`
   left: 11.5em;
   &:hover {
     transform: translateY(-5px) rotate(-2deg);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
 `;
 
@@ -164,7 +165,7 @@ export const Irr1 = styled(SampleLink)<IImageProps>`
   left: 13.28em;
   &:hover {
     transform: translateY(-5px) rotate(3deg);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
   ${Irr4}:hover ~ & {
     transform: translateY(-7px);
@@ -172,6 +173,7 @@ export const Irr1 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr2 = styled(SampleLink)<IImageProps>`
+  cursor: default;
   width: 12em;
   height: 2.7em;
   bottom: 5.7em;
@@ -182,6 +184,7 @@ export const Irr2 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr3 = styled(SampleLink)<IImageProps>`
+  cursor: default;
   width: 11em;
   aspect-ratio: 211/44;
   bottom: 3.5em;
@@ -198,7 +201,7 @@ export const Irr8 = styled(SampleLink)<IImageProps>`
   left: 35.5em;
   &:hover {
     transform: translateY(-15px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
 `;
 
@@ -209,7 +212,7 @@ export const Irr6 = styled(SampleLink)<IImageProps>`
   left: 28.55em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
 
   ${Irr8}:hover ~ & {
@@ -224,7 +227,7 @@ export const Irr5 = styled(SampleLink)<IImageProps>`
   left: 24em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
   ${Irr6}:hover ~ & {
     transform: translateX(-2px) rotate(-2deg);
@@ -235,7 +238,7 @@ export const Irr5 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr7 = styled(SampleLink)<IImageProps>`
-  pointer-events: none;
+  cursor: default;
   width: 4.2em;
   height: 10.3em;
   bottom: 0em;
@@ -267,11 +270,12 @@ export const Irr9 = styled(SampleLink)<IImageProps>`
   left: 4.5em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
 `;
 
 export const Irr10 = styled(SampleLink)<IImageProps>`
+  cursor: default;
   width: 4em;
   height: 7.7em;
   bottom: 0em;
@@ -289,7 +293,7 @@ export const Irr16 = styled(SampleLink)<IImageProps>`
   left: 35.5em;
   &:hover {
     transform: translateY(-10px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
 `;
 
@@ -300,7 +304,7 @@ export const Irr15 = styled(SampleLink)<IImageProps>`
   left: 31.5em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
   ${Irr16}:hover ~ & {
     transform: translateX(-1px) rotate(-1.5deg);
@@ -314,7 +318,7 @@ export const Irr14 = styled(SampleLink)<IImageProps>`
   left: 22.5em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
   ${Irr15}:hover ~ & {
     transform: translateX(-2px);
@@ -322,13 +326,13 @@ export const Irr14 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr11 = styled(SampleLink)<IImageProps>`
-  width: 10em;
+  width: 9em;
   height: 8.8em;
   bottom: 0em;
   left: 10em;
   &:hover {
     transform: translateY(-5px);
-    background-image: url(${(props) => props.hoveredImg});
+    filter: brightness(1.1);
   }
   ${Irr14}:hover ~ & {
     transform: translate(1px, -2px) rotate(-1deg);
@@ -339,6 +343,7 @@ export const Irr11 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr12 = styled(SampleLink)<IImageProps>`
+  cursor: default;
   pointer-events: none;
   width: 13.5em;
   height: 10.2em;
@@ -353,6 +358,7 @@ export const Irr12 = styled(SampleLink)<IImageProps>`
 `;
 
 export const Irr13 = styled(SampleLink)<IImageProps>`
+  cursor: default;
   width: 15em;
   height: 3.2em;
   bottom: 0em;

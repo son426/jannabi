@@ -7,8 +7,7 @@ import { ExitIcon, PauseIcon, PlayIcon } from "@/data/icon";
 
 interface IMenuProps {
   isAudioPlaying: boolean;
-  onAudioPause: () => void;
-  onAudioPlay: () => void;
+  toggleAudio: () => void;
   onExit: () => void;
   albumData: IRegularData[];
   nowIndex: number;
@@ -17,8 +16,7 @@ interface IMenuProps {
 
 function Regular1Menu({
   isAudioPlaying,
-  onAudioPause,
-  onAudioPlay,
+  toggleAudio,
   onExit,
   albumData,
   nowIndex,
@@ -34,7 +32,7 @@ function Regular1Menu({
                 <S.MenuColumn1>
                   <PauseIcon />
                 </S.MenuColumn1>
-                <S.MenuColumn2 onClick={onAudioPause}>
+                <S.MenuColumn2 onClick={toggleAudio}>
                   노래 일시정지
                 </S.MenuColumn2>
               </S.Menu>
@@ -44,7 +42,7 @@ function Regular1Menu({
                 <S.MenuColumn1>
                   <PlayIcon />
                 </S.MenuColumn1>
-                <S.MenuColumn2 onClick={onAudioPlay}>노래 재생</S.MenuColumn2>
+                <S.MenuColumn2 onClick={toggleAudio}>노래 재생</S.MenuColumn2>
               </S.Menu>
             )}
             <S.Menu onClick={onExit}>
@@ -77,9 +75,7 @@ function Regular1Menu({
               <M.MenuColumn1>
                 <PauseIcon />
               </M.MenuColumn1>
-              <M.MenuColumn2 onClick={onAudioPause}>
-                노래 일시정지
-              </M.MenuColumn2>
+              <M.MenuColumn2 onClick={toggleAudio}>노래 일시정지</M.MenuColumn2>
             </M.Menu>
           )}
           {!isAudioPlaying && (
@@ -87,7 +83,7 @@ function Regular1Menu({
               <M.MenuColumn1>
                 <PlayIcon />
               </M.MenuColumn1>
-              <M.MenuColumn2 onClick={onAudioPlay}>노래 재생</M.MenuColumn2>
+              <M.MenuColumn2 onClick={toggleAudio}>노래 재생</M.MenuColumn2>
             </M.Menu>
           )}
           <M.Menu>

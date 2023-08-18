@@ -2,12 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import { Default, Desktop, Mobile } from "../../components/mediaquery";
 import * as S from "./regularDetailPage3.style";
 import * as M from "./mobile.style";
-import images from "@/data/images/regular3";
 import { DownArrowIcon, PauseIcon, PlayIcon } from "@/data/icon";
 import { ILyric, regularData3 } from "@/data/meta/regular3";
 import useScrollAnimation from "@/hooks/useScroll";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
 import { wrapGrid } from "animate-css-grid";
+import { loadAudios, loadImages } from "@/hooks/tools";
+import Loading from "@/components/loading";
 interface ILyricIndex {
   [key: number]: boolean;
 }
@@ -32,6 +33,11 @@ function RegularDetailPage3() {
   const [selectedLyric, setSelectedLyric] = useState<ILyric>(
     regularData3[0].lyricData[0]
   );
+  const [audioFiles, setAudioFiles] = useState<string[]>([]);
+  const [audioFetched, setAudioFetched] = useState<boolean>(false);
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const [imageFetched, setImageFetched] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const containerRef1 = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -44,7 +50,7 @@ function RegularDetailPage3() {
   const cardRefs = useRef<HTMLDivElement[]>([]);
 
   const albumData = regularData3;
-  const initialTrack: string = albumData[nowIndex].audioFile;
+  const initialTrack: string = "";
 
   const {
     audioRef,
@@ -54,6 +60,7 @@ function RegularDetailPage3() {
     setIsAudioPlaying,
     audioProgress,
     setAudioProgress,
+    changeAudio,
   } = useAudioPlayer(initialTrack);
 
   useScrollAnimation(
@@ -71,6 +78,28 @@ function RegularDetailPage3() {
     console.log(lyric);
   };
 
+  useEffect(() => {
+    const fetchAudioFiles = async () => {
+      const fetchedAudios = await loadAudios("regular3");
+      setAudioFiles(fetchedAudios);
+      setAudioFetched(true);
+    };
+
+    const fetchImageFiles = async () => {
+      const fetchedImages = await loadImages("regular3");
+      setImageFiles(fetchedImages);
+      setImageFetched(true);
+    };
+
+    const fetchAllFiles = async () => {
+      await fetchAudioFiles();
+      await fetchImageFiles();
+      setIsLoading(false);
+    };
+
+    fetchAllFiles();
+  }, []);
+
   // flexbox line break 설정
   useEffect(() => {
     if (flexContainerRef.current)
@@ -83,19 +112,13 @@ function RegularDetailPage3() {
   // 오디오 관련
   // 노래 바뀔때마다
   useEffect(() => {
-    setIsAudioPlaying(true);
-    if (!audioRef.current.paused) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    audioRef.current = new Audio(albumData[nowIndex].audioFile);
-    audioRef.current.play();
+    if (audioFetched) changeAudio(audioFiles[nowIndex]);
 
     return () => {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     };
-  }, [nowIndex]);
+  }, [nowIndex, audioFetched]);
 
   const [test, setTest] = useState<number>(0);
 
@@ -119,22 +142,23 @@ function RegularDetailPage3() {
     return () => {
       audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, [nowIndex]);
+  }, [nowIndex, audioFetched]);
 
   return (
     <>
+      <Loading isloading={isLoading} />
       <Default>
         <S.Wrapper>
-          <S.IntroDiv ref={containerRef1}>
-            <S.LpDiv ref={lpRef}></S.LpDiv>
-            <S.AlbumDiv ref={albumRef}></S.AlbumDiv>
+          <S.IntroDiv img={imageFiles[13]} ref={containerRef1}>
+            <S.LpDiv img={imageFiles[16]} ref={lpRef}></S.LpDiv>
+            <S.AlbumDiv img={imageFiles[14]} ref={albumRef}></S.AlbumDiv>
             <S.Footer>
               <div className="title">THE LAND OF FANTASY</div>
               <div className="jannabi">잔나비</div>
             </S.Footer>
           </S.IntroDiv>
           <S.IntroContentDiv ref={containerRef2}>
-            <S.IntroBackground></S.IntroBackground>
+            <S.IntroBackground img={imageFiles[17]}></S.IntroBackground>
             <S.IntroContentBox>
               <div ref={boxRef1} className="test">
                 <S.Row1>
@@ -164,7 +188,8 @@ function RegularDetailPage3() {
             <S.CardWrapper ref={flexContainerRef}>
               {regularData3.map((album, index) => (
                 <S.CardDiv
-                  img={album.coverImg}
+                  key={index}
+                  img={imageFiles[index]}
                   className={index === nowIndex ? "expanded" : ""}
                   isboolean={index === nowIndex}
                   ref={(el: HTMLDivElement) => (cardRefs.current[index] = el)}
@@ -279,7 +304,7 @@ function RegularDetailPage3() {
       <Mobile>
         <M.Wrapper>
           <M.IntroContentDiv>
-            <M.AlbumDiv></M.AlbumDiv>
+            <M.AlbumDiv img={imageFiles[14]}></M.AlbumDiv>
             <M.IntroContentBox>
               <M.Row1>
                 <span>잔나비 정규 3집</span>
@@ -305,7 +330,7 @@ function RegularDetailPage3() {
             <M.CardWrapper>
               {regularData3.map((album, index) => (
                 <M.CardDiv isboolean={index === nowIndex}>
-                  <M.CardAlbumCover img={album.coverImg}></M.CardAlbumCover>
+                  <M.CardAlbumCover img={imageFiles[index]}></M.CardAlbumCover>
 
                   <M.CardInfo
                     onClick={() => {
@@ -388,7 +413,13 @@ function RegularDetailPage3() {
                       )}
 
                       {index !== nowIndex && (
-                        <M.LyricRow>{album.lyrics}</M.LyricRow>
+                        <>
+                          {album?.lyricData.map(
+                            (lyric: ILyric, index: number) => (
+                              <M.LyricRow>{lyric.content}</M.LyricRow>
+                            )
+                          )}
+                        </>
                       )}
                     </div>
                   </M.CardLyrics>

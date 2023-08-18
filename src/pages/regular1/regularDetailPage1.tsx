@@ -13,6 +13,8 @@ import Regular1Menu from "@/components/regular1PlayList";
 import Draggable, { DraggableData } from "react-draggable";
 import { useMediaQuery } from "react-responsive";
 import Soundwave from "@/components/soundwave";
+import useAudioPlayer from "@/hooks/useAudioPlayer";
+import { loadAudios } from "@/hooks/tools";
 
 interface IButtonPosition {
   x: number;
@@ -23,12 +25,16 @@ function RegularDetailPage1() {
   const [nowIndex, setNowIndex] = useState<number>(0);
   const [titleVisible, setTitleVisible] = useState<boolean>(false);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
-  const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(true);
   const [isButtonDragging, setIsButtonDragging] = useState<boolean>(false);
   const [buttonPosition, setButtonPosition] = useState<IButtonPosition>({
     x: 0,
     y: 0,
   });
+
+  const [audioFiles, setAudioFiles] = useState<string[]>([]);
+  const [audioFetched, setAudioFetched] = useState<boolean>(false);
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const [imageFetched, setImageFetched] = useState<boolean>(false);
 
   const containerRef1 = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -51,9 +57,23 @@ function RegularDetailPage1() {
     boxRef2
   );
 
-  const audioRef = useRef<HTMLAudioElement>(
-    new Audio(regularData[0].audioFile)
-  );
+  const {
+    audioRef,
+    toggleAudio,
+    isAudioPlaying,
+    setIsAudioPlaying,
+    changeAudio,
+  } = useAudioPlayer("");
+
+  useEffect(() => {
+    const fetchAudioFiles = async () => {
+      const fetchedAudios = await loadAudios("regular1");
+      setAudioFiles(fetchedAudios);
+      setAudioFetched(true);
+    };
+
+    fetchAudioFiles();
+  }, []);
 
   const albumData: IRegularData[] = regularData;
 
@@ -69,14 +89,6 @@ function RegularDetailPage1() {
     if (index !== nowIndex) setTitleVisible(false);
     if (index === nowIndex - 1) handlePrev();
     else if (index === nowIndex + 1) handleNext();
-  };
-  const handleAudioPause = () => {
-    audioRef.current.pause();
-    setIsAudioPlaying(false);
-  };
-  const handleAudioPlay = () => {
-    audioRef.current.play();
-    setIsAudioPlaying(true);
   };
   const handleExit = () => {
     navigate("/main");
@@ -102,12 +114,7 @@ function RegularDetailPage1() {
     }, 500);
 
     // 오디오 관련
-    if (!audioRef.current.paused) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    audioRef.current = new Audio(albumData[nowIndex].audioFile);
-    audioRef.current.play();
+    if (audioFetched) changeAudio(audioFiles[nowIndex]);
 
     // 스크롤 관련
     if (isMobile && nowIndex > 0)
@@ -120,7 +127,7 @@ function RegularDetailPage1() {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     };
-  }, [nowIndex]);
+  }, [nowIndex, audioFetched]);
 
   return (
     <>
@@ -180,8 +187,7 @@ function RegularDetailPage1() {
             {menuVisible && (
               <Regular1Menu
                 isAudioPlaying={isAudioPlaying}
-                onAudioPause={handleAudioPause}
-                onAudioPlay={handleAudioPlay}
+                toggleAudio={toggleAudio}
                 onExit={handleExit}
                 albumData={albumData}
                 nowIndex={nowIndex}
@@ -235,8 +241,7 @@ function RegularDetailPage1() {
           {menuVisible && (
             <Regular1Menu
               isAudioPlaying={isAudioPlaying}
-              onAudioPause={handleAudioPause}
-              onAudioPlay={handleAudioPlay}
+              toggleAudio={toggleAudio}
               onExit={handleExit}
               albumData={albumData}
               nowIndex={nowIndex}

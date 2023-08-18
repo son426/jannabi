@@ -1,3 +1,5 @@
+import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
+
 // 현재 시간으로부터 몇시간 전인지 계산
 // 입력 : Date / 반환 : string
 export function timeForToday(value: Date): string {
@@ -71,3 +73,57 @@ export function commentOverlapsWithForm(
 
   return commentLiRect.bottom - 15 >= commentFormRect.top;
 }
+
+export const fetchImages = async (path: string): Promise<string[]> => {
+  const storage = getStorage();
+  const listRef = ref(storage, `image/${path}`);
+  const result = await listAll(listRef);
+
+  const urlPromises = result.items.map((imageRef) => getDownloadURL(imageRef));
+  return Promise.all(urlPromises);
+};
+
+// 파이어베이스에서 이미지 로드
+// export const loadImages = async (path: string) => {
+//   const urls = await fetchImages(path);
+
+//   urls.map((url) => {
+//     const img = new Image();
+//     img.src = url;
+//   });
+
+//   const promises = urls.map((url: string) => {
+//     return new Promise<void>((resolve, reject) => {
+//       const img = new Image();
+//       img.src = url;
+
+//       img.onload = () => resolve();
+//       img.onerror = (error) => {
+//         console.error("Image preload error:", error);
+//         console.error("Failed URL:", url);
+//         reject(error);
+//       };
+//     });
+//   });
+
+//   return Promise.all(promises);
+// };
+
+export const loadImages = async (path: string) => {
+  const urls = await fetchImages(path);
+  return urls;
+};
+
+export const fetchAudios = async (path: string): Promise<string[]> => {
+  const storage = getStorage();
+  const listRef = ref(storage, `audio/${path}`);
+  const result = await listAll(listRef);
+
+  const urlPromises = result.items.map((audioRef) => getDownloadURL(audioRef));
+  return Promise.all(urlPromises);
+};
+
+export const loadAudios = async (path: string) => {
+  const urls = await fetchAudios(path);
+  return urls;
+};
