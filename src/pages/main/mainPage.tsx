@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./mainPage.style";
 import * as M from "./mobile.style";
@@ -13,13 +14,23 @@ import {
   Tablet,
 } from "../../components/mediaquery";
 import images from "@/data/images/main";
-import { useRef, useState } from "react";
+
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import Loading from "@/components/loading";
 
 function MainPage() {
   const [isMoved, setIsMoved] = useState<boolean>(false);
   const [isIntro] = useRecoilState(isIntroAtom);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const leftDoorRef = useRef<HTMLDivElement>(null);
   const rightDoorRef = useRef<HTMLDivElement>(null);
@@ -61,6 +72,7 @@ function MainPage() {
 
   return (
     <>
+      <Loading isloading={isLoading} loadingtext="" />
       <BigDesktop>
         <>
           {isIntro && <Intro />}
@@ -357,7 +369,6 @@ function MainPage() {
       <Tablet>
         <>
           {isIntro && <Intro />}
-
           <T.BackgroundDiv img={images.background}>
             <T.ShelfDiv>
               <T.Shelf img={images.shelf}>

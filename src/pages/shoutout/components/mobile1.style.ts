@@ -1,5 +1,4 @@
 import { styled, keyframes } from "styled-components";
-import Logo from "../../../data/images/shoutout/logo.png";
 
 const rotateAnimation = keyframes`
   0% {
@@ -27,14 +26,18 @@ const translateZAnimation = keyframes`
 
 const content1Em = "1.4vw";
 
+interface IString {
+  stringvalue: string;
+}
+
 export const Content1 = styled.div`
   height: 100vh;
   /* border: 5px solid red; */
   font-size: ${content1Em};
 `;
 
-export const LogoDiv = styled.div`
-  background-image: url(${Logo});
+export const LogoDiv = styled.div<IString>`
+  background-image: url(${(props) => props.stringvalue});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

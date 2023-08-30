@@ -7,6 +7,8 @@ import ShoutoutContent2 from "./components/shoutoutContent2";
 import { Mobile, Default } from "../../components/mediaquery";
 import { useNavigate } from "react-router-dom";
 import { useAudio } from "../../hooks/useAudio";
+import { loadImages } from "@/hooks/tools";
+import Loading from "@/components/loading";
 
 export interface IComment {
   content: string;
@@ -20,6 +22,10 @@ function ShoutoutPage() {
   const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
   const [isEnded, setIsEnded] = useState(false);
   const [scrollHeight, setScrollHeight] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const [imageFetched, setImageFetched] = useState<boolean>(false);
 
   const commentDataRef = collection(db, "comment");
 
@@ -32,6 +38,22 @@ function ShoutoutPage() {
   const handleAudioEnd = () => {
     alert("끝");
   };
+
+  useEffect(() => {
+    const fetchImageFiles = async () => {
+      const fetchedImages = await loadImages("shoutout");
+      console.log(fetchedImages);
+      setImageFiles(fetchedImages);
+      setImageFetched(true);
+    };
+
+    const fetchAllFiles = async () => {
+      await fetchImageFiles();
+      setIsLoading(false);
+    };
+
+    fetchAllFiles();
+  }, []);
 
   // audio 재생
   useEffect(() => {
@@ -102,10 +124,17 @@ function ShoutoutPage() {
 
   return (
     <>
+      <Loading isloading={isLoading} loadingtext="로딩중" />
       <Default>
         <S.Wrapper>
-          <ShoutoutContent1 />
+          <ShoutoutContent1
+            img_kim={imageFiles[2]}
+            img_choi={imageFiles[1]}
+            img_logo1={imageFiles[3]}
+          />
           <ShoutoutContent2
+            img_back={imageFiles[0]}
+            img_logo2={imageFiles[4]}
             isSmall={isSmall}
             isCommentVisible={isCommentVisible}
             commentDataRef={commentDataRef}
@@ -116,8 +145,14 @@ function ShoutoutPage() {
       </Default>
       <Mobile>
         <S.Wrapper>
-          <ShoutoutContent1 />
+          <ShoutoutContent1
+            img_kim={imageFiles[2]}
+            img_choi={imageFiles[1]}
+            img_logo1={imageFiles[3]}
+          />
           <ShoutoutContent2
+            img_back={imageFiles[0]}
+            img_logo2={imageFiles[4]}
             isSmall={isSmall}
             isCommentVisible={isCommentVisible}
             commentDataRef={commentDataRef}

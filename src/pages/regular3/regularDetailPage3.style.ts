@@ -352,6 +352,7 @@ export const LyricRow = styled.div<IBoolean>`
 `;
 
 export const TotalBar = styled.div<IBoolean>`
+  cursor: pointer;
   z-index: 1;
   width: 100%;
   min-height: ${(props) => (props.isboolean ? "5px" : "3px")};

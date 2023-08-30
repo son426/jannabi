@@ -1,6 +1,11 @@
 import { styled, css } from "styled-components";
-import Logo2 from "../../../data/images/shoutout/logo2.png";
-import backImg from "../../../data/images/shoutout/back.png";
+
+interface ISmall {
+  issmall: boolean;
+}
+interface IString {
+  stringvalue: string;
+}
 
 export const Content2 = styled.div`
   width: 100%;
@@ -11,8 +16,8 @@ export const Content2 = styled.div`
   font-size: 20px;
 `;
 
-export const BackImageDiv = styled.div`
-  background-image: url(${backImg});
+export const BackImageDiv = styled.div<IString>`
+  background-image: url(${(props) => props.stringvalue});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -23,12 +28,10 @@ export const BackImageDiv = styled.div`
   opacity: 0.2;
 `;
 
-interface ISmall {
-  issmall: boolean;
-}
+interface ILogoProps extends ISmall, IString {}
 
-export const LogoDiv2 = styled.div<ISmall>`
-  background-image: url(${Logo2});
+export const LogoDiv2 = styled.div<ILogoProps>`
+  background-image: url(${(props) => props.stringvalue});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

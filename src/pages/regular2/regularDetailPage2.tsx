@@ -170,7 +170,7 @@ function RegularDetailPage2() {
 
   return (
     <>
-      <Loading isloading={isLoading} />
+      <Loading isloading={isLoading} loadingtext="로딩중" />
       <Default>
         <S.Wrapper>
           <S.IntroDiv ref={containerRef1}>

@@ -14,7 +14,8 @@ import Draggable, { DraggableData } from "react-draggable";
 import { useMediaQuery } from "react-responsive";
 import Soundwave from "@/components/soundwave";
 import useAudioPlayer from "@/hooks/useAudioPlayer";
-import { loadAudios } from "@/hooks/tools";
+import { loadAudios, loadImages } from "@/hooks/tools";
+import Loading from "@/components/loading";
 
 interface IButtonPosition {
   x: number;
@@ -30,6 +31,7 @@ function RegularDetailPage1() {
     x: 0,
     y: 0,
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [audioFiles, setAudioFiles] = useState<string[]>([]);
   const [audioFetched, setAudioFetched] = useState<boolean>(false);
@@ -72,7 +74,20 @@ function RegularDetailPage1() {
       setAudioFetched(true);
     };
 
-    fetchAudioFiles();
+    const fetchImageFiles = async () => {
+      const fetchedImages = await loadImages("regular1");
+      console.log(fetchedImages);
+      setImageFiles(fetchedImages);
+      setImageFetched(true);
+    };
+
+    const fetchAllFiles = async () => {
+      await fetchAudioFiles();
+      await fetchImageFiles();
+      setIsLoading(false);
+    };
+
+    fetchAllFiles();
   }, []);
 
   const albumData: IRegularData[] = regularData;
@@ -131,18 +146,19 @@ function RegularDetailPage1() {
 
   return (
     <>
+      <Loading isloading={isLoading} loadingtext="로딩중" />
       <Default>
         <S.Wrapper>
-          <S.IntroDiv ref={containerRef1}>
-            <S.LpDiv ref={lpRef}></S.LpDiv>
-            <S.AlbumDiv ref={albumRef}></S.AlbumDiv>
+          <S.IntroDiv ref={containerRef1} stringvalue={imageFiles[1]}>
+            <S.LpDiv ref={lpRef} stringvalue={imageFiles[7]}></S.LpDiv>
+            <S.AlbumDiv ref={albumRef} stringvalue={imageFiles[0]}></S.AlbumDiv>
             <S.Footer>
               <div className="title">MONKEY HOTEL</div>
               <div className="jannabi">잔나비</div>
             </S.Footer>
           </S.IntroDiv>
           <S.IntroContentDiv ref={containerRef2}>
-            <S.IntroContentBg />
+            <S.IntroContentBg stringvalue={imageFiles[6]} />
             <S.IntroContentBox>
               <div ref={boxRef1} className="test">
                 <S.Row1>
@@ -180,7 +196,7 @@ function RegularDetailPage1() {
           <S.ContentDiv>
             <Draggable onDrag={(e, data) => handleDrag(data)}>
               <S.FloatingButton onClick={handleButtonClick}>
-                <S.FloatingButtonImg />
+                <S.FloatingButtonImg stringvalue={imageFiles[5]} />
                 <Soundwave width={3.73} stop={!isAudioPlaying} maxheight={30} />
               </S.FloatingButton>
             </Draggable>
@@ -197,13 +213,25 @@ function RegularDetailPage1() {
             <S.CarouselDiv numbervalue={nowIndex}>
               {albumData.map((album, index) => (
                 <>
-                  <S.Column
+                  {/* <S.Column
                     stringvalue={albumData[index].scrollImg}
                     isboolean={index === nowIndex}
                     onClick={() => {
                       handleClick(index);
                     }}
-                  ></S.Column>
+                  ></S.Column> */}
+                  <S.Column
+                    stringvalue={imageFiles[3]}
+                    isboolean={index === nowIndex}
+                    onClick={() => {
+                      handleClick(index);
+                    }}
+                  >
+                    <S.DoorAlbum
+                      isboolean={index === nowIndex}
+                      stringvalue={imageFiles[index + 8]}
+                    ></S.DoorAlbum>
+                  </S.Column>
                 </>
               ))}
             </S.CarouselDiv>
@@ -230,6 +258,7 @@ function RegularDetailPage1() {
           <Draggable onDrag={(e, data) => handleDrag(data)}>
             <M.FloatingButtonDiv>
               <M.FloatingButton
+                stringvalue={imageFiles[5]}
                 onClick={(e: React.MouseEvent) => {
                   e.stopPropagation();
                   handleButtonClick();
@@ -248,9 +277,9 @@ function RegularDetailPage1() {
               onTrackClick={handleTrackClick}
             />
           )}
-          <M.IntroDiv>
-            <M.LpDiv></M.LpDiv>
-            <M.AlbumDiv></M.AlbumDiv>
+          <M.IntroDiv stringvalue={imageFiles[2]}>
+            <M.LpDiv stringvalue={imageFiles[7]}></M.LpDiv>
+            <M.AlbumDiv stringvalue={imageFiles[0]}></M.AlbumDiv>
             <M.IntroContentDiv>
               <M.Row1>
                 <p>잔나비 정규 1집</p>
@@ -272,11 +301,14 @@ function RegularDetailPage1() {
           </M.IntroDiv>
           {albumData.map((album, index) => (
             <M.ContentDiv
+              stringvalue={imageFiles[4]}
               ref={(el: HTMLDivElement) => (contentRef.current[index] = el)}
             >
               <M.Index>Track {album.index}</M.Index>
               <M.Title>{album.title}</M.Title>
-              <M.AlbumCoverImage image={album.coverImg}></M.AlbumCoverImage>
+              <M.AlbumCoverImage
+                image={imageFiles[index + 8]}
+              ></M.AlbumCoverImage>
               <M.Description>{album.description}</M.Description>
             </M.ContentDiv>
           ))}

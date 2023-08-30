@@ -798,3 +798,8 @@ intro, main 까지 프리로드
 
 메타 데이터에서 image audio 제외.
 각 페이지별로 state 선언해서 image audio 끼워넣기.
+
+
+정규1집
+hidden
+main

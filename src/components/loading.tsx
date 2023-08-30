@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface ILoading {
   isloading: boolean;
+  loadingtext: string;
 }
 
 export const LoadingWrapper = styled.div`
@@ -26,7 +27,7 @@ export const LoadingText = styled.div`
   justify-content: center;
 `;
 
-function Loading({ isloading }: ILoading) {
+function Loading({ isloading, loadingtext }: ILoading) {
   return (
     <>
       <AnimatePresence>
@@ -50,7 +51,7 @@ function Loading({ isloading }: ILoading) {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
               >
-                <LoadingText>로딩중</LoadingText>
+                <LoadingText>{loadingtext}</LoadingText>
               </motion.div>
             </LoadingWrapper>
           </motion.div>

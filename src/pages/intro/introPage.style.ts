@@ -10,15 +10,6 @@ interface IClickedProps {
   isclicked: boolean;
 }
 
-const blinkAnimation = keyframes`
-  0%, 100%{
-    filter:brightness(1);
-  }
-  50%{
-    filter:brightness(1.5);
-  }
-`;
-
 const zoomInAnimation = keyframes`
   0%{
     transform : scale(1) translateY(calc(-100% + 100vh));
@@ -82,102 +73,6 @@ export const IntroImgDiv = styled.div<IClickedProps>`
           `
         : "none"};
 `;
-
-export const TopDiv = styled.div`
-  width: 100%;
-  height: 70%;
-  background-image: url(${image.top});
-  background-size: contain;
-  background-repeat: no-repeat;
-`;
-export const StoreDiv = styled.div`
-  width: 100%;
-  height: 20%;
-  background-image: url(${image.store});
-  background-size: contain;
-  background-repeat: no-repeat;
-`;
-export const BottomDiv = styled.div`
-  width: 100%;
-  height: 100px;
-  background-image: url(${image.bottom});
-  background-size: contain;
-  background-repeat: no-repeat;
-`;
-
-export const BlinkingDiv = styled.div`
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 450px;
-  height: 280px;
-  background-color: rgba(255, 255, 255, 1);
-
-  border: none;
-  /* animation: ${blinkAnimation} 2s ease-in-out infinite; */
-`;
-
-// export const IntroImageDiv = styled.div<IClickedProps>`
-//   pointer-events: none;
-//   @media screen and (min-width: 1536px) {
-//     background-size: cover;
-//     width: 100%;
-
-//     /* animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
-//         forwards,
-//       ${({ isclicked }) =>
-//       isclicked
-//         ? css`
-//             ${zoomInAnimation} 2s ease-in forwards
-//           `
-//         : "none"}; */
-//   }
-//   @media screen and (min-width: 501px) and (max-width: 1535px) {
-//     background-size: 100%;
-//     width: 50%;
-//     height: 250%;
-
-//     animation: ${slideDownAnimation} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
-//         forwards,
-//       ${({ isclicked }) =>
-//         isclicked
-//           ? css`
-//               ${zoomInAnimation} 2s ease-in forwards
-//             `
-//           : "none"};
-//   }
-
-//   @media screen and (min-width: 416px) and (max-width: 500px) {
-//     background-size: contain;
-//     width: 100%;
-//     transform: scale(1.3) translateY(300px);
-//     animation: ${slideDownAnimation2} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
-//         forwards,
-//       ${({ isclicked }) =>
-//         isclicked
-//           ? css`
-//               ${zoomInAnimation2} 2s ease-in forwards
-//             `
-//           : "none"};
-//   }
-//   @media screen and (max-width: 415px) {
-//     background-size: contain;
-//     width: 100%;
-//     transform: scale(1.1) translateY(300px);
-//     animation: ${slideDownAnimation3} 5s cubic-bezier(0.42, 0, 0.58, 1) 1s
-//         forwards,
-//       ${({ isclicked }) =>
-//         isclicked
-//           ? css`
-//               ${zoomInAnimation3} 2s ease-in forwards
-//             `
-//           : "none"};
-//   }
-//   background-image: url(${introImage});
-//   background-position: center;
-//   background-repeat: no-repeat;
-// `;
 
 export const TestDiv = styled.div`
   position: fixed;

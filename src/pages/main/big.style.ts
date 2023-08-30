@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useRecoilValue } from "recoil";
 import { fontSizeAtom, rowWidthAtom, shelfHeightAtom } from "@/constants/atom";
+import dollImg from "@/data/images/main/background/doll.png";
 
 const slideLeftAnimation = keyframes`
   from {
@@ -396,12 +397,16 @@ export const DoorDiv = styled.div`
 `;
 
 export const ClickDiv = styled.div`
-  width: 130px;
-  height: 100px;
+  background-image: url(${dollImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 24.4%;
+  aspect-ratio: 86/41;
   z-index: 2;
   position: absolute;
-  top: 50px;
-  left: 90px;
+  top: 73px;
+  left: 75px;
   cursor: pointer;
 `;
 

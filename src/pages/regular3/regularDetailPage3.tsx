@@ -146,7 +146,7 @@ function RegularDetailPage3() {
 
   return (
     <>
-      <Loading isloading={isLoading} />
+      <Loading isloading={isLoading} loadingtext="로딩중" />
       <Default>
         <S.Wrapper>
           <S.IntroDiv img={imageFiles[13]} ref={containerRef1}>

@@ -1,11 +1,5 @@
 import { css, styled } from "styled-components";
-import images from "../../data/images/regular1/";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-
-const albumCover = images.album;
-const introbg = images.backgreen;
-const lp = images.lp;
-const floatingButtonImg = images.floatingimg;
 
 const h1 = "40px";
 const h2 = "32px";
@@ -42,33 +36,25 @@ export const Wrapper = styled.div`
 
 interface IIntroProps extends IBoolean, INumber {}
 
-const transitionDuration = "0.1s";
-const lpRotation = "10deg";
-const transitionMixin = css`
-  transition-property: opacity, width, transform;
-  transition-duration: ${transitionDuration};
-  transition-timing-function: linear;
-`;
-
-export const IntroDiv = styled.div`
+export const IntroDiv = styled.div<IString>`
   width: 100%;
   height: 100vh;
-  background-image: url(${introbg});
+  background-image: url(${(props) => props.stringvalue});
   background-size: 100% 100%;
   background-repeat: no-repeat;
 `;
 
-export const AlbumDiv = styled.div`
+export const AlbumDiv = styled.div<IString>`
   width: 400px;
   aspect-ratio: 1/1;
-  background-image: url(${albumCover});
+  background-image: url(${(props) => props.stringvalue});
   ${backgroundImgDefault};
   ${positionCenter};
   left: 48%;
 `;
-export const LpDiv = styled.div`
+export const LpDiv = styled.div<IString>`
   ${backgroundImgDefault};
-  background-image: url(${lp});
+  background-image: url(${(props) => props.stringvalue});
   background-size: 82% 82%;
   width: 400px;
   aspect-ratio: 1/1;
@@ -101,10 +87,10 @@ export const IntroContentDiv = styled.div`
   position: relative;
 `;
 
-export const IntroContentBg = styled.div`
+export const IntroContentBg = styled.div<IString>`
   width: 100%;
   height: 100%;
-  background-image: url(${images.introbg});
+  background-image: url(${(props) => props.stringvalue});
   background-size: 100% 120%;
   background-position: center;
   background-repeat: no-repeat;
@@ -206,6 +192,20 @@ export const Column = styled.div<IColumnProps>`
   background-size: contain;
   opacity: ${(props) => (props.isboolean ? "1" : "0.4")};
   transition: opacity 0.4s linear, width 0.4s linear;
+  position: relative;
+`;
+
+export const DoorAlbum = styled.div<IColumnProps>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: ${(props) => (props.isboolean ? "45%" : "65%")};
+  aspect-ratio: 1/1;
+  background-image: url(${(props) => props.stringvalue});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 `;
 
 export const ColumnTitle = styled.div`
@@ -256,10 +256,10 @@ export const FloatingButton = styled.div`
   flex-direction: column;
 `;
 
-export const FloatingButtonImg = styled.div`
+export const FloatingButtonImg = styled.div<IString>`
   width: 100px;
   height: 70px;
-  background-image: url(${floatingButtonImg});
+  background-image: url(${(props) => props.stringvalue});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

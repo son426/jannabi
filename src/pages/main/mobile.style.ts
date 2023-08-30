@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-
-// shelf height
-// 컴퓨터 1100
-// 모바일 650
+import dollImg from "@/data/images/main/background/doll.png";
 
 interface IImageProps {
   img?: string;
@@ -370,12 +367,16 @@ export const DoorDiv = styled.div`
 `;
 
 export const ClickDiv = styled.div`
-  width: 12em;
-  height: 100px;
+  background-image: url(${dollImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 24.4%;
+  aspect-ratio: 86/41;
   z-index: 2;
   position: absolute;
-  bottom: 0em;
-  left: 3.9em;
+  bottom: 1em;
+  left: 4.2em;
   cursor: pointer;
 `;
 

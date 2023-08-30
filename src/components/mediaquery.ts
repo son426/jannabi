@@ -23,7 +23,7 @@ const Tablet = ({
 }: {
   children: JSX.Element;
 }): JSX.Element | null => {
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
+  const isTablet = useMediaQuery({ minWidth: 829, maxWidth: 1023 });
   return isTablet ? children : null;
 };
 
@@ -32,7 +32,7 @@ const Mobile = ({
 }: {
   children: JSX.Element;
 }): JSX.Element | null => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useMediaQuery({ maxWidth: 828 });
   return isMobile ? children : null;
 };
 

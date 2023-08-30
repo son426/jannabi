@@ -1,12 +1,5 @@
 import { styled } from "styled-components";
 import { backgroundImgDefault, positionCenter } from "../../constants/style";
-import images from "../../data/images/regular1";
-
-const introbg = images.backgreenmobile;
-const introbg2 = images.backgreenmobile2;
-const albumCover = images.album;
-const lp = images.lp;
-const floatingButtonImg = images.floatingimg;
 
 const h1 = "40px";
 const h2 = "32px";
@@ -25,6 +18,9 @@ const yellow = "#fec800";
 const eaeaea = "eaeaea";
 const fff = "ffffff";
 
+interface IString {
+  stringvalue: string;
+}
 interface IImageProps {
   image: string;
 }
@@ -37,27 +33,27 @@ export const Wrapper = styled.div`
   background-color: black;
 `;
 
-export const IntroDiv = styled.div`
+export const IntroDiv = styled.div<IString>`
   width: 100%;
   height: 100vh;
-  background-image: url(${introbg});
+  background-image: url(${(props) => props.stringvalue});
   background-size: 100% 100%;
   background-repeat: no-repeat;
 `;
 
-export const AlbumDiv = styled.div`
+export const AlbumDiv = styled.div<IString>`
   width: 205px;
   aspect-ratio: 1/1;
-  background-image: url(${albumCover});
+  background-image: url(${(props) => props.stringvalue});
   ${backgroundImgDefault};
   ${positionCenter};
   position: absolute;
   top: 20%;
   transform: translate(-65%, -30%);
 `;
-export const LpDiv = styled.div`
+export const LpDiv = styled.div<IString>`
   ${backgroundImgDefault};
-  background-image: url(${lp});
+  background-image: url(${(props) => props.stringvalue});
   background-size: 82% 82%;
   width: 205px;
   aspect-ratio: 1/1;
@@ -131,14 +127,14 @@ export const Row3 = styled.div`
   font-weight: ${medium};
   line-height: ${h3};
 `;
-export const ContentDiv = styled.div`
+export const ContentDiv = styled.div<IString>`
   width: 100%;
   height: 100vh;
   padding: 30px;
   padding-top: 50px;
 
-  background-image: url(${introbg2});
-  background-size: 100% 85%;
+  background-image: url(${(props) => props.stringvalue});
+  background-size: 100% 98%;
   background-position: bottom;
   background-repeat: no-repeat;
 
@@ -159,7 +155,7 @@ export const Title = styled.div`
   color: ${red};
   font-weight: ${bold};
   font-size: ${h3};
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   text-align: center;
   line-height: 26px;
 `;
@@ -195,11 +191,11 @@ export const FloatingButtonDiv = styled.div`
   flex-direction: column;
 `;
 
-export const FloatingButton = styled.div`
+export const FloatingButton = styled.div<IString>`
   cursor: pointer;
   width: 100%;
   height: 70%;
-  background-image: url(${floatingButtonImg});
+  background-image: url(${(props) => props.stringvalue});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

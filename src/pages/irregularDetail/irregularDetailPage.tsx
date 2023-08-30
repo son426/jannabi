@@ -217,7 +217,7 @@ function IrregularDetailPage() {
 
   return (
     <>
-      <Loading isloading={isLoading} />
+      <Loading isloading={isLoading} loadingtext="로딩중" />
       <>
         <Default>
           <S.BackgroundDiv color={albumData?.pointColor}>

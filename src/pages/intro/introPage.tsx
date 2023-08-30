@@ -7,11 +7,9 @@ import {
   loadImages,
   objectToArray,
 } from "../../hooks/tools";
-import main_images from "@/data/images/main";
-import regular1_images from "@/data/images/regular1";
-import irregular_images from "@/data/images/irregular";
-import shoutout_images from "@/data/images/shoutout";
-import intro_images from "@/data/images/intro";
+// import main_images from "@/data/images/main";
+// import irregular_images from "@/data/images/irregular";
+// import intro_images from "@/data/images/intro";
 import { Default } from "@/components/mediaquery";
 import Loading from "@/components/loading";
 import { AnimatePresence, motion } from "framer-motion";

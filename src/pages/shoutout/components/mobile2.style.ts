@@ -1,6 +1,4 @@
 import { styled, css } from "styled-components";
-import Logo2 from "../../../data/images/shoutout/logo2.png";
-import backImg from "../../../data/images/shoutout/back.png";
 
 const h1 = "24px";
 const h2 = "14px";
@@ -23,6 +21,10 @@ interface INumberProps {
   numbervalue: number;
 }
 
+interface IString {
+  stringvalue: string;
+}
+
 interface IVisible {
   visible: boolean;
 }
@@ -33,8 +35,8 @@ export const ViewDiv = styled.div`
   position: relative;
 `;
 
-export const BackImageDiv = styled.div`
-  background-image: url(${backImg});
+export const BackImageDiv = styled.div<IString>`
+  background-image: url(${(props) => props.stringvalue});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -85,8 +87,8 @@ export const SubTitle = styled.div`
   word-break: keep-all;
 `;
 
-export const LogoDiv2 = styled.div`
-  background-image: url(${Logo2});
+export const LogoDiv2 = styled.div<IString>`
+  background-image: url(${(props) => props.stringvalue});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

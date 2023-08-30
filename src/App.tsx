@@ -4,11 +4,6 @@ import {
   createGlobalStyle,
 } from "styled-components";
 import Router from "./Router";
-
-import PretendardBold from "./data/fonts/pretendard/pretendardbold.woff2";
-import PretendardSemiBold from "./data/fonts/pretendard/pretendardsemibold.woff2";
-import PretendardMedium from "./data/fonts/pretendard/pretendardmedium.woff2";
-import PretendardThin from "./data/fonts/pretendard/pretendardthin.woff2";
 import theme from "./constants/theme";
 
 const GlobalStyle = createGlobalStyle`
@@ -67,12 +62,6 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration:none;
     color:inherit;
-  }
-  @font-face {
-    font-family: 'Pretendard';
-    src: local('PretendardBold'), local('PretendardSemiBold'), local('PretendardMedium'), local('PretendardThin');
-    font-style: normal;
-    src: url(${PretendardBold}) url(${PretendardSemiBold}) url(${PretendardMedium}) url(${PretendardThin}) format('woff2');
   }
   body {
     font-family: 'Pretendard', sans-serif;

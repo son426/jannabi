@@ -1,12 +1,16 @@
 import * as S from "./shoutoutContent1.style";
 import * as M from "./mobile1.style";
-import choi from "../../../data/images/shoutout/choi.png";
-import kim from "../../../data/images/shoutout/kim.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Default, Mobile } from "../../../components/mediaquery";
 
-function ShoutoutContent1() {
+interface IImageProps {
+  img_kim: string;
+  img_choi: string;
+  img_logo1: string;
+}
+
+function ShoutoutContent1({ img_kim, img_choi, img_logo1 }: IImageProps) {
   const [selected, setSelected] = useState<number>(1);
   const [cardIndex, setCardIndex] = useState("0");
 
@@ -25,6 +29,7 @@ function ShoutoutContent1() {
       <Default>
         <S.Content1>
           <S.LogoDiv
+            stringvalue={img_logo1}
             onClick={() => {
               navigate("/main");
             }}
@@ -70,11 +75,11 @@ function ShoutoutContent1() {
             </S.Column>
             <S.Column>
               <S.Card
-                img={kim}
+                img={img_kim}
                 style={{ transform: "rotateZ(-10deg)", zIndex: cardIndex }}
               ></S.Card>
               <S.Card
-                img={choi}
+                img={img_choi}
                 style={{ transform: "rotateZ(10deg)" }}
               ></S.Card>
             </S.Column>
@@ -84,6 +89,7 @@ function ShoutoutContent1() {
       <Mobile>
         <M.Content1>
           <M.LogoDiv
+            stringvalue={img_logo1}
             onClick={() => {
               navigate("/main");
             }}
@@ -98,11 +104,11 @@ function ShoutoutContent1() {
           >
             <M.Column>
               <M.Card
-                img={kim}
+                img={img_kim}
                 style={{ transform: "rotateZ(-10deg)", zIndex: cardIndex }}
               ></M.Card>
               <M.Card
-                img={choi}
+                img={img_choi}
                 style={{ transform: "rotateZ(10deg)" }}
               ></M.Card>
             </M.Column>

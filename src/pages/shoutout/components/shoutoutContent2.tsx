@@ -15,6 +15,8 @@ interface IShoutoutProps {
   commentDataRef: CollectionReference<DocumentData>;
   comments: IComment[];
   fetchComments: () => Promise<void>;
+  img_back: string;
+  img_logo2: string;
 }
 
 function ShoutoutContent2({
@@ -23,6 +25,8 @@ function ShoutoutContent2({
   commentDataRef,
   comments,
   fetchComments,
+  img_back,
+  img_logo2,
 }: IShoutoutProps) {
   const [inputData, setInputData] = useState<string>("");
 
@@ -85,8 +89,8 @@ function ShoutoutContent2({
     <>
       <Default>
         <S.Content2>
-          <S.BackImageDiv></S.BackImageDiv>
-          <S.LogoDiv2 issmall={isSmall}></S.LogoDiv2>
+          <S.BackImageDiv stringvalue={img_back}></S.BackImageDiv>
+          <S.LogoDiv2 issmall={isSmall} stringvalue={img_logo2}></S.LogoDiv2>
           {isSmall && (
             <S.CommentContainer visible={isCommentVisible}>
               <S.CommentForm onSubmit={handleSubmit}>
@@ -121,7 +125,7 @@ function ShoutoutContent2({
       </Default>
       <Mobile>
         <M.ViewDiv>
-          <M.BackImageDiv ref={bgRef}></M.BackImageDiv>
+          <M.BackImageDiv ref={bgRef} stringvalue={img_back}></M.BackImageDiv>
           <M.Content2>
             <M.TextDiv>
               <M.Title>
@@ -135,7 +139,7 @@ function ShoutoutContent2({
                 밴드이다.
               </M.SubTitle>
             </M.TextDiv>
-            <M.LogoDiv2 ref={logoRef}></M.LogoDiv2>
+            <M.LogoDiv2 ref={logoRef} stringvalue={img_logo2}></M.LogoDiv2>
             <M.CommentDiv ref={commentDivRef}>
               <M.CommentUl>
                 {comments.map((comment, index) => {

@@ -29,8 +29,7 @@ function Practice() {
 
   return (
     <>
-      <Loading isloading={isLoading} />
-
+      <Loading isloading={isLoading} loadingtext="로딩중" />
       <>하이</>
     </>
   );
