@@ -203,15 +203,15 @@ export const ContentBox = styled.div<IImageProps>`
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
+  position: absolute;
+  top: 0;
+  z-index: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: baseline;
   padding: 80px;
-  position: absolute;
-  top: 0;
-  z-index: 1;
 `;
 
 export const ContentRow = styled.div`

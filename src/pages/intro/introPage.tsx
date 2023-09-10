@@ -1,27 +1,36 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./introPage.style";
+import * as M from "./mobile.style";
 import {
   IObject,
   fetchImages,
+  imgPreload,
   loadImages,
   objectToArray,
 } from "../../hooks/tools";
 // import main_images from "@/data/images/main";
 // import irregular_images from "@/data/images/irregular";
 // import intro_images from "@/data/images/intro";
-import { Default } from "@/components/mediaquery";
+import {
+  Default,
+  Default2,
+  Mobile,
+  SmallMobile,
+} from "@/components/mediaquery";
 import Loading from "@/components/loading";
 import { AnimatePresence, motion } from "framer-motion";
 import { isIntroAtom } from "@/constants/atom";
 import { useRecoilState } from "recoil";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
+import intro_images from "@/data/images/intro";
 
 function IntroPage() {
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadedImages, setLoadedImages] = useState<number>(0);
-  const [totalImages, setTotalImages] = useState<number>(0);
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
+  const [imageFetched, setImageFetched] = useState<boolean>(false);
+  const [startAnimation, setStartAnimation] = useState<boolean>(false);
 
   const [isIntro, setIsIntro] = useRecoilState(isIntroAtom);
 
@@ -33,6 +42,30 @@ function IntroPage() {
       navigate("/main", { state: { isIntro: true } });
     }, 1500);
   };
+
+  const setVHVariable = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+    console.log(vh);
+  };
+
+  useEffect(() => {
+    const fetchImageFiles = async () => {
+      const fetchedImages = await loadImages("intro");
+      setImageFiles(fetchedImages);
+      setImageFetched(true);
+      await imgPreload(fetchedImages);
+    };
+
+    const fetchAllFiles = async () => {
+      if (!imageFetched) await fetchImageFiles();
+      setIsLoading(false);
+      setTimeout(() => {
+        setStartAnimation(true);
+      }, 1500);
+    };
+    fetchAllFiles();
+  }, []);
 
   // useEffect(() => {
   //   const introImgUrls: string[] = objectToArray(intro_images as IObject);
@@ -66,17 +99,37 @@ function IntroPage() {
 
   useEffect(() => {
     setIsIntro(true);
+    setVHVariable();
+    window.addEventListener("resize", setVHVariable);
   }, []);
 
   return (
     <>
-      <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
-      <S.ImgWrapper>
-        <S.IntroImgDiv
-          isclicked={isClicked}
-          onClick={handleClick}
-        ></S.IntroImgDiv>
-      </S.ImgWrapper>
+      <Loading isloading={isLoading} loadingtext="로딩중입니다" />
+      <Default2>
+        <>
+          <S.BlackDiv isclicked={isClicked}></S.BlackDiv>
+          <S.ImgWrapper>
+            <S.IntroImgDiv
+              startanimation={startAnimation}
+              stringvalue={imageFiles[0]}
+              isclicked={isClicked}
+              onClick={handleClick}
+            ></S.IntroImgDiv>
+          </S.ImgWrapper>
+        </>
+      </Default2>
+      <SmallMobile>
+        <>
+          <M.BlackDiv isclicked={isClicked}></M.BlackDiv>
+          <M.ImgWrapper>
+            <M.IntroImgDiv
+              isclicked={isClicked}
+              onClick={handleClick}
+            ></M.IntroImgDiv>
+          </M.ImgWrapper>
+        </>
+      </SmallMobile>
     </>
   );
 }

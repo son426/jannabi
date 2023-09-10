@@ -10,6 +10,14 @@ interface IClickedProps {
   isclicked: boolean;
 }
 
+interface IString {
+  stringvalue: string;
+}
+
+interface IStartAnimation {
+  startanimation: boolean;
+}
+
 const zoomInAnimation = keyframes`
   0%{
     transform : scale(1) translateY(calc(-100% + 100vh));
@@ -59,40 +67,23 @@ export const ImgWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const IntroImgDiv = styled.div<IClickedProps>`
+interface IIntroImgProps extends IClickedProps, IString, IStartAnimation {}
+
+export const IntroImgDiv = styled.div<IIntroImgProps>`
   width: 100%;
   padding-top: 168.4%;
-  background-image: url(${introImg});
+  background-image: url(${(props) => props.stringvalue});
   background-size: cover;
   position: relative;
-  animation: ${scrollAnimation} 7s ease-in-out 1.5s forwards,
-    ${({ isclicked }) =>
-      isclicked
-        ? css`
-            ${zoomInAnimation} 2s ease-in forwards
-          `
-        : "none"};
-`;
-
-export const TestDiv = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  font-size: 20px;
-
-  @media screen and (max-width: 1535px) {
-    &:after {
-      content: "작은 버젼";
-    }
-  }
-  @media screen and (min-width: 1536px) {
-    &:after {
-      content: "큰 버젼";
-    }
-  }
-  @media screen and (max-width: 500px) {
-    &:after {
-      content: "모바일";
-    }
-  }
+  animation: ${(props) =>
+    props.startanimation
+      ? css`
+          ${scrollAnimation} 7s ease-in-out 0.5s forwards,
+          ${props.isclicked
+            ? css`
+                ${zoomInAnimation} 2s ease-in forwards
+              `
+            : "none"}
+        `
+      : "none"};
 `;

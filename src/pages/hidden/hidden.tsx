@@ -20,7 +20,9 @@ function HiddenPage() {
 
     const fetchAllFiles = async () => {
       await fetchImageFiles();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     };
 
     fetchAllFiles();
@@ -28,22 +30,31 @@ function HiddenPage() {
 
   return (
     <>
-      <Loading isloading={isLoading} loadingtext="로딩중" />
+      <Loading isloading={isLoading} loadingtext="사진전" />
       <Default>
-        <>
+        <div
+          onClick={() =>
+            alert("추후 팬아트 전시관으로 업데이트 될 예정입니다.")
+          }
+        >
           <S.Background
             stringvalue={imageFiles[imageFiles.length - 1]}
           ></S.Background>
           <S.Pictures stringvalue={imageFiles[1]}></S.Pictures>
-        </>
+        </div>
       </Default>
       <Mobile>
-        <>
+        <div
+          style={{ zIndex: "2" }}
+          onClick={() =>
+            alert("추후 팬아트 전시관으로 업데이트 될 예정입니다.")
+          }
+        >
           <S.Background
             stringvalue={imageFiles[imageFiles.length - 1]}
           ></S.Background>
           <S.Pictures stringvalue={imageFiles[1]}></S.Pictures>
-        </>
+        </div>
       </Mobile>
     </>
   );

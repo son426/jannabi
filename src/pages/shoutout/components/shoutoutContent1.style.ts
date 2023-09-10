@@ -31,7 +31,7 @@ interface IString {
 const content1Em = "1.4vw";
 
 export const Content1 = styled.div`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   /* border: 5px solid red; */
   font-size: ${content1Em};
 `;
@@ -60,7 +60,7 @@ export const Column = styled.div`
   /* border: 1px solid red; */
   position: relative;
   width: 40%;
-  height: 70vh;
+  height: calc(var(--vh, 1vh) * 70);
   display: flex;
   flex-direction: column;
   align-items: center;

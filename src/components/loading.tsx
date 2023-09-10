@@ -8,11 +8,12 @@ interface ILoading {
 }
 
 export const LoadingWrapper = styled.div`
+  white-space: pre-wrap;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: black;
 `;
 
@@ -25,6 +26,7 @@ export const LoadingText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: pre-wrap;
 `;
 
 function Loading({ isloading, loadingtext }: ILoading) {

@@ -84,7 +84,9 @@ function RegularDetailPage1() {
     const fetchAllFiles = async () => {
       await fetchAudioFiles();
       await fetchImageFiles();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     };
 
     fetchAllFiles();
@@ -146,7 +148,7 @@ function RegularDetailPage1() {
 
   return (
     <>
-      <Loading isloading={isLoading} loadingtext="로딩중" />
+      <Loading isloading={isLoading} loadingtext="정규 1집 앨범관" />
       <Default>
         <S.Wrapper>
           <S.IntroDiv ref={containerRef1} stringvalue={imageFiles[1]}>
@@ -255,15 +257,16 @@ function RegularDetailPage1() {
             if (menuVisible) setMenuVisible(false);
           }}
         >
-          <Draggable onDrag={(e, data) => handleDrag(data)}>
+          <Draggable
+            onDrag={(e, data) => {
+              handleDrag(data);
+            }}
+            onStop={() => {
+              handleButtonClick();
+            }}
+          >
             <M.FloatingButtonDiv>
-              <M.FloatingButton
-                stringvalue={imageFiles[5]}
-                onClick={(e: React.MouseEvent) => {
-                  e.stopPropagation();
-                  handleButtonClick();
-                }}
-              ></M.FloatingButton>
+              <M.FloatingButton stringvalue={imageFiles[5]}></M.FloatingButton>
               <Soundwave width={3} maxheight={20} stop={!isAudioPlaying} />
             </M.FloatingButtonDiv>
           </Draggable>

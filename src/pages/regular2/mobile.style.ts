@@ -167,15 +167,15 @@ export const ContentBg = styled.div<IImageProps>`
   position: absolute;
   top: 0;
   width: 100%;
-  height: 100vh;
-  opacity: 0.3;
+  min-height: 100vh;
+  height: 100%;
+`;
+
+export const ContentBox = styled.div<IImageProps>`
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
-`;
-
-export const ContentBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

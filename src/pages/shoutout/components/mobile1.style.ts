@@ -31,7 +31,7 @@ interface IString {
 }
 
 export const Content1 = styled.div`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   /* border: 5px solid red; */
   font-size: ${content1Em};
 `;

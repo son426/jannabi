@@ -50,14 +50,14 @@ export const BackButton = styled.div<IColorProps>`
 
 export const BackgroundDiv = styled.div<IColorProps>`
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   background-color: ${(props) => props.color};
 `;
 
 export const TextWrapper = styled.div<IColorProps>`
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   font-size: 10px;
   white-space: pre-wrap;
   text-align: start;

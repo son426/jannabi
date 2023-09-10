@@ -67,7 +67,9 @@ function RegularDetailPage2() {
     const fetchAllFiles = async () => {
       await fetchAudioFiles();
       await fetchImageFiles();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     };
 
     fetchAllFiles();
@@ -170,7 +172,7 @@ function RegularDetailPage2() {
 
   return (
     <>
-      <Loading isloading={isLoading} loadingtext="로딩중" />
+      <Loading isloading={isLoading} loadingtext="정규 2집 앨범관" />
       <Default>
         <S.Wrapper>
           <S.IntroDiv ref={containerRef1}>
@@ -407,8 +409,8 @@ function RegularDetailPage2() {
             </M.IntroContentBox>
           </M.IntroContentDiv>
           <M.ContentDiv>
-            <M.ContentBg img={imageFiles[0]} />
-            <M.ContentBox>
+            {/* <M.ContentBg img={imageFiles[0]} /> */}
+            <M.ContentBox img={imageFiles[0]}>
               <M.ContentTitle>TrackList</M.ContentTitle>
               {albumData.map((album, index) => (
                 <M.ContentRow>

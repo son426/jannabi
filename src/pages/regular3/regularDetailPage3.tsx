@@ -94,7 +94,9 @@ function RegularDetailPage3() {
     const fetchAllFiles = async () => {
       await fetchAudioFiles();
       await fetchImageFiles();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     };
 
     fetchAllFiles();
@@ -146,7 +148,7 @@ function RegularDetailPage3() {
 
   return (
     <>
-      <Loading isloading={isLoading} loadingtext="로딩중" />
+      <Loading isloading={isLoading} loadingtext="정규 3집 앨범관" />
       <Default>
         <S.Wrapper>
           <S.IntroDiv img={imageFiles[13]} ref={containerRef1}>

@@ -49,7 +49,9 @@ function ShoutoutPage() {
 
     const fetchAllFiles = async () => {
       await fetchImageFiles();
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     };
 
     fetchAllFiles();
@@ -124,7 +126,7 @@ function ShoutoutPage() {
 
   return (
     <>
-      <Loading isloading={isLoading} loadingtext="로딩중" />
+      <Loading isloading={isLoading} loadingtext="앵콜관" />
       <Default>
         <S.Wrapper>
           <ShoutoutContent1

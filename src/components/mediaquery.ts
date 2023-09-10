@@ -36,14 +36,32 @@ const Mobile = ({
   return isMobile ? children : null;
 };
 
+const SmallMobile = ({
+  children,
+}: {
+  children: JSX.Element;
+}): JSX.Element | null => {
+  const isMobile = useMediaQuery({ maxWidth: 600 });
+  return isMobile ? children : null;
+};
+
 // mobile이 아닐 때만 출력되는 컴포넌트
 const Default = ({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element | null => {
-  const isNotMobile = useMediaQuery({ minWidth: 768 });
+  const isNotMobile = useMediaQuery({ minWidth: 828 });
   return isNotMobile ? children : null;
 };
 
-export { BigDesktop, Desktop, Tablet, Mobile, Default };
+const Default2 = ({
+  children,
+}: {
+  children: JSX.Element;
+}): JSX.Element | null => {
+  const isNotMobile = useMediaQuery({ minWidth: 601 });
+  return isNotMobile ? children : null;
+};
+
+export { BigDesktop, Desktop, Tablet, Mobile, SmallMobile, Default, Default2 };

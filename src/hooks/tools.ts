@@ -127,3 +127,12 @@ export const loadAudios = async (path: string) => {
   const urls = await fetchAudios(path);
   return urls;
 };
+
+export const fetchIrregularAudios = async (path: string): Promise<string[]> => {
+  const storage = getStorage();
+  const listRef = ref(storage, `audio/irregular/${path}`);
+  const result = await listAll(listRef);
+
+  const urlPromises = result.items.map((audioRef) => getDownloadURL(audioRef));
+  return Promise.all(urlPromises);
+};
